@@ -15,3 +15,4 @@ class Product(db.Model):
     owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
 
     owner = db.relationship("User", back_populates='products')
+    images = db.relationship("ProductImage", back_populates='product')
