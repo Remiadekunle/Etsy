@@ -1,4 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
+from .order import order_items
 
 class Product(db.Model):
     __tablename__ = 'products'
@@ -17,3 +18,4 @@ class Product(db.Model):
     owner = db.relationship("User", back_populates='products')
     images = db.relationship("ProductImage", back_populates='product')
     cart_items = db.relationship('CartItem', back_populates='product')
+    orders = db.relationship('Order', secondary=order_items, back_populates='products')
