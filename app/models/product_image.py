@@ -8,8 +8,8 @@ class ProductImage(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     url = db.Column(db.String, nullable=False)
-    created_at = db.Column(db.DateTime, nullable=False)
-    preview = db.Column(db.Boolean, nullable=False)
+    created_at = db.Column(db.DateTime)
+    preview = db.Column(db.Boolean)
     product_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('products.id')), nullable=False)
 
     product = db.relationship("Product", back_populates='images')

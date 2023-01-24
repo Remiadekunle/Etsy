@@ -7,8 +7,8 @@ class Cart(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    total = db.Columm(db.Numeric(precision=10, scale=2), nullable=False)
-    created_at = db.Column(db.DateTime, nullable=False)
+    total = db.Column(db.Float(5, 2), default=1.0, nullable=False)
+    created_at = db.Column(db.DateTime)
     updated_at = db.Column(db.DateTime)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
 

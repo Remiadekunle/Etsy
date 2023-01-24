@@ -10,7 +10,7 @@ class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False, unique=True)
     description = db.Column(db.String(200), nullable=False)
-    price = db.Column(db.Numeric(precision=10, scale=2), nullable=False)
+    price = db.Column(db.Float(5, 2), default=1.0, nullable=False)
     stock = db.Column(db.Integer, nullable=False)
     options = db.Column(db.String(500), nullable=False)
     owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
