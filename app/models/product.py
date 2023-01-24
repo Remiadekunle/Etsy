@@ -16,3 +16,4 @@ class Product(db.Model):
 
     owner = db.relationship("User", back_populates='products')
     images = db.relationship("ProductImage", back_populates='product')
+    cart_items = db.relationship('CartItem', back_populates='product')
