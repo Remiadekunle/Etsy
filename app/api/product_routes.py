@@ -35,3 +35,23 @@ def create_product():
         return {"product": product.to_dict()} , 201
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+@product_routes.route('/<int:id>', methods=['PUT'])
+# @login_required
+def update_product(id):
+    product = Product.query.get(id)
+    form = ProductForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        product.name=form.data['name']
+        product.description=form.data['description']
+        product.price=form.data['price']
+        product.stock=form.data['stock']
+        product.options=form.data['options']
+        product.preview_img=form.data['preview_img']
+
+        db.session.commit()
+        return {"product": product.to_dict()} , 201
+    else:
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 400
