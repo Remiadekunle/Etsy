@@ -35,5 +35,8 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+            'products': [product.id for product in self.products],
+            # 'cart': [cart.id for cart in self.cart],
+            # 'orders': [order.id for order in self.orders]
         }

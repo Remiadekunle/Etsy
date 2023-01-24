@@ -18,3 +18,15 @@ class Product(db.Model):
     owner = db.relationship("User", back_populates='products')
     cart_items = db.relationship('CartItem', back_populates='product')
     order_items = db.relationship('OrderItem', back_populates='product')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'description': self.description,
+            'price': float(self.price),
+            'stock': self.stock,
+            'options': self.options,
+            'previewImg': self.preview_img,
+            'owner': self.owner.to_dict(),
+        }
