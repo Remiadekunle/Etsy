@@ -1,8 +1,8 @@
-"""created users, orders, products, order_item, cart, cart_item tables
+"""created users, product, orders, order_item, cart, cart_item tables
 
-Revision ID: e581c7061c58
+Revision ID: 66c6bcd7d348
 Revises:
-Create Date: 2023-01-24 08:56:19.567340
+Create Date: 2023-01-24 09:37:01.768878
 
 """
 from alembic import op
@@ -13,7 +13,7 @@ SCHEMA = os.environ.get("SCHEMA")
 
 
 # revision identifiers, used by Alembic.
-revision = 'e581c7061c58'
+revision = '66c6bcd7d348'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -60,8 +60,7 @@ def upgrade():
     sa.Column('owner_id', sa.Integer(), nullable=False),
     sa.Column('preview_img', sa.String(), nullable=False),
     sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('name')
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('cart_items',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -93,7 +92,6 @@ def upgrade():
         op.execute(f"ALTER TABLE cart_items SET SCHEMA {SCHEMA};")
     if environment == "production":
         op.execute(f"ALTER TABLE order_items SET SCHEMA {SCHEMA};")
-
     # ### end Alembic commands ###
 
 
