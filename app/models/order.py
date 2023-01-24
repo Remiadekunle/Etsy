@@ -1,15 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 
 
-order_items = db.Table(
-    "order_items",
-    db.Column('order_id', db.Integer, db.ForeignKey(add_prefix_for_prod('orders.id'))),
-    db.Column('product_id', db.Integer, db.ForeignKey(add_prefix_for_prod('products.id')))
-)
-
-if environment == "production":
-    order_items.schema = SCHEMA
-
 
 class Order(db.Model):
     __tablename__ = 'orders'
@@ -24,4 +15,4 @@ class Order(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
 
     user = db.relationship("User", back_populates='orders')
-    products = db.relationship("Product", secondary=order_items, back_populates='orders')
+    items = db.relationship("OrderItem", back_populates='order')

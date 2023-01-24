@@ -1,5 +1,4 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-from .order import order_items
 
 class Product(db.Model):
     __tablename__ = 'products'
@@ -14,8 +13,8 @@ class Product(db.Model):
     stock = db.Column(db.Integer, nullable=False)
     options = db.Column(db.String(500), nullable=False)
     owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+    preview_img = db.Column(db.String, nullable=False)
 
     owner = db.relationship("User", back_populates='products')
-    images = db.relationship("ProductImage", back_populates='product')
     cart_items = db.relationship('CartItem', back_populates='product')
-    orders = db.relationship('Order', secondary=order_items, back_populates='products')
+    order_item = db.relationship('OrderItem', back_populates='product')
