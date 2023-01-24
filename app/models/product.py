@@ -17,4 +17,4 @@ class Product(db.Model):
 
     owner = db.relationship("User", back_populates='products')
     cart_items = db.relationship('CartItem', back_populates='product')
-    order_item = db.relationship('OrderItem', back_populates='product')
+    order_items = db.relationship('OrderItem', back_populates='product')
