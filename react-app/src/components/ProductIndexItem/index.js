@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom";
 import { fetchProducts } from "../../store/product";
@@ -8,9 +8,16 @@ import './index.css';
 function ProductIndex(){
     const {productId} = useParams()
     const product = useSelector(state => state.product.allProducts[productId])
+    const [listingToggle, setListingToggle] = useState(false);
+
     if (!product){
         return null
     }
+
+    const toggleListingButtons = () => {
+        setListingToggle(!listingToggle)
+    }
+
     let {options } = product;
     console.log(options)
     options = options.split('-')
@@ -62,30 +69,48 @@ function ProductIndex(){
 
                 </div>
                 <div className="product-description-container">
-                    <div className="product-">
-                        <div>
-                            <i class="fa-solid fa-award"></i>
+                    <div className="product-description-awards">
+                        <div className="product-description-award-item">
+                            <i class="fa-solid fa-award fa-2xl"></i>
                             Star Seller. This seller consistently earned
                         </div>
-                        <div>
-                            <i class="fa-solid fa-truck"></i>
+                        <div className="product-description-award-item">
+                            <i class="fa-solid fa-truck fa-2xl"></i>
                             Hooray! This item ships free.
                         </div>
                     </div>
+                    <div className="product-attribute-dropdown" onClick={toggleListingButtons} >
+                        <div>
+                            Manage Product Listing
+                        </div>
+                        <i class="fa-solid fa-chevron-down fa-sm"></i>
+                    </div>
+                    {listingToggle ? <div className="product-listing-buttons-container">
+                        <button className="product-listing-buttons">Edit Product</button>
+                        <button>Delte Product</button>
+                    </div> : <></> }
                     <div className="product-attribute-dropdown">
-                        Shipping and return policies
+                        <div>
+                            Shipping and return policies
+                        </div>
                         <i class="fa-solid fa-chevron-down fa-sm"></i>
                     </div>
                     <div className="product-attribute-dropdown">
-                        Highlights
+                        <div>
+                            Highlights
+                        </div>
                         <i class="fa-solid fa-chevron-down fa-sm"></i>
                     </div>
                     <div className="product-attribute-dropdown">
-                        Description
+                        <div>
+                            Description
+                        </div>
                         <i class="fa-solid fa-chevron-down fa-sm"></i>
                     </div>
                     <div className="product-attribute-dropdown">
-                        Meet your sellers
+                        <div>
+                            Meet your sellers
+                        </div>
                         <i class="fa-solid fa-chevron-down fa-sm"></i>
                     </div>
                 </div>
