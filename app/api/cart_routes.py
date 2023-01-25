@@ -3,6 +3,7 @@ from flask_login import current_user, login_required
 from ..models import db, Product, Cart, User, CartItem
 from .auth_routes import validation_errors_to_error_messages
 from ..forms import CartForm
+from datetime import datetime
 
 cart_routes = Blueprint('cart', __name__)
 
@@ -63,9 +64,17 @@ def update_cart(id):
             item = [item for item in user.cart.items if item.product_id == product_id]
             found_item = item[0]
             print('quanity b4', found_item.quantity)
+            print('price b4', user.cart.total)
+            if found_item.quantity <= quantity:
+                db.session.delete(found_item)
+                new_total = found_item.quantity * product.price
+                user.cart.total = user.cart.total - new_total
+                db.session.commit()
+                return {"cart": user.cart.to_dict()}
             found_item.quantity = found_item.quantity - quantity
-            if found_item.quanity <= 0:
-                db.session.delete()
             print('quanity after', found_item.quantity)
-            user.cart.total = user.cart.total + total
+            user.cart.total = user.cart.total - total
+            print('price after', user.cart.total)
+            db.session.commit()
+            return {"cart": user.cart.to_dict()}
         return 'hi'
