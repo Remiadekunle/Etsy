@@ -14,10 +14,9 @@ def get_all_products():
     return {'products': res}
 
 @product_routes.route('/', methods=['POST'])
-# @login_required
+@login_required
 def create_product():
     form = ProductForm()
-    user = User.query.get(1)
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         product = Product(
@@ -27,7 +26,7 @@ def create_product():
             stock=form.data['stock'],
             options=form.data['options'],
             preview_img=form.data['preview_img'],
-            owner=user
+            owner=current_user
         )
 
         db.session.add(product)

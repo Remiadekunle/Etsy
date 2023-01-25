@@ -3,20 +3,21 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useModal } from '../../context/Modal';
 import { Modal } from "../../context/Modal";
-import { createProduct } from "../../store/product";
+import { createProduct, editProduct, updateProduct } from "../../store/product";
 import './index.css';
 
-function CreateProductForm({setShowModal}){
+function EditProductForm({setShowModal, product}){
     const dispatch = useDispatch()
     const history = useHistory()
-    const [name, setName] = useState('')
-    const [description, setDescription] = useState('')
-    const [price, setPrice] = useState('')
-    const [stock, setStock] = useState('')
-    const [option1, setOption1] = useState('')
-    const [option2, setOption2] = useState('')
-    const [option3, setOption3] = useState('')
-    const [previewImg, setPreviewImg] = useState('')
+    const {options} = product
+    const [name, setName] = useState(product.name)
+    const [description, setDescription] = useState(product.description)
+    const [price, setPrice] = useState(product.price)
+    const [stock, setStock] = useState(product.stock)
+    const [option1, setOption1] = useState(product.options.split('-')[0])
+    const [option2, setOption2] = useState(product.options.split('-')[1])
+    const [option3, setOption3] = useState(product.options.split('-')[2])
+    const [previewImg, setPreviewImg] = useState(product.previewImg)
     const [errors, setErrors] = useState([]);
     useEffect(() => {
         let newErrors = [];
@@ -46,8 +47,8 @@ function CreateProductForm({setShowModal}){
             options,
             previewImg
         }
-        const body = await dispatch(createProduct(payload))
-        history.push(`/products/${body.product.id}`)
+        const body = await dispatch(updateProduct(payload, product.id))
+        // history.push(`/products/${body.product.id}`)
         setShowModal(false)
     }
 
@@ -134,21 +135,21 @@ function CreateProductForm({setShowModal}){
                     onChange={(e) => setPreviewImg(e.target.value)}
                     className='create-product-input'/>
                 </label>
-                <button className='creater-product-button' type='submit'>Create a product</button>
+                <button className='creater-product-button' type='submit'>Edit your product</button>
             </form>
         </>
     )
 }
 
-export function CreateProductModal(){
+export function EditProductModal({product}){
     const [showModal, setShowModal] = useState(false);
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>Create a product</button>
+      <button onClick={() => setShowModal(true)}>Edit your product</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <CreateProductForm setShowModal={setShowModal}/>
+          <EditProductForm setShowModal={setShowModal} product={product}/>
         </Modal>
       )}
     </>
@@ -156,4 +157,4 @@ export function CreateProductModal(){
 }
 
 
-export default CreateProductForm
+export default EditProductForm

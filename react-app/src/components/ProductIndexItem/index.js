@@ -2,8 +2,9 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom";
 import { fetchProducts } from "../../store/product";
+import { DeleteProductModal } from "../DeleteProduct";
+import { EditProductModal } from "../EditProduct";
 import './index.css';
-
 
 function ProductIndex(){
     const {productId} = useParams()
@@ -86,8 +87,8 @@ function ProductIndex(){
                         <i class="fa-solid fa-chevron-down fa-sm"></i>
                     </div>
                     {listingToggle ? <div className="product-listing-buttons-container">
-                        <button className="product-listing-buttons">Edit Product</button>
-                        <button>Delte Product</button>
+                        <EditProductModal product={product} />
+                        <DeleteProductModal product={product}/>
                     </div> : <></> }
                     <div className="product-attribute-dropdown">
                         <div>

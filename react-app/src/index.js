@@ -10,15 +10,21 @@ import { ModalProvider,Modal} from './context/Modal';
 
 const store = configureStore();
 
-ReactDOM.render(
-  <React.StrictMode>
+function Root(){
+  return (
     <ModalProvider>
       <Provider store={store}>
-        <BrowserRouter>
           <App />
-        </BrowserRouter>
       </Provider>
     </ModalProvider>
+  )
+}
+
+
+
+ReactDOM.render(
+  <React.StrictMode>
+    <Root />
   </React.StrictMode>,
   document.getElementById('root')
 );

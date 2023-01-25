@@ -1,15 +1,25 @@
 
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { login } from '../store/session';
 import LogoutButton from './auth/LogoutButton';
-import CreateProductForm from './CreateProduct/Index';
+import CreateProductForm, { CreateProductModal } from './CreateProduct/Index';
 import './index.css';
 import OpenModalMenuItem from './OpenModalButton';
+
 const NavBar = () => {
   const [showMenu, setShowMenu] = useState(false)
-
+  const dispatch = useDispatch();
   const toggleShowMenu = () => {
     setShowMenu(!showMenu)
+  }
+
+  const useDemo = async (e) => {
+    e.preventDefault();
+    const email = 'demo@aa.io'
+    const password = 'password'
+    const data = await dispatch(login(email, password));
   }
 
   return (
@@ -17,12 +27,7 @@ const NavBar = () => {
       <div className='navbar-items'>
         <h1 className='navbar-h1'>Besty</h1>
         <input className='search-input' placeholder='Search for products'></input>
-        <button className='create-product-button'>
-          <OpenModalMenuItem
-          itemText='Create a product listing'
-          modalComponent={CreateProductForm}
-           />
-        </button>
+        <CreateProductModal />
         <div className='navbar-right-side-container'>
           <div className='profile-dropdown-container' onClick={toggleShowMenu}>
             <i class="fa-solid fa-user"></i>
@@ -51,6 +56,7 @@ const NavBar = () => {
               <li>
                 <LogoutButton />
               </li>
+              <button onClick={useDemo}>Demo User</button>
             </ul> :<></>}
 
           </div>

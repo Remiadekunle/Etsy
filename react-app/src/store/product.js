@@ -47,6 +47,63 @@ export const fetchProducts = () => async dispatch => {
     }
 }
 
+export const createProduct = (payload) => async dispatch => {
+    const res = await fetch(`/api/products/`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            name: payload.name,
+            description:payload.description,
+            price:payload.price,
+            stock:payload.stock,
+            options:payload.options,
+            preview_img: payload.previewImg
+        })
+    } )
+    if (res.ok){
+        const body = await res.json()
+        console.log('we got the body back', body)
+        dispatch(addProduct(body.product))
+        return body
+    } else{
+        const body = await res.json()
+        console.log('yooooooo this is the bad res', body)
+    }
+}
+
+export const updateProduct = (payload, id) => async dispatch => {
+    const res = await fetch(`/api/products/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            name: payload.name,
+            description:payload.description,
+            price:payload.price,
+            stock:payload.stock,
+            options:payload.options,
+            preview_img: payload.previewImg
+        })
+    } )
+    if (res.ok){
+        const body = await res.json()
+        console.log('we got the body back', body)
+        dispatch(editProduct(body.product))
+        return body
+    }
+}
+
+export const removeProduct = (id) => async dispatch => {
+    const res = await fetch(`/api/products/${id}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" }
+    } )
+    if (res.ok){
+        const body = await res.json()
+        console.log('we got the body back', body)
+        dispatch(deleteProduct(id))
+        return body
+    }
+}
 
 const initialState = {
     allProducts: {},
@@ -63,6 +120,24 @@ const productReducer = (state = initialState, action) => {
             products.forEach(product => {
                 newState.allProducts[product.id] = product
             })
+            return newState
+        case ADD_PRODUCT:
+            newState = Object.assign({}, state);
+            newState.allProducts = {...state.allProducts}
+            const product = action.product
+            newState.allProducts[product.id] = product
+            return newState
+        case EDIT_PRODUCT:
+            newState = Object.assign({}, state);
+            newState.allProducts = {...state.allProducts}
+            const newProduct = action.product
+            newState.allProducts[newProduct.id] = newProduct
+            return newState
+        case DELETE_PRODUCT:
+            newState = Object.assign({}, state);
+            newState.allProducts = {...state.allProducts}
+            const id = action.id
+            delete newState.allProducts[id]
             return newState
         default:
             return state;
