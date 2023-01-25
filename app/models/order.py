@@ -16,3 +16,12 @@ class Order(db.Model):
 
     user = db.relationship("User", back_populates='orders')
     items = db.relationship("OrderItem", back_populates='order')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'total': float(self.total),
+            # 'products': [product.id for product in self.products],
+            'items': [item.to_dict() for item in self.items],
+            # 'orders': [order.id for order in self.orders]
+        }

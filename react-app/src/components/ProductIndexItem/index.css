@@ -1,0 +1,138 @@
+.product-index-container{
+    margin: 0px 280px;
+    height: 100%;
+    display: flex;
+    border: 1px solid blue;
+    flex-direction: column;
+}
+
+.product-index-main-content{
+    display: flex;
+    height: 450px;
+    border: 1px solid yellow;
+}
+
+.product-image-container{
+    width: 65%;
+    border: 1px solid green;
+    height: 450px;
+    object-fit: cover;
+}
+
+.product-details-container{
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: 100%;
+    margin: 0px 30px;
+    /* padding: 0px 30px; */
+}
+
+.product-index-image{
+    height: 100%;
+    /* width: 100%; */
+    object-fit: cover;
+}
+
+.product-details-owner{
+    display: flex;
+    padding: 10px 0px 10px 15px;
+    gap: 5px;
+}
+
+.product-detials-owner-stats{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 0px 10px 15px;
+}
+
+.product-details-name{
+    display: flex;
+    align-items: center;
+    padding: 10px 0px 10px 15px;
+    font-size: 30px;
+}
+
+.product-details-price{
+    display: flex;
+    align-items: center;
+    padding: 10px 0px 10px 15px;
+    font-size: 30px;
+}
+
+.product-details-options{
+    display: flex;
+    /* align-items: center; */
+    flex-direction: column;
+    gap: 7px;
+    padding: 0px 15px 0px 15px;
+    /* width: ; */
+}
+
+.product-details-select{
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.product-detail-cart-button{
+    margin: 10px 15px 0px 15px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0);
+    cursor: pointer;
+}
+
+.product-content-description-container{
+    display: flex;
+}
+
+.product-comments-container{
+    width: 65%;
+    border: 1px solid red;
+    height: 600px;
+}
+
+.product-description-container{
+    height: 100%;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 0px 30px;
+}
+
+.product-attribute-dropdown{
+    display: flex;
+    border: 1px solid blue;
+    padding: 10px;
+    /* width: 370px; */
+    /* gap: 10px; */
+    border-radius: 10px;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.product-description-awards{
+    display: flex;
+    flex-direction: column;
+}
+
+.product-description-award-item{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0px;
+}
+
+.product-listing-buttons-container{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.product-listing-buttons{
+
+}

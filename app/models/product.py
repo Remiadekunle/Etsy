@@ -7,7 +7,7 @@ class Product(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), nullable=False, unique=True)
+    name = db.Column(db.String(50), nullable=False)
     description = db.Column(db.String(200), nullable=False)
     price = db.Column(db.Float(5, 2), default=1.0, nullable=False)
     stock = db.Column(db.Integer, nullable=False)
@@ -17,4 +17,16 @@ class Product(db.Model):
 
     owner = db.relationship("User", back_populates='products')
     cart_items = db.relationship('CartItem', back_populates='product')
-    order_items = db.relationship('OrderItem', back_populates='product')
+    orders = db.relationship('OrderItem', back_populates='product')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'description': self.description,
+            'price': float(self.price),
+            'stock': self.stock,
+            'options': self.options,
+            'previewImg': self.preview_img,
+            'owner': self.owner.to_dict2(),
+        }
