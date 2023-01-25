@@ -20,7 +20,7 @@ class Cart(db.Model):
             'id': self.id,
             'total': float(self.total),
             # 'user': self.user.to_dict(),
-            'items': [product.product.id for product in self.items],
+            'items': [item.to_dict() for item in self.items],
             # 'cart': [cart.id for cart in self.cart],
             # 'orders': [order.id for order in self.orders]
         }

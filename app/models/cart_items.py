@@ -18,7 +18,7 @@ class CartItem(db.Model):
         return {
             'id': self.id,
             'quantity': self.quantity,
-            'product': [product.id for product in self.products],
+            'product': self.product.id,
             # 'cart': [cart.id for cart in self.cart],
             # 'orders': [order.id for order in self.orders]
         }

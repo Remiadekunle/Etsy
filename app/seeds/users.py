@@ -33,5 +33,7 @@ def undo_users():
         db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
     else:
         db.session.execute("DELETE FROM users")
+        db.session.execute("DELETE FROM cart_items")
+        db.session.execute("DELETE FROM carts")
 
     db.session.commit()
