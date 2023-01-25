@@ -28,5 +28,5 @@ class Product(db.Model):
             'stock': self.stock,
             'options': self.options,
             'previewImg': self.preview_img,
-            'owner': self.owner.to_dict(),
+            'owner': self.owner.to_dict2(),
         }

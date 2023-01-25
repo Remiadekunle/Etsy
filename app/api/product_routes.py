@@ -36,7 +36,7 @@ def create_product():
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 @product_routes.route('/<int:id>', methods=['PUT'])
-# @login_required
+@login_required
 def update_product(id):
     product = Product.query.get(id)
     form = ProductForm()
@@ -56,7 +56,7 @@ def update_product(id):
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 @product_routes.route('/<int:id>', methods=['DELETE'])
-# @login_required
+@login_required
 def delete_product(id):
     product = Product.query.get(id)
     if product:
