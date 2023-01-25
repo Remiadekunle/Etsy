@@ -27,20 +27,31 @@ def create_order(id):
         total = user.cart.total
         print('this is the total', total)
         order = Order(
-            total=total,
+            total=0,
             user=user
         )
+        errors = []
         cart_items = [item for item in user.cart.items]
         for item in cart_items:
             product = item.product
             print('yay we got the product', product)
+            print('yay we got the products stock', product.stock)
+            if product.stock == 0:
+                errors.append(f'{item.product.name} is out of stock')
+                continue
+            elif item.quantity > product.stock:
+                item.quantity = product.stock
             order_item = OrderItem(
                 quantity = item.quantity,
                 product = item.product,
                 order=order
             )
+            product.stock = product.stock - item.quantity
             print('yay this is the new order-item', order_item)
-            # db.session.add(order_item)
+            print('yay we got the new stock', product.stock)
+            new_cost = item.quantity * product.price
+            order.total = order.total + new_cost
+            db.session.add(order_item)
         print('these are the order items',cart_items )
-        # db.session.commit()
+        db.session.commit()
         return {"order": order.to_dict()}
