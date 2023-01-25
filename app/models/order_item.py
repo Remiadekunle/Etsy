@@ -12,4 +12,4 @@ class OrderItem(db.Model):
     order_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('orders.id')), nullable=False)
 
     order = db.relationship("Order", back_populates='items')
-    product = db.relationship("Product", back_populates='order_items')
+    product = db.relationship("Product", back_populates='orders')
