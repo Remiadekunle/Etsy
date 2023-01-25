@@ -49,6 +49,8 @@ def add_product(id):
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
+
+# route is only for removing items from the cart. Use the add_product to increase the quantity of an item.
 @cart_routes.route('<int:id>',methods=['PUT'])
 def update_cart(id):
     form = CartForm()
@@ -77,4 +79,9 @@ def update_cart(id):
             print('price after', user.cart.total)
             db.session.commit()
             return {"cart": user.cart.to_dict()}
-        return 'hi'
+        else:
+            return {"errors": 'Product not in cart'}
+    else:
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+

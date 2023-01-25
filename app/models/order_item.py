@@ -13,3 +13,10 @@ class OrderItem(db.Model):
 
     order = db.relationship("Order", back_populates='items')
     product = db.relationship("Product", back_populates='orders')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'quantity': self.quantity,
+            'product_id': self.product_id,
+        }
