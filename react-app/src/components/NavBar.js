@@ -2,8 +2,9 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
+import CreateProductForm from './CreateProduct/Index';
 import './index.css';
-
+import OpenModalMenuItem from './OpenModalButton';
 const NavBar = () => {
   const [showMenu, setShowMenu] = useState(false)
 
@@ -17,7 +18,10 @@ const NavBar = () => {
         <h1 className='navbar-h1'>Besty</h1>
         <input className='search-input' placeholder='Search for products'></input>
         <button className='create-product-button'>
-          Create a product listing
+          <OpenModalMenuItem
+          itemText='Create a product listing'
+          modalComponent={CreateProductForm}
+           />
         </button>
         <div className='navbar-right-side-container'>
           <div className='profile-dropdown-container' onClick={toggleShowMenu}>
