@@ -11,8 +11,12 @@ function ProductIndex(){
     const {productId} = useParams()
     const product = useSelector(state => state.product.allProducts[productId])
     const [listingToggle, setListingToggle] = useState(false);
+    const [policiesToggle, setPoliciesToggle] = useState(false);
+    const [highlightToggle, setHighlightToggle] = useState(false);
+    const [descriptionToggle, setDescriptionToggle] = useState(false);
     const [quantity, setQuantity] = useState(0)
     const dispatch = useDispatch()
+
 
     if (!product){
         return null
@@ -20,6 +24,18 @@ function ProductIndex(){
 
     const toggleListingButtons = () => {
         setListingToggle(!listingToggle)
+    }
+
+    const togglePolicyButtons = () => {
+        setPoliciesToggle(!policiesToggle)
+    }
+
+    const toggleHighlight = () => {
+        setHighlightToggle(!highlightToggle)
+    }
+
+    const toggleDescription = () => {
+        setDescriptionToggle(!descriptionToggle)
     }
 
     const incrimentQuantity = () => {
@@ -81,15 +97,17 @@ function ProductIndex(){
                             ))}
                             {/* <option value={}></option> */}
                         </select>
-                        <div>
-                            Quantity:{quantity}
+                        <div className="product-quantity-container">
+                            <div>
+                                Quantity:{quantity}
+                            </div>
+                            <button className="product-quantity-button" onClick={incrimentQuantity}><i class="fa-solid fa-plus"></i></button>
+                            <button className="product-quantity-button" onClick={decrimentQuantity}><i class="fa-solid fa-minus"></i></button>
                         </div>
-                        <button className="product-quantity-button" onClick={incrimentQuantity}><i class="fa-solid fa-plus"></i></button>
-                        <button className="product-quantity-button" onClick={decrimentQuantity}><i class="fa-solid fa-minus"></i></button>
                     </div>
                     <button className="product-detail-cart-button">Buy it now</button>
-                    <form onSubmit={addCart}>
-                        <button className="product-detail-cart-button" type="submit">Add to cart</button>
+                    <form className="product-add-to-cart-button-form" onSubmit={addCart}>
+                        <button className="product-to-cart-button" type="submit">Add to cart</button>
                     </form>
                 </div>
             </div>
@@ -101,7 +119,7 @@ function ProductIndex(){
                     <div className="product-description-awards">
                         <div className="product-description-award-item">
                             <i class="fa-solid fa-award fa-2xl"></i>
-                            Star Seller. This seller consistently earned
+                            Star Seller. This seller consistently shipped on time and replied quickly to any messages they recieved.
                         </div>
                         <div className="product-description-award-item">
                             <i class="fa-solid fa-truck fa-2xl"></i>
@@ -112,35 +130,65 @@ function ProductIndex(){
                         <div>
                             Manage Product Listing
                         </div>
-                        <i class="fa-solid fa-chevron-down fa-sm"></i>
+                        {listingToggle? <i class="fa-solid fa-chevron-up fa-sm"></i> : <i class="fa-solid fa-chevron-down fa-sm"></i>}
                     </div>
                     {listingToggle ? <div className="product-listing-buttons-container">
                         <EditProductModal product={product} />
                         <DeleteProductModal product={product}/>
                     </div> : <></> }
-                    <div className="product-attribute-dropdown">
+                    <div className="product-attribute-dropdown" onClick={togglePolicyButtons}>
                         <div>
-                            Shipping and return policies
+                            Besty's purchase policies
                         </div>
-                        <i class="fa-solid fa-chevron-down fa-sm"></i>
+                        {policiesToggle? <i class="fa-solid fa-chevron-up fa-sm"></i> : <i class="fa-solid fa-chevron-down fa-sm"></i>}
                     </div>
-                    <div className="product-attribute-dropdown">
+                    {policiesToggle? <div className="prroduct-besty-certified">
+                        <i class="fa-regular fa-handshake fa-xl"></i>
+                        <div>
+                            Besty Purchases Protection: Shop confidently on Besty knowing if something goes wrong with an order, we've got your back.
+                        </div>
+                    </div> : <></>}
+                    <div className="product-attribute-dropdown" onClick={toggleHighlight}>
                         <div>
                             Highlights
                         </div>
-                        <i class="fa-solid fa-chevron-down fa-sm"></i>
+                        {highlightToggle? <i class="fa-solid fa-chevron-up fa-sm"></i> : <i class="fa-solid fa-chevron-down fa-sm"></i>}
                     </div>
-                    <div className="product-attribute-dropdown">
+                    {highlightToggle ? <div className="product-highlights-container">
+                        <div className="product-highlight-item">
+                            <i class="fa-solid fa-hand"></i>
+                            Handmade
+                        </div>
+                        <div className="product-highlight-item">
+                            <i class="fa-solid fa-shop"></i>
+                            Small business
+                        </div>
+                        </div> : <></>
+                    }
+                    <div className="product-attribute-dropdown" onClick={toggleDescription}>
                         <div>
                             Description
                         </div>
                         <i class="fa-solid fa-chevron-down fa-sm"></i>
                     </div>
+                    {descriptionToggle ? <div className="product-description-item-container">
+                        {product.description}
+                        </div> : <></>
+                    }
                     <div className="product-attribute-dropdown">
                         <div>
                             Meet your sellers
                         </div>
                         <i class="fa-solid fa-chevron-down fa-sm"></i>
+                    </div>
+                    <div>
+                       <div>
+                            <img></img>
+                            <div></div>
+                       </div>
+                       <button className="meet-seller-button">
+                        Message {product.owner?.username}
+                       </button>
                     </div>
                 </div>
             </div>

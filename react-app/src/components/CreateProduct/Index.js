@@ -23,8 +23,8 @@ function CreateProductForm({setShowModal}){
 
         if (name.length < 1) newErrors.push("Product name must be at least 1 character");
         else if (name.length > 30) newErrors.push("Product name must be less than 30 characters");
-        if (price < 0) newErrors.push('Price must be greater than $0')
-        if (stock < 0) newErrors.push('Stock must be greater than 0')
+        if (price < 1) newErrors.push('Price must be greater than $0')
+        if (stock < 1) newErrors.push('Stock must be greater than 0')
         if (description.length < 50) newErrors.push('Description must be greater than 50 characters')
 
 
@@ -73,7 +73,7 @@ function CreateProductForm({setShowModal}){
                 </label>
                 <label className='create-product-label'>
                     Description
-                    <input
+                    <textarea
                     type="text"
                     required
                     value={description}
