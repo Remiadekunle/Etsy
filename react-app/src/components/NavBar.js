@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { login } from '../store/session';
 import LogoutButton from './auth/LogoutButton';
@@ -9,6 +9,8 @@ import './index.css';
 import OpenModalMenuItem from './OpenModalButton';
 
 const NavBar = () => {
+  const user = useSelector(state => state.session.user)
+  const cart = useSelector(state => state.cart.cart)
   const [showMenu, setShowMenu] = useState(false)
   const dispatch = useDispatch();
   const toggleShowMenu = () => {
@@ -63,6 +65,7 @@ const NavBar = () => {
           <div className='cart-container'>
             <i class="fa-solid fa-cart-shopping fa-lg"></i>
           </div>
+          <div className='cart-item-amount'>{cart.items?.length}</div>
         </div>
       </div>
     </nav>
