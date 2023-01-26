@@ -3,8 +3,9 @@
     display: flex;
     align-items: center;
     position: relative;
-    padding-bottom: 10px;
-    height: 72px;
+    padding-bottom: 5px;
+    margin-bottom: 30px;
+    /* height: 72px; */
 }
 
 .search-input{

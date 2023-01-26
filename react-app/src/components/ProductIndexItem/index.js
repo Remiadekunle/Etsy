@@ -100,7 +100,7 @@ function ProductIndex(){
                             Options:
                         </div>
                         <select className="product-details-select">
-                            <option value=''>Select an option</option>
+                            <option  value=''>Select an option</option>
                             {options && options.map(item => (
                                 <option value={item}>{item}</option>
                             ))}
@@ -135,16 +135,7 @@ function ProductIndex(){
                             Hooray! This item ships free.
                         </div>
                     </div>
-                    {user?.username === product.owner?.username? <div className="product-attribute-dropdown" onClick={toggleListingButtons} >
-                        <div>
-                            Manage Product Listing
-                        </div>
-                        {listingToggle? <i class="fa-solid fa-chevron-up fa-sm"></i> : <i class="fa-solid fa-chevron-down fa-sm"></i>}
-                    </div> : <></>}
-                    {listingToggle ? <div className="product-listing-buttons-container">
-                        <EditProductModal product={product} />
-                        <DeleteProductModal product={product}/>
-                    </div> : <></> }
+
                     <div className="product-attribute-dropdown" onClick={togglePolicyButtons}>
                         <div>
                             Besty's purchase policies
@@ -207,7 +198,16 @@ function ProductIndex(){
                        </button>
                     </div>:<></>
                     }
-
+                    {user?.username === product.owner?.username? <div className="product-attribute-dropdown" onClick={toggleListingButtons} >
+                        <div>
+                            Manage Product Listing
+                        </div>
+                        {listingToggle? <i class="fa-solid fa-chevron-up fa-sm"></i> : <i class="fa-solid fa-chevron-down fa-sm"></i>}
+                    </div> : <></>}
+                    {listingToggle ? <div className="product-listing-buttons-container">
+                        <EditProductModal product={product} />
+                        <DeleteProductModal product={product}/>
+                    </div> : <></> }
                 </div>
             </div>
         </div>

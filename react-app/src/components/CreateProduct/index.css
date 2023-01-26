@@ -23,4 +23,18 @@
     padding: 10px;
     border-radius: 20px;
     margin-top: 20px;
+    cursor: pointer;
+}
+
+.create-product-nav-button{
+    background-color: white;
+    border-style: none;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.create-product-nav-button:hover{
+    background-color: lightgray;
+    border-radius: 10px;
+    text-decoration: underline;
 }

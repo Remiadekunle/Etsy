@@ -37,6 +37,7 @@ function EditProductForm({setShowModal, product}){
     const handleSubmit = async (e) => {
         e.preventDefault();
         // setErrors([]);
+        if (description.length < 50) return
         const options = `${option1}-${option2}-${option3}`
         console.log(typeof price)
         const payload = {

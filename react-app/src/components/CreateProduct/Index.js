@@ -35,6 +35,8 @@ function CreateProductForm({setShowModal}){
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (description.length < 50) return
         // setErrors([]);
         const options = `${option1}-${option2}-${option3}`
         console.log(typeof price)
@@ -145,7 +147,7 @@ export function CreateProductModal(){
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>Create a product</button>
+      <button className="create-product-nav-button" onClick={() => setShowModal(true)}>Create a product</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <CreateProductForm setShowModal={setShowModal}/>
