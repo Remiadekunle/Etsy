@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { login } from '../store/session';
 import LogoutButton from './auth/LogoutButton';
 import CreateProductForm, { CreateProductModal } from './CreateProduct/Index';
@@ -13,6 +13,8 @@ const NavBar = () => {
   const cart = useSelector(state => state.cart.cart)
   const [showMenu, setShowMenu] = useState(false)
   const dispatch = useDispatch();
+  const history = useHistory();
+
   const toggleShowMenu = () => {
     setShowMenu(!showMenu)
   }
@@ -24,10 +26,17 @@ const NavBar = () => {
     const data = await dispatch(login(email, password));
   }
 
+  const toCart = () => {
+    return history.push('/cart')
+  }
+
+
   return (
     <nav className='navbar'>
       <div className='navbar-items'>
-        <h1 className='navbar-h1'>Besty</h1>
+        <NavLink to={'/'} style={{ textDecoration: 'none', color: 'inherit' }}>
+          <h1 className='navbar-h1'>Besty</h1>
+        </NavLink>
         <input className='search-input' placeholder='Search for products'></input>
         <CreateProductModal />
         <div className='navbar-right-side-container'>
@@ -62,7 +71,7 @@ const NavBar = () => {
             </ul> :<></>}
 
           </div>
-          <div className='cart-container'>
+          <div className='cart-container' onClick={toCart}>
             <i class="fa-solid fa-cart-shopping fa-lg"></i>
           </div>
           <div className='cart-item-amount'>{cart.items?.length}</div>

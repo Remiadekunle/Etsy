@@ -89,7 +89,7 @@ function ProductIndex(){
                     </div>
                     <button className="product-detail-cart-button">Buy it now</button>
                     <form onSubmit={addCart}>
-                        <button className="product-detail-cart-button">Add to cart</button>
+                        <button className="product-detail-cart-button" type="submit">Add to cart</button>
                     </form>
                 </div>
             </div>
