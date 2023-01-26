@@ -9,11 +9,13 @@ import { addToCart } from "../../store/cart";
 
 function ProductIndex(){
     const {productId} = useParams()
+    const user = useSelector(state => state.session.user)
     const product = useSelector(state => state.product.allProducts[productId])
     const [listingToggle, setListingToggle] = useState(false);
     const [policiesToggle, setPoliciesToggle] = useState(false);
     const [highlightToggle, setHighlightToggle] = useState(false);
     const [descriptionToggle, setDescriptionToggle] = useState(false);
+    const [sellerToggle, setSellerToggle] = useState(false);
     const [quantity, setQuantity] = useState(0)
     const dispatch = useDispatch()
 
@@ -36,6 +38,10 @@ function ProductIndex(){
 
     const toggleDescription = () => {
         setDescriptionToggle(!descriptionToggle)
+    }
+
+    const toggleSeller = () => {
+        setSellerToggle(!sellerToggle)
     }
 
     const incrimentQuantity = () => {
@@ -64,6 +70,9 @@ function ProductIndex(){
         <div className="product-index-container">
             <div className="product-index-main-content">
                 <div className="product-image-container">
+                    <div className="product-image-rows">
+
+                    </div>
                     <img className="product-index-image" src={product.previewImg}></img>
                 </div>
                 <div className="product-details-container">
@@ -126,12 +135,12 @@ function ProductIndex(){
                             Hooray! This item ships free.
                         </div>
                     </div>
-                    <div className="product-attribute-dropdown" onClick={toggleListingButtons} >
+                    {user?.username === product.owner?.username? <div className="product-attribute-dropdown" onClick={toggleListingButtons} >
                         <div>
                             Manage Product Listing
                         </div>
                         {listingToggle? <i class="fa-solid fa-chevron-up fa-sm"></i> : <i class="fa-solid fa-chevron-down fa-sm"></i>}
-                    </div>
+                    </div> : <></>}
                     {listingToggle ? <div className="product-listing-buttons-container">
                         <EditProductModal product={product} />
                         <DeleteProductModal product={product}/>
@@ -169,27 +178,36 @@ function ProductIndex(){
                         <div>
                             Description
                         </div>
-                        <i class="fa-solid fa-chevron-down fa-sm"></i>
+                        {descriptionToggle? <i class="fa-solid fa-chevron-up fa-sm"></i> : <i class="fa-solid fa-chevron-down fa-sm"></i>}
                     </div>
                     {descriptionToggle ? <div className="product-description-item-container">
                         {product.description}
                         </div> : <></>
                     }
-                    <div className="product-attribute-dropdown">
+                    <div className="product-attribute-dropdown" onClick={toggleSeller}>
                         <div>
                             Meet your sellers
                         </div>
-                        <i class="fa-solid fa-chevron-down fa-sm"></i>
+                        {sellerToggle? <i class="fa-solid fa-chevron-up fa-sm"></i> : <i class="fa-solid fa-chevron-down fa-sm"></i>}
                     </div>
-                    <div>
-                       <div>
-                            <img></img>
-                            <div></div>
+                    {sellerToggle ? <div>
+                       <div className="meet-seller-owner-container">
+                            <img className="meet-seller-img" src={product.owner.profileImg? product.owner.profileImg : 'https://i.pinimg.com/originals/b1/92/4d/b1924dce177345b5485bb5490ab3441f.jpg'}></img>
+                            <div className="meet-seeler-description">
+                                <div>
+                                    {product.owner?.username}
+                                </div>
+                                <div>
+                                    {`Owner of ${product.name}`}
+                                </div>
+                            </div>
                        </div>
                        <button className="meet-seller-button">
                         Message {product.owner?.username}
                        </button>
-                    </div>
+                    </div>:<></>
+                    }
+
                 </div>
             </div>
         </div>
