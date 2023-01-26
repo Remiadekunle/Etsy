@@ -1,6 +1,6 @@
 
 .cart-page{
-    margin: 0px 280px;
+    margin: 0px 15%;
     height: 100vh;
 }
 
@@ -51,6 +51,7 @@
 .cart-product-name-container{
     display: flex;
     flex-direction: column;
+    width: 355px;
 }
 
 .cart-product-name{
