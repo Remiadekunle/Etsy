@@ -87,7 +87,8 @@
     background-color: white;
     top: 0;
     right: 1.5%;
-    padding: 0px 15px;
+    padding: 15px 15px;
+    border-radius: 15px;
 }
 
 .cart-discount-container{
