@@ -4,10 +4,6 @@ import { fetchProducts } from '../../store/product';
 import './index.css';
 
 function HomePage(){
-    const dispatch = useDispatch();
-    useEffect(() => {
-        
-    }, [dispatch])
     return(
         <div className="home-page">
             <div className="home-products-container">

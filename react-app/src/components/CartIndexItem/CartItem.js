@@ -4,7 +4,7 @@ import { useSelector } from "react-redux"
 function CartItem({item}){
     const product = useSelector(state => state.product.allProducts[item.product])
     const [cartQuantity, setCartQuantity] = useState(item.quantity)
-
+    const stockDrop = []
     const incrimentQuantity = () => {
         if (cartQuantity >= product.stock) return
         setCartQuantity(cartQuantity + 1)
@@ -13,6 +13,14 @@ function CartItem({item}){
         if (cartQuantity === 0) return
         setCartQuantity(cartQuantity - 1)
     }
+
+    const getStock = () => {
+        for(let i = 0;  i < product.stock; i++ ){
+            stockDrop.push(i)
+        }
+    }
+    getStock();
+
     return(
         <div className="cart-item-index-container">
             <img className="cart-product-img" src={product?.previewImg}></img>
@@ -29,9 +37,16 @@ function CartItem({item}){
 
                 </div>
                 <div className="cart-cost-metrics">
-                    <div className="cart-item-quantity">
+                    <select value={cartQuantity} className="cart-item-quantity">
+                        {
+                            stockDrop.map(index => (
+                                <option value={index}>{index}</option>
+                            ))
+                        }
+                    </select>
+                    <div >
                         {`${cartQuantity}`}
-                        <i class="fa-solid fa-caret-down"></i>
+                        {/* <i class="fa-solid fa-caret-down"></i> */}
                     </div>
                     <div className="cart-item-price">
                         {`$${product?.price}.00`}

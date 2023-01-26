@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom";
-import { fetchProducts } from "../../store/product";
 import { DeleteProductModal } from "../DeleteProduct";
 import { EditProductModal } from "../EditProduct";
 import './index.css';
@@ -15,6 +14,8 @@ function ProductIndex(){
     const [policiesToggle, setPoliciesToggle] = useState(false);
     const [highlightToggle, setHighlightToggle] = useState(false);
     const [descriptionToggle, setDescriptionToggle] = useState(false);
+    const [option, setOption] = useState('0')
+    const [optionValue, setOptionValue] = useState('')
     const [sellerToggle, setSellerToggle] = useState(false);
     const [quantity, setQuantity] = useState(0)
     const dispatch = useDispatch()
@@ -58,13 +59,17 @@ function ProductIndex(){
         console.log('the quant', quantity)
         // const payloadQ = quantity
         if (quantity === 0) return
-        await dispatch(addToCart(productId, quantity))
+        if (option === 0) return
+        const optionItem = product.options[option - 1]
+        await dispatch(addToCart(productId, quantity, optionValue))
         setQuantity(0)
     }
 
     let {options } = product;
     console.log(options)
     options = options.split('-')
+    console.log('yooooooooooo this is the option', option)
+    console.log('yooooooooooo this is the option', optionValue)
 
     return(
         <div className="product-index-container">
@@ -99,10 +104,16 @@ function ProductIndex(){
                         <div>
                             Options:
                         </div>
-                        <select className="product-details-select">
-                            <option  value=''>Select an option</option>
-                            {options && options.map(item => (
-                                <option value={item}>{item}</option>
+                        <select
+                         className="product-details-select"
+                         onChange={(e) => {
+                            setOption(e.target.value)
+                            setOptionValue(e.target.childNodes[e.target.value].label)
+                        }}
+                         >
+                            <option  value='0'>Select an option</option>
+                            {options && options.map((item, i) => (
+                                <option label={item} value={i + 1}>{item}</option>
                             ))}
                             {/* <option value={}></option> */}
                         </select>

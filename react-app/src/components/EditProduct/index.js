@@ -147,7 +147,7 @@ export function EditProductModal({product}){
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>Edit your product</button>
+      <button className="edit-product-button" onClick={() => setShowModal(true)}><i class="fa-regular fa-pen-to-square fa-2xl"></i></button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <EditProductForm setShowModal={setShowModal} product={product}/>

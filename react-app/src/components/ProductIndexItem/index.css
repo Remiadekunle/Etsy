@@ -148,7 +148,8 @@
 
 .product-listing-buttons-container{
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
+    padding-left: 10px;
     gap: 20px;
 }
 
