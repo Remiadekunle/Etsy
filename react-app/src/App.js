@@ -11,6 +11,7 @@ import { authenticate } from './store/session';
 import HomePage from './components/HomePage';
 import ProductIndex from './components/ProductIndexItem';
 import { fetchProducts } from './store/product';
+import { fetchCart } from './store/cart';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -20,6 +21,7 @@ function App() {
     (async() => {
       await dispatch(authenticate());
       dispatch(fetchProducts())
+      dispatch(fetchCart())
       setLoaded(true);
     })();
   }, [dispatch]);
