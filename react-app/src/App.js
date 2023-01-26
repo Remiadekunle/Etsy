@@ -11,6 +11,8 @@ import { authenticate } from './store/session';
 import HomePage from './components/HomePage';
 import ProductIndex from './components/ProductIndexItem';
 import { fetchProducts } from './store/product';
+import { fetchCart } from './store/cart';
+import CartPage from './components/CartIndexItem';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -20,6 +22,7 @@ function App() {
     (async() => {
       await dispatch(authenticate());
       dispatch(fetchProducts())
+      dispatch(fetchCart())
       setLoaded(true);
     })();
   }, [dispatch]);
@@ -43,6 +46,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
+        </ProtectedRoute>
+        <ProtectedRoute path='/cart' exact={true}>
+          <CartPage />
         </ProtectedRoute>
         <Route path='/products/:productId'>
           <ProductIndex />

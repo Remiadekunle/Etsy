@@ -5,11 +5,14 @@ import { fetchProducts } from "../../store/product";
 import { DeleteProductModal } from "../DeleteProduct";
 import { EditProductModal } from "../EditProduct";
 import './index.css';
+import { addToCart } from "../../store/cart";
 
 function ProductIndex(){
     const {productId} = useParams()
     const product = useSelector(state => state.product.allProducts[productId])
     const [listingToggle, setListingToggle] = useState(false);
+    const [quantity, setQuantity] = useState(0)
+    const dispatch = useDispatch()
 
     if (!product){
         return null
@@ -17,6 +20,24 @@ function ProductIndex(){
 
     const toggleListingButtons = () => {
         setListingToggle(!listingToggle)
+    }
+
+    const incrimentQuantity = () => {
+        if (quantity >= product.stock) return
+        setQuantity(quantity + 1)
+    }
+    const decrimentQuantity = () => {
+        if (quantity === 0) return
+        setQuantity(quantity - 1)
+    }
+
+    const addCart = async (e) => {
+        e.preventDefault();
+        console.log('the quant', quantity)
+        // const payloadQ = quantity
+        if (quantity === 0) return
+        await dispatch(addToCart(productId, quantity))
+        setQuantity(0)
     }
 
     let {options } = product;
@@ -60,9 +81,16 @@ function ProductIndex(){
                             ))}
                             {/* <option value={}></option> */}
                         </select>
+                        <div>
+                            Quantity:{quantity}
+                        </div>
+                        <button className="product-quantity-button" onClick={incrimentQuantity}><i class="fa-solid fa-plus"></i></button>
+                        <button className="product-quantity-button" onClick={decrimentQuantity}><i class="fa-solid fa-minus"></i></button>
                     </div>
                     <button className="product-detail-cart-button">Buy it now</button>
-                    <button className="product-detail-cart-button">Add to cart</button>
+                    <form onSubmit={addCart}>
+                        <button className="product-detail-cart-button" type="submit">Add to cart</button>
+                    </form>
                 </div>
             </div>
             <div className="product-content-description-container">

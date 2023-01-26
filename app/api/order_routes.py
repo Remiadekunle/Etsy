@@ -7,12 +7,10 @@ from datetime import datetime
 
 order_routes = Blueprint('order', __name__)
 
-@order_routes.route('/<int:id>')
-# @login_required
+@order_routes.route('/')
+@login_required
 def get_user_cart(id):
-    user = User.query.get(id)
-    print(user.cart, 'testinggggggggg')
-    return {"cart": user.cart.to_dict()}
+    return {"cart": current_user.cart.to_dict()}
 
 
 @order_routes.route('/<int:id>',  methods=['POST'])

@@ -4,6 +4,7 @@
     align-items: center;
     position: relative;
     padding-bottom: 10px;
+    height: 72px;
 }
 
 .search-input{
@@ -41,6 +42,15 @@
     display: flex;
     align-items: center;
     cursor: pointer;
+    width: 50px;
+    justify-content: center;
+    border-radius: 25px;
+    /* height: 100%; */
+    /* position: relative; */
+}
+
+.cart-container:hover{
+    background-color: lightgray;
 }
 
 .profile-dropdown-container{
@@ -69,10 +79,23 @@
     display: flex;
     position: absolute;
     right: 0;
+    width: 100px;
 }
 
 .create-product-button{
     border-radius: 5px;
     padding: 5px 10px;
     cursor: pointer;
+}
+
+.cart-item-amount{
+    border: 1px solid gray;
+    font-size: 8px;
+    font-weight: bold;
+    padding: 5px;
+    position: absolute;
+    background-color: orange;
+    top: 0;
+    right: 1px;
+    border-radius: 50%;
 }
