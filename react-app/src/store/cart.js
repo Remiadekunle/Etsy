@@ -92,6 +92,17 @@ export const deleteFromCart = (id, option) => async dispatch =>{
     }
 }
 
+export const clearCart = (id, option) => async dispatch => {
+    const res = await fetch('/api/cart/clear', {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+    })
+    if (res.ok){
+        const body = await res.json();
+        console.log('yay we got the cart back', body)
+        dispatch(loadCart(body.cart))
+    }
+}
 
 
 const initialState = {

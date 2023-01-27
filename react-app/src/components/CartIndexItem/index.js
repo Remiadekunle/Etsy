@@ -1,11 +1,16 @@
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { clearCart } from "../../store/cart";
 import CartItem from "./CartItem"
 import './index.css';
-
 function CartPage(){
     const cart = useSelector(state => state.cart.cart)
+    const dispatch = useDispatch()
     console.log('this is the cart', cart)
     const tag = cart.items?.length > 1 ? 'items' : 'item'
+
+    const deleteCart =  async () => {
+        await dispatch(clearCart())
+    }
     return(
         <div className="cart-page">
             <div className="cart-page-welcome">
@@ -45,6 +50,7 @@ function CartPage(){
                         </div>
                     </div>
                     <button className="cart-place-order-button">Place Order</button>
+                    <button className="cart-clear-button" type="button" onClick={deleteCart}>Clear Cart</button>
                 </div>
             </div>
         </div>

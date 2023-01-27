@@ -210,6 +210,13 @@ def delete_cart():
     print('new cart yo hella good', new_cart)
     return {"cart": current_user.cart.to_dict()}
 
-@cart_routes.route('/clearr',methods=['DELETE'])
+@cart_routes.route('/clear',methods=['DELETE'])
+@login_required
 def delete_all_items():
-    pass
+    cart = current_user.cart
+    cart_items = [item for item in cart.items]
+    for item in cart_items:
+        db.session.delete(item)
+    cart.total = 0.0
+    db.session.commit()
+    return {"cart": current_user.cart.to_dict()}

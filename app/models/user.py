@@ -38,7 +38,7 @@ class User(db.Model, UserMixin):
             'email': self.email,
             # 'products': [product.id for product in self.products],
             'cart': self.cart.to_dict(),
-            # 'orders': [order.id for order in self.orders]
+            'orders': [order.to_dict() for order in self.orders]
         }
     def to_dict2(self):
         return {
@@ -48,5 +48,5 @@ class User(db.Model, UserMixin):
             'profile': self.profile_img,
             'products': [product.id for product in self.products],
             # 'cart': self.cart.to_dict(),
-            # 'orders': [order.id for order in self.orders]
+            'orders': [order.to_dict() for order in self.orders]
         }
