@@ -13,6 +13,7 @@ import ProductIndex from './components/ProductIndexItem';
 import { fetchProducts } from './store/product';
 import { fetchCart } from './store/cart';
 import CartPage from './components/CartIndexItem';
+import { fetchOrders } from './store/order';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -23,6 +24,7 @@ function App() {
       await dispatch(authenticate());
       dispatch(fetchProducts())
       dispatch(fetchCart())
+      dispatch(fetchOrders())
       setLoaded(true);
     })();
   }, [dispatch]);

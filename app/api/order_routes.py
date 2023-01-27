@@ -10,14 +10,16 @@ order_routes = Blueprint('order', __name__)
 @order_routes.route('/')
 @login_required
 def get_user_cart():
-    return {"order": current_user.to_dict()}
+    orders = Order.query.filter(Order.user_id == current_user.id)
+    return {"orders": [order.to_dict() for order in orders]}
 
 @order_routes.route('/<int:id>')
 # @login_required
 def get_user_cart2(id):
     user = User.query.get(id)
+    orders = Order.query.filter(Order.user_id == user.id)
     print('help yo', user.to_dict())
-    return {"orders": user.to_dict()}
+    return {"orders": [order.to_dict() for order in orders]}
 
 
 
