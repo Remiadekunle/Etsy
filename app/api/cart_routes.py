@@ -81,3 +81,18 @@ def update_cart(id):
             return {"errors": 'Product not in cart'}
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+@cart_routes.route('/item',methods=['PUT'])
+def delete_cart():
+    form = CartForm()
+    cart = current_user.cart
+    product_id = form.data['product_id']
+    product = Product.query.get(product_id)
+    new_cart = [item for item in cart.items if item.product_id == product_id ]
+    new_cart = new_cart[0]
+    total = product.price * new_cart.quantity
+    db.session.delete(new_cart)
+    current_user.cart.total = current_user.cart.total - total
+    db.session.commit()
+    # print('new cart yo hella good', new_cart)
+    return {"cart": current_user.cart.to_dict()}

@@ -1,10 +1,15 @@
 import { useState } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { deleteFromCart, editToCartAdd, editToCartRemove } from "../../store/cart"
+import EditCartItemForm, { EditCartItemModal } from "./EditItem"
+import { DeleteCartItemModal } from "./RemoveItem"
 
 function CartItem({item}){
     const product = useSelector(state => state.product.allProducts[item.product])
     const [cartQuantity, setCartQuantity] = useState(item.quantity)
+    const dispatch = useDispatch();
     const stockDrop = []
+    const currQuantity = item.quantity
     const incrimentQuantity = () => {
         if (cartQuantity >= product.stock) return
         setCartQuantity(cartQuantity + 1)
@@ -19,6 +24,20 @@ function CartItem({item}){
             stockDrop.push(i)
         }
     }
+    if(!product){
+        return null
+    }
+    const updateCart = async (e) => {
+        if (cartQuantity === item.quantity) return
+        console.log('we got past the validation', currQuantity)
+        if (cartQuantity < currQuantity){
+
+        } else{
+
+        }
+        e.preventDefault();
+
+    }
     getStock();
 
     return(
@@ -32,24 +51,24 @@ function CartItem({item}){
                     <div>
                         {'Options placeholder'}
                     </div>
+                    <DeleteCartItemModal product={product}/>
                 </div>
-                <div className="cart-quantity-buttons">
 
-                </div>
                 <div className="cart-cost-metrics">
-                    <select value={cartQuantity} className="cart-item-quantity">
+                    {/* <select value={cartQuantity} onChange={(e) => {
+                        setCartQuantity(e.target.value)
+                        console.log('in the onchange')
+                        updateCart(e)
+                        }} className="cart-item-quantity">
                         {
                             stockDrop.map(index => (
                                 <option value={index}>{index}</option>
                             ))
                         }
-                    </select>
-                    <div >
-                        {`${cartQuantity}`}
-                        {/* <i class="fa-solid fa-caret-down"></i> */}
-                    </div>
+                    </select> */}
+                    <EditCartItemModal product={product} item={item} />
                     <div className="cart-item-price">
-                        {`$${product?.price}.00`}
+                        {`$${product?.price * cartQuantity}.00`}
                     </div>
                     {/* <button className="product-quantity-button" onClick={incrimentQuantity}><i class="fa-solid fa-plus"></i></button>
                     <button className="product-quantity-button" onClick={decrimentQuantity}><i class="fa-solid fa-minus"></i></button> */}
