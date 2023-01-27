@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { DeleteProductModal } from "../DeleteProduct";
 import { EditProductModal } from "../EditProduct";
 import './index.css';
@@ -19,6 +19,7 @@ function ProductIndex(){
     const [sellerToggle, setSellerToggle] = useState(false);
     const [quantity, setQuantity] = useState(0)
     const dispatch = useDispatch()
+    const history = useHistory();
 
 
     if (!product){
@@ -59,10 +60,11 @@ function ProductIndex(){
         console.log('the quant', quantity)
         // const payloadQ = quantity
         if (quantity === 0) return
-        if (option === 0) return
+        // if (option === 0) return
         const optionItem = product.options[option - 1]
         await dispatch(addToCart(productId, quantity, optionValue))
         setQuantity(0)
+        return history.push('/cart')
     }
 
     let {options } = product;
