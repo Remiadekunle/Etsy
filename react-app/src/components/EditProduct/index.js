@@ -24,8 +24,8 @@ function EditProductForm({setShowModal, product}){
 
         if (name.length < 1) newErrors.push("Product name must be at least 1 character");
         else if (name.length > 30) newErrors.push("Product name must be less than 30 characters");
-        if (price < 0) newErrors.push('Price must be greater than $0')
-        if (stock < 0) newErrors.push('Stock must be greater than 0')
+        if (price < 1) newErrors.push('Price must be greater than $0')
+        if (stock < 1) newErrors.push('Stock must be greater than 0')
         if (description.length < 50) newErrors.push('Description must be greater than 50 characters')
 
 
@@ -37,6 +37,7 @@ function EditProductForm({setShowModal, product}){
     const handleSubmit = async (e) => {
         e.preventDefault();
         // setErrors([]);
+        if (description.length < 50) return
         const options = `${option1}-${option2}-${option3}`
         console.log(typeof price)
         const payload = {
@@ -146,7 +147,7 @@ export function EditProductModal({product}){
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>Edit your product</button>
+      <button className="edit-product-button" onClick={() => setShowModal(true)}><i class="fa-regular fa-pen-to-square fa-2xl"></i></button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <EditProductForm setShowModal={setShowModal} product={product}/>

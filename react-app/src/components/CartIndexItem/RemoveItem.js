@@ -3,20 +3,22 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useModal } from '../../context/Modal';
 import { Modal } from "../../context/Modal";
+import { deleteFromCart } from "../../store/cart";
 import { createProduct, editProduct, removeProduct, updateProduct } from "../../store/product";
 import './index.css';
 
-function DeleteProductForm({setShowModal, product}){
+function DeleteCartItemForm({setShowModal, product}){
     const dispatch = useDispatch()
     const history = useHistory()
     const {options} = product
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        dispatch(deleteFromCart(product.id));
         // setErrors([]);
-        const body = await dispatch(removeProduct(product.id))
+
         setShowModal(false)
-        history.push(`/`)
+        // history.push(`/`)
     }
 
 
@@ -24,27 +26,27 @@ function DeleteProductForm({setShowModal, product}){
         <>
             <form className="create-product-form" onSubmit={handleSubmit}>
                 <label className='delete-product-checkbox'>
-                    Are you sure you want to delete?
+                    Are you sure you want to delete this item?
                     <input
                     type="checkbox"
                     required
                     className='create-product-input'/>
                 </label>
-                <button className='creater-product-button' type='submit'>Delete your product</button>
+                <button className='creater-product-button' type='submit'>Delete your cart item</button>
             </form>
         </>
     )
 }
 
-export function DeleteProductModal({product}){
+export function DeleteCartItemModal({product}){
     const [showModal, setShowModal] = useState(false);
 
   return (
     <>
-      <button className="delete-product-button" onClick={() => setShowModal(true)}><i class="fa-regular fa-trash-can fa-2xl"></i></button>
+      <button className="delete-cart-item-button" onClick={() => setShowModal(true)}><i class="fa-regular fa-trash-can fa-2xl"></i></button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <DeleteProductForm setShowModal={setShowModal} product={product}/>
+          <DeleteCartItemForm setShowModal={setShowModal} product={product}/>
         </Modal>
       )}
     </>
@@ -52,4 +54,4 @@ export function DeleteProductModal({product}){
 }
 
 
-export default DeleteProductForm
+export default DeleteCartItemForm

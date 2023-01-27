@@ -44,6 +44,29 @@ export const addToCart = (productId, quantity) => async dispatch => {
     }
 }
 
+export const editToCartAdd = () => async dispatch =>{
+
+}
+export const editToCartRemove = () => async dispatch =>{
+
+}
+export const deleteFromCart = (id, quantity) => async dispatch =>{
+    const res = await fetch('/api/cart/item', {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            product_id:id
+        })
+    })
+    if (res.ok){
+        const body = await res.json();
+        console.log('yay we got the cart back', body)
+        dispatch(loadCart(body.cart))
+    }
+}
+
+
+
 const initialState = {
     cart: {},
 };
