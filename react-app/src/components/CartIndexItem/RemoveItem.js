@@ -7,14 +7,14 @@ import { deleteFromCart } from "../../store/cart";
 import { createProduct, editProduct, removeProduct, updateProduct } from "../../store/product";
 import './index.css';
 
-function DeleteCartItemForm({setShowModal, product}){
+function DeleteCartItemForm({setShowModal, product, item}){
     const dispatch = useDispatch()
     const history = useHistory()
     const {options} = product
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        dispatch(deleteFromCart(product.id));
+        dispatch(deleteFromCart(product.id, item.option));
         // setErrors([]);
 
         setShowModal(false)
@@ -38,7 +38,7 @@ function DeleteCartItemForm({setShowModal, product}){
     )
 }
 
-export function DeleteCartItemModal({product}){
+export function DeleteCartItemModal({product, item}){
     const [showModal, setShowModal] = useState(false);
 
   return (
@@ -46,7 +46,7 @@ export function DeleteCartItemModal({product}){
       <button className="delete-cart-item-button" onClick={() => setShowModal(true)}><i class="fa-regular fa-trash-can fa-2xl"></i></button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <DeleteCartItemForm setShowModal={setShowModal} product={product}/>
+          <DeleteCartItemForm item={item} setShowModal={setShowModal} product={product}/>
         </Modal>
       )}
     </>

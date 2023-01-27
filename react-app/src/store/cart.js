@@ -27,13 +27,14 @@ export const fetchCart = () => async dispatch => {
     }
 }
 
-export const addToCart = (productId, quantity) => async dispatch => {
+export const addToCart = (productId, quantity, optionValue) => async dispatch => {
     const res = await fetch('/api/cart/', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
             product_id:productId,
-            quantity:quantity
+            quantity:quantity,
+            option:optionValue
         })
     })
 
@@ -45,17 +46,43 @@ export const addToCart = (productId, quantity) => async dispatch => {
 }
 
 export const editToCartAdd = () => async dispatch =>{
-
+    // const res = await fetch('/api/cart/', {
+    //     method: "POST",
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify({
+    //         product_id:productId,
+    //         quantity:quantity
+    //     })
+    // })
+    // if (res.ok){
+    //     const body = await res.json();
+    //     console.log('yay we got the cart back', body)
+    //     dispatch(loadCart(body.cart))
+    // }
 }
-export const editToCartRemove = () => async dispatch =>{
-
+export const editToCartRemove = (productId, quantity, option) => async dispatch =>{
+    const res = await fetch('/api/cart/', {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            product_id:productId,
+            quantity:quantity,
+            option:option
+        })
+    })
+    if (res.ok){
+        const body = await res.json();
+        console.log('yay we got the cart back', body)
+        dispatch(loadCart(body.cart))
+    }
 }
-export const deleteFromCart = (id, quantity) => async dispatch =>{
+export const deleteFromCart = (id, option) => async dispatch =>{
     const res = await fetch('/api/cart/item', {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-            product_id:id
+            product_id:id,
+            option:option
         })
     })
     if (res.ok){

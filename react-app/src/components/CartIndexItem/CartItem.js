@@ -49,9 +49,12 @@ function CartItem({item}){
                         {product?.name}
                     </div>
                     <div>
-                        {'Options placeholder'}
+                        {`Option: ${item?.option}`}
                     </div>
-                    <DeleteCartItemModal product={product}/>
+                    <div>
+                        {`Description: ${product.description}`}
+                    </div>
+                    <DeleteCartItemModal product={product} item={item}/>
                 </div>
 
                 <div className="cart-cost-metrics">
@@ -68,7 +71,7 @@ function CartItem({item}){
                     </select> */}
                     <EditCartItemModal product={product} item={item} />
                     <div className="cart-item-price">
-                        {`$${product?.price * cartQuantity}.00`}
+                        {`$${product?.price * item.quantity}.00`}
                     </div>
                     {/* <button className="product-quantity-button" onClick={incrimentQuantity}><i class="fa-solid fa-plus"></i></button>
                     <button className="product-quantity-button" onClick={decrimentQuantity}><i class="fa-solid fa-minus"></i></button> */}

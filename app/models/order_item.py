@@ -10,6 +10,7 @@ class OrderItem(db.Model):
     quantity = db.Column(db.Integer, nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('products.id')), nullable=False)
     order_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('orders.id')), nullable=False)
+    option = db.Column(db.String)
 
     order = db.relationship("Order", back_populates='items')
     product = db.relationship("Product", back_populates='orders')
