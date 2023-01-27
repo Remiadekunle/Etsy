@@ -60,7 +60,7 @@ function ProductIndex(){
         console.log('the quant', quantity)
         // const payloadQ = quantity
         if (quantity === 0) return
-        // if (option === 0) return
+        if (parseInt(option) === 0) return
         console.log('b4 we submit', optionValue)
         await dispatch(addToCart(productId, quantity, optionValue))
         setQuantity(0)

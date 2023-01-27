@@ -1,15 +1,24 @@
 import { useDispatch, useSelector } from "react-redux"
-import { clearCart } from "../../store/cart";
+import { useHistory } from "react-router-dom";
+import { clearCart, fetchCart } from "../../store/cart";
+import { addOrder, createOrder } from "../../store/order";
 import CartItem from "./CartItem"
 import './index.css';
 function CartPage(){
     const cart = useSelector(state => state.cart.cart)
     const dispatch = useDispatch()
+    const history = useHistory();
     console.log('this is the cart', cart)
     const tag = cart.items?.length > 1 ? 'items' : 'item'
 
     const deleteCart =  async () => {
         await dispatch(clearCart())
+    }
+
+    const placeOrder = async () => {
+        await dispatch(createOrder())
+        await dispatch(fetchCart())
+        return history.push('/orders')
     }
     return(
         <div className="cart-page">
@@ -49,7 +58,7 @@ function CartPage(){
                             <div>{`$${cart.total}.00`}</div>
                         </div>
                     </div>
-                    <button className="cart-place-order-button">Place Order</button>
+                    <button className="cart-place-order-button" onClick={placeOrder}>Place Order</button>
                     <button className="cart-clear-button" type="button" onClick={deleteCart}>Clear Cart</button>
                 </div>
             </div>
