@@ -45,21 +45,7 @@ export const addToCart = (productId, quantity, optionValue) => async dispatch =>
     }
 }
 
-export const editToCartAdd = () => async dispatch =>{
-    // const res = await fetch('/api/cart/', {
-    //     method: "POST",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify({
-    //         product_id:productId,
-    //         quantity:quantity
-    //     })
-    // })
-    // if (res.ok){
-    //     const body = await res.json();
-    //     console.log('yay we got the cart back', body)
-    //     dispatch(loadCart(body.cart))
-    // }
-}
+
 export const editToCartRemove = (productId, quantity, option) => async dispatch =>{
     const res = await fetch('/api/cart/', {
         method: "PUT",

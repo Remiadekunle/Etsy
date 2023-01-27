@@ -83,11 +83,14 @@
 
 .cart-total-container{
     border: 1px solid pink;
+    gap: 10px;
     width: 370px;
     height: 400px;
     position: absolute;
     background-color: white;
     top: 0;
+    display: flex;
+    flex-direction: column;
     right: 1.5%;
     padding: 15px 15px;
     border-radius: 15px;
@@ -96,7 +99,31 @@
 .cart-discount-container{
     display: flex;
     justify-content: space-between;
+    padding: 10px;
 }
+.cart-discount-container2{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #222222;
+}
+.cart-discount-container3{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+.cart-discount-container4{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+.cart-discount-container5{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-top: 1px solid #222222;;
+}
+
 
 .cart-place-order-button{
     width: 100%;
@@ -133,6 +160,72 @@
     width: 100%;
     height: 40px;
     border-radius: 20px;
-    background-color: gray;
+    background-color: rgb(34,34,34);
+    color: white;
     cursor: pointer;
+}
+
+.besty-coupon-button{
+    background-color: #FFFFFF;
+    width: 200px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    border-style: none;
+    border-radius: 20px;
+}
+
+.besty-coupon-button:hover{
+    background-color: #F0F0F0;
+}
+
+.fa-tag{
+    color:blue;
+    transform: rotate(90deg);
+}
+
+.payment-types-excepted{
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+}
+
+.radianite-img{
+    width: 30px;
+    object-fit: cover;
+    color: blue;
+    background-color: lightblue;
+    border-radius: 15px;
+}
+.divinium-img{
+    width: 20px;
+    object-fit: cover;
+    color: blue;
+    background-color: white;
+}
+
+.payment-images-container{
+    display: flex;
+    height: 30px;
+}
+
+.v-bucks-img{
+    width: 40px;
+    object-fit:cover;
+    color: blue;
+    background-color: white;
+}
+
+.secure-section-container{
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.berry-img{
+    width: 40px;
+    object-fit:cover;
+    color: blue;
+    /* background-color: white; */
 }

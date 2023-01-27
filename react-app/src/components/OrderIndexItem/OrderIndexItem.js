@@ -1,7 +1,7 @@
 function OrderIndex({order}){
     return (
         <div>
-            {order.total}
+            {`$${order.total}.00`}
         </div>
     )
 }
