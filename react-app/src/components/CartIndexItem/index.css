@@ -85,7 +85,7 @@
 
 .cart-total-container{
     /* border: 1px solid pink; */
-    box-shadow: 2px 2px 20px red;
+    box-shadow: 2px 2px 20px #FFA500;
     gap: 10px;
     /* width: 370px; */
     width: 25%;

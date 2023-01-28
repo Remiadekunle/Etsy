@@ -52,6 +52,7 @@ function ProductIndex(){
     const incrimentQuantity = () => {
         if (quantity >= product.stock) return
         setQuantity(quantity + 1)
+        setQuantityError([])
     }
     const decrimentQuantity = () => {
         if (quantity === 0) return
@@ -85,6 +86,11 @@ function ProductIndex(){
     console.log('yooooooooooo this is the option', option)
     console.log('yooooooooooo this is the option', optionValue)
     console.log('ummmmmmmmmmmmmmmmmm', optionsError?.length > 0)
+    const placeImgs = []
+
+    for (let i = 0; i < 9; i++){
+        placeImgs.push(i)
+    }
 
     const optionsErrorName = optionsError?.length > 0 ? 'options-error-class' : 'options-error-class2'
     const quantityErrorName = quantityError?.length > 0 ? 'quantity-error-class' : 'quantity-error-class2'
@@ -96,7 +102,12 @@ function ProductIndex(){
             <div className="product-index-main-content">
                 <div className="product-image-container">
                     <div className="product-image-rows">
-
+                        {
+                            placeImgs?.map(item => (
+                                <img className="smaller-imgs" src={product.previewImg}>
+                                </img>
+                            ))
+                        }
                     </div>
                     <img className="product-index-image" src={product.previewImg}></img>
                 </div>
@@ -121,8 +132,8 @@ function ProductIndex(){
                         {`$${product.price}.00`}
                     </div>
                     <div className="product-details-options">
-                        <div>
-                            Options:
+                        <div className="product-options-select-name">
+                            Options<i class="fa-solid fa-star fa-2xs quantity-star"></i>
                         </div>
                         <select
                          className="product-details-select"
