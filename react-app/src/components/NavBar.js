@@ -44,30 +44,29 @@ const NavBar = () => {
             <i class="fa-solid fa-user"></i>
             <i class="fa-solid fa-caret-down"></i>
             {showMenu ? <ul className='profile-ul-dropdown'>
-              <li>
-                <NavLink to='/' exact={true} activeClassName='active'>
-                  Home
+              {user ? <div className='profile-dropdown-user'>
+                <NavLink  to='/orders'>
+                  <button className='nav-order-buttons'>
+                    Your orders
+                  </button>
                 </NavLink>
-              </li>
-              <li>
-                <NavLink to='/login' exact={true} activeClassName='active'>
-                  Login
+                <NavLink to={`/users/${user.id}`} >
+                  <button className='nav-order-buttons'>Profile</button>
                 </NavLink>
-              </li>
-              <li>
-                <NavLink to='/sign-up' exact={true} activeClassName='active'>
-                  Sign Up
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to='/users' exact={true} activeClassName='active'>
-                  Users
-                </NavLink>
-              </li>
-              <li>
                 <LogoutButton />
-              </li>
-              <button onClick={useDemo}>Demo User</button>
+              </div> : <div>
+                <div>
+                  <NavLink to='/login' exact={true} activeClassName='active'>
+                    Login
+                  </NavLink>
+                </div>
+                <div>
+                  <NavLink to='/sign-up' exact={true} activeClassName='active'>
+                    Sign Up
+                  </NavLink>
+                </div>
+                <button onClick={useDemo}>Demo User</button>
+              </div> }
             </ul> :<></>}
 
           </div>

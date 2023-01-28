@@ -28,6 +28,7 @@
     /* background-color: orange; */
     overflow-y: scroll;
 }
+
 ::-webkit-scrollbar{
     -webkit-appearance: none;
     width: 1px;

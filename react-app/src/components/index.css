@@ -29,6 +29,10 @@
     right: 0px;
     top: 12px;
     background-color: #FFFFFF;
+    list-style: none;
+    padding: 0;
+    width: 150px;
+    padding: 10px;
 }
 
 .navbar-items{
@@ -39,6 +43,22 @@
     width: 100%;
     gap: 1%;
     /* width: 100%; */
+}
+
+.profile-dropdown-user{
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-order-buttons{
+    width: 100%;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.nav-loggout-button{
+    cursor: pointer;
+    padding: 5px;
 }
 
 .cart-container{
