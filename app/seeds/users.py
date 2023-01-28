@@ -7,9 +7,23 @@ def seed_users():
         User(
             username='Demo', email='demo@aa.io', password='password'),
         User(
-            username='marnie', email='marnie@aa.io', password='password'),
+            username='Reyna', email='reyna@aa.io', password='password'),
         User(
-            username='bobbie', email='bobbie@aa.io', password='password')
+            username='Raze', email='raze@aa.io', password='password'),
+        User(
+            username='Omen', email='omen@aa.io', password='password'),
+        User(
+            username='Takeo', email='takeo@aa.io', password='password'),
+        User(
+            username='Richtofen ', email='richtofen@aa.io', password='password'),
+        User(
+            username='Asta', email='asta@aa.io', password='password'),
+        User(
+            username='Noelle', email='noelle@aa.io', password='password'),
+        User(
+            username='Kakashi', email='kakashi@aa.io', password='password'),
+        User(
+            username='Zoro', email='zoro@aa.io', password='password'),
     ]
 
     for user in users:
@@ -31,6 +45,9 @@ def seed_users():
 def undo_users():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.cart_items RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.carts RESTART IDENTITY CASCADE;")
+
     else:
         db.session.execute("DELETE FROM users")
         db.session.execute("DELETE FROM cart_items")
