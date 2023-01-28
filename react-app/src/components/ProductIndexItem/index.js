@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { DeleteProductModal } from "../DeleteProduct";
 import { EditProductModal } from "../EditProduct";
 import './index.css';
@@ -17,11 +17,15 @@ function ProductIndex(){
     const [option, setOption] = useState('0')
     const [optionValue, setOptionValue] = useState('')
     const [sellerToggle, setSellerToggle] = useState(false);
+    const [optionsError, setOptionsError] = useState([])
+    const [quantityError, setQuantityError] = useState([])
     const [quantity, setQuantity] = useState(0)
     const dispatch = useDispatch()
+    const history = useHistory();
 
 
     if (!product){
+        console.log('ooopsie')
         return null
     }
 
@@ -48,6 +52,7 @@ function ProductIndex(){
     const incrimentQuantity = () => {
         if (quantity >= product.stock) return
         setQuantity(quantity + 1)
+        setQuantityError([])
     }
     const decrimentQuantity = () => {
         if (quantity === 0) return
@@ -56,13 +61,23 @@ function ProductIndex(){
 
     const addCart = async (e) => {
         e.preventDefault();
+        setOptionsError([])
+        setQuantityError([])
         console.log('the quant', quantity)
         // const payloadQ = quantity
-        if (quantity === 0) return
-        if (option === 0) return
-        const optionItem = product.options[option - 1]
+        if (quantity === 0) {
+            setQuantityError(['Please input a quantity greater than 0'])
+            return
+        }
+        if (parseInt(option) === 0) {
+            console.log('in here')
+            setOptionsError(['Please select an option'])
+            return
+        }
+        console.log('b4 we submit', optionValue)
         await dispatch(addToCart(productId, quantity, optionValue))
         setQuantity(0)
+        return history.push('/cart')
     }
 
     let {options } = product;
@@ -70,13 +85,29 @@ function ProductIndex(){
     options = options.split('-')
     console.log('yooooooooooo this is the option', option)
     console.log('yooooooooooo this is the option', optionValue)
+    console.log('ummmmmmmmmmmmmmmmmm', optionsError?.length > 0)
+    const placeImgs = []
+
+    for (let i = 0; i < 9; i++){
+        placeImgs.push(i)
+    }
+
+    const optionsErrorName = optionsError?.length > 0 ? 'options-error-class' : 'options-error-class2'
+    const quantityErrorName = quantityError?.length > 0 ? 'quantity-error-class' : 'quantity-error-class2'
+    console.log('ummmmmmmmmmmmm again', optionsErrorName)
+    console.log(optionsError)
 
     return(
         <div className="product-index-container">
             <div className="product-index-main-content">
                 <div className="product-image-container">
                     <div className="product-image-rows">
-
+                        {
+                            placeImgs?.map(item => (
+                                <img className="smaller-imgs" src={product.previewImg}>
+                                </img>
+                            ))
+                        }
                     </div>
                     <img className="product-index-image" src={product.previewImg}></img>
                 </div>
@@ -101,14 +132,15 @@ function ProductIndex(){
                         {`$${product.price}.00`}
                     </div>
                     <div className="product-details-options">
-                        <div>
-                            Options:
+                        <div className="product-options-select-name">
+                            Options<i class="fa-solid fa-star fa-2xs quantity-star"></i>
                         </div>
                         <select
                          className="product-details-select"
                          onChange={(e) => {
                             setOption(e.target.value)
                             setOptionValue(e.target.childNodes[e.target.value].label)
+                            setOptionsError([])
                         }}
                          >
                             <option  value='0'>Select an option</option>
@@ -117,9 +149,15 @@ function ProductIndex(){
                             ))}
                             {/* <option value={}></option> */}
                         </select>
+                        <ul className={optionsErrorName}>
+                            {optionsError.map((error,idx) =>(<li key={idx}>{error}</li>))}
+                        </ul>
                         <div className="product-quantity-container">
-                            <div>
+                            <div className="product-details-quantity-container">
                                 Quantity:{quantity}
+                                <ul className={quantityErrorName}>
+                                    {quantityError.map((error,idx) =>(<li key={idx}>{error}</li>))}
+                                </ul>
                             </div>
                             <button className="product-quantity-button" onClick={incrimentQuantity}><i class="fa-solid fa-plus"></i></button>
                             <button className="product-quantity-button" onClick={decrimentQuantity}><i class="fa-solid fa-minus"></i></button>

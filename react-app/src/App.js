@@ -13,6 +13,8 @@ import ProductIndex from './components/ProductIndexItem';
 import { fetchProducts } from './store/product';
 import { fetchCart } from './store/cart';
 import CartPage from './components/CartIndexItem';
+import { fetchOrders } from './store/order';
+import OrderPage from './components/OrderIndexItem';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -23,6 +25,7 @@ function App() {
       await dispatch(authenticate());
       dispatch(fetchProducts())
       dispatch(fetchCart())
+      dispatch(fetchOrders())
       setLoaded(true);
     })();
   }, [dispatch]);
@@ -56,6 +59,9 @@ function App() {
         <Route path='/' exact={true} >
           <HomePage />
         </Route>
+        <ProtectedRoute path='/orders' exact={true} >
+          <OrderPage />
+        </ProtectedRoute>
       </Switch>
     </BrowserRouter>
   );
