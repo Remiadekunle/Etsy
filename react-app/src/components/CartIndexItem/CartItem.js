@@ -56,9 +56,9 @@ function CartItem({item}){
                     <div>
                         {`Option: ${item?.option}`}
                     </div>
-                    <div className="product-description-cart">
+                    {/* <div className="product-description-cart">
                         {`Description: ${product.description}`}
-                    </div>
+                    </div> */}
                     <DeleteCartItemModal product={product} item={item}/>
                 </div>
 
