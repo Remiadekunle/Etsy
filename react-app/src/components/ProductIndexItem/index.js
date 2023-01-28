@@ -17,12 +17,15 @@ function ProductIndex(){
     const [option, setOption] = useState('0')
     const [optionValue, setOptionValue] = useState('')
     const [sellerToggle, setSellerToggle] = useState(false);
+    const [optionsError, setOptionsError] = useState([])
+    const [quantityError, setQuantityError] = useState([])
     const [quantity, setQuantity] = useState(0)
     const dispatch = useDispatch()
     const history = useHistory();
 
 
     if (!product){
+        console.log('ooopsie')
         return null
     }
 
@@ -57,10 +60,19 @@ function ProductIndex(){
 
     const addCart = async (e) => {
         e.preventDefault();
+        setOptionsError([])
+        setQuantityError([])
         console.log('the quant', quantity)
         // const payloadQ = quantity
-        if (quantity === 0) return
-        if (parseInt(option) === 0) return
+        if (quantity === 0) {
+            setQuantityError(['Please input a quantity greater than 0'])
+            return
+        }
+        if (parseInt(option) === 0) {
+            console.log('in here')
+            setOptionsError(['Please select an option'])
+            return
+        }
         console.log('b4 we submit', optionValue)
         await dispatch(addToCart(productId, quantity, optionValue))
         setQuantity(0)
@@ -72,6 +84,12 @@ function ProductIndex(){
     options = options.split('-')
     console.log('yooooooooooo this is the option', option)
     console.log('yooooooooooo this is the option', optionValue)
+    console.log('ummmmmmmmmmmmmmmmmm', optionsError?.length > 0)
+
+    const optionsErrorName = optionsError?.length > 0 ? 'options-error-class' : 'options-error-class2'
+    const quantityErrorName = quantityError?.length > 0 ? 'quantity-error-class' : 'quantity-error-class2'
+    console.log('ummmmmmmmmmmmm again', optionsErrorName)
+    console.log(optionsError)
 
     return(
         <div className="product-index-container">
@@ -111,6 +129,7 @@ function ProductIndex(){
                          onChange={(e) => {
                             setOption(e.target.value)
                             setOptionValue(e.target.childNodes[e.target.value].label)
+                            setOptionsError([])
                         }}
                          >
                             <option  value='0'>Select an option</option>
@@ -119,9 +138,15 @@ function ProductIndex(){
                             ))}
                             {/* <option value={}></option> */}
                         </select>
+                        <ul className={optionsErrorName}>
+                            {optionsError.map((error,idx) =>(<li key={idx}>{error}</li>))}
+                        </ul>
                         <div className="product-quantity-container">
-                            <div>
+                            <div className="product-details-quantity-container">
                                 Quantity:{quantity}
+                                <ul className={quantityErrorName}>
+                                    {quantityError.map((error,idx) =>(<li key={idx}>{error}</li>))}
+                                </ul>
                             </div>
                             <button className="product-quantity-button" onClick={incrimentQuantity}><i class="fa-solid fa-plus"></i></button>
                             <button className="product-quantity-button" onClick={decrimentQuantity}><i class="fa-solid fa-minus"></i></button>

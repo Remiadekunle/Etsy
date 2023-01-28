@@ -153,6 +153,30 @@
     gap: 20px;
 }
 
+.options-error-class{
+    display: flex;
+    margin: 0;
+}
+.options-error-class2{
+    display: hidden;
+    height: 0px;
+    margin: 0;
+}
+.quantity-error-class{
+    display: flex;
+    margin: 0;
+    color: red;
+}
+.quantity-error-class2{
+    display: hidden;
+    height: 0px;
+    margin: 0;
+}
+
+.product-details-quantity-container{
+    display: flex;
+}
+
 .product-listing-buttons{
 
 }

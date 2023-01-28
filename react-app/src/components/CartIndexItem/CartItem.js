@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { NavLink } from "react-router-dom"
 import { deleteFromCart, editToCartAdd, editToCartRemove } from "../../store/cart"
 import EditCartItemForm, { EditCartItemModal } from "./EditItem"
 import { DeleteCartItemModal } from "./RemoveItem"
@@ -42,16 +43,20 @@ function CartItem({item}){
 
     return(
         <div className="cart-item-index-container">
-            <img className="cart-product-img" src={product?.previewImg}></img>
+            <NavLink to={`/products/${product.id}`}>
+                <img className="cart-product-img" src={product?.previewImg}></img>
+            </NavLink>
             <div className="cart-product-info-container">
                 <div className="cart-product-name-container">
-                    <div className="cart-product-name">
-                        {product?.name}
-                    </div>
+                    <NavLink className='navlink-back-to-product' to={`/products/${product.id}`}>
+                        <div className="cart-product-name">
+                            {product?.name}
+                        </div>
+                    </NavLink>
                     <div>
                         {`Option: ${item?.option}`}
                     </div>
-                    <div>
+                    <div className="product-description-cart">
                         {`Description: ${product.description}`}
                     </div>
                     <DeleteCartItemModal product={product} item={item}/>
