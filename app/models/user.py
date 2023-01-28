@@ -36,7 +36,7 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'username': self.username,
             'email': self.email,
-            # 'products': [product.id for product in self.products],
+            'products': [product.id for product in self.products],
             'cart': self.cart.to_dict(),
             'orders': [order.to_dict() for order in self.orders]
         }

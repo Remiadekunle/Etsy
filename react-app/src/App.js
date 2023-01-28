@@ -7,7 +7,7 @@ import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
-import { authenticate } from './store/session';
+import { authenticate, fetchExamples } from './store/session';
 import HomePage from './components/HomePage';
 import ProductIndex from './components/ProductIndexItem';
 import { fetchProducts } from './store/product';
@@ -26,6 +26,7 @@ function App() {
       dispatch(fetchProducts())
       dispatch(fetchCart())
       dispatch(fetchOrders())
+      await dispatch(fetchExamples())
       setLoaded(true);
     })();
   }, [dispatch]);
