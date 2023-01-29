@@ -7,12 +7,26 @@ function OrderPage(){
     const orderList = Object.values(orders)
     console.log('yo what is the orderlist for this', orderList)
     return (
-        <div className='order-page-container'>
-            {
-                orderList?.map(order => (
-                    <OrderIndex order={order}/>
-                ))
-            }
+        <div className='order-page-background' >
+            <div className='order-page-welcome-container'>
+                <div className='order-welcome-stuff'>
+                    <div>
+                        Purchases
+                    </div>
+                    <form>
+                        <input className='order-search-bar' placeholder={`Search your orders` }></input>
+                    </form>
+                </div>
+
+
+            </div>
+            <div className='order-page-container'>
+                {
+                    orderList?.map(order => (
+                        <OrderIndex order={order}/>
+                    ))
+                }
+            </div>
         </div>
     )
 

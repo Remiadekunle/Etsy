@@ -23,10 +23,10 @@ function App() {
   useEffect(() => {
     (async() => {
       await dispatch(authenticate());
+      await dispatch(fetchExamples())
       dispatch(fetchProducts())
       dispatch(fetchCart())
       dispatch(fetchOrders())
-      await dispatch(fetchExamples())
       setLoaded(true);
     })();
   }, [dispatch]);
