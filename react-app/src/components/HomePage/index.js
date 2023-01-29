@@ -8,8 +8,6 @@ import ProductCard, { ProductCardRound, UserCards } from './productCard';
 function HomePage(){
     const product = useSelector(state => state.product.allProducts)
     const users = useSelector(state => state.session.examples)
-    console.log('hey we getting the users', users)
-    console.log('hey we getting the users', users[2])
     return(
         <div className="home-page">
             <div className="home-products-container">
