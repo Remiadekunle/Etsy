@@ -1,17 +1,24 @@
 // constants
 const SET_USER = 'session/SET_USER';
+const SET_EXAMPLES = 'session/exampleUsers'
 const REMOVE_USER = 'session/REMOVE_USER';
 
 const setUser = (user) => ({
   type: SET_USER,
   payload: user
 });
+export const setExamples = (users) => {
+  return {
+    type:SET_EXAMPLES,
+    users
+  }
+}
 
 const removeUser = () => ({
   type: REMOVE_USER,
 })
 
-const initialState = { user: null };
+const initialState = { user: null, examples:{} };
 
 export const authenticate = () => async (dispatch) => {
   const response = await fetch('/api/auth/', {
@@ -24,9 +31,18 @@ export const authenticate = () => async (dispatch) => {
     if (data.errors) {
       return;
     }
-  
+
     dispatch(setUser(data));
   }
+}
+
+export const fetchExamples = () => async (dispatch) => {
+    const response = await fetch('/api/users/');
+    if (response.ok) {
+      const responseData = await response.json();
+      console.log('checking', responseData.users)
+      dispatch(setExamples(responseData.users))
+    }
 }
 
 export const login = (email, password) => async (dispatch) => {
@@ -40,8 +56,8 @@ export const login = (email, password) => async (dispatch) => {
       password
     })
   });
-  
-  
+
+
   if (response.ok) {
     const data = await response.json();
     dispatch(setUser(data))
@@ -82,7 +98,7 @@ export const signUp = (username, email, password) => async (dispatch) => {
       password,
     }),
   });
-  
+
   if (response.ok) {
     const data = await response.json();
     dispatch(setUser(data))
@@ -98,11 +114,23 @@ export const signUp = (username, email, password) => async (dispatch) => {
 }
 
 export default function reducer(state = initialState, action) {
+  let newState;
   switch (action.type) {
     case SET_USER:
-      return { user: action.payload }
+      return { user: action.payload, examples:{...state.examples} }
     case REMOVE_USER:
-      return { user: null }
+      return { user: null, examples:{...state.examples} }
+    case SET_EXAMPLES:
+      newState = Object.assign({}, state);
+      newState.examples = {...state.examples}
+      const examples = action.users
+      // console.log(examples)
+      examples.forEach(item => {
+        console.log(item)
+        console.log(typeof item.id)
+        newState.examples[item.id] = item
+      })
+      return newState
     default:
       return state;
   }

@@ -7,7 +7,7 @@ import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
-import { authenticate } from './store/session';
+import { authenticate, fetchExamples } from './store/session';
 import HomePage from './components/HomePage';
 import ProductIndex from './components/ProductIndexItem';
 import { fetchProducts } from './store/product';
@@ -15,6 +15,7 @@ import { fetchCart } from './store/cart';
 import CartPage from './components/CartIndexItem';
 import { fetchOrders } from './store/order';
 import OrderPage from './components/OrderIndexItem';
+import Footer from './components/FooterItems';
 
 function App() {
   const [loaded, setLoaded] = useState(false);

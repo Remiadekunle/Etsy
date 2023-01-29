@@ -1,0 +1,14 @@
+.Footer-container{
+    width: 100%;
+    /* border: 1px solid red; */
+    height: 200px;
+    display: flex;
+    justify-content: space-around;
+    background-color: blue;
+}
+
+.footer-column{
+    height: 200px;
+    width: 100px;
+    border: 1px solid red
+}
