@@ -4,6 +4,7 @@ import { clearCart, fetchCart } from "../../store/cart";
 import { addOrder, createOrder } from "../../store/order";
 import CartItem from "./CartItem"
 import './index.css';
+import { PlaceOrderFormModal } from "./placeOrder";
 function CartPage(){
     const cart = useSelector(state => state.cart.cart)
     const dispatch = useDispatch()
@@ -73,7 +74,8 @@ function CartPage(){
                             <div>{`$${cart.total}.00`}</div>
                         </div>
                     </div>
-                    <button className="cart-place-order-button" onClick={placeOrder}>Place Order</button>
+                    {/* <button className="cart-place-order-button" onClick={placeOrder}>Place Order</button> */}
+                    <PlaceOrderFormModal />
                     <button className="cart-clear-button" type="button" onClick={deleteCart}>Clear Cart</button>
                     <button className="besty-coupon-button"><i class="fa-solid fa-tag fa-xl"></i><div>Apply Besty coupon code</div></button>
                 </div>

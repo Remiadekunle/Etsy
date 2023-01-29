@@ -26,12 +26,15 @@ def get_user_cart2(id):
 @order_routes.route('/',  methods=['POST'])
 # @login_required
 def create_order():
-    form = CartForm()
+    form = OrderForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         order = Order(
             total=0,
-            user=current_user
+            user=current_user,
+            address=form.data['address'],
+            city=form.data['city'],
+            state=form.data['state'],
         )
         errors = []
         cart_items = [item for item in current_user.cart.items]

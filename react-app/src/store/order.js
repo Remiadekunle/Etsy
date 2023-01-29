@@ -27,14 +27,14 @@ export const fetchOrders = () => async dispatch => {
     }
 }
 
-export const createOrder = () => async dispatch => {
+export const createOrder = (address, city, state) => async dispatch => {
     const res = await fetch('/api/orders/', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-            product_id:1,
-            quantity:1,
-            option:'red'
+            city: city,
+            state: state,
+            address:address
         })
     })
 

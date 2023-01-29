@@ -5,6 +5,6 @@ from wtforms.validators import DataRequired, Email, ValidationError
 
 
 class OrderForm(FlaskForm):
-    product_id = IntegerField('id', validators=[DataRequired()])
-    quantity = IntegerField('quantity', validators=[DataRequired()])
-    cost = IntegerField('cost', validators=[DataRequired()])
+    address = StringField('address', validators=[DataRequired()])
+    city = StringField('city', validators=[DataRequired()])
+    state = StringField('state', validators=[DataRequired()])

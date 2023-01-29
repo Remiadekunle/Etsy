@@ -24,7 +24,7 @@ function App() {
   useEffect(() => {
     (async() => {
       await dispatch(authenticate());
-      dispatch(fetchProducts())
+      await dispatch(fetchProducts())
       dispatch(fetchCart())
       dispatch(fetchOrders())
       setLoaded(true);
