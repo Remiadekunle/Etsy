@@ -23,7 +23,7 @@ function PlaceOrderForm({setShowModal}){
         if (address.length < 2) return
         if (city.length < 2) return
         if (state.length < 2) return
-        dispatch(createOrder(address, city, state))
+        await dispatch(createOrder(address, city, state))
         // dispatch(deleteFromCart(product.id));
         // setErrors([]);
 

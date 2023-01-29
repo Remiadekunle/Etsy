@@ -12,11 +12,13 @@
     border: 1px solid blue;
     display: flex;
     gap: 10px;
+    justify-content: space-between;
 }
 
 .order-trackings-cancel-section{
     display: flex;
     flex-direction: column;
+    width: 20%;
 }
 
 .order-details-section{
@@ -44,4 +46,9 @@
 
 .order-welcome-stuff div{
     font-size: 30px;
+}
+
+.shipping-stuff-track{
+    display: flex;
+    flex-direction: column;
 }
