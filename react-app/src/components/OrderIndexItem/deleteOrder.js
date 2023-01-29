@@ -4,15 +4,15 @@ import { useHistory } from 'react-router-dom';
 import { useModal } from '../../context/Modal';
 import { Modal } from "../../context/Modal";
 import { addToCart, deleteFromCart, editToCartRemove, fetchCart } from "../../store/cart";
-import { createOrder } from "../../store/order";
+import { createOrder, removeOrder, updateOrder } from "../../store/order";
 import { createProduct, editProduct, removeProduct, updateProduct } from "../../store/product";
 import './index.css';
 
-function PlaceOrderForm({setShowModal}){
+function DeleteOrderForm({setShowModal, order}){
     const dispatch = useDispatch()
-    const [address, setAddress] = useState('')
-    const [city, setCity] = useState('')
-    const [state, setState] = useState('')
+    const [address, setAddress] = useState(order.address)
+    const [city, setCity] = useState(order.city)
+    const [state, setState] = useState(order.state)
     const [errors, setErrors] = useState([]);
     const history = useHistory()
 
@@ -23,11 +23,11 @@ function PlaceOrderForm({setShowModal}){
         if (address.length < 2) return
         if (city.length < 2) return
         if (state.length < 2) return
-        dispatch(createOrder(address, city, state))
+        // dispatch(createOrder(address, city, state))
         // dispatch(deleteFromCart(product.id));
         // setErrors([]);
-
-        await dispatch(fetchCart())
+        dispatch(removeOrder(order.id))
+        // await dispatch(fetchCart())
         setShowModal(false)
         return history.push('/orders')
     }
@@ -44,47 +44,27 @@ function PlaceOrderForm({setShowModal}){
                       ))}
                   </ul>
                 <label className='delete-product-checkbox'>
-                    Address
+                    Are you sure you want to delete?
                     <input
-                    type="text"
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
+                    type="checkbox"
                     required
                     className='create-product-input'/>
                 </label>
-                <label className='delete-product-checkbox'>
-                    City
-                    <input
-                    type="text"
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                    required
-                    className='create-product-input'/>
-                </label>
-                <label className='delete-product-checkbox'>
-                    State
-                    <input
-                    type="text"
-                    value={state}
-                    onChange={(e) => setState(e.target.value)}
-                    required
-                    className='create-product-input'/>
-                </label>
-                <button className='creater-product-button' type='submit'>Place order</button>
+                <button className='creater-product-button' type='submit'>Cancel Order</button>
             </form>
         </>
     )
 }
 
-export function PlaceOrderFormModal({}){
+export function DeleteOrderFormModal({order}){
     const [showModal, setShowModal] = useState(false);
 
   return (
     <>
-      <button className="cart-place-order-button" onClick={() => setShowModal(true)}>Place Order</button>
+      <button className="edit-order-button" onClick={() => setShowModal(true)}>Cancel Order</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <PlaceOrderForm setShowModal={setShowModal}/>
+          <DeleteOrderForm setShowModal={setShowModal} order={order}/>
         </Modal>
       )}
     </>
@@ -92,4 +72,4 @@ export function PlaceOrderFormModal({}){
 }
 
 
-export default PlaceOrderForm
+export default DeleteOrderForm

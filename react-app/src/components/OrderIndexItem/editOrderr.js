@@ -4,15 +4,15 @@ import { useHistory } from 'react-router-dom';
 import { useModal } from '../../context/Modal';
 import { Modal } from "../../context/Modal";
 import { addToCart, deleteFromCart, editToCartRemove, fetchCart } from "../../store/cart";
-import { createOrder } from "../../store/order";
+import { createOrder, updateOrder } from "../../store/order";
 import { createProduct, editProduct, removeProduct, updateProduct } from "../../store/product";
 import './index.css';
 
-function PlaceOrderForm({setShowModal}){
+function EditOrderForm({setShowModal, order}){
     const dispatch = useDispatch()
-    const [address, setAddress] = useState('')
-    const [city, setCity] = useState('')
-    const [state, setState] = useState('')
+    const [address, setAddress] = useState(order.address)
+    const [city, setCity] = useState(order.city)
+    const [state, setState] = useState(order.state)
     const [errors, setErrors] = useState([]);
     const history = useHistory()
 
@@ -23,11 +23,11 @@ function PlaceOrderForm({setShowModal}){
         if (address.length < 2) return
         if (city.length < 2) return
         if (state.length < 2) return
-        dispatch(createOrder(address, city, state))
+        // dispatch(createOrder(address, city, state))
         // dispatch(deleteFromCart(product.id));
         // setErrors([]);
-
-        await dispatch(fetchCart())
+        dispatch(updateOrder(address, city, state, order.id))
+        // await dispatch(fetchCart())
         setShowModal(false)
         return history.push('/orders')
     }
@@ -76,15 +76,15 @@ function PlaceOrderForm({setShowModal}){
     )
 }
 
-export function PlaceOrderFormModal({}){
+export function EditOrderFormModal({order}){
     const [showModal, setShowModal] = useState(false);
 
   return (
     <>
-      <button className="cart-place-order-button" onClick={() => setShowModal(true)}>Place Order</button>
+      <button className="edit-order-button" onClick={() => setShowModal(true)}>Edit Order</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <PlaceOrderForm setShowModal={setShowModal}/>
+          <EditOrderForm setShowModal={setShowModal} order={order}/>
         </Modal>
       )}
     </>
@@ -92,4 +92,4 @@ export function PlaceOrderFormModal({}){
 }
 
 
-export default PlaceOrderForm
+export default EditOrderForm

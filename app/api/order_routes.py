@@ -24,7 +24,7 @@ def get_user_cart2(id):
 
 
 @order_routes.route('/',  methods=['POST'])
-# @login_required
+@login_required
 def create_order():
     form = OrderForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -65,6 +65,38 @@ def create_order():
         print('these are the order items',order.items )
         print('just checkingout the cart', current_user.cart.to_dict())
         db.session.commit()
+        return {"order": order.to_dict(), 'errors': errors}
+    else:
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+
+@order_routes.route('/<int:id>',  methods=['PUT'])
+@login_required
+def edit_order(id):
+    form = OrderForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        order = Order.query.get(id)
+        order.address=form.data['address']
+        order.city=form.data['city']
+        order.state=form.data['state']
+
+        db.session.commit()
         return {"order": order.to_dict()}
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+@order_routes.route('/<int:id>',  methods=['DELETE'])
+@login_required
+def delete_order(id):
+    order = Order.query.get(id)
+    order_items = order.items
+    for item in order_items:
+        quantity = item.quantity
+        product_id = item.product_id
+        product = Product.query.get(product_id)
+        product.stock = product.stock + quantity
+        db.session.delete(item)
+    db.session.delete(order)
+    db.session.commit()
+    return {'message': 'Its done'}

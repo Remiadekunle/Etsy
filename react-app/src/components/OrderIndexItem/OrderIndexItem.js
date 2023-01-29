@@ -1,4 +1,6 @@
 import { useSelector } from "react-redux"
+import { DeleteOrderFormModal } from "./deleteOrder"
+import { EditOrderFormModal } from "./editOrderr"
 
 function OrderIndex({order}){
     console.log('yo this is the order', order)
@@ -15,9 +17,9 @@ function OrderIndex({order}){
                 <div>
                     In Progress ...
                 </div>
-                <button>Edit Order</button>
+                <EditOrderFormModal order={order} />
                 <button>View Recipt</button>
-                <button> Cancel Order</button>
+                <DeleteOrderFormModal order={order}/>
             </div>
         </div>
     )

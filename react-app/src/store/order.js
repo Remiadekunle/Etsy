@@ -1,6 +1,8 @@
-const GET_ORDERS = 'cart/getOrders'
+const GET_ORDERS = 'orders/getOrders'
 
-const ADD_ORDER = 'carts/addOrder'
+const ADD_ORDER = 'orders/addOrder'
+const EDIT_ORDER = 'orders/editOrder'
+const DELETE_ORRDER = 'orders/deleteOrder'
 
 export const loadorders = (orders) => {
     return{
@@ -15,6 +17,19 @@ export const addOrder = (order) => {
         order
     }
 }
+export const editOrder = (order) => {
+    return {
+        type:EDIT_ORDER,
+        order
+    }
+}
+
+export const deleteOrder = (id) => {
+    return {
+        type:DELETE_ORRDER,
+        id
+    }
+}
 
 
 export const fetchOrders = () => async dispatch => {
@@ -22,7 +37,6 @@ export const fetchOrders = () => async dispatch => {
 
     if (res.ok){
         const body = await res.json();
-        console.log('yay we got the order back', body)
         dispatch(loadorders(body.orders))
     }
 }
@@ -40,29 +54,37 @@ export const createOrder = (address, city, state) => async dispatch => {
 
     if (res.ok){
         const body = await res.json();
-        console.log('yay we got the order back', body)
         dispatch(addOrder(body.order))
     }
 }
 
-// export const addToCart = (productId, quantity, optionValue) => async dispatch => {
-//     const res = await fetch('/api/cart/', {
-//         method: "POST",
-//         headers: { "Content-Type": "application/json" },
-//         body: JSON.stringify({
-//             product_id:productId,
-//             quantity:quantity,
-//             option:optionValue
-//         })
-//     })
+export const updateOrder = (address, city, state, id) => async dispatch => {
+    const res = await fetch(`/api/orders/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            city: city,
+            state: state,
+            address:address
+        })
+    })
 
-//     if (res.ok){
-//         const body = await res.json();
-//         console.log('yay we got the cart back', body)
-//         dispatch(loadCart(body.cart))
-//     }
-// }
+    if (res.ok){
+        const body = await res.json();
+        dispatch(editOrder(body.order))
+    }
+}
 
+export const removeOrder = (id) => async dispatch => {
+    const res = await fetch(`/api/orders/${id}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+    })
+
+    if (res.ok){
+        dispatch(deleteOrder(id))
+    }
+}
 
 
 const initialState = {
@@ -85,6 +107,17 @@ const orderReducer = (state = initialState, action) => {
             newState.allOrders = {...state.allOrders}
             const order = action.order
             newState.allOrders[order.id] = order
+            return newState
+        case EDIT_ORDER:
+            newState = Object.assign({}, state);
+            newState.allOrders = {...state.allOrders}
+            const order2 = action.order
+            newState.allOrders[order2.id] = order2
+            return newState
+        case DELETE_ORRDER:
+            newState = Object.assign({}, state);
+            newState.allOrders = {...state.allOrders}
+            delete newState.allOrders[action.id]
             return newState
         default:
             return state;
