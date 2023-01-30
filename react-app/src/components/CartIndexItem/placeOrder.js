@@ -76,12 +76,12 @@ function PlaceOrderForm({setShowModal}){
     )
 }
 
-export function PlaceOrderFormModal({}){
+export function PlaceOrderFormModal({cart}){
     const [showModal, setShowModal] = useState(false);
 
   return (
     <>
-      <button className="cart-place-order-button" onClick={() => setShowModal(true)}>Place Order</button>
+      <button disabled={cart.items?.length > 0 ? false : true} className="cart-place-order-button" onClick={() => setShowModal(true)}>Place Order</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <PlaceOrderForm setShowModal={setShowModal}/>

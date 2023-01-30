@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { clearCart, fetchCart } from "../../store/cart";
 import { addOrder, createOrder } from "../../store/order";
 import CartItem from "./CartItem"
+import { ClearCartModal } from "./clearCart";
 import './index.css';
 import { PlaceOrderFormModal } from "./placeOrder";
 function CartPage(){
@@ -75,8 +76,9 @@ function CartPage(){
                         </div>
                     </div>
                     {/* <button className="cart-place-order-button" onClick={placeOrder}>Place Order</button> */}
-                    <PlaceOrderFormModal />
-                    <button className="cart-clear-button" type="button" onClick={deleteCart}>Clear Cart</button>
+                    <PlaceOrderFormModal cart={cart}/>
+                    {/* <button className="cart-clear-button" type="button" onClick={deleteCart}>Clear Cart</button> */}
+                    <ClearCartModal />
                     <button className="besty-coupon-button"><i class="fa-solid fa-tag fa-xl"></i><div>Apply Besty coupon code</div></button>
                 </div>
             </div>
