@@ -68,14 +68,14 @@ def sign_up():
             password=form.data['password'],
             profile_img=form.data['profile_img'] if form.data['profile_img'] else 'https://i.pinimg.com/originals/b1/92/4d/b1924dce177345b5485bb5490ab3441f.jpg'
         )
-        db.session.add(user)
-        login_user(user)
         cart = Cart(
             user=user,
             total=0
         )
+        db.session.add(user)
         db.session.add(cart)
         db.session.commit()
+        login_user(user)
         return user.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
