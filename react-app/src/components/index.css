@@ -28,15 +28,17 @@ body{
 }
 
 .profile-ul-dropdown{
-    border: 1px solid orange;
+    border: 1px solid darkgray;
     position: absolute;
     right: 0px;
-    top: 12px;
+    top: 70%;
     background-color: #FFFFFF;
     list-style: none;
     padding: 0;
-    width: 150px;
-    padding: 10px;
+    width: 175px;
+    padding: 10px 0px;
+    border-radius: 5px;
+    z-index: 1;
 }
 
 .navbar-items{
@@ -54,15 +56,55 @@ body{
     flex-direction: column;
 }
 
+.nav-auth-buttons{
+    cursor: pointer;
+    padding: 5px;
+    background-color: white;
+    border-style: none;
+    display: flex;
+    padding: 10px 10px;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-auth-buttons:hover{
+    background-color: lightgray;
+}
+
+
 .nav-order-buttons{
     width: 100%;
     cursor: pointer;
     padding: 5px;
+    background-color: white;
+    border-style: none;
+    display: flex;
+    padding: 10px 10px;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-order-buttons:hover{
+    background-color: lightgray;
 }
 
 .nav-loggout-button{
+    margin-top: 10px;
+    width: 100%;
     cursor: pointer;
     padding: 5px;
+    background-color: white;
+    border-style: none;
+    display: flex;
+    padding: 10px 10px;
+    align-items: center;
+    gap: 10px;
+}
+.nav-loggout-button:hover{
+    background-color: lightgray;
+}
+.fa-arrow-right-from-bracket{
+    transform: rotate(180deg);
 }
 
 .cart-container{
@@ -130,4 +172,15 @@ body{
     top: 0;
     right: 1px;
     border-radius: 50%;
+    cursor: pointer;
+}
+
+.profile-dropdown-view-profile{
+    display: flex;
+    gap: 10px;
+    padding: 10px 10px;
+}
+
+.profile-dropdown-view-profile:hover{
+    background-color: lightgray;
 }

@@ -12,7 +12,7 @@ function HomePage(){
     return(
         <div className="home-page">
             <div className='welcome-back-background'>
-                {user ? <h2>Welcome back, {user.username}!</h2> : <h2>Welcome</h2>}
+                {user ? <h2>Welcome back, {user.username}!</h2> : <h2>Welcome!!!</h2>}
             </div>
             <div className="home-products-container">
                 <div className='welcome-back-container'>

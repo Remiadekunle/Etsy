@@ -1,0 +1,108 @@
+.login-form{
+    width: 340px;
+    /* height: 240px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    /* margin: 100px 40%; */
+    border: 1px solid black;
+    border-radius: 5px;
+    z-index: 1;
+    background-color: #FFFFFF;
+    padding: 30px;
+}
+
+
+.login-form div label{
+    display: flex;
+    width: 100%;
+}
+
+
+
+
+.login-form-heading{
+    display: flex;
+    /* justify-content: space-between; */
+    /* justify-content: center; */
+    /* position: relative; */
+    width: 100%;
+    margin-bottom: 20px;
+    position: relative;
+    font-size: 28px;
+    align-items: flex-end;
+}
+
+.login-register-button{
+    background-color: #FFFFFF;
+    padding: 5px 10px;
+    border-radius: 20px;
+    margin: 0;
+    cursor: pointer;
+}
+
+.login-form-containers{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    /* align-items: center; */
+    width: 100%;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.login-form-containers input{
+    border-radius: 5px;
+    border: 0.5px solid gray;
+    padding: 15px;
+    /* width: 100%; */
+}
+.login-form-containers label{
+    display: flex;
+    gap: 5px;
+}
+
+.login-to-singup-button{
+    position: absolute;
+    margin: 0;
+    top: 0;
+    right: 0;
+}
+
+.login-welcome-to-best{
+    background-color: pink;
+    position: absolute;
+    width: 100%;
+    /* height: 50%; */
+    height: 120px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-submit{
+    width: 100%;
+    height: 50px;
+    background-color: #222222;
+    color: #FFFFFF;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.login-form-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 115px;
+    height: 100%;
+}
+
+.fa-asterisk{
+    color: red;
+    display: flex;
+    align-items: center;
+    height: 10px;
+}
