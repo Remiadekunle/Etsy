@@ -288,3 +288,11 @@
     flex-direction: column;
     justify-content: center;
 }
+
+
+.product-reviews-container-summary{
+    display: flex;
+    gap: 15px;
+    font-size: 28px;
+    margin: 20px 0px;
+}

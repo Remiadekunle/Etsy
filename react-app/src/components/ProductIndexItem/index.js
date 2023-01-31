@@ -5,6 +5,7 @@ import { DeleteProductModal } from "../DeleteProduct";
 import { EditProductModal } from "../EditProduct";
 import './index.css';
 import { addToCart } from "../../store/cart";
+import ReviewIndex from "./ProductReview";
 
 function ProductIndex(){
     const {productId} = useParams()
@@ -59,6 +60,47 @@ function ProductIndex(){
         setQuantity(quantity - 1)
     }
 
+    const findStars = (avg) => {
+        console.log('testing the type', typeof avg)
+        if (avg === 0) return 'No Reviews'
+        if (avg >  0 && avg <= 1) return <i class="fa-solid fa-star fa-xs"></i>
+        else if (avg >  1 && avg <= 2) {
+            return (
+            <div>
+                <i class="fa-solid fa-star fa-xs"></i>
+                <i class="fa-solid fa-star fa-xs"></i>
+            </div>
+        )}
+        else if (avg >  2 && avg <= 3) {
+            return (
+            <div>
+                <i class="fa-solid fa-star fa-xs"></i>
+                <i class="fa-solid fa-star fa-xs"></i>
+                <i class="fa-solid fa-star fa-xs"></i>
+            </div>
+        )}
+        else if (avg >  3 && avg <= 4) {
+            return (
+            <div>
+                <i class="fa-solid fa-star fa-xs"></i>
+                <i class="fa-solid fa-star fa-xs"></i>
+                <i class="fa-solid fa-star fa-xs"></i>
+                <i class="fa-solid fa-star fa-xs"></i>
+            </div>
+        )}
+        else if (avg >  4 && avg <= 5) {
+            return (
+            <div>
+                <i class="fa-solid fa-star fa-xs"></i>
+                <i class="fa-solid fa-star fa-xs"></i>
+                <i class="fa-solid fa-star fa-xs"></i>
+                <i class="fa-solid fa-star fa-xs"></i>
+                <i class="fa-solid fa-star fa-xs"></i>
+            </div>
+        )}
+
+    }
+
     const addCart = async (e) => {
         e.preventDefault();
         setOptionsError([])
@@ -79,7 +121,7 @@ function ProductIndex(){
         setQuantity(0)
         return history.push('/cart')
     }
-
+    findStars(product.avg)
     let {options } = product;
     console.log(options)
     options = options.split('-')
@@ -119,11 +161,7 @@ function ProductIndex(){
                     <div className="product-detials-owner-stats">
                         {'1 Sale'}
                         {' | '}
-                        <i class="fa-solid fa-star fa-xs"></i>
-                        <i class="fa-solid fa-star fa-xs"></i>
-                        <i class="fa-solid fa-star fa-xs"></i>
-                        <i class="fa-solid fa-star fa-xs"></i>
-                        <i class="fa-solid fa-star fa-xs"></i>
+                        {findStars(product.avg)}
                     </div>
                     <div className="product-details-name">
                         {product.name}
@@ -171,7 +209,15 @@ function ProductIndex(){
             </div>
             <div className="product-content-description-container">
                 <div className="product-comments-container">
-
+                    <div className="product-reviews-container-summary">
+                        <div>
+                            {`${product.reviews?.length} product reviews`}
+                        </div>
+                        {findStars(product.avg)}
+                    </div>
+                    {product.reviews?.map(review => (
+                        <ReviewIndex review={review} />
+                    ))}
                 </div>
                 <div className="product-description-container">
                     <div className="product-description-awards">

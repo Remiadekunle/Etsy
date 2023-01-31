@@ -90,7 +90,7 @@ def create_review(id):
         )
         db.session.add(review)
         db.session.commit()
-        return {"review": review.to_dict()}, 201
+        return {"review": review.to_dict(), "product": product.to_dict()}, 201
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
@@ -130,10 +130,10 @@ def edit_review(id, reviewId):
         review.review_img=form.data['img']
         review.updated_at=datetime.now()
         db.session.commit()
-        return {"review": review.to_dict()}, 200
+        return {"review": review.to_dict(), "product": product.to_dict()}, 200
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
-    
+
 
 @product_routes.route('/<int:id>/reviews/<int:reviewId>', methods=['DELETE'])
 def delete_review(id, reviewId):
