@@ -10,7 +10,8 @@ order_routes = Blueprint('order', __name__)
 @order_routes.route('/')
 @login_required
 def get_user_cart():
-    orders = Order.query.filter(Order.user_id == current_user.id)
+    orders = Order.query.filter(Order.user_id == current_user.id).order_by(Order.created_at).all()[::-1]
+    print('hey these are the orders', [order.created_at.strftime('%m/%d/%Y') for order in orders])
     return {"orders": [order.to_dict() for order in orders]}
 
 @order_routes.route('/<int:id>')
@@ -35,6 +36,8 @@ def create_order():
             address=form.data['address'],
             city=form.data['city'],
             state=form.data['state'],
+            created_at=datetime.now(),
+            updated_at=datetime.now()
         )
         errors = []
         cart_items = [item for item in current_user.cart.items]
@@ -80,7 +83,7 @@ def edit_order(id):
         order.address=form.data['address']
         order.city=form.data['city']
         order.state=form.data['state']
-
+        order.updated_at=datetime.now()
         db.session.commit()
         return {"order": order.to_dict()}
     else:

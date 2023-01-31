@@ -4,6 +4,8 @@ import { NavLink, Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
 import { Modal } from "../../context/Modal";
 import './index.css';
+import { fetchCart } from '../../store/cart';
+import { fetchOrders } from '../../store/order';
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
@@ -17,6 +19,8 @@ const LoginForm = () => {
     e.preventDefault();
     console.log('in the dispatch function')
     const data = await dispatch(login(email, password));
+    dispatch(fetchCart())
+    dispatch(fetchOrders())
     if (data) {
       setErrors(data);
     }

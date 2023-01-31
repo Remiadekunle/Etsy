@@ -81,7 +81,7 @@ export function EditOrderFormModal({order}){
 
   return (
     <>
-      <button className="edit-order-button" onClick={() => setShowModal(true)}>Edit Order</button>
+      <button className="edit-orders-button" onClick={() => setShowModal(true)}>Edit Order</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <EditOrderForm setShowModal={setShowModal} order={order}/>

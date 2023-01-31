@@ -27,6 +27,10 @@ class Order(db.Model):
             'items': [item.to_dict() for item in self.items],
             'address': self.address,
             'city': self.city,
-            'state': self.state
+            'state': self.state,
+            'created_at': f'{self.created_at}'.split(' ')[0],
+            'updated_at': f'{self.updated_at}'.split(' ')[0],
+            'preview_img':self.items[0].product.preview_img,
+            'preview_item':self.items[0].product.to_dict()
             # 'orders': [order.id for order in self.orders]
         }

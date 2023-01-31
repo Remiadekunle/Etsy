@@ -8,27 +8,34 @@
 
 .order-item-container{
     width: 100%;
-    height: 200px;
-    border: 1px solid blue;
+    height: 190px;
+    /* border: 1px solid blue; */
     display: flex;
     gap: 10px;
     justify-content: space-between;
+    padding-bottom: 50px;
 }
 
 .order-trackings-cancel-section{
     display: flex;
     flex-direction: column;
     width: 20%;
+    justify-content: space-between;
 }
 
 .order-details-section{
-    width: 75%;
+    width: 78%;
+    /* padding: 10px; */
+    position: relative;
+    border: 1px solid gray;
+    border-radius: 5px;
 }
 
 .order-page-welcome-container{
     width: 100%;
     height: 70px;
     margin-bottom: 30px;
+    margin-top: 30px;
     /* padding: 0px 23% 0px 23%; */
     border-bottom: 1px solid darkslategray;
 }
@@ -51,4 +58,69 @@
 .shipping-stuff-track{
     display: flex;
     flex-direction: column;
+}
+
+.order-details-shop-holder{
+    border-bottom: 1px solid black;
+    /* padding: 10px; */
+    width: 100%;
+}
+
+.order-details-shop-holder-values{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.order-shipping-status{
+    margin: 0;
+}
+
+.order-index-previewImg{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.order-index-previewImg-container{
+    width: 105px;
+    height: 105px;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+.order-index-preview-item-details{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100px;
+}
+
+.order-index-preview{
+    display: flex;
+    gap: 20px;
+    padding-left: 5%;
+    padding-top: 2%;
+}
+
+.order-index-preview-item-details-button{
+    background-color: #222222;
+    color: #FFFFFF;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.order-index-preview-item-details div{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+
+.edit-orders-button{
+    height: 30px;
 }

@@ -61,7 +61,7 @@ export function DeleteOrderFormModal({order}){
 
   return (
     <>
-      <button className="edit-order-button" onClick={() => setShowModal(true)}>Cancel Order</button>
+      <button className="edit-orders-button" onClick={() => setShowModal(true)}>Cancel Order</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <DeleteOrderForm setShowModal={setShowModal} order={order}/>
