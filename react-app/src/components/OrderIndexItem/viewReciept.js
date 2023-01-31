@@ -69,8 +69,8 @@ function OrderItemIndex(item){
     const object = item.item
     return(
         <div className="order-item-border">
-            <div>
-                {object.name}
+            <div className="order-item-name-quantity">
+                {`${object.name} x ${object.quantity}`}
             </div>
             <div>
                 {`$${object.price}.00`}
