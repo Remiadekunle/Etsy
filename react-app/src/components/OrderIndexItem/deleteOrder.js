@@ -43,7 +43,7 @@ function DeleteOrderForm({setShowModal, order}){
                       </li>
                       ))}
                   </ul>
-                <label className='delete-product-checkbox'>
+                <label className='delete-product-checkbox2'>
                     Are you sure you want to delete your order?
                     <input
                     type="checkbox"

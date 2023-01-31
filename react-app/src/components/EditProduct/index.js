@@ -38,6 +38,9 @@ function EditProductForm({setShowModal, product}){
         e.preventDefault();
         // setErrors([]);
         if (description.length < 50) return
+        if (name.length > 30) return
+        if (price === 0) return
+        if (stock === 0) return
         const options = `${option1}-${option2}-${option3}`
         console.log(typeof price)
         const payload = {
@@ -94,7 +97,8 @@ function EditProductForm({setShowModal, product}){
                 <label className='create-product-label'>
                     Quantity
                     <input
-                    type="text"
+                    type="number"
+                    min='1'
                     required
                     value={stock}
                     onChange={(e) => setStock(e.target.value)}

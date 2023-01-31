@@ -23,7 +23,7 @@ function DeleteProductForm({setShowModal, product}){
     return(
         <>
             <form className="create-product-form" onSubmit={handleSubmit}>
-                <label className='delete-product-checkbox'>
+                <label className='delete-product-checkbox2'>
                     Are you sure you want to delete?
                     <input
                     type="checkbox"

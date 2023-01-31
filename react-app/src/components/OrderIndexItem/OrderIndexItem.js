@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { DeleteOrderFormModal } from "./deleteOrder"
 import { EditOrderFormModal } from "./editOrderr"
 import './index.css';
+import { ViewReciptPageModal } from "./viewReciept";
 
 function OrderIndex({order}){
     console.log('yo this is the order', order)
@@ -73,7 +74,8 @@ function OrderIndex({order}){
                         {state}
                     </div>
                 </div>
-                <button className="edit-orders-button">View Recipt</button>
+                {/* <button className="edit-orders-button">View Recipt</button> */}
+                <ViewReciptPageModal order={order}/>
                 <EditOrderFormModal createdAt={createdAt} order={order} />
                 <DeleteOrderFormModal cancelWindow={cancelWindow} order={order}/>
             </div>

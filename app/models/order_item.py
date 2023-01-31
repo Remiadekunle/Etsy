@@ -20,4 +20,6 @@ class OrderItem(db.Model):
             'id': self.id,
             'quantity': self.quantity,
             'product_id': self.product_id,
+            'name': self.product.name,
+            'price':float(self.product.price)
         }

@@ -24,7 +24,7 @@ function ClearCartForm({setShowModal, product, item}){
     return(
         <>
             <form className="create-product-form" onSubmit={handleSubmit}>
-                <label className='delete-product-checkbox'>
+                <label className='delete-product-checkbox2'>
                     Are you sure you want to clear all items?
                     <input
                     type="checkbox"

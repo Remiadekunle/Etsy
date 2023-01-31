@@ -25,7 +25,7 @@ function DeleteCartItemForm({setShowModal, product, item}){
     return(
         <>
             <form className="create-product-form" onSubmit={handleSubmit}>
-                <label className='delete-product-checkbox'>
+                <label className='delete-product-checkbox2'>
                     Are you sure you want to delete this item?
                     <input
                     type="checkbox"
