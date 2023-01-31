@@ -96,7 +96,7 @@ const orderReducer = (state = initialState, action) => {
     switch(action.type){
         case GET_ORDERS:
             newState = Object.assign({}, state);
-            newState.allOrders = {...state.allOrders}
+            newState.allOrders = {}
             const orders = action.orders
             orders.forEach(order => {
                 newState.allOrders[order.id] = order

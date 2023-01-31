@@ -6,6 +6,7 @@ import { EditProductModal } from "../EditProduct";
 import './index.css';
 import { addToCart } from "../../store/cart";
 import ReviewIndex from "./ProductReview";
+import { ComingSoonBuyItNowModal, ComingSoonBuyMessageOwnerModal } from "../ComingSoon";
 
 function ProductIndex(){
     const {productId} = useParams()
@@ -153,12 +154,14 @@ function ProductIndex(){
                     <div className="product-image-rows">
                         {
                             placeImgs?.map(item => (
-                                <img className="smaller-imgs" src={product.previewImg}>
+                                <img className="smaller-imgs"
+                                onError={e => { e.currentTarget.src = "https://freight.cargo.site/w/3840/q/75/i/a17dfc0b27e50cb1c75dcd8fcd13a2d11783729f60265d9a00d184bc5a8d9296/VALORANT_1.png"}}
+                                src={product.previewImg}>
                                 </img>
                             ))
                         }
                     </div>
-                    <img className="product-index-image" src={product.previewImg}></img>
+                    <img className="product-index-image" onError={e => { e.currentTarget.src = "https://freight.cargo.site/w/3840/q/75/i/a17dfc0b27e50cb1c75dcd8fcd13a2d11783729f60265d9a00d184bc5a8d9296/VALORANT_1.png"}} src={product.previewImg}></img>
                 </div>
                 <div className="product-details-container">
                     <div className="product-details-owner">
@@ -208,7 +211,7 @@ function ProductIndex(){
                             <button className="product-quantity-button" onClick={decrimentQuantity}><i class="fa-solid fa-minus"></i></button>
                         </div>
                     </div>
-                    <button className="product-detail-cart-button">Buy it now</button>
+                    <ComingSoonBuyItNowModal feature={'Direct purchase from product listing'}/>
                     <form className="product-add-to-cart-button-form" onSubmit={addCart}>
                         <button className="product-to-cart-button" type="submit">Add to cart</button>
                     </form>
@@ -295,9 +298,7 @@ function ProductIndex(){
                                 </div>
                             </div>
                        </div>
-                       <button className="meet-seller-button">
-                        Message {product.owner?.username}
-                       </button>
+                       <ComingSoonBuyMessageOwnerModal name={product.owner?.username}/>
                     </div>:<></>
                     }
                     {user?.username === product.owner?.username? <div className="product-attribute-dropdown" onClick={toggleListingButtons} >

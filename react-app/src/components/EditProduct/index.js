@@ -36,13 +36,21 @@ function EditProductForm({setShowModal, product}){
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // setErrors([]);
+        setErrors([]);
         if (description.length < 50) return
+        if(name.length < 1)  return
         if (name.length > 30) return
         if (price === 0) return
         if (stock === 0) return
         const options = `${option1}-${option2}-${option3}`
         console.log(typeof price)
+        console.log('ok im lowker  smart somethings', name)
+        const set = new Set(name.split(''))
+        console.log('what is the outcome of this', set.size)
+        if (set.size == 1 && set.has(' ')) {
+            setErrors(['name: name must not be all whitespace'])
+            return
+        }
         const payload = {
             name,
             description,
@@ -52,7 +60,8 @@ function EditProductForm({setShowModal, product}){
             previewImg
         }
         const body = await dispatch(updateProduct(payload, product.id))
-        // history.push(`/products/${body.product.id}`)
+
+
         setShowModal(false)
     }
 

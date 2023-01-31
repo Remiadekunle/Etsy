@@ -2,6 +2,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
+import { fetchCart } from '../store/cart';
+import { fetchOrders } from '../store/order';
 import { login } from '../store/session';
 import { LoginFormModal } from './auth/LoginForm';
 import LogoutButton from './auth/LogoutButton';
@@ -42,6 +44,8 @@ const NavBar = () => {
     const email = 'demo@aa.io'
     const password = 'password'
     const data = await dispatch(login(email, password));
+    await dispatch(fetchCart())
+    await dispatch(fetchOrders())
   }
 
   const toCart = () => {

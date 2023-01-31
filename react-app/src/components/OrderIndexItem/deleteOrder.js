@@ -20,9 +20,6 @@ function DeleteOrderForm({setShowModal, order}){
     const handleSubmit = async (e) => {
         e.preventDefault();
         const newErrors = []
-        if (address.length < 2) return
-        if (city.length < 2) return
-        if (state.length < 2) return
         // dispatch(createOrder(address, city, state))
         // dispatch(deleteFromCart(product.id));
         // setErrors([]);

@@ -67,7 +67,7 @@ export const createProduct = (payload) => async dispatch => {
         return body
     } else{
         const body = await res.json()
-        console.log('yooooooo this is the bad res', body)
+        return body.errors
     }
 }
 
@@ -89,6 +89,9 @@ export const updateProduct = (payload, id) => async dispatch => {
         console.log('we got the body back', body)
         dispatch(editProduct(body.product))
         return body
+    }else{
+        const body = await res.json()
+        return body.errors
     }
 }
 

@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
 import { Modal } from "../../context/Modal";
+import { fetchCart } from '../../store/cart';
+import { fetchOrders } from '../../store/order';
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
@@ -16,12 +18,43 @@ const SignUpForm = () => {
 
   const onSignUp = async (e) => {
     e.preventDefault();
+    const test = '@'
+    console.log(email.indexOf(test))
+    setErrors([])
+    const set = new Set(username.split(''))
+    if (set.size === 1 && set.has(' ')) {
+      console.log('um did we get herre')
+      setErrors(['Username: Username must not be all whitespace'])
+      return
+  }
+  else if (set.size < 1){
+    setErrors(['Username: Please enter a Username'])
+    return
+  }
+  if (email.indexOf(test) === -1){
+    console.log('hey we made it to the  if statement', email)
+    setErrors(['Email: Email must include @'])
+    return
+  }
+  const test2 = email.split('.')
+  if (test2.length < 2){
+    setErrors(['Email: must include an ending domain. Ex" .com'])
+    return
+  }
+
+
+
+
     if (password === repeatPassword) {
       const data = await dispatch(signUp(username, email, password, url));
       if (data) {
         setErrors(data)
       }
+
+      await dispatch(fetchCart())
+      await dispatch(fetchOrders())
     }
+
   };
 
   const updateUsername = (e) => {
