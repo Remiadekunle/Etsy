@@ -95,7 +95,7 @@ def create_review(id):
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 # @product_routes.route('/<int:id>/reviews', methods=['POST'])
-# @login_required
+# # @login_required
 # def create_review2(id):
 #     user = User.query.get(1)
 #     product = Product.query.get(id)

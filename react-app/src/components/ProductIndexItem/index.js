@@ -64,14 +64,20 @@ function ProductIndex(){
         console.log('testing the type', typeof avg)
         if (avg === 0) return 'No Reviews'
         if (avg >  0 && avg <= 1) return <i class="fa-solid fa-star fa-xs"></i>
-        else if (avg >  1 && avg <= 2) {
+        else if (avg >=  1 && avg < 2) {
+            return (
+            <div>
+                <i class="fa-solid fa-star fa-xs"></i>
+            </div>
+        )}
+        else if (avg >=  2 && avg < 3) {
             return (
             <div>
                 <i class="fa-solid fa-star fa-xs"></i>
                 <i class="fa-solid fa-star fa-xs"></i>
             </div>
         )}
-        else if (avg >  2 && avg <= 3) {
+        else if (avg >=  3 && avg < 4) {
             return (
             <div>
                 <i class="fa-solid fa-star fa-xs"></i>
@@ -79,7 +85,7 @@ function ProductIndex(){
                 <i class="fa-solid fa-star fa-xs"></i>
             </div>
         )}
-        else if (avg >  3 && avg <= 4) {
+        else if (avg >=  4 && avg < 5) {
             return (
             <div>
                 <i class="fa-solid fa-star fa-xs"></i>
@@ -87,20 +93,21 @@ function ProductIndex(){
                 <i class="fa-solid fa-star fa-xs"></i>
                 <i class="fa-solid fa-star fa-xs"></i>
             </div>
+
         )}
-        else if (avg >  4 && avg <= 5) {
-            return (
-            <div>
-                <i class="fa-solid fa-star fa-xs"></i>
-                <i class="fa-solid fa-star fa-xs"></i>
-                <i class="fa-solid fa-star fa-xs"></i>
-                <i class="fa-solid fa-star fa-xs"></i>
-                <i class="fa-solid fa-star fa-xs"></i>
-            </div>
-        )}
+        else{
+            return(
+                <div>
+                    <i class="fa-solid fa-star fa-xs"></i>
+                    <i class="fa-solid fa-star fa-xs"></i>
+                    <i class="fa-solid fa-star fa-xs"></i>
+                    <i class="fa-solid fa-star fa-xs"></i>
+                    <i class="fa-solid fa-star fa-xs"></i>
+                </div>
+            )
+        }
 
     }
-
     const addCart = async (e) => {
         e.preventDefault();
         setOptionsError([])
@@ -216,7 +223,7 @@ function ProductIndex(){
                         {findStars(product.avg)}
                     </div>
                     {product.reviews?.map(review => (
-                        <ReviewIndex review={review} />
+                        <ReviewIndex review={review} findStars={findStars} />
                     ))}
                 </div>
                 <div className="product-description-container">
