@@ -76,12 +76,12 @@ function EditOrderForm({setShowModal, order}){
     )
 }
 
-export function EditOrderFormModal({order}){
+export function EditOrderFormModal({order, createdAt}){
     const [showModal, setShowModal] = useState(false);
 
   return (
     <>
-      <button className="edit-orders-button" onClick={() => setShowModal(true)}>Edit Order</button>
+      <button className="edit-orders-button" onClick={() => setShowModal(true)} disabled={Date.now() > createdAt ? true : false}>Edit Order</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <EditOrderForm setShowModal={setShowModal} order={order}/>

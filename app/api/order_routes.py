@@ -3,7 +3,7 @@ from flask_login import current_user, login_required
 from ..models import db, Product, Cart, User, CartItem, Order, OrderItem
 from .auth_routes import validation_errors_to_error_messages
 from ..forms import CartForm, OrderForm
-from datetime import datetime
+from datetime import datetime, timedelta
 
 order_routes = Blueprint('order', __name__)
 
@@ -12,6 +12,13 @@ order_routes = Blueprint('order', __name__)
 def get_user_cart():
     orders = Order.query.filter(Order.user_id == current_user.id).order_by(Order.created_at).all()[::-1]
     print('hey these are the orders', [order.created_at.strftime('%m/%d/%Y') for order in orders])
+    delta = timedelta(
+            days=2
+    )
+    date = datetime(2023, 1, 19)
+    print('qqqqqqqqqqqqqqqqqqqqqqq', date)
+    print(delta, 'wwwwwwwwwwwwwwwwwwwwwwwwwwwwwww')
+    print('this is after adding them', delta + datetime.now())
     return {"orders": [order.to_dict() for order in orders]}
 
 @order_routes.route('/<int:id>')
@@ -30,6 +37,17 @@ def create_order():
     form = OrderForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+        delta = timedelta(
+            days=1,
+        )
+        delta2 = timedelta(
+            microseconds=10
+        )
+        delivery_delta = timedelta(
+            days=3
+        )
+        expiration = delta + datetime.now()
+        deliverd = delivery_delta + datetime.now()
         order = Order(
             total=0,
             user=current_user,
@@ -37,7 +55,9 @@ def create_order():
             city=form.data['city'],
             state=form.data['state'],
             created_at=datetime.now(),
-            updated_at=datetime.now()
+            updated_at=datetime.now(),
+            expires=expiration,
+            delivery=deliverd
         )
         errors = []
         cart_items = [item for item in current_user.cart.items]
@@ -49,6 +69,7 @@ def create_order():
                 errors.append(f'{item.product.name} is out of stock')
                 continue
             elif item.quantity > product.stock:
+                order.notes = order.notes + f'{item.product.name}s stock was {product.stock} we have placed an order for that amount and charged only for the amount placed-'
                 errors.append(f'{item.product.name}s stock was {product.stock} we have placed an order for that amount and charged only for the amount placed')
                 item.quantity = product.stock
             order_item = OrderItem(
