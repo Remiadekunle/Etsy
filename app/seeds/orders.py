@@ -1,5 +1,6 @@
 from app.models import db, Product, User, environment, SCHEMA, Order, OrderItem
 from datetime import datetime, timedelta
+from random import choice
 
 def seed_orders():
     user = User.query.get(1)
@@ -12,7 +13,7 @@ def seed_orders():
             created_at=datetime(2023, 1, 19),
             expires=datetime(2023, 1, 13),
             delivery=datetime(2023, 1, 27),
-            total=0
+            total=400
         ),
         Order(
             user=user,
@@ -22,15 +23,27 @@ def seed_orders():
             created_at=datetime(2023, 1, 19),
             expires=datetime(2023, 1, 29),
             delivery=datetime(2023, 2, 10),
-            total=0
+            total=400
+        ),
+        Order(
+            user=user,
+            address='123  Westpoint Lane',
+            city='Central City',
+            state='Ohio',
+            created_at=datetime(2023, 1, 19),
+            expires=datetime(2023, 1, 25),
+            delivery=datetime(2023, 1, 29),
+            total=400
         ),
     ]
+
+    options = [1,5,10,8,6]
 
     for order in orders:
         product = Product.query.get(10)
         order_item = OrderItem(
             quantity=2,
-            option='red',
+            option='white',
             order=order,
             product=product
         )
