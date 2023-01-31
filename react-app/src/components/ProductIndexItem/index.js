@@ -232,7 +232,7 @@ function ProductIndex(){
                     </div>
                     {sellerToggle ? <div>
                        <div className="meet-seller-owner-container">
-                            <img className="meet-seller-img" src={product.owner.profileImg.length > 0? product.owner.profileImg : 'https://i.pinimg.com/originals/b1/92/4d/b1924dce177345b5485bb5490ab3441f.jpg'}></img>
+                            <img className="meet-seller-img" src={'https://i.pinimg.com/originals/b1/92/4d/b1924dce177345b5485bb5490ab3441f.jpg'}></img>
                             <div className="meet-seeler-description">
                                 <div>
                                     {product.owner?.username}

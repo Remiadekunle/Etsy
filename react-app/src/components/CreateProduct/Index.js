@@ -37,6 +37,9 @@ function CreateProductForm({setShowModal}){
         e.preventDefault();
 
         if (description.length < 50) return
+        if (name.length > 30) return
+        if (price === 0) return
+        if (stock === 0) return
         // setErrors([]);
         const options = `${option1}-${option2}-${option3}`
         console.log(typeof price)
@@ -87,6 +90,7 @@ function CreateProductForm({setShowModal}){
                     <input
                     type="number"
                     required
+                    min={1}
                     value={price}
                     onChange={(e) => setPrice(e.target.value)}
                     className='create-product-input'/>
@@ -94,7 +98,8 @@ function CreateProductForm({setShowModal}){
                 <label className='create-product-label'>
                     Quantity
                     <input
-                    type="text"
+                    type="number"
+                    min='1'
                     required
                     value={stock}
                     onChange={(e) => setStock(e.target.value)}

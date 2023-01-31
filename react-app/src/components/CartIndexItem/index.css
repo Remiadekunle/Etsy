@@ -61,6 +61,39 @@
     font-size: 30px;
 }
 
+.cart-edit-form-curr-qunatity{
+    margin-bottom: 10px;
+}
+
+.edit-product-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    /* width: 300px; */
+}
+
+.product-modal-errors{
+    list-style: none;
+    color: red;
+}
+
+.create-product-error-container{
+    padding: 0;
+}
+
+.delete-product-checkbox{
+    /* width: 200px; */
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+}
+.delete-product-checkbox2{
+    /* width: 200px; */
+    gap: 5px;
+    width: 100%;
+}
 .cart-cost-metrics{
     width: 350px;
     /* border: 1px solid green; */

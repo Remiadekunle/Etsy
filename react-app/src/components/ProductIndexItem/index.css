@@ -52,7 +52,7 @@
 
 .product-details-owner{
     display: flex;
-    padding: 10px 0px 10px 0px;
+    /* padding: 10px 0px 10px 0px; */
     gap: 5px;
 }
 
@@ -66,7 +66,7 @@
 .product-details-name{
     display: flex;
     align-items: center;
-    padding: 10px 0px 10px 0px;
+    /* padding: 10px 0px 10px 0px; */
     font-size: 30px;
 }
 
@@ -164,11 +164,15 @@
 .options-error-class{
     display: flex;
     margin: 0;
+    color: red;
+    list-style: none;
+    padding: 0;
 }
 .options-error-class2{
     display: hidden;
     height: 0px;
     margin: 0;
+    color: red;
 }
 .quantity-error-class{
     display: flex;

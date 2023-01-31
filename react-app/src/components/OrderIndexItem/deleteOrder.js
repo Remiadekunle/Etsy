@@ -43,7 +43,7 @@ function DeleteOrderForm({setShowModal, order}){
                       </li>
                       ))}
                   </ul>
-                <label className='delete-product-checkbox'>
+                <label className='delete-product-checkbox2'>
                     Are you sure you want to delete your order?
                     <input
                     type="checkbox"
@@ -56,12 +56,12 @@ function DeleteOrderForm({setShowModal, order}){
     )
 }
 
-export function DeleteOrderFormModal({order}){
+export function DeleteOrderFormModal({order, cancelWindow}){
     const [showModal, setShowModal] = useState(false);
 
   return (
     <>
-      <button className="edit-orders-button" onClick={() => setShowModal(true)}>Cancel Order</button>
+      <button disabled={ Date.now() > cancelWindow ? true : false} className="edit-orders-button" onClick={() => setShowModal(true)}>Cancel Order</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <DeleteOrderForm setShowModal={setShowModal} order={order}/>

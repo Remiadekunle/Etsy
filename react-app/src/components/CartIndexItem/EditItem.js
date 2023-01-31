@@ -20,7 +20,7 @@ function EditCartItemForm({setShowModal, product, item}){
         const newErrors = []
         console.log('hi were in the submite with', newQuant)
         if (parseInt(newQuant) === parseInt(item.quantity)){
-          newErrors.push('New quantity is the same as the current quantity')
+          newErrors.push('Please enter new quantity')
           setErrors(newErrors)
           console.log('ummmm i think you should return')
           return
@@ -43,7 +43,7 @@ function EditCartItemForm({setShowModal, product, item}){
 
     return(
         <>
-            <form className="create-product-form" onSubmit={handleSubmit}>
+            <form className="edit-product-form" onSubmit={handleSubmit}>
               <ul className="create-product-error-container">
                       {errors.map((error, idx) => (
                       <li className="product-modal-errors" key={idx}>
@@ -51,7 +51,7 @@ function EditCartItemForm({setShowModal, product, item}){
                       </li>
                       ))}
                   </ul>
-                <div>
+                <div className="cart-edit-form-curr-qunatity">
                     Current quantity: {item.quantity}
                 </div>
                 <label className='delete-product-checkbox'>

@@ -1,5 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-
+from datetime import datetime, timedelta
 
 
 class Order(db.Model):
@@ -16,6 +16,9 @@ class Order(db.Model):
     address = db.Column(db.String)
     city = db.Column(db.String)
     state = db.Column(db.String)
+    notes = db.Column(db.String)
+    expires = db.Column(db.DateTime)
+    delivery = db.Column(db.DateTime)
 
     user = db.relationship("User", back_populates='orders')
     items = db.relationship("OrderItem", back_populates='order')
@@ -31,6 +34,11 @@ class Order(db.Model):
             'created_at': f'{self.created_at}'.split(' ')[0],
             'updated_at': f'{self.updated_at}'.split(' ')[0],
             'preview_img':self.items[0].product.preview_img,
-            'preview_item':self.items[0].product.to_dict()
+            'preview_item':self.items[0].product.to_dict(),
+            'notes': self.notes,
+            'full_created': self.created_at,
+            'expires':self.expires,
+            'delivery_expires':self.delivery,
+            'deliver_date': self.delivery + timedelta(days=4) if self.delivery else ''
             # 'orders': [order.id for order in self.orders]
         }

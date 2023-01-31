@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { DeleteOrderFormModal } from "./deleteOrder"
 import { EditOrderFormModal } from "./editOrderr"
 import './index.css';
+import { ViewReciptPageModal } from "./viewReciept";
 
 function OrderIndex({order}){
     console.log('yo this is the order', order)
@@ -19,7 +20,13 @@ function OrderIndex({order}){
     }
     const {address, city, state} = order
     const id = first.product_id
-    console.log('im stumped', first)
+    console.log('im stumped', typeof order.full_created, order.full_created)
+    const createdAt = new Date(order.expires)
+    const delivered = new Date(order.deliver_date)
+    const cancelWindow = new Date(order.delivery_expires)
+    console.log('diid it work', createdAt)
+    console.log(Date.now() > createdAt)
+
     return (
         <div className="order-item-container">
             <div className="order-details-section">
@@ -55,21 +62,22 @@ function OrderIndex({order}){
             <div className="order-trackings-cancel-section">
                 <div className="shipping-stuff-track">
                     <h3 className="order-shipping-status">
-                        In Progress ...
+                        {Date.now() > delivered ? 'Delivered' : 'In Progress ...'}
                     </h3>
                     <div>
-                        {address}
+                        {`${address},`}
                     </div>
                     <div>
-                        {city}
+                        {`${city},`}
                     </div>
                     <div>
                         {state}
                     </div>
                 </div>
-                <button className="edit-orders-button">View Recipt</button>
-                <EditOrderFormModal order={order} />
-                <DeleteOrderFormModal order={order}/>
+                {/* <button className="edit-orders-button">View Recipt</button> */}
+                <ViewReciptPageModal order={order}/>
+                <EditOrderFormModal createdAt={createdAt} order={order} />
+                <DeleteOrderFormModal cancelWindow={cancelWindow} order={order}/>
             </div>
         </div>
     )
