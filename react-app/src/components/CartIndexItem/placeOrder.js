@@ -5,7 +5,7 @@ import { useModal } from '../../context/Modal';
 import { Modal } from "../../context/Modal";
 import { addToCart, deleteFromCart, editToCartRemove, fetchCart } from "../../store/cart";
 import { createOrder } from "../../store/order";
-import { createProduct, editProduct, removeProduct, updateProduct } from "../../store/product";
+import { createProduct, editProduct, fetchProducts, removeProduct, updateProduct } from "../../store/product";
 import './index.css';
 
 function PlaceOrderForm({setShowModal}){
@@ -20,13 +20,13 @@ function PlaceOrderForm({setShowModal}){
     const handleSubmit = async (e) => {
         e.preventDefault();
         const newErrors = []
-        if (address.length < 2) return
-        if (city.length < 2) return
-        if (state.length < 2) return
+        if (address.length < 1) return
+        if (city.length < 1) return
+        if (state.length < 1) return
         await dispatch(createOrder(address, city, state))
         // dispatch(deleteFromCart(product.id));
         // setErrors([]);
-
+        await dispatch(fetchProducts())
         await dispatch(fetchCart())
         setShowModal(false)
         return history.push('/orders')

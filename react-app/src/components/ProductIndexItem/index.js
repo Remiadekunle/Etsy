@@ -154,7 +154,7 @@ function ProductIndex(){
                         </ul>
                         <div className="product-quantity-container">
                             <div className="product-details-quantity-container">
-                                Quantity:{quantity}
+                                Quantity:{product.stock === 0 ? 'Out of stock' : quantity}
                                 <ul className={quantityErrorName}>
                                     {quantityError.map((error,idx) =>(<li key={idx}>{error}</li>))}
                                 </ul>
