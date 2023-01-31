@@ -5,7 +5,7 @@ import { useModal } from '../../context/Modal';
 import { Modal } from "../../context/Modal";
 import { addToCart, deleteFromCart, editToCartRemove, fetchCart } from "../../store/cart";
 import { createOrder, removeOrder, updateOrder } from "../../store/order";
-import { createProduct, editProduct, removeProduct, updateProduct } from "../../store/product";
+import { createProduct, editProduct, fetchProducts, removeProduct, updateProduct } from "../../store/product";
 import './index.css';
 
 function DeleteOrderForm({setShowModal, order}){
@@ -27,6 +27,7 @@ function DeleteOrderForm({setShowModal, order}){
         // dispatch(deleteFromCart(product.id));
         // setErrors([]);
         dispatch(removeOrder(order.id))
+        await dispatch(fetchProducts())
         // await dispatch(fetchCart())
         setShowModal(false)
         return history.push('/orders')
