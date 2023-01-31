@@ -169,6 +169,13 @@
     background-color: white;
     cursor: pointer;
 }
+.cart-place-order-button2{
+    width: 100%;
+    height: 40px;
+    border-radius: 20px;
+    background-color: white;
+    cursor: not-allowed;
+}
 
 .delete-cart-item-button{
     width: 50px;

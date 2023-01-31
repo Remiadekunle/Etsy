@@ -48,7 +48,9 @@ function OrderIndex({order}){
                             </div>
                         </NavLink>
                         <div className="order-index-preview-item-details">
-                            {first.name}
+                            <NavLink to={`/products/${first.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                {first.name}
+                            </NavLink>
                             <div>
                                 <NavLink to={`/products/${first.id}`}>
                                     <button className="order-index-preview-item-details-button"> Buy this again</button>
