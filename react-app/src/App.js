@@ -16,6 +16,7 @@ import CartPage from './components/CartIndexItem';
 import { fetchOrders } from './store/order';
 import OrderPage from './components/OrderIndexItem';
 import Footer from './components/FooterItems';
+import Welcome from './components/auth/WelcomePage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -24,7 +25,7 @@ function App() {
   useEffect(() => {
     (async() => {
       await dispatch(authenticate());
-      dispatch(fetchProducts())
+      await dispatch(fetchProducts())
       dispatch(fetchCart())
       dispatch(fetchOrders())
       setLoaded(true);
@@ -40,9 +41,11 @@ function App() {
       <NavBar />
       <Switch>
         <Route path='/login' exact={true}>
+          <Welcome />
           <LoginForm />
         </Route>
         <Route path='/sign-up' exact={true}>
+          <Welcome />
           <SignUpForm />
         </Route>
         <ProtectedRoute path='/users' exact={true} >

@@ -10,7 +10,8 @@ order_routes = Blueprint('order', __name__)
 @order_routes.route('/')
 @login_required
 def get_user_cart():
-    orders = Order.query.filter(Order.user_id == current_user.id)
+    orders = Order.query.filter(Order.user_id == current_user.id).order_by(Order.created_at).all()[::-1]
+    print('hey these are the orders', [order.created_at.strftime('%m/%d/%Y') for order in orders])
     return {"orders": [order.to_dict() for order in orders]}
 
 @order_routes.route('/<int:id>')
@@ -24,14 +25,19 @@ def get_user_cart2(id):
 
 
 @order_routes.route('/',  methods=['POST'])
-# @login_required
+@login_required
 def create_order():
-    form = CartForm()
+    form = OrderForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         order = Order(
             total=0,
-            user=current_user
+            user=current_user,
+            address=form.data['address'],
+            city=form.data['city'],
+            state=form.data['state'],
+            created_at=datetime.now(),
+            updated_at=datetime.now()
         )
         errors = []
         cart_items = [item for item in current_user.cart.items]
@@ -62,6 +68,38 @@ def create_order():
         print('these are the order items',order.items )
         print('just checkingout the cart', current_user.cart.to_dict())
         db.session.commit()
+        return {"order": order.to_dict(), 'errors': errors}
+    else:
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+
+@order_routes.route('/<int:id>',  methods=['PUT'])
+@login_required
+def edit_order(id):
+    form = OrderForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        order = Order.query.get(id)
+        order.address=form.data['address']
+        order.city=form.data['city']
+        order.state=form.data['state']
+        order.updated_at=datetime.now()
+        db.session.commit()
         return {"order": order.to_dict()}
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+@order_routes.route('/<int:id>',  methods=['DELETE'])
+@login_required
+def delete_order(id):
+    order = Order.query.get(id)
+    order_items = order.items
+    for item in order_items:
+        quantity = item.quantity
+        product_id = item.product_id
+        product = Product.query.get(product_id)
+        product.stock = product.stock + quantity
+        db.session.delete(item)
+    db.session.delete(order)
+    db.session.commit()
+    return {'message': 'Its done'}

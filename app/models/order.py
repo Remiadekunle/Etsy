@@ -13,6 +13,9 @@ class Order(db.Model):
     created_at = db.Column(db.DateTime)
     updated_at = db.Column(db.DateTime)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+    address = db.Column(db.String)
+    city = db.Column(db.String)
+    state = db.Column(db.String)
 
     user = db.relationship("User", back_populates='orders')
     items = db.relationship("OrderItem", back_populates='order')
@@ -22,5 +25,12 @@ class Order(db.Model):
             'total': float(self.total),
             # 'products': [product.id for product in self.products],
             'items': [item.to_dict() for item in self.items],
+            'address': self.address,
+            'city': self.city,
+            'state': self.state,
+            'created_at': f'{self.created_at}'.split(' ')[0],
+            'updated_at': f'{self.updated_at}'.split(' ')[0],
+            'preview_img':self.items[0].product.preview_img,
+            'preview_item':self.items[0].product.to_dict()
             # 'orders': [order.id for order in self.orders]
         }
