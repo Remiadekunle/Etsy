@@ -18,6 +18,7 @@ class Product(db.Model):
     owner = db.relationship("User", back_populates='products')
     cart_items = db.relationship('CartItem', back_populates='product')
     orders = db.relationship('OrderItem', back_populates='product')
+    reviews = db.relationship('Review', back_populates='product')
 
     def to_dict(self):
         return {
@@ -29,4 +30,5 @@ class Product(db.Model):
             'options': self.options,
             'previewImg': self.preview_img,
             'owner': self.owner.to_dict2(),
+            'reviews': [review.to_dict() for review in self.reviews]
         }

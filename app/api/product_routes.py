@@ -1,8 +1,9 @@
 from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
-from ..models import db, Product, Cart, User
+from ..models import db, Product, Cart, User, Review
 from .auth_routes import validation_errors_to_error_messages
-from ..forms import ProductForm
+from ..forms import ProductForm, ReviewForm
+from datetime import datetime, timedelta
 
 product_routes = Blueprint('product', __name__)
 
@@ -65,3 +66,81 @@ def delete_product(id):
         return { "message": "Deleted"}, 200
     else:
         return {"message":'Product couldn\'t be found'} , 404
+
+# @product_routes.route('/<int:id>/reviews', methods=['GET'])
+# def get_product_reviews(id):
+#     product = Product.query.get(id)
+
+
+@product_routes.route('/<int:id>/reviews', methods=['POST'])
+@login_required
+def create_review(id):
+    product = Product.query.get(id)
+    form = ReviewForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        review = Review(
+            content=form.data['content'],
+            stars=form.data['stars'],
+            review_img=form.data['img'],
+            user=current_user,
+            product=product,
+            created_at=datetime.now(),
+            updated_at=datetime.now(),
+        )
+        db.session.add(review)
+        db.session.commit()
+        return {"review": review.to_dict()}, 201
+    else:
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+# @product_routes.route('/<int:id>/reviews', methods=['POST'])
+# @login_required
+# def create_review2(id):
+#     user = User.query.get(1)
+#     product = Product.query.get(id)
+#     form = ReviewForm()
+#     form['csrf_token'].data = request.cookies['csrf_token']
+#     if form.validate_on_submit():
+#         review = Review(
+#             content=form.data['content'],
+#             stars=form.data['stars'],
+#             review_img=form.data['img'],
+#             user=user,
+#             product=product,
+#             created_at=datetime.now(),
+#             updated_at=datetime.now(),
+#         )
+#         db.session.add(review)
+#         db.session.commit()
+#         return{"review": review.to_dict()}
+#     else:
+#         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+
+@product_routes.route('/<int:id>/reviews/<int:reviewId>', methods=['PUT'])
+def edit_review(id, reviewId):
+    product = Product.query.get(id)
+    form = ReviewForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        review = Review.query.get(reviewId)
+        review.content = form.data['content']
+        review.stars=form.data['stars']
+        review.review_img=form.data['img']
+        review.updated_at=datetime.now()
+        db.session.commit()
+        return {"review": review.to_dict()}, 200
+    else:
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+    
+
+@product_routes.route('/<int:id>/reviews/<int:reviewId>', methods=['DELETE'])
+def delete_review(id, reviewId):
+    review = Review.query.get(reviewId)
+    if review:
+        db.session.delete(review)
+        db.session.commit()
+        return { "message": "Deleted"}, 200
+    else:
+        return {"message":'Review couldn\'t be found'} , 404
