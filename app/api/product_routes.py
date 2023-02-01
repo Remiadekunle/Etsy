@@ -2,8 +2,9 @@ from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
 from ..models import db, Product, Cart, User, Review
 from .auth_routes import validation_errors_to_error_messages
-from ..forms import ProductForm, ReviewForm
+from ..forms import ProductForm, ReviewForm, SearchForm
 from datetime import datetime, timedelta
+from sqlalchemy import or_
 
 product_routes = Blueprint('product', __name__)
 
@@ -119,6 +120,7 @@ def create_review(id):
 
 
 @product_routes.route('/<int:id>/reviews/<int:reviewId>', methods=['PUT'])
+@login_required
 def edit_review(id, reviewId):
     product = Product.query.get(id)
     form = ReviewForm()
@@ -136,6 +138,7 @@ def edit_review(id, reviewId):
 
 
 @product_routes.route('/<int:id>/reviews/<int:reviewId>', methods=['DELETE'])
+@login_required
 def delete_review(id, reviewId):
     review = Review.query.get(reviewId)
     if review:
@@ -145,3 +148,23 @@ def delete_review(id, reviewId):
         return { "message": "Deleted", "product": product.to_dict()}, 200
     else:
         return {"message":'Review couldn\'t be found'} , 404
+
+@product_routes.route('/search', methods=['POST'])
+# @login_required
+def find_results():
+    form = SearchForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    print('ummmmmmmm whats going on', form.data['search'])
+    if form.validate_on_submit():
+        search = form.data['search']
+        # products = Product.query.filter(or_(Product.name.ilike(f"%{search}%", Product.description.ilike(f"%{search}%")))).all()
+        products = Product.query.filter(Product.name.ilike(f"%{search}%")).all()
+        products2 = Product.query.filter(Product.description.ilike(f"%{search}%")).all()
+        new = products + products2
+        print('tried to add the two ssssssssssssssssssssssssssssss', new)
+        print('tried to add the two ssssssssssssssssssssssssssssss', products)
+        print('tried to add the two ssssssssssssssssssssssssssssss', products2)
+        # final = [product for product in new if ]
+        return {"products" : [product.to_dict() for product in products]}
+    else:
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 404
