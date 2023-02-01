@@ -47,7 +47,8 @@ class User(db.Model, UserMixin):
             'products': [product.id for product in self.products],
             'cart': self.cart.to_dict(),
             'orders': [order.to_dict() for order in self.orders],
-            'favorites': [fav.to_fav() for fav in self.favorites]
+            'favorites': [fav.to_fav() for fav in self.favorites],
+            'favIds': [fav.id for fav in self.favorites]
         }
     def to_dict2(self):
         return {

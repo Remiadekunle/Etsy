@@ -41,6 +41,39 @@ def add_fav():
         db.session.commit()
         return current_user.to_dict()
 
+@user_routes.route('/favorties', methods=['PUT'])
+@login_required
+def edit_fav():
+    form = FavForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        product_id = form.data['product_id']
+        product = Product.query.get(product_id)
+        if product_id not in [fav.id for fav in current_user.favorites]:
+            return {'errors': 'Item not favorited'}, 400
+        current_user.favorites.remove(product)
+        db.session.commit()
+        return current_user.to_dict()
+
+# @user_routes.route('/<int:id>/favorties', methods=['PUT'])
+# # @login_required
+# def edit_fav(id):
+#     user = User.query.get(id)
+#     form = FavForm()
+#     form['csrf_token'].data = request.cookies['csrf_token']
+#     if form.validate_on_submit():
+#         product_id = form.data['product_id']
+#         product = Product.query.get(product_id)
+#         if product_id not in [fav.id for fav in user.favorites]:
+#             return {'errors': 'Item not favorited'}, 400
+#         user.favorites.remove(product)
+#         # filterd = [favs for fav in user.favorites if not fav.id == form.data['product_id']]
+#         # user.favorites = filterd
+#         db.session.commit()
+#         return user.to_dict()
+#     else:
+#         return 'hi'
+
 # @user_routes.route('/<int:id>/favorties', methods=['POST'])
 # def add_fav(id):
 #     user = User.query.get(id)
