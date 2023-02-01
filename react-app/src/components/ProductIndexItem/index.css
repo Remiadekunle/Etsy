@@ -114,6 +114,9 @@
     width: 65%;
     /* border: 1px solid red; */
     height: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
 }
 
 .product-description-container{
@@ -300,10 +303,11 @@
 .review-index-container{
     width: 98%;
     /* height: 150px; */
-    border: 1px solid pink;
+    /* border: 1px solid pink; */
     display: flex;
     justify-content: space-between;
-    position: relative;
+    /* min-height: 140px; */
+    /* position: relative; */
 }
 
 .review-index-img{
@@ -319,12 +323,12 @@
 
 .review-index-content-container{
     width: 65%;
-    border: 1px solid green;
+    /* border: 1px solid green; */
     height: 100%;
-    padding-bottom: 30px;
     display: flex;
     flex-direction: column;
     gap: 5px;
+    position: relative;
 }
 
 .review-button-container{
@@ -352,10 +356,17 @@
     gap: 8px;
     align-items: center;
     font-size: 12px;
+    margin-top: 2px;
 }
 
 .review-index-stars{
     font-size: 20px;
     display: flex;
     align-items: center;
+}
+
+.create-review-button{
+    background-color: #FFFFFF;
+    border-style: none;
+    cursor: pointer;
 }

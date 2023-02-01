@@ -1,14 +1,20 @@
-function ReviewIndex(review){
+import { useSelector } from "react-redux"
+import { EditReviewFormModal } from "./CreateEditReview"
+import { DeleteReviewFormModal } from "./DeleteReview"
+
+function ReviewIndex(review, productId){
     console.log('we got into the component', review)
+    const user = useSelector(state => state.session.user)
     const reviewItem = review.review
 
     const date = new  Date(reviewItem.time)
-    console.log('were checking the date', date.toString())
+
     const displayDateHolder = date.toString().split(' ')
-    console.log('were checking the date', displayDateHolder)
+
     const month = displayDateHolder[1]
     const day = displayDateHolder[2]
     const year = displayDateHolder[3]
+
 
     const findStars = (avg) => {
         console.log('testing the type', typeof avg)
@@ -63,6 +69,13 @@ function ReviewIndex(review){
             <div className="review-index-content-container">
                 <div className="review-index-stars">
                     {findStars(reviewItem.stars)}
+                    {
+                        user && user?.username ===  reviewItem?.username ? <div>
+                        <EditReviewFormModal productId={productId} review={reviewItem}/>
+                        <DeleteReviewFormModal review={reviewItem}/>
+                        </div> : <></>
+                    }
+
                 </div>
                 <div>
                     {reviewItem.content}
@@ -71,13 +84,14 @@ function ReviewIndex(review){
                     <img className="review-user-img" src="https://i.pinimg.com/originals/b1/92/4d/b1924dce177345b5485bb5490ab3441f.jpg"></img>
                     <div>{reviewItem.username}</div>
                     <div>{`${month} ${day}, ${year}`}</div>
+
+                </div>
+                <div className="review-button-container">
+
                 </div>
             </div>
             <img className={reviewItem?.reviewImg.length > 0 ? "review-index-img" : 'review-index-img-hidden'} src={reviewItem?.reviewImg}></img>
-            <div className="review-button-container">
-                <button  className="review-index-buttons"><i class="fa-regular fa-pen-to-square fa-2xl"></i></button>
-                <button className="review-index-buttons"><i class="fa-regular fa-trash-can fa-2xl"></i></button>
-            </div>
+
         </div>
     )
 }

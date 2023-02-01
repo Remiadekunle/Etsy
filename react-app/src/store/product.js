@@ -125,6 +125,35 @@ export const addReview = (productId, content, stars,  img) => async dispatch =>{
     }
 }
 
+export const updateReview = (productId, content, stars,  img, reviewId) => async dispatch =>{
+    const res = await fetch(`/api/products/${productId}/reviews/${reviewId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            content,
+            stars,
+            img
+        })
+    })
+    if (res.ok){
+        const body = await res.json();
+        console.log('yay we got the cart back', body)
+        dispatch(editProduct(body.product))
+    }
+}
+
+export const removeReview = (productId, reviewId) => async dispatch =>{
+    const res = await fetch(`/api/products/${productId}/reviews/${reviewId}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+    })
+    if (res.ok){
+        const body = await res.json();
+
+        dispatch(editProduct(body.product))
+    }
+}
+
 const initialState = {
     allProducts: {},
     singleProduct:{}

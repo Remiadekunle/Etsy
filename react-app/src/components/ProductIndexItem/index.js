@@ -7,6 +7,7 @@ import './index.css';
 import { addToCart } from "../../store/cart";
 import ReviewIndex from "./ProductReview";
 import { ComingSoonBuyItNowModal, ComingSoonBuyMessageOwnerModal } from "../ComingSoon";
+import { CreateReviewFormModal } from "./CreateEditReview";
 
 function ProductIndex(){
     const {productId} = useParams()
@@ -141,7 +142,8 @@ function ProductIndex(){
     for (let i = 0; i < 9; i++){
         placeImgs.push(i)
     }
-
+    const id = product.id
+    console.log('this is def working nnnnnnnnnnnnnnnnnnnnnnnnnnn', id)
     const optionsErrorName = optionsError?.length > 0 ? 'options-error-class' : 'options-error-class2'
     const quantityErrorName = quantityError?.length > 0 ? 'quantity-error-class' : 'quantity-error-class2'
     console.log('ummmmmmmmmmmmm again', optionsErrorName)
@@ -223,10 +225,11 @@ function ProductIndex(){
                         <div>
                             {`${product.reviews?.length} product reviews`}
                         </div>
-                        {findStars(product.avg)}
+                        {findStars(product.avg) === 'No Reviews' ? '' : findStars(product.avg)}
+                        <CreateReviewFormModal product={product}/>
                     </div>
                     {product.reviews?.map(review => (
-                        <ReviewIndex review={review} findStars={findStars} />
+                        <ReviewIndex  productId={id} review={review} findStars={findStars} />
                     ))}
                 </div>
                 <div className="product-description-container">

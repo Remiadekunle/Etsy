@@ -141,6 +141,7 @@ def delete_review(id, reviewId):
     if review:
         db.session.delete(review)
         db.session.commit()
-        return { "message": "Deleted"}, 200
+        product = Product.query.get(id)
+        return { "message": "Deleted", "product": product.to_dict()}, 200
     else:
         return {"message":'Review couldn\'t be found'} , 404
