@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useModal } from '../../context/Modal';
 import { Modal } from "../../context/Modal";
@@ -11,6 +11,7 @@ function CreateReviewForm({setShowModal, product}){
     const history = useHistory()
     const {options} = product
     const [stars, setStars] = useState(1)
+    const user = useSelector(state => state.session.user)
     const [content, setContent] = useState('')
     const [img, setImg] = useState('')
     const [description, setDescription] = useState(product.description)
@@ -19,16 +20,35 @@ function CreateReviewForm({setShowModal, product}){
     useEffect(() => {
         let newErrors = [];
 
-
+        if (content.length < 5) newErrors.push('Content: please type atleast 5 chars')
+        if (content.length > 75) newErrors.push('Content: please type under 75 chars')
+        if (stars > 5 || stars < 0) newErrors.push('Stars: please input a number between 1 and 5')
 
         setErrors(newErrors);
-    }, []);
+    }, [content, stars]);
 
+    if (!user){
+        return (
+            <div className="login-check-container">
+                Please login to continue
+            </div>
+        )
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors([]);
-
+        if (content.length < 5) {
+            setErrors(['Content: please type atleast 5 chars'])
+            return
+        }
+        else if (content.length > 75){
+            setErrors(['Content: please type under 75 chars'])
+            return
+        }
+        if (stars > 5 || stars < 0) {
+            setErrors(['Stars: please input a number between 1 and 5'])
+        }
         await dispatch(addReview(product.id, content, stars, img))
         setShowModal(false)
     }
@@ -107,16 +127,29 @@ export function EditReviewForm({setShowModal, productId, review}){
     const [errors, setErrors] = useState([]);
     useEffect(() => {
         let newErrors = [];
-
+        if (content.length < 5) newErrors.push('Content: please type atleast 5 chars')
+        if (content.length > 75) newErrors.push('Content: please type under 75 chars')
+        if (stars > 5 || stars < 0) newErrors.push('Stars: please input a number between 1 and 5')
 
 
         setErrors(newErrors);
-    }, []);
+    }, [content, stars]);
 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors([]);
+        if (content.length < 5) {
+            setErrors(['Content: please type atleast 5 chars'])
+            return
+        }
+        else if (content.length > 75){
+            setErrors(['Content: please type under 75 chars'])
+            return
+        }
+        if (stars > 5 || stars < 0) {
+            setErrors(['Stars: please input a number between 1 and 5'])
+        }
 
         await dispatch(updateReview(review.productId, content, stars, img, review.id))
         // await dispatch(addReview(product.id, content, stars, img))

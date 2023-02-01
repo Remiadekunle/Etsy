@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useModal } from '../../context/Modal';
 import { Modal } from "../../context/Modal";
@@ -15,6 +15,7 @@ function CreateProductForm({setShowModal}){
     const [stock, setStock] = useState('')
     const [option1, setOption1] = useState('')
     const [option2, setOption2] = useState('')
+    const user = useSelector(state => state.session.user)
     const [option3, setOption3] = useState('')
     const [previewImg, setPreviewImg] = useState('')
     const [errors, setErrors] = useState([]);
@@ -31,6 +32,14 @@ function CreateProductForm({setShowModal}){
 
         setErrors(newErrors);
     }, [name, previewImg, option3, option2, option1, stock, price, description]);
+
+    if (!user){
+        return (
+            <div className="login-check-container">
+                Please login to continue
+            </div>
+        )
+    }
 
 
     const handleSubmit = async (e) => {

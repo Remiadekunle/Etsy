@@ -116,7 +116,7 @@
     height: 600px;
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 30px;
 }
 
 .product-description-container{
@@ -369,4 +369,9 @@
     background-color: #FFFFFF;
     border-style: none;
     cursor: pointer;
+}
+
+.login-check-container{
+    height: 50px;
+    padding: 10px;
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useModal } from '../../context/Modal';
 import { Modal } from "../../context/Modal";
@@ -15,6 +15,15 @@ function PlaceOrderForm({setShowModal}){
     const [state, setState] = useState('')
     const [errors, setErrors] = useState([]);
     const history = useHistory()
+    const user = useSelector(state => state.session.user)
+
+    if (!user){
+      return (
+          <div className="login-check-container">
+              Please login to continue
+          </div>
+      )
+    }
 
 
     const handleSubmit = async (e) => {
