@@ -19,6 +19,7 @@ import Footer from './components/FooterItems';
 import Welcome from './components/auth/WelcomePage';
 import SearchPage from './components/SearchPage';
 import { getSearch } from './store/search';
+import FavoritesPage from './components/FavoritesPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -80,6 +81,9 @@ function App() {
         <Route path='/search' exact={true}>
           <SearchPage setSearch={setSearch}  search={search}/>
         </Route>
+        <ProtectedRoute path='/favorites' exact={true}>
+          <FavoritesPage />
+        </ProtectedRoute>
       </Switch>
     </BrowserRouter>
   );

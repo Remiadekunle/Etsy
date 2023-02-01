@@ -115,6 +115,12 @@ const NavBar = ({setSearch, search}) => {
                     Your orders
                   </button>
                 </NavLink>
+                <NavLink  to='/favorites' style={{ textDecoration: 'none', color: 'inherit' }}>
+                  <button className='nav-order-buttons'>
+                    <i class="fa-regular fa-heart fa-xl"></i>
+                    Your favorites
+                  </button>
+                </NavLink>
                 <LogoutButton />
               </div> : <div>
                 <div>

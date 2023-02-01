@@ -45,6 +45,39 @@ export const fetchExamples = () => async (dispatch) => {
     }
 }
 
+export const addFavorite = (product_id) => async (dispatch) => {
+  const res = await fetch('/api/users/favorties', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      product_id
+    })
+  });
+
+  if (res.ok){
+    const body = await res.json()
+    dispatch(setUser(body))
+  }
+}
+export const removeFavorite = (product_id) => async (dispatch) => {
+  const res = await fetch('/api/users/favorties', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      product_id
+    })
+  });
+
+  if (res.ok){
+    const body = await res.json()
+    dispatch(setUser(body))
+  }
+}
+
 export const login = (email, password) => async (dispatch) => {
   const response = await fetch('/api/auth/login', {
     method: 'POST',
