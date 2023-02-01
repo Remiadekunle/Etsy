@@ -2,6 +2,12 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
+favorites = db.Table(
+    'favorites',
+    db.Column("user_id", db.Integer, db.ForeignKey(add_prefix_for_prod("users.id"))),
+    db.Column("product_id", db.Integer, db.ForeignKey(add_prefix_for_prod("products.id"))),
+)
+
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -20,6 +26,7 @@ class User(db.Model, UserMixin):
     cart = db.relationship("Cart", uselist=False, back_populates="user")
     orders = db.relationship('Order', back_populates='user')
     reviews = db.relationship('Review', back_populates='user')
+    favorites = db.relationship('Product', secondary=favorites, back_populates='faved_users')
 
     @property
     def password(self):
@@ -39,7 +46,8 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'products': [product.id for product in self.products],
             'cart': self.cart.to_dict(),
-            'orders': [order.to_dict() for order in self.orders]
+            'orders': [order.to_dict() for order in self.orders],
+            'favorites': [fav.to_fav() for fav in self.favorites]
         }
     def to_dict2(self):
         return {

@@ -13,11 +13,11 @@ import CreateProductForm, { CreateProductModal } from './CreateProduct/Index';
 import './index.css';
 import OpenModalMenuItem from './OpenModalButton';
 
-const NavBar = () => {
+const NavBar = ({setSearch, search}) => {
   const user = useSelector(state => state.session.user)
   const cart = useSelector(state => state.cart.cart)
   const [showMenu, setShowMenu] = useState(false)
-  const [search, setSearch] = useState('')
+
   const dispatch = useDispatch();
   const history = useHistory();
   const ulRef = useRef();
@@ -25,6 +25,13 @@ const NavBar = () => {
   const openMenu = () => {
     setShowMenu(!showMenu);
   };
+
+  useEffect(() => {
+    return () => {
+      console.log('this is b4 dismount')
+      localStorage.setItem('search', search)
+    }
+  }, [])
 
   useEffect(() => {
     if (!showMenu) return;
@@ -46,6 +53,9 @@ const NavBar = () => {
     console.log('this is the search', search)
     await dispatch(clearSearch())
     await dispatch(getSearch(search))
+    localStorage.setItem('search', search)
+    sessionStorage.setItem('search', search)
+    // setSearch('')
     return history.push('/search')
   }
 
@@ -63,7 +73,7 @@ const NavBar = () => {
     return history.push('/cart')
   }
 
-
+  console.log('searchinggggggggggggggg', search)
   return (
     <nav className='navbar'>
       <div className='navbar-items'>
@@ -72,6 +82,7 @@ const NavBar = () => {
         </NavLink>
         <form onSubmit={handleSearch} className='search-form'>
           <input className='search-input'
+          value={search}
           onChange={e => setSearch(e.target.value)}
           placeholder='Search for products'></input>
         </form>

@@ -2,6 +2,5 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, IntegerField, BooleanField
 from wtforms.validators import DataRequired
 
-class SearchForm(FlaskForm):
-    search = StringField('search', validators=[DataRequired()])
-    price = BooleanField('price')
+class FavForm(FlaskForm):
+    product_id = IntegerField('product_id', validators=[DataRequired()])
