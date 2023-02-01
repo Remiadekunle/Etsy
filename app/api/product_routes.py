@@ -161,10 +161,9 @@ def find_results():
         products = Product.query.filter(Product.name.ilike(f"%{search}%")).all()
         products2 = Product.query.filter(Product.description.ilike(f"%{search}%")).all()
         new = products + products2
-        print('tried to add the two ssssssssssssssssssssssssssssss', new)
-        print('tried to add the two ssssssssssssssssssssssssssssss', products)
-        print('tried to add the two ssssssssssssssssssssssssssssss', products2)
+        test_set = set(new)
+        final = list(test_set)
         # final = [product for product in new if ]
-        return {"products" : [product.to_dict() for product in products]}
+        return {"products" : [product.to_dict() for product in final], 'length' : len(final)}
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 404

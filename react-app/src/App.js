@@ -17,6 +17,7 @@ import { fetchOrders } from './store/order';
 import OrderPage from './components/OrderIndexItem';
 import Footer from './components/FooterItems';
 import Welcome from './components/auth/WelcomePage';
+import SearchPage from './components/SearchPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -66,6 +67,9 @@ function App() {
         <ProtectedRoute path='/orders' exact={true} >
           <OrderPage />
         </ProtectedRoute>
+        <Route path='/search' exact={true}>
+          <SearchPage />
+        </Route>
       </Switch>
     </BrowserRouter>
   );
