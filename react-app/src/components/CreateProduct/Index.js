@@ -42,6 +42,11 @@ function CreateProductForm({setShowModal}){
         if (stock === 0) return
         // setErrors([]);
         const options = `${option1}-${option2}-${option3}`
+        const set = new Set(name.split(''))
+        if (set.size == 1 && set.has(' ')) {
+            setErrors(['name: name must not be all whitespace'])
+            return
+        }
         console.log(typeof price)
         const payload = {
             name,
@@ -51,7 +56,25 @@ function CreateProductForm({setShowModal}){
             options,
             previewImg
         }
-        const body = await dispatch(createProduct(payload))
+        const body = await dispatch(createProduct(payload)).catch(async (res) => {
+            const data = await res.json();
+            if (data && data.errors) {
+                setErrors(data.error)
+                return
+            }
+        })
+
+        const errors = body.errors
+        console.log('yo theses are the errrors man', body)
+        if (body?.length > 0){
+            console.log(body)
+
+            console.log('plz')
+            setErrors(body)
+            return
+        }
+
+
         history.push(`/products/${body.product.id}`)
         setShowModal(false)
     }

@@ -67,7 +67,7 @@ export const createProduct = (payload) => async dispatch => {
         return body
     } else{
         const body = await res.json()
-        console.log('yooooooo this is the bad res', body)
+        return body.errors
     }
 }
 
@@ -89,6 +89,9 @@ export const updateProduct = (payload, id) => async dispatch => {
         console.log('we got the body back', body)
         dispatch(editProduct(body.product))
         return body
+    }else{
+        const body = await res.json()
+        return body.errors
     }
 }
 
@@ -102,6 +105,52 @@ export const removeProduct = (id) => async dispatch => {
         console.log('we got the body back', body)
         dispatch(deleteProduct(id))
         return body
+    }
+}
+
+export const addReview = (productId, content, stars,  img) => async dispatch =>{
+    const res = await fetch(`/api/products/${productId}/reviews`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            content,
+            stars,
+            img
+        })
+    })
+    if (res.ok){
+        const body = await res.json();
+        console.log('yay we got the cart back', body)
+        dispatch(editProduct(body.product))
+    }
+}
+
+export const updateReview = (productId, content, stars,  img, reviewId) => async dispatch =>{
+    const res = await fetch(`/api/products/${productId}/reviews/${reviewId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            content,
+            stars,
+            img
+        })
+    })
+    if (res.ok){
+        const body = await res.json();
+        console.log('yay we got the cart back', body)
+        dispatch(editProduct(body.product))
+    }
+}
+
+export const removeReview = (productId, reviewId) => async dispatch =>{
+    const res = await fetch(`/api/products/${productId}/reviews/${reviewId}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+    })
+    if (res.ok){
+        const body = await res.json();
+
+        dispatch(editProduct(body.product))
     }
 }
 

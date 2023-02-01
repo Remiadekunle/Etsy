@@ -5,6 +5,9 @@ import { DeleteProductModal } from "../DeleteProduct";
 import { EditProductModal } from "../EditProduct";
 import './index.css';
 import { addToCart } from "../../store/cart";
+import ReviewIndex from "./ProductReview";
+import { ComingSoonBuyItNowModal, ComingSoonBuyMessageOwnerModal } from "../ComingSoon";
+import { CreateReviewFormModal } from "./CreateEditReview";
 
 function ProductIndex(){
     const {productId} = useParams()
@@ -59,6 +62,54 @@ function ProductIndex(){
         setQuantity(quantity - 1)
     }
 
+    const findStars = (avg) => {
+        console.log('testing the type', typeof avg)
+        if (avg === 0) return 'No Reviews'
+        if (avg >  0 && avg <= 1) return <i class="fa-solid fa-star fa-xs"></i>
+        else if (avg >=  1 && avg < 2) {
+            return (
+            <div>
+                <i class="fa-solid fa-star fa-xs"></i>
+            </div>
+        )}
+        else if (avg >=  2 && avg < 3) {
+            return (
+            <div>
+                <i class="fa-solid fa-star fa-xs"></i>
+                <i class="fa-solid fa-star fa-xs"></i>
+            </div>
+        )}
+        else if (avg >=  3 && avg < 4) {
+            return (
+            <div>
+                <i class="fa-solid fa-star fa-xs"></i>
+                <i class="fa-solid fa-star fa-xs"></i>
+                <i class="fa-solid fa-star fa-xs"></i>
+            </div>
+        )}
+        else if (avg >=  4 && avg < 5) {
+            return (
+            <div>
+                <i class="fa-solid fa-star fa-xs"></i>
+                <i class="fa-solid fa-star fa-xs"></i>
+                <i class="fa-solid fa-star fa-xs"></i>
+                <i class="fa-solid fa-star fa-xs"></i>
+            </div>
+
+        )}
+        else{
+            return(
+                <div>
+                    <i class="fa-solid fa-star fa-xs"></i>
+                    <i class="fa-solid fa-star fa-xs"></i>
+                    <i class="fa-solid fa-star fa-xs"></i>
+                    <i class="fa-solid fa-star fa-xs"></i>
+                    <i class="fa-solid fa-star fa-xs"></i>
+                </div>
+            )
+        }
+
+    }
     const addCart = async (e) => {
         e.preventDefault();
         setOptionsError([])
@@ -79,7 +130,7 @@ function ProductIndex(){
         setQuantity(0)
         return history.push('/cart')
     }
-
+    findStars(product.avg)
     let {options } = product;
     console.log(options)
     options = options.split('-')
@@ -91,7 +142,8 @@ function ProductIndex(){
     for (let i = 0; i < 9; i++){
         placeImgs.push(i)
     }
-
+    const id = product.id
+    console.log('this is def working nnnnnnnnnnnnnnnnnnnnnnnnnnn', id)
     const optionsErrorName = optionsError?.length > 0 ? 'options-error-class' : 'options-error-class2'
     const quantityErrorName = quantityError?.length > 0 ? 'quantity-error-class' : 'quantity-error-class2'
     console.log('ummmmmmmmmmmmm again', optionsErrorName)
@@ -104,12 +156,14 @@ function ProductIndex(){
                     <div className="product-image-rows">
                         {
                             placeImgs?.map(item => (
-                                <img className="smaller-imgs" src={product.previewImg}>
+                                <img className="smaller-imgs"
+                                onError={e => { e.currentTarget.src = "https://freight.cargo.site/w/3840/q/75/i/a17dfc0b27e50cb1c75dcd8fcd13a2d11783729f60265d9a00d184bc5a8d9296/VALORANT_1.png"}}
+                                src={product.previewImg}>
                                 </img>
                             ))
                         }
                     </div>
-                    <img className="product-index-image" src={product.previewImg}></img>
+                    <img className="product-index-image" onError={e => { e.currentTarget.src = "https://freight.cargo.site/w/3840/q/75/i/a17dfc0b27e50cb1c75dcd8fcd13a2d11783729f60265d9a00d184bc5a8d9296/VALORANT_1.png"}} src={product.previewImg}></img>
                 </div>
                 <div className="product-details-container">
                     <div className="product-details-owner">
@@ -119,11 +173,7 @@ function ProductIndex(){
                     <div className="product-detials-owner-stats">
                         {'1 Sale'}
                         {' | '}
-                        <i class="fa-solid fa-star fa-xs"></i>
-                        <i class="fa-solid fa-star fa-xs"></i>
-                        <i class="fa-solid fa-star fa-xs"></i>
-                        <i class="fa-solid fa-star fa-xs"></i>
-                        <i class="fa-solid fa-star fa-xs"></i>
+                        {findStars(product.avg)}
                     </div>
                     <div className="product-details-name">
                         {product.name}
@@ -163,7 +213,7 @@ function ProductIndex(){
                             <button className="product-quantity-button" onClick={decrimentQuantity}><i class="fa-solid fa-minus"></i></button>
                         </div>
                     </div>
-                    <button className="product-detail-cart-button">Buy it now</button>
+                    <ComingSoonBuyItNowModal feature={'Direct purchase from product listing'}/>
                     <form className="product-add-to-cart-button-form" onSubmit={addCart}>
                         <button className="product-to-cart-button" type="submit">Add to cart</button>
                     </form>
@@ -171,7 +221,16 @@ function ProductIndex(){
             </div>
             <div className="product-content-description-container">
                 <div className="product-comments-container">
-
+                    <div className="product-reviews-container-summary">
+                        <div>
+                            {`${product.reviews?.length} product reviews`}
+                        </div>
+                        {findStars(product.avg) === 'No Reviews' ? '' : findStars(product.avg)}
+                        <CreateReviewFormModal product={product}/>
+                    </div>
+                    {product.reviews?.map(review => (
+                        <ReviewIndex  productId={id} review={review} findStars={findStars} />
+                    ))}
                 </div>
                 <div className="product-description-container">
                     <div className="product-description-awards">
@@ -242,9 +301,7 @@ function ProductIndex(){
                                 </div>
                             </div>
                        </div>
-                       <button className="meet-seller-button">
-                        Message {product.owner?.username}
-                       </button>
+                       <ComingSoonBuyMessageOwnerModal name={product.owner?.username}/>
                     </div>:<></>
                     }
                     {user?.username === product.owner?.username? <div className="product-attribute-dropdown" onClick={toggleListingButtons} >
