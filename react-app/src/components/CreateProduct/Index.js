@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useModal } from '../../context/Modal';
 import { Modal } from "../../context/Modal";
@@ -15,36 +15,52 @@ function CreateProductForm({setShowModal}){
     const [stock, setStock] = useState('')
     const [option1, setOption1] = useState('')
     const [option2, setOption2] = useState('')
+    const user = useSelector(state => state.session.user)
     const [option3, setOption3] = useState('')
     const [previewImg, setPreviewImg] = useState('')
     const [errors, setErrors] = useState([]);
     useEffect(() => {
         let newErrors = [];
 
-        if (name.length < 1) newErrors.push("Product name must be at least 1 character");
-        else if (name.length > 30) newErrors.push("Product name must be less than 30 characters");
+        if (name.trim().length < 1) newErrors.push("Product name must be at least 1 letter");
+        else if (name.trim().length > 30) newErrors.push("Product name must be less than 30 characters");
         if (price < 1) newErrors.push('Price must be greater than $0')
         if (stock < 1) newErrors.push('Stock must be greater than 0')
-        if (description.length < 50) newErrors.push('Description must be greater than 50 characters')
+        if (option1.trim().length < 1) newErrors.push('Option1 must be at least 1 letter')
+        if (option2.trim().length < 1) newErrors.push('Option2 must be at least 1 letter')
+        if (option3.trim().length < 1) newErrors.push('Option2 must be at least 1 letter')
+        if (description.trim().length < 50) newErrors.push('Description must be greater than 50 letters')
 
 
 
         setErrors(newErrors);
     }, [name, previewImg, option3, option2, option1, stock, price, description]);
 
+    if (!user){
+        return (
+            <div className="login-check-container">
+                Please login to continue
+            </div>
+        )
+    }
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (description.length < 50) return
-        if (name.length > 30) return
+        if (description.trim().length < 50) return
+        if (name.trim().length > 30) return
+        if (option1.trim().length < 1) return
+        if (option2.trim().length < 1) return
+        if (option3.trim().length < 1) return
         if (price === 0) return
         if (stock === 0) return
         // setErrors([]);
         const options = `${option1}-${option2}-${option3}`
         const set = new Set(name.split(''))
-        if (set.size == 1 && set.has(' ')) {
-            setErrors(['name: name must not be all whitespace'])
+        const nameCheck = name.trim()
+        if (nameCheck.length < 1) {
+            setErrors(['name: name must atleast 1 letter'])
             return
         }
         console.log(typeof price)

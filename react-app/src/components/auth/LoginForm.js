@@ -51,7 +51,7 @@ const LoginForm = () => {
         </div>
         <div>
           {errors.map((error, ind) => (
-            <div key={ind}>{error}</div>
+            <div className='product-modal-errors' key={ind}>{error}</div>
           ))}
         </div>
         <div className='login-form-containers'>

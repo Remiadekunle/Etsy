@@ -1,5 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-
+from .user import favorites
 class Product(db.Model):
     __tablename__ = 'products'
 
@@ -19,7 +19,7 @@ class Product(db.Model):
     cart_items = db.relationship('CartItem', back_populates='product')
     orders = db.relationship('OrderItem', back_populates='product')
     reviews = db.relationship('Review', back_populates='product')
-
+    faved_users = db.relationship('User', secondary=favorites, back_populates='favorites')
     def review_avg(self):
         reviews = [review.stars for review in self.reviews]
         if len(reviews) < 1:
@@ -40,5 +40,14 @@ class Product(db.Model):
             'previewImg': self.preview_img,
             'owner': self.owner.to_dict2(),
             'reviews': [review.to_dict() for review in self.reviews],
-            'avg': self.review_avg()
+            'avg': self.review_avg(),
+            'faved_user': [user.id for user in self.faved_users]
+        }
+    def to_fav(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'price': float(self.price),
+            'previewImg': self.preview_img,
+            'owner': self.owner.username,
         }

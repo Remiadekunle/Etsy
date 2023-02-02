@@ -1,14 +1,17 @@
 import { useSelector } from "react-redux"
 import { NavLink } from "react-router-dom"
-
+import FavButton from "../FavButton"
 function ProductCard({product}){
     return(
-        <NavLink to={`/products/${product?.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-            <div className='home-page-product-itemA'>
-                    <img className='home-page-product-itemA-img' src={`${product?.previewImg}`}></img>
-                    <div className='home-page-product-itemA-price'>{`$${product?.price}.00`}</div>
-            </div>
-        </NavLink>
+        <div className="home-page-product-itemA-container">
+            <NavLink to={`/products/${product?.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                <div className='home-page-product-itemA'>
+                        <img className='home-page-product-itemA-img' src={`${product?.previewImg}`}></img>
+                        <div className='home-page-product-itemA-price'>{`$${product?.price}.00`}</div>
+                </div>
+            </NavLink>
+            <FavButton productId={product?.id} />
+        </div>
     )
 }
 
@@ -26,16 +29,22 @@ export function ProductCardRound({product}){
 
 export function BestyPickCard({product}){
     return(
-        <NavLink to={`/products/${product?.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-            <img className='Besty-sample-gaming-row-img' src={`${product?.previewImg}`}></img>
-        </NavLink>
+        <div className="Besty-sample-gaming-row-img-container">
+            <NavLink to={`/products/${product?.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                <img className='Besty-sample-gaming-row-img' src={`${product?.previewImg}`}></img>
+            </NavLink>
+            <FavButton productId={product?.id} />
+        </div>
     )
 }
 export function BestyPickCardBig({product}){
     return(
-        <NavLink to={`/products/${product?.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-            <img></img>
-        </NavLink>
+        <div className="home-page-product-itemA-container">
+            <NavLink to={`/products/${product?.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                <img></img>
+            </NavLink>
+            <FavButton productId={product?.id} />
+        </div>
     )
 }
 

@@ -90,7 +90,9 @@ function ReviewIndex(review, productId){
 
                 </div>
             </div>
-            <img className={reviewItem?.reviewImg.length > 0 ? "review-index-img" : 'review-index-img-hidden'} src={reviewItem?.reviewImg}></img>
+            <img className={reviewItem?.reviewImg.length > 0 ? "review-index-img" : 'review-index-img-hidden'}
+                onError={e => { e.currentTarget.src = "https://seeklogo.com/images/V/valorant-logo-FAB2CA0E55-seeklogo.com.png"}}
+                src={reviewItem?.reviewImg}></img>
 
         </div>
     )

@@ -2,6 +2,8 @@ const GET_CART = 'cart/getCart'
 
 const ADD_CART = 'carts/addCart'
 
+const CLEAR_CART = 'carts/clearCart'
+
 export const loadCart = (cart) => {
     return{
         type:GET_CART,
@@ -90,6 +92,12 @@ export const clearCart = (id, option) => async dispatch => {
     }
 }
 
+export const resetCart = () => {
+    return{
+        type:CLEAR_CART
+    }
+}
+
 
 const initialState = {
     cart: {},
@@ -101,6 +109,10 @@ const cartReducer = (state = initialState, action) => {
         case GET_CART:
             newState = Object.assign({}, state);
             newState.cart = action.cart
+            return newState
+        case CLEAR_CART:
+            newState = Object.assign({}, state);
+            newState.cart = {}
             return newState
         default:
             return state;

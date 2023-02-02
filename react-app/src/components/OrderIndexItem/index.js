@@ -1,32 +1,44 @@
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import './index.css';
 import OrderIndex from './OrderIndexItem';
 
 function OrderPage(){
     const orders = useSelector(state => state.order.allOrders)
+    const [toggle, setToggle] = useState(false)
+    const switchToggle = () => {
+        setToggle(!toggle)
+    }
+    const className = toggle ? 'disabled-search-feature' : 'disabled-search-feature disabled-hidden'
     const orderList = Object.values(orders)
     console.log('yo what is the orderlist for this', orderList)
     return (
         <div className='order-page-background' >
             <div className='order-page-welcome-container'>
                 <div className='order-welcome-stuff'>
-                    <div>
+                    <div className='order-welcome-stuff-header'>
                         Purchases
                     </div>
-                    <form>
-                        <input className='order-search-bar' placeholder={`Search your orders` }></input>
+                    <form onMouseEnter={switchToggle} onMouseLeave={switchToggle}>
+                        <input disabled={true} className='order-search-bar' placeholder={`Search your orders` }></input>
+                        <div className={className}>
+                            Coming soon
+                        </div>
                     </form>
                 </div>
 
 
             </div>
-            <div className='order-page-container'>
+            {
+                orderList.length > 0 ?  <div className='order-page-container'>
                 {
                     orderList?.map(order => (
                         <OrderIndex order={order}/>
                     ))
                 }
-            </div>
+            </div> : <div className='no-orders-default-page'> No Orders</div>
+            }
+
         </div>
     )
 

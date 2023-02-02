@@ -17,9 +17,14 @@ import { fetchOrders } from './store/order';
 import OrderPage from './components/OrderIndexItem';
 import Footer from './components/FooterItems';
 import Welcome from './components/auth/WelcomePage';
+import SearchPage from './components/SearchPage';
+import { getSearch } from './store/search';
+import FavoritesPage from './components/FavoritesPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
+  // const [search, setSearch] = useState(localStorage.getItem('search')? localStorage.getItem('search') : '')
+  const [search, setSearch] = useState('')
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -28,6 +33,13 @@ function App() {
       await dispatch(fetchProducts())
       dispatch(fetchCart())
       dispatch(fetchOrders())
+      // const prevSearch = localStorage.getItem('search')
+      const prevSearch = sessionStorage.getItem('search')
+      console.log('are we getting the search at all', sessionStorage.getItem('search'))
+      if (prevSearch) {
+        dispatch(getSearch(prevSearch))
+        setSearch(prevSearch)
+      }
       setLoaded(true);
     })();
   }, [dispatch]);
@@ -38,7 +50,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar />
+      <NavBar search={search} setSearch={setSearch}/>
       <Switch>
         <Route path='/login' exact={true}>
           <Welcome />
@@ -65,6 +77,12 @@ function App() {
         </Route>
         <ProtectedRoute path='/orders' exact={true} >
           <OrderPage />
+        </ProtectedRoute>
+        <Route path='/search' exact={true}>
+          <SearchPage setSearch={setSearch}  search={search}/>
+        </Route>
+        <ProtectedRoute path='/favorites' exact={true}>
+          <FavoritesPage />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

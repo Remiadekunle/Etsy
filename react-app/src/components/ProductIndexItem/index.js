@@ -8,6 +8,8 @@ import { addToCart } from "../../store/cart";
 import ReviewIndex from "./ProductReview";
 import { ComingSoonBuyItNowModal, ComingSoonBuyMessageOwnerModal } from "../ComingSoon";
 import { CreateReviewFormModal } from "./CreateEditReview";
+import FavButton from "../FavButton";
+import { fetchOneProducts } from "../../store/product";
 
 function ProductIndex(){
     const {productId} = useParams()
@@ -25,6 +27,10 @@ function ProductIndex(){
     const [quantity, setQuantity] = useState(0)
     const dispatch = useDispatch()
     const history = useHistory();
+
+    useEffect(() => {
+        dispatch(fetchOneProducts(productId))
+    }, [dispatch, productId])
 
 
     if (!product){
@@ -164,6 +170,7 @@ function ProductIndex(){
                         }
                     </div>
                     <img className="product-index-image" onError={e => { e.currentTarget.src = "https://freight.cargo.site/w/3840/q/75/i/a17dfc0b27e50cb1c75dcd8fcd13a2d11783729f60265d9a00d184bc5a8d9296/VALORANT_1.png"}} src={product.previewImg}></img>
+                    <FavButton productId={productId}/>
                 </div>
                 <div className="product-details-container">
                     <div className="product-details-owner">

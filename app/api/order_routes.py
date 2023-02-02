@@ -67,7 +67,7 @@ def create_order():
             print('yay we got the products stock', product.stock)
             if product.stock == 0:
                 errors.append(f'{item.product.name} is out of stock')
-                continue
+                return {'errors': f'{item.product.name} is out of stock'}, 400
             elif item.quantity > product.stock:
                 order.notes = order.notes + f'{item.product.name}s stock was {product.stock} we have placed an order for that amount and charged only for the amount placed-'
                 errors.append(f'{item.product.name}s stock was {product.stock} we have placed an order for that amount and charged only for the amount placed')

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
 import { fetchCart } from '../store/cart';
 import { fetchOrders } from '../store/order';
+import { clearSearch, getSearch } from '../store/search';
 import { login } from '../store/session';
 import { LoginFormModal } from './auth/LoginForm';
 import LogoutButton from './auth/LogoutButton';
@@ -12,10 +13,11 @@ import CreateProductForm, { CreateProductModal } from './CreateProduct/Index';
 import './index.css';
 import OpenModalMenuItem from './OpenModalButton';
 
-const NavBar = () => {
+const NavBar = ({setSearch, search}) => {
   const user = useSelector(state => state.session.user)
   const cart = useSelector(state => state.cart.cart)
   const [showMenu, setShowMenu] = useState(false)
+
   const dispatch = useDispatch();
   const history = useHistory();
   const ulRef = useRef();
@@ -23,6 +25,13 @@ const NavBar = () => {
   const openMenu = () => {
     setShowMenu(!showMenu);
   };
+
+  useEffect(() => {
+    return () => {
+      console.log('this is b4 dismount')
+      localStorage.setItem('search', search)
+    }
+  }, [])
 
   useEffect(() => {
     if (!showMenu) return;
@@ -38,6 +47,18 @@ const NavBar = () => {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    if (search.length === 0) return
+    console.log('this is the search', search)
+    await dispatch(clearSearch())
+    await dispatch(getSearch(search))
+    localStorage.setItem('search', search)
+    sessionStorage.setItem('search', search)
+    // setSearch('')
+    return history.push('/search')
+  }
+
 
   const useDemo = async (e) => {
     e.preventDefault();
@@ -52,14 +73,19 @@ const NavBar = () => {
     return history.push('/cart')
   }
 
-
+  console.log('searchinggggggggggggggg', search)
   return (
     <nav className='navbar'>
       <div className='navbar-items'>
         <NavLink to={'/'} style={{ textDecoration: 'none', color: 'inherit' }}>
           <h1 className='navbar-h1'>Besty</h1>
         </NavLink>
-        <input className='search-input' placeholder='Search for products'></input>
+        <form onSubmit={handleSearch} className='search-form'>
+          <input className='search-input'
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+          placeholder='Search for products'></input>
+        </form>
         <CreateProductModal />
         <div className='navbar-right-side-container'>
           <div className='profile-dropdown-container' onClick={openMenu} ref={ulRef}>
@@ -87,6 +113,12 @@ const NavBar = () => {
                   <button className='nav-order-buttons'>
                     <i class="fa-solid fa-table-list fa-xl"></i>
                     Your orders
+                  </button>
+                </NavLink>
+                <NavLink  to='/favorites' style={{ textDecoration: 'none', color: 'inherit' }}>
+                  <button className='nav-order-buttons'>
+                    <i class="fa-regular fa-heart fa-xl"></i>
+                    Your favorites
                   </button>
                 </NavLink>
                 <LogoutButton />
