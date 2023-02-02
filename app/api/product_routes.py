@@ -5,6 +5,7 @@ from .auth_routes import validation_errors_to_error_messages
 from ..forms import ProductForm, ReviewForm, SearchForm
 from datetime import datetime, timedelta
 from sqlalchemy import or_
+from ..aws import upload_file_to_s3, allowed_file, get_unique_filename
 
 product_routes = Blueprint('product', __name__)
 
@@ -20,7 +21,14 @@ def get_all_products():
 def create_product():
     form = ProductForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+
     if form.validate_on_submit():
+        image = form.data['preview_img']
+        # if not allowed_file(image):
+        #     return {"errors": "file type not permitted"}, 400
+        # upload = upload_file_to_s3(image)
+        # if "url" not in upload:
+        #     return upload, 400
         product = Product(
             name=form.data['name'],
             description=form.data['description'],
