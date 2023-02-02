@@ -21,10 +21,16 @@ function SearchPage({search, setSearch}){
     console.log('we arent getting this far')
     // const mappable = Object.values(messages.search)
     return (
-        <div className="search-results-container">
-            {results && results.map(item => (
-                <SearchIndex product={item}/>
-            ))}
+        <div >
+            <div className="search-results-welcome">
+                {`Search results`}
+                <i class="fa-solid fa-ellipsis"></i>
+            </div>
+            <div className="search-results-container">
+                {results && results.map(item => (
+                    <SearchIndex product={item}/>
+                ))}
+            </div>
         </div>
     )
 }

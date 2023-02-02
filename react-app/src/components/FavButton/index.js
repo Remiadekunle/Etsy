@@ -13,7 +13,8 @@ function FavButton({productId}){
     const check = favs?.indexOf(parseInt(productId))
     console.log('what is the result of the check', check)
     const message = check === -1 ? 'Removed from your favorites' : 'Added to your favorites'
-    const handleFavs = (id) => {
+    const handleFavs = (e, id) => {
+        e.preventDefault();
         console.log(id)
         if (check === -1){
             dispatch(addFavorite(id))

@@ -38,7 +38,7 @@ function App() {
       console.log('are we getting the search at all', sessionStorage.getItem('search'))
       if (prevSearch) {
         dispatch(getSearch(prevSearch))
-        // setSearch(prevSearch)
+        setSearch(prevSearch)
       }
       setLoaded(true);
     })();

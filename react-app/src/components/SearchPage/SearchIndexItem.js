@@ -77,7 +77,9 @@ function SearchIndex(item, search){
     return(
         <div className="search-index-container">
             <NavLink to={`/products/${product?.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                <img className="search-item-img" src={`${product.previewImg}`}></img>
+                <img className="search-item-img" src={`${product.previewImg}`}
+                onError={e => { e.currentTarget.src = "https://freight.cargo.site/w/3840/q/75/i/a17dfc0b27e50cb1c75dcd8fcd13a2d11783729f60265d9a00d184bc5a8d9296/VALORANT_1.png"}}
+                ></img>
                 <div className="search-product-details">
                     <div>
                         {product.name}
@@ -91,8 +93,8 @@ function SearchIndex(item, search){
                     </div>
                 </div>
             </NavLink>
-            {/* <FavButton productId={product?.id} /> */}
             <button onClick={addCart} className="search-add-to-cart"><i class="fa-solid fa-plus"></i> Add to cart</button>
+            <FavButton productId={product?.id} />
         </div>
     )
 }
