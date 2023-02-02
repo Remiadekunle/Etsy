@@ -22,14 +22,11 @@ const SignUpForm = () => {
     console.log(email.indexOf(test))
     setErrors([])
     const set = new Set(username.split(''))
-    if (set.size === 1 && set.has(' ')) {
+    const nameCheck = username.trim()
+    if (nameCheck.length < 1) {
       console.log('um did we get herre')
-      setErrors(['Username: Username must not be all whitespace'])
+      setErrors(['Username: Username must atleast 1 letter'])
       return
-  }
-  else if (set.size < 1){
-    setErrors(['Username: Please enter a Username'])
-    return
   }
   if (email.indexOf(test) === -1){
     console.log('hey we made it to the  if statement', email)
@@ -88,7 +85,7 @@ const SignUpForm = () => {
         </div>
         <div>
           {errors.map((error, ind) => (
-            <div key={ind}>{error}</div>
+            <div className='product-modal-errors' key={ind}>{error}</div>
           ))}
         </div>
         <div className='login-form-containers'>

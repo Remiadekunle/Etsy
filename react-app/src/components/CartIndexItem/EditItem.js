@@ -72,10 +72,11 @@ function EditCartItemForm({setShowModal, product, item}){
 
 export function EditCartItemModal({product, item}){
     const [showModal, setShowModal] = useState(false);
+    const editCartProductClass = product.stock === 0? 'disabled-edit-cart-item-button' :  'edit-cart-item-button'
 
   return (
     <>
-      <button className="edit-cart-item-button" onClick={() => setShowModal(true)}>{item?.quantity}<i class="fa-solid fa-caret-down"></i></button>
+      <button disabled={product.stock === 0? true : false} className={editCartProductClass} onClick={() => setShowModal(true)}>{item?.quantity}<i class="fa-solid fa-caret-down"></i></button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <EditCartItemForm setShowModal={setShowModal} item={item} product={product}/>

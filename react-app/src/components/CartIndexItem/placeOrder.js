@@ -8,7 +8,7 @@ import { createOrder } from "../../store/order";
 import { createProduct, editProduct, fetchProducts, removeProduct, updateProduct } from "../../store/product";
 import './index.css';
 
-function PlaceOrderForm({setShowModal}){
+function PlaceOrderForm({setShowModal, setCartErrors}){
     const dispatch = useDispatch()
     const [address, setAddress] = useState('')
     const [city, setCity] = useState('')
@@ -16,6 +16,17 @@ function PlaceOrderForm({setShowModal}){
     const [errors, setErrors] = useState([]);
     const history = useHistory()
     const user = useSelector(state => state.session.user)
+
+    useEffect(() => {
+      const newErrors = []
+      if (address.trim().length < 1) newErrors.push('Address must be atleast 1 letter')
+      if (address.trim().length > 20) newErrors.push('Address must be less 20 letters')
+      if (city.trim().length > 20) newErrors.push('City must be less 20 letters')
+      if (state.trim().length !== 2) newErrors.push('state must be exactly 2 letter')
+      if (city.trim().length < 1) newErrors.push('city must be atleast 1 letter')
+      setErrors(newErrors)
+      console.log('ummmmmm the use effect is firing')
+    }, [address, city, state])
 
     if (!user){
       return (
@@ -29,10 +40,16 @@ function PlaceOrderForm({setShowModal}){
     const handleSubmit = async (e) => {
         e.preventDefault();
         const newErrors = []
-        if (address.length < 1) return
-        if (city.length < 1) return
-        if (state.length < 1) return
-        await dispatch(createOrder(address, city, state))
+        if (address.trim().length < 1 || address.trim().length > 20) return
+        if (city.trim().length < 1 || city.trim().length > 20) return
+        if (state.trim().length !== 2) return
+        const body = await dispatch(createOrder(address, city, state))
+
+        if (Object?.values(body).length > 0){
+          setCartErrors([body])
+          setShowModal(false)
+          return
+        }
         // dispatch(deleteFromCart(product.id));
         // setErrors([]);
         await dispatch(fetchProducts())
@@ -85,16 +102,16 @@ function PlaceOrderForm({setShowModal}){
     )
 }
 
-export function PlaceOrderFormModal({cart}){
+export function PlaceOrderFormModal({cart, noStock, setCartErrors}){
     const [showModal, setShowModal] = useState(false);
-    const className = cart.items?.length > 0 ? 'cart-place-order-button' : 'cart-place-order-button2'
+    const className = (cart.items?.length > 0 && noStock === false) ? 'cart-place-order-button' : 'cart-place-order-button2'
 
   return (
     <>
-      <button disabled={cart.items?.length > 0 ? false : true} className={className} onClick={() => setShowModal(true)}>Place Order</button>
+      <button disabled={(cart.items?.length > 0 && noStock === false) ? false : true} className={className} onClick={() => setShowModal(true)}>Place Order</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <PlaceOrderForm setShowModal={setShowModal}/>
+          <PlaceOrderForm setCartErrors={setCartErrors} setShowModal={setShowModal}/>
         </Modal>
       )}
     </>

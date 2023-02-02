@@ -15,6 +15,11 @@ def get_all_products():
     # print(res)
     return {'products': res}
 
+@product_routes.route('/<int:id>')
+def get_one_product(id):
+    product = Product.query.get(id)
+    return {"product": product.to_dict()}
+
 @product_routes.route('/', methods=['POST'])
 @login_required
 def create_product():

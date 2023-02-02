@@ -9,6 +9,7 @@ import ReviewIndex from "./ProductReview";
 import { ComingSoonBuyItNowModal, ComingSoonBuyMessageOwnerModal } from "../ComingSoon";
 import { CreateReviewFormModal } from "./CreateEditReview";
 import FavButton from "../FavButton";
+import { fetchOneProducts } from "../../store/product";
 
 function ProductIndex(){
     const {productId} = useParams()
@@ -26,6 +27,10 @@ function ProductIndex(){
     const [quantity, setQuantity] = useState(0)
     const dispatch = useDispatch()
     const history = useHistory();
+
+    useEffect(() => {
+        dispatch(fetchOneProducts(productId))
+    }, [dispatch, productId])
 
 
     if (!product){

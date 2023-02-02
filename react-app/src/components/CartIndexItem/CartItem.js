@@ -1,13 +1,14 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { NavLink } from "react-router-dom"
 import { deleteFromCart, editToCartAdd, editToCartRemove } from "../../store/cart"
 import EditCartItemForm, { EditCartItemModal } from "./EditItem"
 import { DeleteCartItemModal } from "./RemoveItem"
 
-function CartItem({item}){
+function CartItem({item, setNoStock}){
     const product = useSelector(state => state.product.allProducts[item.product])
     const [cartQuantity, setCartQuantity] = useState(item.quantity)
+    const [errors, setErrors] = useState([])
     const dispatch = useDispatch();
     const stockDrop = []
     const currQuantity = item.quantity
@@ -25,6 +26,20 @@ function CartItem({item}){
             stockDrop.push(i)
         }
     }
+
+    useEffect(() => {
+        const errors = []
+        if (product.stock === 0){
+            errors.push(`This item is out of stock. Please remove to continue.`)
+            setNoStock(true)
+            setErrors([...errors])
+        }
+
+        return () => {
+            setNoStock(false)
+            setErrors([])
+        }
+    }, [product])
     if(!product){
         return null
     }
@@ -55,6 +70,11 @@ function CartItem({item}){
                     </NavLink>
                     <div>
                         {`Option: ${item?.option}`}
+                    </div>
+                    <div>
+                        {errors.map((error, ind) => (
+                            <div className='product-modal-errors' key={ind}>{error}</div>
+                        ))}
                     </div>
                     {/* <div className="product-description-cart">
                         {`Description: ${product.description}`}

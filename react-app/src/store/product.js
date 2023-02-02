@@ -47,6 +47,17 @@ export const fetchProducts = () => async dispatch => {
     }
 }
 
+export const fetchOneProducts = (id) => async dispatch => {
+    const res = await fetch(`/api/products/${id}`)
+    if (res.ok){
+        const body = await res.json();
+        console.log('heyyyyyyyyyyyyyyy', body)
+        await dispatch(addProduct(body.product))
+    }
+}
+
+
+
 export const createProduct = (payload) => async dispatch => {
     const res = await fetch(`/api/products/`, {
         method: "POST",
