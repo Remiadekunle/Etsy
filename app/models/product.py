@@ -49,5 +49,5 @@ class Product(db.Model):
             'name': self.name,
             'price': float(self.price),
             'previewImg': self.preview_img,
-            # 'owner': self.owner.to_dict2(),
+            'owner': self.owner.username,
         }

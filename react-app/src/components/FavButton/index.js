@@ -59,25 +59,26 @@ export function FavsMessageModal({productId, check, message}){
     //     }, [1000])
     // }, [])
     const handleFavs = (id) => {
-        // clearTimeout(timeOutId)
         console.log(id)
         if (check === -1){
             dispatch(addFavorite(id))
         } else{
             dispatch(removeFavorite(id))
         }
-        timeOutId =setTimeout(() => {
+        clearTimeout(timeOutId)
+        timeOutId = setTimeout(() => {
             setShowModal(false)
-        }, 3000)
+        }, 2000)
     }
 
   return (
     <>
       <button className='fav-button' onClick={async () => {
-        await handleFavs(productId)
         setTimeout(() => {
             timeOutId = setShowModal(true)
         }, 100)
+        // setShowModal(true)
+        await handleFavs(productId)
         }}>
                         {check === -1 ? <i class="fa-regular fa-heart fa-xl"></i> : <i class="fa-solid fa-heart fa-xl fav-liked"></i>}
                     </button>

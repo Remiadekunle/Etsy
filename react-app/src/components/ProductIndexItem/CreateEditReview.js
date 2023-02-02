@@ -20,8 +20,8 @@ function CreateReviewForm({setShowModal, product}){
     useEffect(() => {
         let newErrors = [];
 
-        if (content.length < 5) newErrors.push('Content: please type atleast 5 chars')
-        if (content.length > 75) newErrors.push('Content: please type under 75 chars')
+        if (content.trim().length < 5) newErrors.push('Content: please type atleast 5 chars')
+        if (content.trim().length > 75) newErrors.push('Content: please type under 75 chars')
         if (stars > 5 || stars < 0) newErrors.push('Stars: please input a number between 1 and 5')
 
         setErrors(newErrors);
@@ -38,11 +38,11 @@ function CreateReviewForm({setShowModal, product}){
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors([]);
-        if (content.length < 5) {
+        if (content.trim().length < 5) {
             setErrors(['Content: please type atleast 5 chars'])
             return
         }
-        else if (content.length > 75){
+        else if (content.trim().length > 75){
             setErrors(['Content: please type under 75 chars'])
             return
         }
@@ -131,8 +131,8 @@ export function EditReviewForm({setShowModal, productId, review}){
     const [errors, setErrors] = useState([]);
     useEffect(() => {
         let newErrors = [];
-        if (content.length < 5) newErrors.push('Content: please type atleast 5 chars')
-        if (content.length > 75) newErrors.push('Content: please type under 75 chars')
+        if (content.trim().length < 5) newErrors.push('Content: please type atleast 5 chars')
+        if (content.trim().length > 75) newErrors.push('Content: please type under 75 chars')
         if (stars > 5 || stars < 0) newErrors.push('Stars: please input a number between 1 and 5')
 
 
@@ -143,11 +143,11 @@ export function EditReviewForm({setShowModal, productId, review}){
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors([]);
-        if (content.length < 5) {
+        if (content.trim().length < 5) {
             setErrors(['Content: please type atleast 5 chars'])
             return
         }
-        else if (content.length > 75){
+        else if (content.trim().length > 75){
             setErrors(['Content: please type under 75 chars'])
             return
         }

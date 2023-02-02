@@ -1,3 +1,72 @@
 .favorites-page-container{
     margin: 20px 15% 0px 15%;
 }
+
+.favorites-welcome-section{
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.favorites-welcome-header{
+    font-size: 32px;
+}
+
+.favorites-welcome-header-span{
+    font-size: 16px;
+}
+
+.favorites-welcome-header-icon{
+    display: flex;
+    gap: 10px;
+}
+
+.favorites-search-form{
+    width: 98%;
+    margin-top: 5px;
+}
+
+.favorites-search-form-input{
+    width: 100%;
+    padding: 10px;
+    border-radius: 20px;
+    border: 0.5px solid black;
+}
+
+.favorites-index-container{
+    max-width: 100%;
+    /* border: 1px solid blue; */
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.favs-page-index-item-img{
+    /* width: 200px; */
+    height: 200px;
+    max-width: 250px;
+    object-fit: cover;
+    border-radius: 2px;
+    margin-bottom: 5px;
+}
+
+.favs-page-index-navlink{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: flex-start; */
+    margin-bottom: 10px;
+    width: 250px;
+
+}
+
+.favs-page-index-item-name{
+    display: flex;
+    overflow: hidden;
+    height: 18px;
+}
+
+.favs-page-index-item{
+    position: relative;
+}
