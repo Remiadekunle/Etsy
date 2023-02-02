@@ -64,6 +64,12 @@
     padding: 10px 0px 10px 0px;
 }
 
+.the-modal-review-labels{
+    display: flex;
+    gap: 3px;
+    align-items: center;
+}
+
 .product-details-name{
     display: flex;
     align-items: center;

@@ -105,6 +105,20 @@
     border-bottom-right-radius: 5px;
 
 }
+
+.home-page-product-itemA-container{
+    position: relative;
+}
+
+.Besty-sample-gaming-row-img-container{
+    height: 96%;
+    position: relative;
+}
+
+.hidden{
+    display: none;
+}
+
 .Besty-sample-gaming-products{
     width: 70%;
     /* width: 1px solid purple; */

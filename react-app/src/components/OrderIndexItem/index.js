@@ -20,13 +20,16 @@ function OrderPage(){
 
 
             </div>
-            <div className='order-page-container'>
+            {
+                orderList.length > 0 ?  <div className='order-page-container'>
                 {
                     orderList?.map(order => (
                         <OrderIndex order={order}/>
                     ))
                 }
-            </div>
+            </div> : <div className='no-orders-default-page'> No Orders</div>
+            }
+
         </div>
     )
 

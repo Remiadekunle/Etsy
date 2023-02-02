@@ -40,6 +40,8 @@ def add_fav():
         current_user.favorites.append(product)
         db.session.commit()
         return current_user.to_dict()
+    else:
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 @user_routes.route('/favorties', methods=['PUT'])
 @login_required
@@ -54,6 +56,8 @@ def edit_fav():
         current_user.favorites.remove(product)
         db.session.commit()
         return current_user.to_dict()
+    else:
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 # @user_routes.route('/<int:id>/favorties', methods=['PUT'])
 # # @login_required

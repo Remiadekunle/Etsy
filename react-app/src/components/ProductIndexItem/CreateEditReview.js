@@ -65,7 +65,9 @@ function CreateReviewForm({setShowModal, product}){
                     ))}
                 </ul>
                 <label className='create-product-label'>
-                    stars
+                    <div className="the-modal-review-labels">
+                        stars<i class="fa-solid fa-asterisk fa-2xs"></i>
+                    </div>
                     <input
                     type="number"
                     required
@@ -76,7 +78,9 @@ function CreateReviewForm({setShowModal, product}){
                     className='create-product-input'/>
                 </label>
                 <label className='create-product-label'>
-                    content
+                    <div className="the-modal-review-labels">
+                        content<i class="fa-solid fa-asterisk fa-2xs"></i>
+                    </div>
                     <input
                     type="text"
                     required
@@ -167,7 +171,9 @@ export function EditReviewForm({setShowModal, productId, review}){
                     ))}
                 </ul>
                 <label className='create-product-label'>
-                    stars
+                    <div className="the-modal-review-labels">
+                        stars<i class="fa-solid fa-asterisk fa-2xs"></i>
+                    </div>
                     <input
                     type="number"
                     required
@@ -178,7 +184,9 @@ export function EditReviewForm({setShowModal, productId, review}){
                     className='create-product-input'/>
                 </label>
                 <label className='create-product-label'>
-                    content
+                    <div className="the-modal-review-labels">
+                        content<i class="fa-solid fa-asterisk fa-2xs"></i>
+                    </div>
                     <input
                     type="text"
                     required

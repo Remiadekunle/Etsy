@@ -1,6 +1,68 @@
 .fav-button{
     position: absolute;
-    right: 0;
-    top: 0;
+    right: 5%;
+    top: 2%;
     z-index: 20;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    /* padding: 10px; */
+    border-style: none;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.fav-button:hover{
+    position: absolute;
+    right: 5%;
+    top: 2%;
+    z-index: 20;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    /* padding: 10px; */
+    border-style: none;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.fav-liked{
+    color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fav-success-popup{
+    height: 50px;
+    background-color: blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 20px;
+    gap: 10px;
+    color: white;
+}
+
+.favs-check-border{
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 50%;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+}
+
+.fa-check{
+    color: black;
 }

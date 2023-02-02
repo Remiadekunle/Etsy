@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom"
 import { addToCart } from "../../store/cart";
 import { getSearch } from "../../store/search";
+import FavButton from "../FavButton";
 
 function SearchIndex(item, search){
     console.log('were getting the item', item)
@@ -90,6 +91,7 @@ function SearchIndex(item, search){
                     </div>
                 </div>
             </NavLink>
+            {/* <FavButton productId={product?.id} /> */}
             <button onClick={addCart} className="search-add-to-cart"><i class="fa-solid fa-plus"></i> Add to cart</button>
         </div>
     )
