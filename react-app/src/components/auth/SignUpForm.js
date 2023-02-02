@@ -28,6 +28,10 @@ const SignUpForm = () => {
       setErrors(['Username: Username must atleast 1 letter'])
       return
   }
+  if (username.trim().length > 40){
+    setErrors(['Username: Username must less than 40 letter'])
+    return
+  }
   if (email.indexOf(test) === -1){
     console.log('hey we made it to the  if statement', email)
     setErrors(['Email: Email must include @'])
