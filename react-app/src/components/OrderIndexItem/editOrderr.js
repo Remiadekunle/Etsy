@@ -19,8 +19,8 @@ function EditOrderForm({setShowModal, order}){
     useEffect(() => {
       const newErrors = []
       if (address.trim().length < 1) newErrors.push('Address must be atleast 1 letter')
-      if (address.trim().length > 20) newErrors.push('Address must be less 20 letters')
-      if (city.trim().length > 20) newErrors.push('City must be less 20 letters')
+      if (address.trim().length > 30) newErrors.push('Address must be less 20 letters')
+      if (city.trim().length > 30) newErrors.push('City must be less 20 letters')
       if (state.trim().length !== 2) newErrors.push('state must be exactly 2 letter')
       if (city.trim().length < 1) newErrors.push('city must be atleast 1 letter')
       setErrors(newErrors)
@@ -31,8 +31,8 @@ function EditOrderForm({setShowModal, order}){
     const handleSubmit = async (e) => {
         e.preventDefault();
         const newErrors = []
-        if (address.trim().length < 1 || address.trim().length > 20) return
-        if (city.trim().length < 1 || city.trim().length > 20) return
+        if (address.trim().length < 1 || address.trim().length > 30) return
+        if (city.trim().length < 1 || city.trim().length > 30) return
         if (state.trim().length !== 2) return
         dispatch(updateOrder(address, city, state, order.id))
         setShowModal(false)

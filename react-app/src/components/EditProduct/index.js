@@ -44,11 +44,11 @@ function EditProductForm({setShowModal, product}){
         if (name.trim().length > 30) {
             return
         }
-        if (price === 0) return
+        if (parseInt(price) === 0) return
         if (option1.trim().length < 1) return
         if (option2.trim().length < 1) return
         if (option3.trim().length < 1) return
-        if (stock === 0) return
+        if (parseInt(stock) === 0) return
         // setErrors([]);
         const options = `${option1}-${option2}-${option3}`
         const set = new Set(name.split(''))
@@ -105,6 +105,7 @@ function EditProductForm({setShowModal, product}){
                     <input
                     type="number"
                     required
+                    min={1}
                     value={price}
                     onChange={(e) => setPrice(e.target.value)}
                     className='create-product-input'/>
