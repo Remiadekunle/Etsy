@@ -34,12 +34,15 @@ export const clearSearch = () => {
 // }
 
 
-export const getSearch = (search) => async dispatch => {
+export const getSearch = (search, priceInc, priceDecr, reviews) => async dispatch => {
     const res = await fetch(`/api/products/search`, {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-            search
+            search,
+            price_incr: priceInc,
+            price_decr:priceDecr,
+            highest_review:reviews
         })
     })
 

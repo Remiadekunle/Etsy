@@ -70,3 +70,8 @@
     display: flex;
     gap: 5px;
 }
+
+
+.search-results-filter-container{
+    margin: 0px 15% 0px 15%;
+}
