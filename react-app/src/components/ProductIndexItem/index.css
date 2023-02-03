@@ -389,3 +389,9 @@
     height: 50px;
     padding: 10px;
 }
+
+/* @media screen and (max-width: 1200px) {
+    .product-index-container{
+        margin: 13px 2%;
+    }
+} */

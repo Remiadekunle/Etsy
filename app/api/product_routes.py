@@ -162,9 +162,43 @@ def find_results():
     print('ummmmmmmm whats going on', form.data['search'])
     if form.validate_on_submit():
         search = form.data['search']
+        price_incr = form.data['price_incr']
+        price_decr = form.data['price_decr']
+        highest_review = form.data['highest_review']
+        most_recent = form.data['most_recent']
+        prods = []
+        print('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh')
+        print(price_incr)
+        if price_incr:
+            # products = Product.query.filter(or_(len(str(Product.name.ilike(f"%{search}%"))) > 0, len(str(Product.description.ilike(f"%{search}%"))) > 0)).all()
+            products = Product.query.filter(Product.name.ilike(f"%{search}%")).order_by(Product.price.desc()).all()
+            products2 = Product.query.filter(Product.description.ilike(f"%{search}%")).order_by(Product.price.desc()).all()
+            new = products + products2
+            test_set = set(new)
+            final = sorted(list(test_set), key=lambda x: x.price, reverse=True)
+            print('llllllllllllllllllllllllllllllllllllllllllllllllllll')
+            return {"products" : [product.to_dict() for product in final], 'length' : len(final)}
+            # return {"products" : [product.to_dict() for product in products], 'length' : len(products)}
+        elif price_decr:
+            products = Product.query.filter(Product.name.ilike(f"%{search}%")).order_by(Product.price).all()
+            products2 = Product.query.filter(Product.description.ilike(f"%{search}%")).order_by(Product.price).all()
+            new = products + products2
+            test_set = set(new)
+            final = sorted(list(test_set), key=lambda x: x.price)
+            return {"products" : [product.to_dict() for product in final], 'length' : len(final)}
+        elif highest_review:
+            products = Product.query.filter(Product.name.ilike(f"%{search}%")).all()
+            products2 = Product.query.filter(Product.description.ilike(f"%{search}%")).all()
+            new = products + products2
+            test_set = set(new)
+            final = [product.to_dict() for product in test_set]
+            res = sorted(list(final), key=lambda x: x['avg'], reverse=True)
+            return {"products" : res, 'length' : len(final)}
+        elif most_recent:
+            pass
         # products = Product.query.filter(or_(Product.name.ilike(f"%{search}%", Product.description.ilike(f"%{search}%")))).all()
-        products = Product.query.filter(Product.name.ilike(f"%{search}%")).all()
-        products2 = Product.query.filter(Product.description.ilike(f"%{search}%")).all()
+        products = Product.query.filter(Product.name.ilike(f"%{search}%")).order_by(Product.name).all()
+        products2 = Product.query.filter(Product.description.ilike(f"%{search}%")).order_by(Product.name).all()
         new = products + products2
         test_set = set(new)
         final = list(test_set)
