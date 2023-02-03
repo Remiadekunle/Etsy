@@ -119,6 +119,70 @@
     display: none;
 }
 
+.home-slideshow {
+    margin: 0 auto;
+    overflow: hidden;
+    max-width: 500px;
+}
+.home-slideshowSlider{
+    white-space: nowrap;
+    transition:  ease 1000ms;
+  }
+.home-slide{
+    display: inline-block;
+    /* height: 400px; */
+    width: 100%;
+    border-radius: 40px;
+    position: relative;
+}
+.home-page-container-footer{
+    background-color: #2F466C;
+    margin-top: 40px;
+    color: white;
+}
+
+.home-slidehow-header{
+    display: flex;
+    justify-content: center;
+    font-size: 46px;
+    margin-bottom: 15px;
+}
+
+.home-slideshowDots{
+    text-align: center;
+    white-space: nowrap;
+}
+.home-slideshowDot{
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin: 15px 7px 0px;
+    background-color: #c4c4c4;
+}
+
+.home-slide-img{
+    width: 100%;
+    border-radius: 5px;
+    height: 281px;
+    object-fit: cover;
+}
+
+.home-slidehow-container{
+    border: 1px solid gray;
+    margin: 0 auto;
+    padding-bottom: 50px;
+    width: 70%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.home-slides-container{
+    display: flex;
+}
+
 .Besty-sample-gaming-products{
     width: 70%;
     /* width: 1px solid purple; */

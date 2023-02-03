@@ -10,6 +10,7 @@ import { ComingSoonBuyItNowModal, ComingSoonBuyMessageOwnerModal } from "../Comi
 import { CreateReviewFormModal } from "./CreateEditReview";
 import FavButton from "../FavButton";
 import { fetchOneProducts } from "../../store/product";
+import Footer, { Footer2 } from "../FooterItems";
 
 function ProductIndex(){
     const {productId} = useParams()
@@ -156,174 +157,179 @@ function ProductIndex(){
     console.log(optionsError)
 
     return(
-        <div className="product-index-container">
-            <div className="product-index-main-content">
-                <div className="product-image-container">
-                    <div className="product-image-rows">
-                        {
-                            placeImgs?.map(item => (
-                                <img className="smaller-imgs"
-                                onError={e => { e.currentTarget.src = "https://freight.cargo.site/w/3840/q/75/i/a17dfc0b27e50cb1c75dcd8fcd13a2d11783729f60265d9a00d184bc5a8d9296/VALORANT_1.png"}}
-                                src={product.previewImg}>
-                                </img>
-                            ))
-                        }
-                    </div>
-                    <img className="product-index-image" onError={e => { e.currentTarget.src = "https://freight.cargo.site/w/3840/q/75/i/a17dfc0b27e50cb1c75dcd8fcd13a2d11783729f60265d9a00d184bc5a8d9296/VALORANT_1.png"}} src={product.previewImg}></img>
-                    <FavButton productId={productId}/>
-                </div>
-                <div className="product-details-container">
-                    <div className="product-details-owner">
-                        {product.owner.username}
-                        <i class="fa-solid fa-heart"></i>
-                    </div>
-                    <div className="product-detials-owner-stats">
-                        {'1 Sale'}
-                        {' | '}
-                        {findStars(product.avg)}
-                    </div>
-                    <div className="product-details-name">
-                        {product.name}
-                    </div>
-                    <div className="product-details-price">
-                        {`$${product.price}.00`}
-                    </div>
-                    <div className="product-details-options">
-                        <div className="product-options-select-name">
-                            Options<i class="fa-solid fa-asterisk fa-2xs"></i>
+        <div style={{position: 'relative', width: '100%', height: '100%'}}>
+            <div className="product-index-container">
+                <div className="product-index-main-content">
+                    <div className="product-image-container">
+                        <div className="product-image-rows">
+                            {
+                                placeImgs?.map(item => (
+                                    <img className="smaller-imgs"
+                                    onError={e => { e.currentTarget.src = "https://freight.cargo.site/w/3840/q/75/i/a17dfc0b27e50cb1c75dcd8fcd13a2d11783729f60265d9a00d184bc5a8d9296/VALORANT_1.png"}}
+                                    src={product.previewImg}>
+                                    </img>
+                                ))
+                            }
                         </div>
-                        <select
-                         className="product-details-select"
-                         onChange={(e) => {
-                            setOption(e.target.value)
-                            setOptionValue(e.target.childNodes[e.target.value].label)
-                            setOptionsError([])
-                        }}
-                         >
-                            <option  value='0'>Select an option</option>
-                            {options && options.map((item, i) => (
-                                <option label={item} value={i + 1}>{item}</option>
-                            ))}
-                            {/* <option value={}></option> */}
-                        </select>
-                        <ul className={optionsErrorName}>
-                            {optionsError.map((error,idx) =>(<li key={idx}>{error}</li>))}
-                        </ul>
-                        <div className="product-quantity-container">
-                            <div className="product-details-quantity-container">
-                                Quantity:{product.stock === 0 ? 'Out of stock' : quantity}
-                                <ul className={quantityErrorName}>
-                                    {quantityError.map((error,idx) =>(<li key={idx}>{error}</li>))}
-                                </ul>
+                        <img className="product-index-image" onError={e => { e.currentTarget.src = "https://freight.cargo.site/w/3840/q/75/i/a17dfc0b27e50cb1c75dcd8fcd13a2d11783729f60265d9a00d184bc5a8d9296/VALORANT_1.png"}} src={product.previewImg}></img>
+                        <FavButton productId={productId}/>
+                    </div>
+                    <div className="product-details-container">
+                        <div className="product-details-owner">
+                            {product.owner.username}
+                            <i class="fa-solid fa-heart"></i>
+                        </div>
+                        <div className="product-detials-owner-stats">
+                            {'1 Sale'}
+                            {' | '}
+                            {findStars(product.avg)}
+                        </div>
+                        <div className="product-details-name">
+                            {product.name}
+                        </div>
+                        <div className="product-details-price">
+                            {`$${product.price}.00`}
+                        </div>
+                        <div className="product-details-options">
+                            <div className="product-options-select-name">
+                                Options<i class="fa-solid fa-asterisk fa-2xs"></i>
                             </div>
-                            <button className="product-quantity-button" onClick={incrimentQuantity}><i class="fa-solid fa-plus"></i></button>
-                            <button className="product-quantity-button" onClick={decrimentQuantity}><i class="fa-solid fa-minus"></i></button>
+                            <select
+                            className="product-details-select"
+                            onChange={(e) => {
+                                setOption(e.target.value)
+                                setOptionValue(e.target.childNodes[e.target.value].label)
+                                setOptionsError([])
+                            }}
+                            >
+                                <option  value='0'>Select an option</option>
+                                {options && options.map((item, i) => (
+                                    <option label={item} value={i + 1}>{item}</option>
+                                ))}
+                                {/* <option value={}></option> */}
+                            </select>
+                            <ul className={optionsErrorName}>
+                                {optionsError.map((error,idx) =>(<li key={idx}>{error}</li>))}
+                            </ul>
+                            <div className="product-quantity-container">
+                                <div className="product-details-quantity-container">
+                                    Quantity:{product.stock === 0 ? 'Out of stock' : quantity}
+                                    <ul className={quantityErrorName}>
+                                        {quantityError.map((error,idx) =>(<li key={idx}>{error}</li>))}
+                                    </ul>
+                                </div>
+                                <button className="product-quantity-button" onClick={incrimentQuantity}><i class="fa-solid fa-plus"></i></button>
+                                <button className="product-quantity-button" onClick={decrimentQuantity}><i class="fa-solid fa-minus"></i></button>
+                            </div>
                         </div>
+                        <ComingSoonBuyItNowModal feature={'Direct purchase from product listing'}/>
+                        <form className="product-add-to-cart-button-form" onSubmit={addCart}>
+                            <button className="product-to-cart-button" type="submit">Add to cart</button>
+                        </form>
                     </div>
-                    <ComingSoonBuyItNowModal feature={'Direct purchase from product listing'}/>
-                    <form className="product-add-to-cart-button-form" onSubmit={addCart}>
-                        <button className="product-to-cart-button" type="submit">Add to cart</button>
-                    </form>
+                </div>
+                <div className="product-content-description-container">
+                    <div className="product-comments-container">
+                        <div className="product-reviews-container-summary">
+                            <div>
+                                {`${product.reviews?.length} product reviews`}
+                            </div>
+                            {findStars(product.avg) === 'No Reviews' ? '' : findStars(product.avg)}
+                            <CreateReviewFormModal product={product}/>
+                        </div>
+                        {product.reviews?.map(review => (
+                            <ReviewIndex  productId={id} review={review} findStars={findStars} />
+                        ))}
+                    </div>
+                    <div className="product-description-container">
+                        <div className="product-description-awards">
+                            <div className="product-description-award-item">
+                                <i class="fa-solid fa-award fa-2xl"></i>
+                                Star Seller. This seller consistently shipped on time and replied quickly to any messages they recieved.
+                            </div>
+                            <div className="product-description-award-item">
+                                <i class="fa-solid fa-truck fa-2xl"></i>
+                                Hooray! This item ships free.
+                            </div>
+                        </div>
+
+                        <div className="product-attribute-dropdown" onClick={togglePolicyButtons}>
+                            <div>
+                                Besty's purchase policies
+                            </div>
+                            {policiesToggle? <i class="fa-solid fa-chevron-up fa-sm"></i> : <i class="fa-solid fa-chevron-down fa-sm"></i>}
+                        </div>
+                        {policiesToggle? <div className="prroduct-besty-certified">
+                            <i class="fa-regular fa-handshake fa-xl"></i>
+                            <div>
+                                Besty Purchases Protection: Shop confidently on Besty knowing if something goes wrong with an order, we've got your back.
+                            </div>
+                        </div> : <></>}
+                        <div className="product-attribute-dropdown" onClick={toggleHighlight}>
+                            <div>
+                                Highlights
+                            </div>
+                            {highlightToggle? <i class="fa-solid fa-chevron-up fa-sm"></i> : <i class="fa-solid fa-chevron-down fa-sm"></i>}
+                        </div>
+                        {highlightToggle ? <div className="product-highlights-container">
+                            <div className="product-highlight-item">
+                                <i class="fa-solid fa-hand"></i>
+                                Handmade
+                            </div>
+                            <div className="product-highlight-item">
+                                <i class="fa-solid fa-shop"></i>
+                                Small business
+                            </div>
+                            </div> : <></>
+                        }
+                        <div className="product-attribute-dropdown" onClick={toggleDescription}>
+                            <div>
+                                Description
+                            </div>
+                            {descriptionToggle? <i class="fa-solid fa-chevron-up fa-sm"></i> : <i class="fa-solid fa-chevron-down fa-sm"></i>}
+                        </div>
+                        {descriptionToggle ? <div className="product-description-item-container">
+                            <div className="product-description-item-description">
+                                {product.description}
+                            </div>
+                            </div> : <></>
+                        }
+                        <div className="product-attribute-dropdown" onClick={toggleSeller}>
+                            <div>
+                                Meet your sellers
+                            </div>
+                            {sellerToggle? <i class="fa-solid fa-chevron-up fa-sm"></i> : <i class="fa-solid fa-chevron-down fa-sm"></i>}
+                        </div>
+                        {sellerToggle ? <div>
+                        <div className="meet-seller-owner-container">
+                                <img className="meet-seller-img" src={'https://i.pinimg.com/originals/b1/92/4d/b1924dce177345b5485bb5490ab3441f.jpg'}></img>
+                                <div className="meet-seeler-description">
+                                    <div>
+                                        {product.owner?.username}
+                                    </div>
+                                    <div>
+                                        {`Owner of ${product.name}`}
+                                    </div>
+                                </div>
+                        </div>
+                        <ComingSoonBuyMessageOwnerModal name={product.owner?.username}/>
+                        </div>:<></>
+                        }
+                        {user?.username === product.owner?.username? <div className="product-attribute-dropdown" onClick={toggleListingButtons} >
+                            <div>
+                                Manage Product Listing
+                            </div>
+                            {listingToggle? <i class="fa-solid fa-chevron-up fa-sm"></i> : <i class="fa-solid fa-chevron-down fa-sm"></i>}
+                        </div> : <></>}
+                        {listingToggle ? <div className="product-listing-buttons-container">
+                            <EditProductModal product={product} />
+                            <DeleteProductModal product={product}/>
+                        </div> : <></> }
+                    </div>
                 </div>
             </div>
-            <div className="product-content-description-container">
-                <div className="product-comments-container">
-                    <div className="product-reviews-container-summary">
-                        <div>
-                            {`${product.reviews?.length} product reviews`}
-                        </div>
-                        {findStars(product.avg) === 'No Reviews' ? '' : findStars(product.avg)}
-                        <CreateReviewFormModal product={product}/>
-                    </div>
-                    {product.reviews?.map(review => (
-                        <ReviewIndex  productId={id} review={review} findStars={findStars} />
-                    ))}
-                </div>
-                <div className="product-description-container">
-                    <div className="product-description-awards">
-                        <div className="product-description-award-item">
-                            <i class="fa-solid fa-award fa-2xl"></i>
-                            Star Seller. This seller consistently shipped on time and replied quickly to any messages they recieved.
-                        </div>
-                        <div className="product-description-award-item">
-                            <i class="fa-solid fa-truck fa-2xl"></i>
-                            Hooray! This item ships free.
-                        </div>
-                    </div>
-
-                    <div className="product-attribute-dropdown" onClick={togglePolicyButtons}>
-                        <div>
-                            Besty's purchase policies
-                        </div>
-                        {policiesToggle? <i class="fa-solid fa-chevron-up fa-sm"></i> : <i class="fa-solid fa-chevron-down fa-sm"></i>}
-                    </div>
-                    {policiesToggle? <div className="prroduct-besty-certified">
-                        <i class="fa-regular fa-handshake fa-xl"></i>
-                        <div>
-                            Besty Purchases Protection: Shop confidently on Besty knowing if something goes wrong with an order, we've got your back.
-                        </div>
-                    </div> : <></>}
-                    <div className="product-attribute-dropdown" onClick={toggleHighlight}>
-                        <div>
-                            Highlights
-                        </div>
-                        {highlightToggle? <i class="fa-solid fa-chevron-up fa-sm"></i> : <i class="fa-solid fa-chevron-down fa-sm"></i>}
-                    </div>
-                    {highlightToggle ? <div className="product-highlights-container">
-                        <div className="product-highlight-item">
-                            <i class="fa-solid fa-hand"></i>
-                            Handmade
-                        </div>
-                        <div className="product-highlight-item">
-                            <i class="fa-solid fa-shop"></i>
-                            Small business
-                        </div>
-                        </div> : <></>
-                    }
-                    <div className="product-attribute-dropdown" onClick={toggleDescription}>
-                        <div>
-                            Description
-                        </div>
-                        {descriptionToggle? <i class="fa-solid fa-chevron-up fa-sm"></i> : <i class="fa-solid fa-chevron-down fa-sm"></i>}
-                    </div>
-                    {descriptionToggle ? <div className="product-description-item-container">
-                        <div className="product-description-item-description">
-                            {product.description}
-                        </div>
-                        </div> : <></>
-                    }
-                    <div className="product-attribute-dropdown" onClick={toggleSeller}>
-                        <div>
-                            Meet your sellers
-                        </div>
-                        {sellerToggle? <i class="fa-solid fa-chevron-up fa-sm"></i> : <i class="fa-solid fa-chevron-down fa-sm"></i>}
-                    </div>
-                    {sellerToggle ? <div>
-                       <div className="meet-seller-owner-container">
-                            <img className="meet-seller-img" src={'https://i.pinimg.com/originals/b1/92/4d/b1924dce177345b5485bb5490ab3441f.jpg'}></img>
-                            <div className="meet-seeler-description">
-                                <div>
-                                    {product.owner?.username}
-                                </div>
-                                <div>
-                                    {`Owner of ${product.name}`}
-                                </div>
-                            </div>
-                       </div>
-                       <ComingSoonBuyMessageOwnerModal name={product.owner?.username}/>
-                    </div>:<></>
-                    }
-                    {user?.username === product.owner?.username? <div className="product-attribute-dropdown" onClick={toggleListingButtons} >
-                        <div>
-                            Manage Product Listing
-                        </div>
-                        {listingToggle? <i class="fa-solid fa-chevron-up fa-sm"></i> : <i class="fa-solid fa-chevron-down fa-sm"></i>}
-                    </div> : <></>}
-                    {listingToggle ? <div className="product-listing-buttons-container">
-                        <EditProductModal product={product} />
-                        <DeleteProductModal product={product}/>
-                    </div> : <></> }
-                </div>
+            <div style={{width: '100%'}}>
+                <Footer2 />
             </div>
         </div>
     )

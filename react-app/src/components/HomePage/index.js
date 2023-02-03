@@ -3,12 +3,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { fetchProducts } from '../../store/product';
 import Footer from '../FooterItems';
+import HomePageSlideshow, { HomePageSlideshow2 } from './HomePageSlides';
 import './index.css';
 import ProductCard, { BestyPickCard, ProductCardRound, UserCards } from './productCard';
 
 function HomePage(){
     const product = useSelector(state => state.product.allProducts)
     const user = useSelector(state => state.session.user)
+    useEffect(() => {
+        return () => window.scrollTo(0, 0);
+    }, [])
     return(
         <div className="home-page">
             <div className='welcome-back-background'>
@@ -86,7 +90,18 @@ function HomePage(){
                     </div> */}
                 </div>
             </div>
-            {/* <Footer /> */}
+            <div className='home-slidehow-container'>
+                <div className='home-slidehow-header'>
+                    Besty's products
+                </div>
+                <div className='home-slides-container'>
+                    <HomePageSlideshow product={product}/>
+                    <HomePageSlideshow2 product={product}/>
+                </div>
+            </div>
+            <div className='home-page-container-footer'>
+                <Footer />
+            </div>
             {/* <div className='footer'>
                 <h1>
                     Besty
