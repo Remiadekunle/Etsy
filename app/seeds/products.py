@@ -6,29 +6,34 @@ def seed_products():
     owner3 = User.query.get(3)
     owner4 = User.query.get(4)
     owner5 = User.query.get(5)
+    owner6 = User.query.get(6)
+    owner7 = User.query.get(7)
+    owner8 = User.query.get(8)
+    owner9 = User.query.get(9)
+    owner10 = User.query.get(10)
     demo_products = [
     Product(
-        name='Valorant 3D Forsaken Vandal', description='Forsaken Vandal', price=200, stock=20, options='green-white/gold', preview_img='https://i.imgur.com/UG5X4CA.png',
+        name='Valorant 3D Forsaken Vandal', description='Forsaken Vandal', price=220, stock=20, options='green-white/gold', preview_img='https://i.imgur.com/UG5X4CA.png',
         owner=owner
     ),
     Product(
-        name='Valorant 3D Prime Vandal', description='Prime Vandal', price=200, stock=20, options='gold-orange-blue-yellow', preview_img='https://i.imgur.com/zxdgzEM.png',
+        name='Valorant 3D Prime Vandal', description='Prime Vandal', price=300, stock=20, options='gold-orange-blue-yellow', preview_img='https://i.imgur.com/zxdgzEM.png',
         owner=owner
     ),
     Product(
-        name='Valorant 3D Prelude to Chaos Vandal', description='Prelude to Chaos Vandal', price=200, stock=20, options='blue-gray-purple-red', preview_img='https://i.imgur.com/eEKyFb9.png',
+        name='Valorant 3D Prelude to Chaos Vandal', description='Prelude to Chaos Vandal', price=250, stock=20, options='blue-gray-purple-red', preview_img='https://i.imgur.com/eEKyFb9.png',
         owner=owner
     ),
     Product(
-        name='Valorant 3D Gai\'s Vengance Vandal', description='Gai\'s Vengance Vandal', price=200, stock=20, options='gray-blue-green-red', preview_img='https://i.imgur.com/M4nfAn7.png',
+        name='Valorant 3D Gai\'s Vengance Vandal', description='Gai\'s Vengance Vandal', price=210, stock=20, options='gray-blue-green-red', preview_img='https://i.imgur.com/M4nfAn7.png',
         owner=owner
     ),
     Product(
-        name='Valorant 3D RGX Vandal', description='RGX Vandal', price=200, stock=20, options='green-red-blue-gray', preview_img='https://i.imgur.com/FEuzkpG.png',
+        name='Valorant 3D RGX Vandal', description='RGX Vandal', price=220, stock=20, options='green-red-blue-gray', preview_img='https://i.imgur.com/FEuzkpG.png',
         owner=owner2
     ),
     Product(
-        name='Valorant 3D Sentinels of Light Vandal', description='Sentinels of Light Vandal', price=200, stock=20, options='pink-purple-green-gold', preview_img='https://i.imgur.com/kKukvBp.png',
+        name='Valorant 3D Sentinels of Light Vandal', description='Sentinels of Light Vandal', price=210, stock=20, options='pink-purple-green-gold', preview_img='https://i.imgur.com/kKukvBp.png',
         owner=owner2
     ),
     Product(
@@ -36,23 +41,23 @@ def seed_products():
         owner=owner2
     ),
     Product(
-        name='Valorant 3D Oni Phantom', description='Oni Phantom', price=200, stock=20, options='red-green-yellow-teal', preview_img='https://i.imgur.com/o5Pas23.png',
+        name='Valorant 3D Oni Phantom', description='Oni Phantom', price=275, stock=20, options='red-green-yellow-teal', preview_img='https://i.imgur.com/o5Pas23.png',
         owner=owner2
     ),
     Product(
-        name='Valorant 3D Prime Phantom', description='Prime Phantom', price=200, stock=20, options='gold-orange-blue-yellow', preview_img='https://i.imgur.com/sCvv43t.png',
+        name='Valorant 3D Prime Phantom', description='Prime Phantom', price=260, stock=20, options='gold-orange-blue-yellow', preview_img='https://i.imgur.com/sCvv43t.png',
         owner=owner3
     ),
     Product(
-        name='Valorant 3D Recon Phantom', description='Recon Phantom', price=200, stock=20, options='gray-red', preview_img='https://i.imgur.com/pGZezdU.png',
+        name='Valorant 3D Recon Phantom', description='Recon Phantom', price=290, stock=20, options='gray-red', preview_img='https://i.imgur.com/pGZezdU.png',
         owner=owner3
     ),
     Product(
-        name='Valorant 3D Reaver Vandal', description='Reaver Vandal', price=200, stock=20, options='purple-red-black-gray', preview_img='https://i.imgur.com/HfCCfch.png',
+        name='Valorant 3D Reaver Vandal', description='Reaver Vandal', price=260, stock=20, options='purple-red-black-gray', preview_img='https://i.imgur.com/HfCCfch.png',
         owner=owner3
     ),
     Product(
-        name='Valorant 3D Orrigin Vandal', description='Origin Vandal', price=200, stock=20, options='black-white-red-green', preview_img='https://i.imgur.com/lRgQopi.png',
+        name='Valorant 3D Origin Vandal', description='Origin Vandal', price=230, stock=20, options='black-white-red-green', preview_img='https://i.imgur.com/lRgQopi.png',
         owner=owner3
     ),
     Product(
@@ -90,6 +95,46 @@ def seed_products():
     Product(
         name='COD Replica ACR', description='Gun modeled from call of duty modern warfare 3 gun', price=100, stock=20, options='Small-Large', preview_img='https://www.safarasoftair.com/media/catalog/product/cache/2/image/4e9d4c756f3a2e58dc27e2c20629df0a/m/a/masada3_tn/www.safarasoftair.com-Aandk-ak-masada3-ras-tn-31.jpg',
         owner=owner5
+    ),
+    Product(
+        name='Valorant Sova Bow', description='Sova bow made from Valorant', price=100, stock=20, options='Small-Large', preview_img='https://i.etsystatic.com/25116497/r/il/0f27f5/3102364325/il_fullxfull.3102364325_k281.jpg',
+        owner=owner6
+    ),
+    Product(
+        name='Valorant Raze Boom Bot', description='Raze Boom Bot made from Valorant', price=80, stock=20, options='Small-Large', preview_img='https://cdna.artstation.com/p/assets/images/images/049/124/918/large/zuzanna-kossowska-ren1.jpg?1651750071',
+        owner=owner6
+    ),
+    Product(
+        name='Valorant Spike Replica', description='Spike replica made from Valorant', price=50, stock=20, options='Small-Large', preview_img='https://www.3dtrophyfactory.com/wp-content/uploads/2020/11/Spike-concept-2.jpg',
+        owner=owner6
+    ),
+    Product(
+        name='Valorant Killjoy Alarm', description='Alarm bot made from Valorant', price=75, stock=20, options='Small-Large', preview_img='https://www.pcgamesn.com/wp-content/uploads/2020/08/killjoy-alarm-bot.jpeg',
+        owner=owner6
+    ),
+    Product(
+        name='COD Replica Ray Gun', description='Gun modeled from call of duty B02 zombies', price=150, stock=20, options='Small-Large', preview_img='https://i.ytimg.com/vi/Tlsor4l9JhA/maxresdefault.jpg',
+        owner=owner7
+    ),
+    Product(
+        name='COD Replica Elemental Staffs', description='Gun modeled from call of duty B02 zombies', price=125, stock=20, options='Ice-Wind-Fire-Lightning', preview_img='https://i.pinimg.com/originals/ea/96/7f/ea967fdac929275e9527d4db280eb0d9.jpg',
+        owner=owner7
+    ),
+    Product(
+        name='COD Replica Vending Machines', description='Vending machione from call of duty BO2/BO3 zombies', price=300, stock=20, options='Juggernog-Speed Cola-Quick Revive-Stamin Up-Doulbe Tap-PHD Flopper- Widow\'s Wine-Electric Cherry', preview_img='https://files.cults3d.com/uploaders/16235602/illustration-file/24499c43-e309-48b0-882c-b10666c391aa/All-Perks-Front.png',
+        owner=owner7
+    ),
+    Product(
+        name='COD Replica Summong Key', description='Key from call of duty B03 zombies', price=150, stock=20, options='Small-Large' , preview_img='https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/5c79022a-643d-487c-85ce-18e39148718c/dafjxyl-81fb2605-1350-4575-a05c-b8409a12568f.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzVjNzkwMjJhLTY0M2QtNDg3Yy04NWNlLTE4ZTM5MTQ4NzE4Y1wvZGFmanh5bC04MWZiMjYwNS0xMzUwLTQ1NzUtYTA1Yy1iODQwOWExMjU2OGYucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.n9SzmQm3NLmQgDvmj9EZLReG71_u2wHCgM-scosTfls',
+        owner=owner7
+    ),
+    Product(
+        name='COD Replica Mystery Box', description='Mystery box from call of duty B03 zombies', price=200, stock=20, options='Small-Large' , preview_img='https://www.charlieintel.com/wp-content/uploads/2021/07/All-Mauer-Der-Toten-mystery-box-locations.jpg',
+        owner=owner8
+    ),
+    Product(
+        name='COD Replica Elemental Bows', description='Bows from call of duty B03 zombies', price=200, stock=20, options='Small-Large' , preview_img='https://pm1.narvii.com/6453/642f20155308cd84327a2b2d58d0b1575313d423_hq.jpg',
+        owner=owner8
     ),
     ]
 

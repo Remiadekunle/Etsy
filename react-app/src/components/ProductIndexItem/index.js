@@ -287,7 +287,9 @@ function ProductIndex(){
                         {descriptionToggle? <i class="fa-solid fa-chevron-up fa-sm"></i> : <i class="fa-solid fa-chevron-down fa-sm"></i>}
                     </div>
                     {descriptionToggle ? <div className="product-description-item-container">
-                        {product.description}
+                        <div className="product-description-item-description">
+                            {product.description}
+                        </div>
                         </div> : <></>
                     }
                     <div className="product-attribute-dropdown" onClick={toggleSeller}>

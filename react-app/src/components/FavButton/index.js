@@ -52,19 +52,17 @@ export function FavsMessageModal({productId, check, message}){
     const dispatch = useDispatch()
     const [showModal, setShowModal] = useState(false);
     console.log('yo whats the id here', productId)
-    let timeOutId;
 
-    // useEffect(() => {
-    //     const time = setTimeout(() => {
-    //         setShowModal(false)
-    //     }, [1000])
-    // }, [])
-    const handleFavs = (id) => {
+    let timeOutId;
+    useEffect(() => {
+        return () => clearInterval(timeOutId)
+    }, [])
+    const handleFavs = async (id) => {
         console.log(id)
         if (check === -1){
-            dispatch(addFavorite(id))
+            await dispatch(addFavorite(id))
         } else{
-            dispatch(removeFavorite(id))
+            await dispatch(removeFavorite(id))
         }
         clearTimeout(timeOutId)
         timeOutId = setTimeout(() => {
@@ -75,11 +73,11 @@ export function FavsMessageModal({productId, check, message}){
   return (
     <>
       <button className='fav-button' onClick={async () => {
-        setTimeout(() => {
-            timeOutId = setShowModal(true)
-        }, 100)
-        // setShowModal(true)
+        // setTimeout(() => {
+        //     timeOutId = setShowModal(true)
+        // }, 100)
         await handleFavs(productId)
+        setShowModal(true)
         }}>
                         {check === -1 ? <i class="fa-regular fa-heart fa-xl"></i> : <i class="fa-solid fa-heart fa-xl fav-liked"></i>}
                     </button>

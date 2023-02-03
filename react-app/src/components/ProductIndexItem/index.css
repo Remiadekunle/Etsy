@@ -135,6 +135,13 @@
     margin: 0px 0px 0px 30px;
 }
 
+.product-description-item-description{
+    display: flex;
+    flex-wrap: wrap;
+    width: 99%;
+    margin: 0px 0px 0px 10px;
+}
+
 .product-attribute-dropdown{
     display: flex;
     /* border: 1px solid blue; */
