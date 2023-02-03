@@ -8,7 +8,7 @@ def seed_products():
     owner5 = User.query.get(5)
     demo_products = [
     Product(
-        name='Valorant 3D Forsaken Vandal', description='Forsaken Vandal', price=200, stock=20, options='green-white/gold', preview_img='https://i.imgur.com/UG5X4CA.png',
+        name='Valorant 3D Forsaken Vandal', description='Forsaken Vandal', price=200, stock=20, options='green-white-gold', preview_img='https://i.imgur.com/UG5X4CA.png',
         owner=owner
     ),
     Product(
@@ -44,7 +44,7 @@ def seed_products():
         owner=owner3
     ),
     Product(
-        name='Valorant 3D Recon Phantom', description='Recon Phantom', price=200, stock=20, options='gray-red', preview_img='https://i.imgur.com/pGZezdU.png',
+        name='Valorant 3D Recon Phantom', description='Recon Phantom', price=200, stock=20, options='gray-red-black', preview_img='https://i.imgur.com/pGZezdU.png',
         owner=owner3
     ),
     Product(
@@ -72,23 +72,23 @@ def seed_products():
         owner=owner4
     ),
     Product(
-        name='COD Replica BAL-27 Skin', description='Gun modeled from call of duty advanced warfare gun', price=100, stock=20, options='Small-Large', preview_img='https://i.ytimg.com/vi/b7C_VovHQ4o/maxresdefault.jpg',
+        name='COD Replica BAL-27 Skin', description='Gun modeled from call of duty advanced warfare gun', price=100, stock=20, options='Small-Medium-Large', preview_img='https://i.ytimg.com/vi/b7C_VovHQ4o/maxresdefault.jpg',
         owner=owner5
     ),
     Product(
-        name='COD Replica M8A1', description='Gun modeled from call of duty black ops 2 gun', price=100, stock=20, options='Small-Large', preview_img='https://i.ytimg.com/vi/CETdQb-Qz5E/maxresdefault.jpg',
+        name='COD Replica M8A1', description='Gun modeled from call of duty black ops 2 gun', price=100, stock=20, options='Small-Medium-Large', preview_img='https://i.ytimg.com/vi/CETdQb-Qz5E/maxresdefault.jpg',
         owner=owner5
     ),
     Product(
-        name='COD Replica PDW-57', description='Gun modeled from call of duty black ops 2 gun', price=100, stock=20, options='Small-Large', preview_img='https://i.ytimg.com/vi/MZyR0IEXIQ4/maxresdefault.jpg',
+        name='COD Replica PDW-57', description='Gun modeled from call of duty black ops 2 gun', price=100, stock=20, options='Small-Medium-Large', preview_img='https://i.ytimg.com/vi/MZyR0IEXIQ4/maxresdefault.jpg',
         owner=owner5
     ),
     Product(
-        name='COD Replica NV4', description='Gun modeled from call of duty infinite warfare gun', price=100, stock=20, options='Small-Large', preview_img='https://i.ytimg.com/vi/2iJfXNsTh5Q/maxresdefault.jpg',
+        name='COD Replica NV4', description='Gun modeled from call of duty infinite warfare gun', price=100, stock=20, options='Small-Medium-Large', preview_img='https://i.ytimg.com/vi/2iJfXNsTh5Q/maxresdefault.jpg',
         owner=owner5
     ),
     Product(
-        name='COD Replica ACR', description='Gun modeled from call of duty modern warfare 3 gun', price=100, stock=20, options='Small-Large', preview_img='https://www.safarasoftair.com/media/catalog/product/cache/2/image/4e9d4c756f3a2e58dc27e2c20629df0a/m/a/masada3_tn/www.safarasoftair.com-Aandk-ak-masada3-ras-tn-31.jpg',
+        name='COD Replica ACR', description='Gun modeled from call of duty modern warfare 3 gun', price=100, stock=20, options='Small-Medium-Large', preview_img='https://www.safarasoftair.com/media/catalog/product/cache/2/image/4e9d4c756f3a2e58dc27e2c20629df0a/m/a/masada3_tn/www.safarasoftair.com-Aandk-ak-masada3-ras-tn-31.jpg',
         owner=owner5
     ),
     ]
