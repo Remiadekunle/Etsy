@@ -65,6 +65,7 @@
     box-shadow: 0px 0px 2px 1px rgba(0, 0, 255, .2);
     border-radius: 5px;
     transition: ease 1000ms;
+    z-index: -1;
 }
 .recs-index-container{
     display: flex;

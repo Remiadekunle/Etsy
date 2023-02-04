@@ -1,5 +1,6 @@
 const LOAD_CATEGORY = 'category/loadCategory'
 const LOAD_RECS = 'category/loadRecs'
+const LOAD_INFO = 'category/loadInfo'
 
 export const loadCategory = (category) => {
     return{
@@ -15,6 +16,13 @@ export const loadRecs = (recs) => {
     }
 }
 
+export const addInfo = (category) => {
+    return{
+        type:LOAD_INFO,
+        category
+    }
+}
+
 
 export const fetchCategory = (id) => async dispatch => {
     const res = await fetch(`/api/categories/${id}`)
@@ -22,6 +30,7 @@ export const fetchCategory = (id) => async dispatch => {
     if (res.ok){
         const body = await res.json();
         dispatch(loadCategory(body.category))
+        dispatch(addInfo(body.info))
     }
 }
 export const fetchCategoryRecs = (id) => async dispatch => {
@@ -57,6 +66,10 @@ const categoryReducer = (state = initialState, action) => {
             products.forEach(product => {
                 newState.recs[product.id] = product
             })
+            return newState
+        case LOAD_INFO:
+            newState = Object.assign({}, state);
+            newState.info = action.category
             return newState
       default:
         return state;

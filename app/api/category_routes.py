@@ -15,7 +15,7 @@ def get_categories():
 @category_routes.route('/<int:id>')
 def get_category_products(id):
     category = Category.query.get(id)
-    return {"category": [product.to_dict() for product in category.products]}
+    return {"category": [product.to_dict() for product in category.products], 'info': category.to_dict2()}
 
 
 @category_routes.route('/<int:id>/recs')

@@ -27,3 +27,9 @@ class Category(db.Model):
             'id': self.id,
             'products': [product.to_dict() for product in self.products]
         }
+    def to_dict2(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'description': self.description
+        }

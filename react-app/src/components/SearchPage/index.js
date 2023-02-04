@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { clearSearch, getSearch } from "../../store/search";
+import { Footer2 } from "../FooterItems";
 import "./index.css";
 import SearchIndex from "./SearchIndexItem";
 
@@ -48,35 +49,38 @@ function SearchPage({search, setSearch, filter, setFilter}){
     // const mappable = Object.values(messages.search)
     return (
         <div >
-            <div className="search-results-welcome">
-                {`Search results`}
-                <i class="fa-solid fa-ellipsis"></i>
-            </div>
-            <div className="search-results-filter-container">
-                <div style={{width:'100%', display: 'flex', justifyContent: "flex-end", marginTop: '10px'}}>
-                    <select
-                    className="search-select-field"
-                    value={filter}
-                    onChange={(e) => {
-                        setFilter(e.target.value)
-                        const idx = e.target.value
-                        console.log('heeeeeeeeeeeeeeeeeeeeeeeeeeee', e.target.value )
-                        if (parseInt(e.target.value) === 1) handleSearch(e, true, false, false, e.target.childNodes[e.target.value].label, idx)
-                        else if (parseInt(e.target.value) === 2) handleSearch(e, false, true, false, e.target.childNodes[e.target.value].label, idx)
-                        else if (parseInt(e.target.value) === 3) handleSearch(e, false, false, true, e.target.childNodes[e.target.value].label, idx)
-                    }}
-                    >   <option label="None" value={0}>None</option>
-                        <option label="HighestPrice" value={1}>Highest Price</option>
-                        <option label="Lowest Price" value={2}>Lowest Price</option>
-                        <option label="Highest Reviewed" value={3}>Highest Reviewed</option>
-                    </select>
+            <div style={{marginBottom: '50px'}} >
+                <div className="search-results-welcome">
+                    {`Search results`}
+                    <i class="fa-solid fa-ellipsis"></i>
+                </div>
+                <div className="search-results-filter-container">
+                    <div style={{width:'100%', display: 'flex', justifyContent: "flex-end", marginTop: '10px'}}>
+                        <select
+                        className="search-select-field"
+                        value={filter}
+                        onChange={(e) => {
+                            setFilter(e.target.value)
+                            const idx = e.target.value
+                            console.log('heeeeeeeeeeeeeeeeeeeeeeeeeeee', e.target.value )
+                            if (parseInt(e.target.value) === 1) handleSearch(e, true, false, false, e.target.childNodes[e.target.value].label, idx)
+                            else if (parseInt(e.target.value) === 2) handleSearch(e, false, true, false, e.target.childNodes[e.target.value].label, idx)
+                            else if (parseInt(e.target.value) === 3) handleSearch(e, false, false, true, e.target.childNodes[e.target.value].label, idx)
+                        }}
+                        >   <option label="None" value={0}>None</option>
+                            <option label="HighestPrice" value={1}>Highest Price</option>
+                            <option label="Lowest Price" value={2}>Lowest Price</option>
+                            <option label="Highest Reviewed" value={3}>Highest Reviewed</option>
+                        </select>
+                    </div>
+                </div>
+                <div className="search-results-container">
+                    {results2 && results2.map(item => (
+                        <SearchIndex product={item}/>
+                    ))}
                 </div>
             </div>
-            <div className="search-results-container">
-                {results2 && results2.map(item => (
-                    <SearchIndex product={item}/>
-                ))}
-            </div>
+            <Footer2 />
         </div>
     )
 }

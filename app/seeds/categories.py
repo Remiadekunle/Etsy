@@ -14,10 +14,12 @@ def seed_categories():
         ),
         Category(
         title='Call of Duty',
-        description='Valorant is a tactical shooting game involving two teams \
-        with 5 players in each team. Every player can sign in and play remotely \
-        from anywhere in the world. Every game has 25 rounds and the team that wins \
-        13 of them first wins the game. Players can choose their in-game characters called agents at the start of the game'
+        description='Call of Duty is a first-person shooter video game franchise published by Activision. \
+            Starting out in 2003, it first focused on games set in World War II. Over time, the series has seen \
+                games set in the midst of the Cold War, futuristic worlds, and the modern day. The games were first \
+                    developed by Infinity Ward, then also by Treyarch and Sledgehammer Games. Several spin-off and handheld \
+                        games were made by other developers. The most recent title, Call of Duty: Modern Warfare II, was \
+                            released on October 28, 2022.'
         ),
         Category(
         title='Pokemon',
