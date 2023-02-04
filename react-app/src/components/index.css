@@ -2,6 +2,8 @@
     border-bottom: 1px solid gray;
     display: flex;
     align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
     position: relative;
     padding-bottom: 5px;
     width: 100%;
@@ -77,9 +79,25 @@ body{
     align-items: center;
     position: relative;
     margin: 0px 15%;
-    width: 100%;
+    /* width: 100%; */
     gap: 1%;
     /* width: 100%; */
+}
+
+.navbar-categories-container{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+    font-family: 'Itim', cursive;
+}
+
+.navbar-categories-button{
+    font-family: 'Itim', cursive;
+    padding: 5px 15px;
+    background-color: #FFFFFF;
+    border-style: none;
+    cursor: pointer;
 }
 
 .profile-dropdown-user{

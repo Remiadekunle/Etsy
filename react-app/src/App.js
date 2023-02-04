@@ -20,6 +20,7 @@ import Welcome from './components/auth/WelcomePage';
 import SearchPage from './components/SearchPage';
 import { getSearch } from './store/search';
 import FavoritesPage from './components/FavoritesPage';
+import CategoryPage from './components/CategoryPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -85,6 +86,9 @@ function App() {
         <ProtectedRoute path='/favorites' exact={true}>
           <FavoritesPage />
         </ProtectedRoute>
+        <Route path='/category' exact={true}>
+          <CategoryPage />
+        </Route>
       </Switch>
     </BrowserRouter>
   );

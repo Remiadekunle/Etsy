@@ -1,6 +1,6 @@
 .YML-container{
     display: flex;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     flex-direction: column;
     justify-content: space-between;
     height: 350px;
@@ -13,13 +13,13 @@
     justify-content: space-between;
     height: 100px;
     align-items: center;
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
 }
 
 .YML-button{
     padding: 10px 15px;
     border-radius: 20px;
-    border: 2px solid black;
+    /* border: 2px solid black; */
     background-color: #FFFFFF;
     cursor: pointer;
 
@@ -32,5 +32,55 @@
 .YML-products-container{
     width: 100%;
     height: calc(100% - 100px);
-    border: 1px dotted yellow;
+    /* border: 1px dotted yellow; */
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.recs-index-img{
+    width: 100%;
+    height: 170px;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.recs-index-name{
+    display: flex;
+    width: 100%;
+}
+.recs-index-price{
+    display: flex;
+    width: 100%;
+}
+/* display: 'flex', flexDirection: 'column', alignItems: 'center', margin:'0 auto', position: 'relative' */
+.recs-index-border{
+    position: absolute;
+    height: 90%;
+    top: 0;
+    width: 100%;
+    /* border: 1px solid red; */
+    padding: 10px;
+    cursor: pointer;
+    box-shadow: 0px 0px 2px 1px rgba(0, 0, 255, .2);
+    border-radius: 5px;
+    transition: ease 1000ms;
+}
+.recs-index-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* margin: 0 auto; */
+    position: relative;
+    justify-content: space-between;
+}
+
+.recs-index-a{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 90%;
+    cursor: pointer;
+
 }

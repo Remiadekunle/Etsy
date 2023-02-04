@@ -1,14 +1,32 @@
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { NavLink, useHistory } from 'react-router-dom';
+import { fetchCategory, fetchCategoryRecs } from '../../store/category';
+import FavButton from '../FavButton';
 import './index.css';
 
-function YouMayLike(){
+function YouMayLike({ids, categoryId}){
+    const dispatch = useDispatch()
     const products = useSelector(state => state.product.allProducts)
-    const productsArr = []
-    for (let i = 0; i < 7; i++){
+    const history = useHistory()
 
+    const selected = []
+    for (let i =0; i < ids.length; i++){
+        const id = ids[i]
+        const product = products[id]
+        if (selected.length === 6) continue
+        selected.push(product)
     }
-    
 
+    const handleCategory = async () => {
+        await dispatch(fetchCategory(categoryId))
+        return history.push('/category')
+    }
+    const recs = useSelector(state => state.category.recs)
+    console.log('yaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', recs)
+
+    // if (!Object?.values(recs).length > 0) return null
+    // const recsArr = Object?.values(recs)
     return(
         <div className='YML-container'>
             <div className='YML-header'>
@@ -16,16 +34,45 @@ function YouMayLike(){
                     You may also like
                 </span>
 
-                <button className='YML-button'>See more</button>
+                <button onClick={handleCategory} className='YML-button'>See more</button>
             </div>
             <div className='YML-products-container'>
-                <img></img>
-                <div>
-
-                </div>
+                {
+                    selected && selected.map(product => (
+                        <RecsIndex product={product} />
+                    ))
+                }
             </div>
         </div>
     )
 }
 
 export default YouMayLike
+
+export function RecsIndex({product}){
+    const [hover, setHover] = useState(false)
+    const toggleHover = () => {
+        setHover(!hover)
+    }
+    return(
+        <div className='recs-index-container'
+        onClick={() => window.scrollTo(0,0)}
+        onMouseEnter={toggleHover}
+        onMouseLeave={toggleHover}
+        >
+            <NavLink className='recs-index-a' to={`/products/${product.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                <div>
+                    <img className='recs-index-img' src={product.previewImg}></img>
+                    <div className='recs-index-name'>
+                        {product.name}
+                    </div>
+                </div>
+                <div className='recs-index-price'>
+                    {`$${product.price}.00`}
+                </div>
+            </NavLink>
+            {hover ?  <FavButton productId={product.id} /> : <></>}
+            {hover ? <div className='recs-index-border'></div> : <></>}
+        </div>
+    )
+}

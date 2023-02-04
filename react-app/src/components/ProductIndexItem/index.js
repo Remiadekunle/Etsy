@@ -12,6 +12,7 @@ import FavButton from "../FavButton";
 import { fetchOneProducts } from "../../store/product";
 import Footer, { Footer2 } from "../FooterItems";
 import YouMayLike from "../YouMayLike";
+import { fetchCategoryRecs } from "../../store/category";
 
 function ProductIndex(){
     const {productId} = useParams()
@@ -330,7 +331,7 @@ function ProductIndex(){
                 </div>
             </div>
             <div style={{margin: '0 15%'}}>
-                <YouMayLike />
+                <YouMayLike ids={product.recs} categoryId={product.categoryId}/>
             </div>
             <div style={{width: '100%'}}>
                 <Footer2 />
