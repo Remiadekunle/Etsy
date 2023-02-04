@@ -159,7 +159,7 @@ const NavBar = ({setSearch, search, setFilter}) => {
         </div>
       </div>
       <div className='navbar-categories-container'>
-        <button onClick={() => handleCategory(1)} className='navbar-categories-button'>valorant</button>
+        <button onClick={() => handleCategory(1)} className='navbar-categories-button'>Valorant</button>
         <button onClick={() => handleCategory(2)}className='navbar-categories-button'>Call of Duty</button>
         <button onClick={() => handleCategory(3)}className='navbar-categories-button'>Pokemon</button>
       </div>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import FavButton from "../FavButton";
+import FavButton, { FavButton2 } from "../FavButton";
 
 function HomePageSlideshow(){
     const products = useSelector(state => state.product.allProducts)
@@ -81,12 +81,14 @@ export default HomePageSlideshow
 
 
 export function SlideIndex({product, index}){
+
     return(
-        <div key={index} className="home-slide">
-            <NavLink to={`/products/${product.id}`}>
+        <div key={index} className="home-slide" >
+            <NavLink to={`/products/${product.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                 <img className="home-slide-img" src={product.previewImg}></img>
+                <div className='home-page-product-itemA-price'>{`$${product?.price}.00`}</div>
             </NavLink>
-            <FavButton productId={product.id} />
+            <FavButton2 className='slideshow-fav' productId={product?.id} />
         </div>
     )
 }

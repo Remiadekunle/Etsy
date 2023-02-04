@@ -26,12 +26,17 @@ function CategoryPage(){
                     </div>
                 </div>
             </div>
-            <div className="category-products-container">
-                {
-                    productsArr && productsArr.map(product => (
-                        <CategoryIndex product={product} />
-                    ))
-                }
+            <div>
+                <div className="category-page-welcome-header">
+                    Find something you love <i class="fa-solid fa-heart categories-heart"></i>
+                </div>
+                <div className="category-products-container">
+                    {
+                        productsArr && productsArr.map(product => (
+                            <CategoryIndex product={product} />
+                        ))
+                    }
+                </div>
             </div>
             <Footer2 />
         </div>

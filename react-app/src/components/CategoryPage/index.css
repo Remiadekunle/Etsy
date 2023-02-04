@@ -1,6 +1,7 @@
 .category-welcome-container{
     margin: 0 15%;
     padding: 30px 0px;
+    min-height: 140px;
     display: flex;
 }
 
@@ -21,4 +22,13 @@
     height: 250px;
     object-fit: cover;
     border-radius: 5px;
+}
+
+.category-page-welcome-header{
+    margin: 30px 15%;
+    font-size: 32px;
+}
+
+.categories-heart{
+    color: #F8EBE6;
 }

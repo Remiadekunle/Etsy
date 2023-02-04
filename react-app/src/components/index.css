@@ -15,10 +15,11 @@
     /* width: 65%; */
     width: 97.4%;
     height: 20px;
-    padding: 10px;
+    padding: 10px 10px 10px 20px;
     border-radius: 25px;
     background-color: rgb(243,243,243);
     border-color: #222222;
+    font-size: 14px;
 }
 
 .search-form{
@@ -98,7 +99,9 @@ body{
     background-color: #FFFFFF;
     border-style: none;
     cursor: pointer;
+    font-size: 16px;
 }
+
 
 .profile-dropdown-user{
     display: flex;

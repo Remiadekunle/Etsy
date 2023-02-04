@@ -1,16 +1,23 @@
+import { useState } from "react"
 import { useSelector } from "react-redux"
 import { NavLink } from "react-router-dom"
-import FavButton from "../FavButton"
+import FavButton, { FavButton2 } from "../FavButton"
 function ProductCard({product}){
+    const [hover, setHover] = useState(false)
+
+    const toggleHover = () => {
+        setHover(!hover)
+    }
     return(
-        <div className="home-page-product-itemA-container">
+        <div className="home-page-product-itemA-container" onMouseEnter={toggleHover} onMouseLeave={toggleHover}>
             <NavLink to={`/products/${product?.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                 <div className='home-page-product-itemA'>
                         <img className='home-page-product-itemA-img' src={`${product?.previewImg}`}></img>
                         <div className='home-page-product-itemA-price'>{`$${product?.price}.00`}</div>
                 </div>
             </NavLink>
-            <FavButton productId={product?.id} />
+            {hover ? <FavButton2 productId={product?.id} /> : <></>}
+
         </div>
     )
 }
@@ -28,12 +35,18 @@ export function ProductCardRound({product}){
 
 
 export function BestyPickCard({product}){
+    const [hover, setHover] = useState(false)
+
+    const toggleHover = () => {
+        setHover(!hover)
+    }
     return(
-        <div className="Besty-sample-gaming-row-img-container">
+        <div className="Besty-sample-gaming-row-img-container" onMouseEnter={toggleHover} onMouseLeave={toggleHover}>
             <NavLink to={`/products/${product?.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                 <img className='Besty-sample-gaming-row-img' src={`${product?.previewImg}`}></img>
+                {hover ? <div className='home-page-product-itemA-price'>{`$${product?.price}.00`}</div> : <></>}
             </NavLink>
-            <FavButton productId={product?.id} />
+            {hover ? <FavButton2 productId={product?.id} /> : <></>}
         </div>
     )
 }
@@ -49,6 +62,11 @@ export function BestyPickCardBig({product}){
 }
 
 export function UserCards({name, products, items, ids}){
+    const [hover, setHover] = useState(false)
+
+    const toggleHover = () => {
+        setHover(!hover)
+    }
     const newProducts = []
     ids.forEach(id => {
         const product = products[id]
@@ -57,7 +75,7 @@ export function UserCards({name, products, items, ids}){
     return(
         <div className='browse-user-item-container'>
             <div className='browse-user-item-username'>
-                <div>
+                <div style={{display: 'flex', gap: '5px', alignItems: 'center'}}>
                     {name}
                     <i class="fa-solid fa-arrow-right"></i>
                 </div>
@@ -67,24 +85,36 @@ export function UserCards({name, products, items, ids}){
             </div>
             <div className='browse-user-item-imgs-container'>
                 <div className='user-item-imgs-container-top'>
-                <NavLink to={`/products/${newProducts[0]?.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                    <img className='user-item-img' src={`${newProducts[0]?.previewImg}`}>
-                    </img>
-                </NavLink>
-                <NavLink to={`/products/${newProducts[1]?.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                    <img className='user-item-img' src={`${newProducts[1]?.previewImg}`}>
-                    </img>
-                </NavLink>
+                    <div style={{position: 'relative'}}>
+                        <NavLink className='user-card-a-tag' to={`/products/${newProducts[0]?.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                            <img className='user-item-img' src={`${newProducts[0]?.previewImg}`}>
+                            </img>
+                            <div className='home-page-product-itemA-price'>{`$${newProducts[0]?.price}.00`}</div>
+                        </NavLink>
+                    </div>
+                    <div style={{position: 'relative'}}>
+                        <NavLink className='user-card-a-tag' to={`/products/${newProducts[1]?.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                            <img className='user-item-img' src={`${newProducts[1]?.previewImg}`}>
+                            </img>
+                            <div className='home-page-product-itemA-price'>{`$${newProducts[1]?.price}.00`}</div>
+                        </NavLink>
+                    </div>
                 </div>
                 <div className='user-item-imgs-container-bottom'>
-                <NavLink to={`/products/${newProducts[2]?.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                    <img className='user-item-img2' src={`${newProducts[2]?.previewImg}`}>
-                        </img>
-                </NavLink>
-                <NavLink to={`/products/${newProducts[3]?.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                    <img className='user-item-img2' src={`${newProducts[3]?.previewImg}`}>
-                    </img>
-                </NavLink>
+                    <div style={{position: 'relative'}}>
+                        <NavLink className='user-card-a-tag' to={`/products/${newProducts[2]?.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                            <img className='user-item-img2' src={`${newProducts[2]?.previewImg}`}>
+                                </img>
+                                <div className='home-page-product-itemA-price'>{`$${newProducts[2]?.price}.00`}</div>
+                        </NavLink>
+                    </div>
+                    <div style={{position: 'relative'}}>
+                        <NavLink className='user-card-a-tag' to={`/products/${newProducts[3]?.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                            <img className='user-item-img3' src={`${newProducts[3]?.previewImg}`}>
+                            </img>
+                            <div className='home-page-product-itemA-price'>{`$${newProducts[3]?.price}.00`}</div>
+                        </NavLink>
+                    </div>
                 </div>
 
             </div>
