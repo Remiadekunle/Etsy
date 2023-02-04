@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
 import { fetchCategory, fetchCategoryRecs } from '../../store/category';
-import FavButton from '../FavButton';
+import FavButton, { FavButton2 } from '../FavButton';
 import './index.css';
 
 function YouMayLike({ids, categoryId}){
@@ -22,6 +22,7 @@ function YouMayLike({ids, categoryId}){
         await dispatch(fetchCategory(categoryId))
         return history.push('/category')
     }
+    
     const recs = useSelector(state => state.category.recs)
     console.log('yaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', recs)
 
@@ -50,15 +51,9 @@ function YouMayLike({ids, categoryId}){
 export default YouMayLike
 
 export function RecsIndex({product}){
-    const [hover, setHover] = useState(false)
-    const toggleHover = () => {
-        setHover(!hover)
-    }
     return(
         <div className='recs-index-container'
         onClick={() => window.scrollTo(0,0)}
-        onMouseEnter={toggleHover}
-        onMouseLeave={toggleHover}
         >
             <NavLink className='recs-index-a' to={`/products/${product.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                 <div>
@@ -71,8 +66,8 @@ export function RecsIndex({product}){
                     {`$${product.price}.00`}
                 </div>
             </NavLink>
-            {hover ?  <FavButton productId={product.id} /> : <></>}
-            {hover ? <div className='recs-index-border'></div> : <></>}
+            <FavButton2 productId={product.id} />
+            <div className='recs-index-border'></div>
         </div>
     )
 }

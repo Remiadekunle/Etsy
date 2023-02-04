@@ -45,7 +45,7 @@ class Product(db.Model):
             'avg': self.review_avg(),
             'faved_user': [user.id for user in self.faved_users],
             'categoryId': self.category.id if self.category else 0,
-            'recs': list(set([product.id for product in self.category.get_recs() if not product.id == self.id]))
+            'recs': list(set([product.id for product in self.category.get_recs() if not product.id == self.id])) if self.category else []
         }
     def to_fav(self):
         return {

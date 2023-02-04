@@ -8,7 +8,7 @@ import { addToCart } from "../../store/cart";
 import ReviewIndex from "./ProductReview";
 import { ComingSoonBuyItNowModal, ComingSoonBuyMessageOwnerModal } from "../ComingSoon";
 import { CreateReviewFormModal } from "./CreateEditReview";
-import FavButton from "../FavButton";
+import FavButton, { FavButton2 } from "../FavButton";
 import { fetchOneProducts } from "../../store/product";
 import Footer, { Footer2 } from "../FooterItems";
 import YouMayLike from "../YouMayLike";
@@ -174,7 +174,7 @@ function ProductIndex(){
                             }
                         </div>
                         <img className="product-index-image" onError={e => { e.currentTarget.src = "https://freight.cargo.site/w/3840/q/75/i/a17dfc0b27e50cb1c75dcd8fcd13a2d11783729f60265d9a00d184bc5a8d9296/VALORANT_1.png"}} src={product.previewImg}></img>
-                        <FavButton productId={productId}/>
+                        <FavButton2 productId={productId}/>
                     </div>
                     <div className="product-details-container">
                         <div className="product-details-owner">
@@ -306,7 +306,7 @@ function ProductIndex(){
                         <div className="meet-seller-owner-container">
                                 <img className="meet-seller-img" src={'https://i.pinimg.com/originals/b1/92/4d/b1924dce177345b5485bb5490ab3441f.jpg'}></img>
                                 <div className="meet-seeler-description">
-                                    <div>
+                                    <div style={{fontSize: '24px'}}>
                                         {product.owner?.username}
                                     </div>
                                     <div>
@@ -331,7 +331,7 @@ function ProductIndex(){
                 </div>
             </div>
             <div style={{margin: '0 15%'}}>
-                <YouMayLike ids={product.recs} categoryId={product.categoryId}/>
+                {product.categoryId ? <YouMayLike ids={product.recs} categoryId={product.categoryId}/> : <></>}
             </div>
             <div style={{width: '100%'}}>
                 <Footer2 />

@@ -41,7 +41,7 @@ function DeleteReviewForm({setShowModal, review}){
                     required
                     className='create-product-input'/>
                 </label>
-                <button className='creater-product-button' type='submit'>Delete your product</button>
+                <button className='creater-product-button' type='submit'>Delete your review</button>
             </form>
         </>
     )

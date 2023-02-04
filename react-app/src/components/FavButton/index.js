@@ -55,7 +55,7 @@ export function FavButton2({productId}){
     return(
         <>
             {user && (
-                <div>
+                <div className='fav-2-div-container'>
                     <FavsMessageModal2 productId={productId} check={check} message={message}/>
                 </div>
             )}
