@@ -11,6 +11,7 @@ import { CreateReviewFormModal } from "./CreateEditReview";
 import FavButton from "../FavButton";
 import { fetchOneProducts } from "../../store/product";
 import Footer, { Footer2 } from "../FooterItems";
+import YouMayLike from "../YouMayLike";
 
 function ProductIndex(){
     const {productId} = useParams()
@@ -35,7 +36,7 @@ function ProductIndex(){
 
 
     if (!product){
-        console.log('ooopsie')
+        // console.log('ooopsie')
         return null
     }
 
@@ -70,7 +71,7 @@ function ProductIndex(){
     }
 
     const findStars = (avg) => {
-        console.log('testing the type', typeof avg)
+        // console.log('testing the type', typeof avg)
         if (avg === 0) return 'No Reviews'
         if (avg >  0 && avg <= 1) return <i class="fa-solid fa-star fa-xs"></i>
         else if (avg >=  1 && avg < 2) {
@@ -121,7 +122,7 @@ function ProductIndex(){
         e.preventDefault();
         setOptionsError([])
         setQuantityError([])
-        console.log('the quant', quantity)
+        // console.log('the quant', quantity)
         // const payloadQ = quantity
         if (quantity === 0) {
             setQuantityError(['Please input a quantity greater than 0'])
@@ -139,22 +140,22 @@ function ProductIndex(){
     }
     findStars(product.avg)
     let {options } = product;
-    console.log(options)
+    // console.log(options)
     options = options.split('-')
-    console.log('yooooooooooo this is the option', option)
-    console.log('yooooooooooo this is the option', optionValue)
-    console.log('ummmmmmmmmmmmmmmmmm', optionsError?.length > 0)
+    // console.log('yooooooooooo this is the option', option)
+    // console.log('yooooooooooo this is the option', optionValue)
+    // console.log('ummmmmmmmmmmmmmmmmm', optionsError?.length > 0)
     const placeImgs = []
 
     for (let i = 0; i < 9; i++){
         placeImgs.push(i)
     }
     const id = product.id
-    console.log('this is def working nnnnnnnnnnnnnnnnnnnnnnnnnnn', id)
+    // console.log('this is def working nnnnnnnnnnnnnnnnnnnnnnnnnnn', id)
     const optionsErrorName = optionsError?.length > 0 ? 'options-error-class' : 'options-error-class2'
     const quantityErrorName = quantityError?.length > 0 ? 'quantity-error-class' : 'quantity-error-class2'
-    console.log('ummmmmmmmmmmmm again', optionsErrorName)
-    console.log(optionsError)
+    // console.log('ummmmmmmmmmmmm again', optionsErrorName)
+    // console.log(optionsError)
 
     return(
         <div style={{position: 'relative', width: '100%', height: '100%'}}>
@@ -327,6 +328,9 @@ function ProductIndex(){
                         </div> : <></> }
                     </div>
                 </div>
+            </div>
+            <div style={{margin: '0 15%'}}>
+                <YouMayLike />
             </div>
             <div style={{width: '100%'}}>
                 <Footer2 />

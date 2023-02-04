@@ -28,7 +28,7 @@ const NavBar = ({setSearch, search, setFilter}) => {
 
   useEffect(() => {
     return () => {
-      console.log('this is b4 dismount')
+      // console.log('this is b4 dismount')
       localStorage.setItem('search', search)
     }
   }, [])
@@ -50,7 +50,7 @@ const NavBar = ({setSearch, search, setFilter}) => {
   const handleSearch = async (e) => {
     e.preventDefault();
     if (search.length === 0) return
-    console.log('this is the search', search)
+    // console.log('this is the search', search)
     await dispatch(clearSearch())
     await dispatch(getSearch(search))
     localStorage.setItem('search', search)

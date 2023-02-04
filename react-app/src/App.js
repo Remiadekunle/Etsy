@@ -36,7 +36,7 @@ function App() {
       dispatch(fetchOrders())
       // const prevSearch = localStorage.getItem('search')
       const prevSearch = sessionStorage.getItem('search')
-      console.log('are we getting the search at all', sessionStorage.getItem('search'))
+      // console.log('are we getting the search at all', sessionStorage.getItem('search'))
       if (prevSearch) {
         dispatch(getSearch(prevSearch))
         setSearch(prevSearch)

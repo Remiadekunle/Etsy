@@ -18,15 +18,15 @@ function EditCartItemForm({setShowModal, product, item}){
     const handleSubmit = async (e) => {
         e.preventDefault();
         const newErrors = []
-        console.log('hi were in the submite with', newQuant)
+        // console.log('hi were in the submite with', newQuant)
         if (parseInt(newQuant) === parseInt(item.quantity)){
           newErrors.push('Please enter new quantity')
           setErrors(newErrors)
-          console.log('ummmm i think you should return')
+          // console.log('ummmm i think you should return')
           return
         }
         if (parseInt(newQuant) > parseInt(item.quantity)){
-          console.log('yep its def greater')
+          // console.log('yep its def greater')
           const final = parseInt(newQuant) - parseInt(item.quantity)
           dispatch(addToCart(product.id, final, item.option))
         } else{

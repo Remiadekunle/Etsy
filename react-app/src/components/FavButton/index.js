@@ -8,14 +8,14 @@ function FavButton({productId}){
     const user = useSelector(state => state.session.user)
     const dispatch = useDispatch()
     const favs = user?.favIds
-    console.log('hey were actually getting the user favs', favs)
-    console.log('hey were actually getting the user favs', productId)
+    // console.log('hey were actually getting the user favs', favs)
+    // console.log('hey were actually getting the user favs', productId)
     const check = favs?.indexOf(parseInt(productId))
-    console.log('what is the result of the check', check)
+    // console.log('what is the result of the check', check)
     const message = check === -1 ? 'Removed from your favorites' : 'Added to your favorites'
     const handleFavs = (e, id) => {
         e.preventDefault();
-        console.log(id)
+        // console.log(id)
         if (check === -1){
             dispatch(addFavorite(id))
         } else{
@@ -51,14 +51,14 @@ function FavoritesDivToggle({type, message}){
 export function FavsMessageModal({productId, check, message}){
     const dispatch = useDispatch()
     const [showModal, setShowModal] = useState(false);
-    console.log('yo whats the id here', productId)
+    // console.log('yo whats the id here', productId)
 
     let timeOutId;
     useEffect(() => {
         return () => clearInterval(timeOutId)
     }, [])
     const handleFavs = async (id) => {
-        console.log(id)
+        // console.log(id)
         if (check === -1){
             await dispatch(addFavorite(id))
         } else{

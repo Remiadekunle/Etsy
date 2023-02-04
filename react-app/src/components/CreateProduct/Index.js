@@ -63,7 +63,7 @@ function CreateProductForm({setShowModal}){
             setErrors(['name: name must atleast 1 letter'])
             return
         }
-        console.log(typeof price)
+        // console.log(typeof price)
         const payload = {
             name,
             description,
@@ -81,11 +81,11 @@ function CreateProductForm({setShowModal}){
         })
 
         const errors = body.errors
-        console.log('yo theses are the errrors man', body)
+        // console.log('yo theses are the errrors man', body)
         if (body?.length > 0){
-            console.log(body)
+            // console.log(body)
 
-            console.log('plz')
+            // console.log('plz')
             setErrors(body)
             return
         }

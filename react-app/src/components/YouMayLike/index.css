@@ -1,0 +1,36 @@
+.YML-container{
+    display: flex;
+    border: 1px solid red;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 350px;
+    margin-bottom: 100px;
+}
+
+.YML-header{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    height: 100px;
+    align-items: center;
+    border: 1px solid blue;
+}
+
+.YML-button{
+    padding: 10px 15px;
+    border-radius: 20px;
+    border: 2px solid black;
+    background-color: #FFFFFF;
+    cursor: pointer;
+
+}
+
+.YML-header span{
+    font-size: 40px;
+}
+
+.YML-products-container{
+    width: 100%;
+    height: calc(100% - 100px);
+    border: 1px dotted yellow;
+}

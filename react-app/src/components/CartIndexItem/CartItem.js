@@ -45,7 +45,7 @@ function CartItem({item, setNoStock}){
     }
     const updateCart = async (e) => {
         if (cartQuantity === item.quantity) return
-        console.log('we got past the validation', currQuantity)
+        // console.log('we got past the validation', currQuantity)
         if (cartQuantity < currQuantity){
 
         } else{
