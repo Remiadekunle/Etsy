@@ -63,9 +63,11 @@ const searchReducer = (state = initialState, action) => {
             newState = Object.assign({}, state);
             newState.search = {...state.search}
             const search = action.search
+            newState.array = search
             search.forEach((item) => {
                 newState.search[item.id] = item
             })
+
             return newState;
         case ADD_SEARCH:
             newState = Object.assign({}, state)

@@ -11,7 +11,7 @@
 
 .search-input{
     /* width: 65%; */
-    width: 96%;
+    width: 97.4%;
     height: 20px;
     padding: 10px;
     border-radius: 25px;
@@ -21,8 +21,30 @@
 
 .search-form{
     width: 65%;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.nav-search-submit-button{
+    position: absolute;
+    right: 0.2%;
+    top: 1;
+    background-color: transparent;
+    cursor: pointer;
+    height: 40px;
+    /* border-radius: 25px; */
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    border-style: none;
 }
 
+.nav-search-submit-button:hover{
+    transition: ease 100ms;
+    background-color: #D3D3D3
+}
 
 
 body{
@@ -192,5 +214,3 @@ body{
 .profile-dropdown-view-profile:hover{
     background-color: lightgray;
 }
-
-

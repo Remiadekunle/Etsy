@@ -25,6 +25,7 @@ function App() {
   const [loaded, setLoaded] = useState(false);
   // const [search, setSearch] = useState(localStorage.getItem('search')? localStorage.getItem('search') : '')
   const [search, setSearch] = useState('')
+  const [filter, setFilter] = useState(0)
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -50,7 +51,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar search={search} setSearch={setSearch}/>
+      <NavBar search={search} setSearch={setSearch} setFilter={setFilter}/>
       <Switch>
         <Route path='/login' exact={true}>
           <Welcome />
@@ -79,7 +80,7 @@ function App() {
           <OrderPage />
         </ProtectedRoute>
         <Route path='/search' exact={true}>
-          <SearchPage setSearch={setSearch}  search={search}/>
+          <SearchPage setSearch={setSearch}  search={search} filter={filter} setFilter={setFilter} />
         </Route>
         <ProtectedRoute path='/favorites' exact={true}>
           <FavoritesPage />

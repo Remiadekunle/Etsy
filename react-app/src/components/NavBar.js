@@ -13,7 +13,7 @@ import CreateProductForm, { CreateProductModal } from './CreateProduct/Index';
 import './index.css';
 import OpenModalMenuItem from './OpenModalButton';
 
-const NavBar = ({setSearch, search}) => {
+const NavBar = ({setSearch, search, setFilter}) => {
   const user = useSelector(state => state.session.user)
   const cart = useSelector(state => state.cart.cart)
   const [showMenu, setShowMenu] = useState(false)
@@ -56,6 +56,7 @@ const NavBar = ({setSearch, search}) => {
     localStorage.setItem('search', search)
     sessionStorage.setItem('search', search)
     // setSearch('')
+    setFilter(0)
     return history.push('/search')
   }
 
@@ -85,6 +86,7 @@ const NavBar = ({setSearch, search}) => {
           value={search}
           onChange={e => setSearch(e.target.value)}
           placeholder='Search for products'></input>
+          <button className='nav-search-submit-button' type='submit'><i class="fa-solid fa-magnifying-glass fa-xl"></i></button>
         </form>
         <CreateProductModal />
         <div className='navbar-right-side-container'>
