@@ -44,7 +44,7 @@ function OrderIndex({order}){
                     <div className="order-index-preview">
                         <NavLink to={`/products/${first.id}`}>
                             <div className="order-index-previewImg-container">
-                                <img className="order-index-previewImg" src={`${first.previewImg}`}></img>
+                                <img className="order-index-previewImg" src={`${first.previewImg}`} onError={e => { e.currentTarget.src = "https://freight.cargo.site/w/3840/q/75/i/a17dfc0b27e50cb1c75dcd8fcd13a2d11783729f60265d9a00d184bc5a8d9296/VALORANT_1.png"}}></img>
                             </div>
                         </NavLink>
                         <div className="order-index-preview-item-details">
