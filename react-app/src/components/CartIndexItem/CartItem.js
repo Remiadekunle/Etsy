@@ -59,7 +59,7 @@ function CartItem({item, setNoStock}){
     return(
         <div className="cart-item-index-container">
             <NavLink to={`/products/${product.id}`}>
-                <img className="cart-product-img" src={product?.previewImg}></img>
+                <img className="cart-product-img" src={product?.previewImg} onError={e => { e.currentTarget.src = "https://freight.cargo.site/w/3840/q/75/i/a17dfc0b27e50cb1c75dcd8fcd13a2d11783729f60265d9a00d184bc5a8d9296/VALORANT_1.png"}}></img>
             </NavLink>
             <div className="cart-product-info-container">
                 <div className="cart-product-name-container">
