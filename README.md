@@ -40,27 +40,25 @@ Welcome to Besty!  Start today by clicking the link below!
 
 # 🔍 Get Started on our Server!
 
-<img width="2000" alt="home page" src="https://i.imgur.com/MmzeDVx.jpg">
+<img width="2000" alt="home page" src="https://i.imgur.com/mvmTHpz.png">
 
-You can start by clicking on the Log In button in the top left hand corner or either sign up for an account. You can also log in as a demo user.
+You can start by clicking on the profile button located in the navbar to either log in or sign up for an account. You can also log in as a demo user.
 
-<img width="2000" alt="log in page" src="https://i.imgur.com/6RrYp9L.jpg">
+<img width="2000" alt="log in page" src="https://i.imgur.com/xBwkfGo.png">
 
-After logging in you can create start by creating a server by clicking the + button in the navigation bar on the left of the screen.
+After logging in you can create start by creating a product by clicking the create new product button in the navigation bar on the right of the screen.
 
-<img width="2000" alt="create server" src="https://i.imgur.com/pEJVe2H.jpg">
+<img width="2000" alt="create server" src="https://i.imgur.com/f3QzOX7.png">
 
-After server creation, you start messaging in the general channel or create a channel yourself. If you are on a server that is owned by you. You are able to edit the server's information or delete the server.
+After product creation, you can start commenting on the product or the product to your cart. If you are on a product that is owned by you. You are able to edit the product's information or delete the product.
 
-<img width="2000" alt="edit server modal" src="https://i.imgur.com/zEpYNhi.jpg">
+<img width="2000" alt="edit server modal" src="https://i.imgur.com/xQ4aN09.png">
 
+Once in the cart, you can purchase the item by clicking the place order button.
 
-You can also send private messages directly to users in your @me page. This can be accessed by clicking the icon in the top left hand corner of the screen.
+<img width="2000" alt="@me dms page" src="https://i.imgur.com/ShlulRN.png">
 
-<img width="2000" alt="@me dms page" src="https://i.imgur.com/4AfdEcz.jpg">
-
-When you are ready to log out you can click your profile card located near the bottom left of your screen then click the Log Out button.
-
+When you are ready to log out you can click your profile button located in the navbar then click the Log Out button.
 
 
 # 🖥️ Get Started Locally!
