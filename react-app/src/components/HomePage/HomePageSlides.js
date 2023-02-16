@@ -85,7 +85,9 @@ export function SlideIndex({product, index}){
     return(
         <div key={index} className="home-slide" >
             <NavLink to={`/products/${product.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                <img className="home-slide-img" src={product.previewImg}></img>
+                <img
+                onError={e => { e.currentTarget.src = "https://freight.cargo.site/w/3840/q/75/i/a17dfc0b27e50cb1c75dcd8fcd13a2d11783729f60265d9a00d184bc5a8d9296/VALORANT_1.png"}}
+                className="home-slide-img" src={product.previewImg}></img>
                 <div className='home-page-product-itemA-price'>{`$${product?.price}.00`}</div>
             </NavLink>
             <FavButton2 className='slideshow-fav' productId={product?.id} />
