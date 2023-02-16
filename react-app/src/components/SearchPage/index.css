@@ -1,5 +1,5 @@
 .search-results-container{
-    margin: 20px 15% 0px 15%;
+    margin: 10px 15% 0px 15%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     /* grid-template-rows: 280px; */
@@ -70,3 +70,16 @@
     display: flex;
     gap: 5px;
 }
+
+
+.search-results-filter-container{
+    margin: 0px 15% 0px 15%;
+}
+
+.search-select-field{
+    padding: 5px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+

@@ -15,6 +15,35 @@
     cursor: pointer;
 }
 
+.fav-button2{
+    position: absolute;
+    right: 5%;
+    top: 2%;
+    z-index: 20;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    /* padding: 10px; */
+    border-style: none;
+    background-color: white;
+    border-radius: 50%;
+    transition: ease-in 200ms;
+    cursor: pointer;
+}
+
+.fav-button2:hover{
+    box-shadow: 0px 0px 2px 1px rgba(0, 0, 255, .2);
+    width: 37px;
+    height: 37px;
+    top: 1.7%;
+    right: 4.9%;
+    /* background-color: red; */
+    z-index: 2;
+}
+
 .fav-button:hover{
     position: absolute;
     right: 5%;
@@ -31,6 +60,7 @@
     border-radius: 50%;
     cursor: pointer;
 }
+
 
 .fav-liked{
     color: red;

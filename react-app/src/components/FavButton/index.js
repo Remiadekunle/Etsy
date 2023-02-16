@@ -8,14 +8,14 @@ function FavButton({productId}){
     const user = useSelector(state => state.session.user)
     const dispatch = useDispatch()
     const favs = user?.favIds
-    console.log('hey were actually getting the user favs', favs)
-    console.log('hey were actually getting the user favs', productId)
+    // console.log('hey were actually getting the user favs', favs)
+    // console.log('hey were actually getting the user favs', productId)
     const check = favs?.indexOf(parseInt(productId))
-    console.log('what is the result of the check', check)
+    // console.log('what is the result of the check', check)
     const message = check === -1 ? 'Removed from your favorites' : 'Added to your favorites'
     const handleFavs = (e, id) => {
         e.preventDefault();
-        console.log(id)
+        // console.log(id)
         if (check === -1){
             dispatch(addFavorite(id))
         } else{
@@ -28,6 +28,35 @@ function FavButton({productId}){
             {user && (
                 <div>
                     <FavsMessageModal productId={productId} check={check} message={message}/>
+                </div>
+            )}
+        </>
+    )
+}
+export function FavButton2({productId}){
+    const user = useSelector(state => state.session.user)
+    const dispatch = useDispatch()
+    const favs = user?.favIds
+    // console.log('hey were actually getting the user favs', favs)
+    // console.log('hey were actually getting the user favs', productId)
+    const check = favs?.indexOf(parseInt(productId))
+    // console.log('what is the result of the check', check)
+    const message = check === -1 ? 'Removed from your favorites' : 'Added to your favorites'
+    const handleFavs = (e, id) => {
+        e.preventDefault();
+        // console.log(id)
+        if (check === -1){
+            dispatch(addFavorite(id))
+        } else{
+            dispatch(removeFavorite(id))
+        }
+    }
+
+    return(
+        <>
+            {user && (
+                <div className='fav-2-div-container'>
+                    <FavsMessageModal2 productId={productId} check={check} message={message}/>
                 </div>
             )}
         </>
@@ -51,20 +80,18 @@ function FavoritesDivToggle({type, message}){
 export function FavsMessageModal({productId, check, message}){
     const dispatch = useDispatch()
     const [showModal, setShowModal] = useState(false);
-    console.log('yo whats the id here', productId)
-    let timeOutId;
+    // console.log('yo whats the id here', productId)
 
-    // useEffect(() => {
-    //     const time = setTimeout(() => {
-    //         setShowModal(false)
-    //     }, [1000])
-    // }, [])
-    const handleFavs = (id) => {
-        console.log(id)
+    let timeOutId;
+    useEffect(() => {
+        return () => clearInterval(timeOutId)
+    }, [])
+    const handleFavs = async (id) => {
+        // console.log(id)
         if (check === -1){
-            dispatch(addFavorite(id))
+            await dispatch(addFavorite(id))
         } else{
-            dispatch(removeFavorite(id))
+            await dispatch(removeFavorite(id))
         }
         clearTimeout(timeOutId)
         timeOutId = setTimeout(() => {
@@ -75,11 +102,52 @@ export function FavsMessageModal({productId, check, message}){
   return (
     <>
       <button className='fav-button' onClick={async () => {
-        setTimeout(() => {
-            timeOutId = setShowModal(true)
-        }, 100)
-        // setShowModal(true)
+        // setTimeout(() => {
+        //     timeOutId = setShowModal(true)
+        // }, 100)
         await handleFavs(productId)
+        setShowModal(true)
+        }}>
+                        {check === -1 ? <i class="fa-regular fa-heart fa-xl"></i> : <i class="fa-solid fa-heart fa-xl fav-liked"></i>}
+                    </button>
+      {showModal && (
+        <Modal2 onClose={() => setShowModal(false)}>
+            <FavoritesDivToggle message={message} check={check}/>
+        </Modal2>
+      )}
+    </>
+  );
+}
+export function FavsMessageModal2({productId, check, message}){
+    const dispatch = useDispatch()
+    const [showModal, setShowModal] = useState(false);
+    // console.log('yo whats the id here', productId)
+
+    let timeOutId;
+    useEffect(() => {
+        return () => clearInterval(timeOutId)
+    }, [])
+    const handleFavs = async (id) => {
+        // console.log(id)
+        if (check === -1){
+            await dispatch(addFavorite(id))
+        } else{
+            await dispatch(removeFavorite(id))
+        }
+        clearTimeout(timeOutId)
+        timeOutId = setTimeout(() => {
+            setShowModal(false)
+        }, 2000)
+    }
+
+  return (
+    <>
+      <button className='fav-button2' onClick={async () => {
+        // setTimeout(() => {
+        //     timeOutId = setShowModal(true)
+        // }, 100)
+        await handleFavs(productId)
+        setShowModal(true)
         }}>
                         {check === -1 ? <i class="fa-regular fa-heart fa-xl"></i> : <i class="fa-solid fa-heart fa-xl fav-liked"></i>}
                     </button>

@@ -1,0 +1,34 @@
+.category-welcome-container{
+    margin: 0 15%;
+    padding: 30px 0px;
+    min-height: 140px;
+    display: flex;
+}
+
+.category-info-description{
+    margin-top: 15px;
+    width: 50%;
+}
+
+.category-products-container{
+    margin: 30px 15%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.category-product-img{
+    /* width: 100%; */
+    max-width: 96%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.category-page-welcome-header{
+    margin: 30px 15%;
+    font-size: 32px;
+}
+
+.categories-heart{
+    color: #F8EBE6;
+}

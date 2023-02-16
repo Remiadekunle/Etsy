@@ -14,12 +14,14 @@ class Product(db.Model):
     options = db.Column(db.String(500), nullable=False)
     owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     preview_img = db.Column(db.String, nullable=False)
+    category_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('categories.id')))
 
     owner = db.relationship("User", back_populates='products')
     cart_items = db.relationship('CartItem', back_populates='product')
     orders = db.relationship('OrderItem', back_populates='product')
     reviews = db.relationship('Review', back_populates='product')
     faved_users = db.relationship('User', secondary=favorites, back_populates='favorites')
+    category = db.relationship("Category", back_populates='products')
     def review_avg(self):
         reviews = [review.stars for review in self.reviews]
         if len(reviews) < 1:
@@ -41,7 +43,9 @@ class Product(db.Model):
             'owner': self.owner.to_dict2(),
             'reviews': [review.to_dict() for review in self.reviews],
             'avg': self.review_avg(),
-            'faved_user': [user.id for user in self.faved_users]
+            'faved_user': [user.id for user in self.faved_users],
+            'categoryId': self.category.id if self.category else 0,
+            'recs': list(set([product.id for product in self.category.get_recs() if not product.id == self.id])) if self.category else []
         }
     def to_fav(self):
         return {

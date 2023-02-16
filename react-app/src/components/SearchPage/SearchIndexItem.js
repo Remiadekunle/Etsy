@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom"
 import { addToCart } from "../../store/cart";
 import { getSearch } from "../../store/search";
+import { scrollUp } from "../CategoryPage";
 import FavButton from "../FavButton";
 
 function SearchIndex(item, search){
@@ -76,7 +77,7 @@ function SearchIndex(item, search){
     const defaultOption = product.options.split('-')[0]
     return(
         <div className="search-index-container">
-            <NavLink to={`/products/${product?.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+            <NavLink to={`/products/${product?.id}`} style={{ textDecoration: 'none', color: 'inherit' }} onClick={scrollUp}>
                 <img className="search-item-img" src={`${product.previewImg}`}
                 onError={e => { e.currentTarget.src = "https://freight.cargo.site/w/3840/q/75/i/a17dfc0b27e50cb1c75dcd8fcd13a2d11783729f60265d9a00d184bc5a8d9296/VALORANT_1.png"}}
                 ></img>

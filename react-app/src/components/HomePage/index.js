@@ -3,12 +3,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { fetchProducts } from '../../store/product';
 import Footer from '../FooterItems';
+import HomePageSlideshow, { HomePageSlideshow2 } from './HomePageSlides';
 import './index.css';
 import ProductCard, { BestyPickCard, ProductCardRound, UserCards } from './productCard';
 
 function HomePage(){
     const product = useSelector(state => state.product.allProducts)
     const user = useSelector(state => state.session.user)
+    useEffect(() => {
+        return () => window.scrollTo(0, 0);
+    }, [])
     return(
         <div className="home-page">
             <div className='welcome-back-background'>
@@ -40,25 +44,24 @@ function HomePage(){
                         </div>
                     </div>
                 </div>
-                <div className='home-sample-products'>
-                    <div className='browse-users-heading'>
-                        <h2>
-                            Browse for items from other users
-                        </h2>
-                        <div className='Usercard-container'>
-                            <UserCards products={product} items={10} name='Omen' ids={[1, 5, 9, 13]}/>
-                            <UserCards products={product} items={6} name='Reyna' ids={[2, 6, 10, 14]}/>
-                            <UserCards products={product} items={25} name='Takeo' ids={[3, 7, 11, 15]}/>
-                            <UserCards products={product} items={4} name='Asta' ids={[4, 8, 12, 16]}/>
-                        </div>
+                <div className='home-slidehow-container'>
+                    <div className='home-slidehow-header'>
+                        Besty's products
                     </div>
+                    <div className='home-slides-container'>
+                        <HomePageSlideshow product={product}/>
+                        <HomePageSlideshow2 product={product}/>
+                    </div>
+                </div>
+                <div className='home-sample-products'>
+
                     <div className='home-sample-gaming'>
                         <div className='Besty-sample-gaming-products'>
                             <div className='Besty-sample-gaming-products-Top'>
                                 <div className='Besty-sample-gaming-heading'>
                                     <div>
                                         Besty's Picks
-                                        <h2>Gaming Wear</h2>
+                                        <h2>Console Gaming</h2>
                                     </div>
                                 </div>
                                 <div className='Besty-sample-gaming-imgs-top'>
@@ -78,6 +81,17 @@ function HomePage(){
                             </img>
                         </div>
                     </div>
+                    <div className='browse-users-heading'>
+                        <h2>
+                            Browse for items from other users
+                        </h2>
+                        <div className='Usercard-container'>
+                            <UserCards products={product} items={10} name='Omen' ids={[1, 5, 9, 13]}/>
+                            <UserCards products={product} items={6} name='Reyna' ids={[2, 6, 10, 14]}/>
+                            <UserCards products={product} items={25} name='Takeo' ids={[3, 7, 11, 15]}/>
+                            <UserCards products={product} items={4} name='Asta' ids={[4, 8, 12, 16]}/>
+                        </div>
+                    </div>
                     {/* <div className='home-sample-keyboards'>
 
                     </div>
@@ -86,7 +100,10 @@ function HomePage(){
                     </div> */}
                 </div>
             </div>
-            {/* <Footer /> */}
+
+            <div className='home-page-container-footer'>
+                <Footer />
+            </div>
             {/* <div className='footer'>
                 <h1>
                     Besty

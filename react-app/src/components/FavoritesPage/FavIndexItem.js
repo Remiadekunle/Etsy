@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import FavButton from '../FavButton';
+import FavButton, { FavButton2 } from '../FavButton';
 
 function FavIndexItem({fav}){
     return(
@@ -16,7 +16,7 @@ function FavIndexItem({fav}){
                     {`$${fav.price}.00`}
                 </div>
             </NavLink>
-            <FavButton productId={fav.id} />
+            <FavButton2 productId={fav.id} />
         </div>
     )
 }

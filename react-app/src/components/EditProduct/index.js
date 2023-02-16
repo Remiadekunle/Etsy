@@ -33,8 +33,6 @@ function EditProductForm({setShowModal, product}){
         if (option1 === '-') newErrors.push('Plz enter a different character')
         if (option2 === '-') newErrors.push('Plz enter a different character')
         if (option3 === '-') newErrors.push('Plz enter a different character')
-
-
         setErrors(newErrors);
     }, [name, previewImg, option3, option2, option1, stock, price, description]);
 
@@ -50,9 +48,10 @@ function EditProductForm({setShowModal, product}){
         if (option1?.trim().length < 1) return
         if (option2?.trim().length < 1) return
         if (option3?.trim().length < 1) return
+
         if (option1 === '-') return
         if (option2 === '-') return
-        if (option3 === '-') return
+
         if (parseInt(stock) === 0) return
         // setErrors([]);
         const options = `${option1}-${option2}-${option3}`

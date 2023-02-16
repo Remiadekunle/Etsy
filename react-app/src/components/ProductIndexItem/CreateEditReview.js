@@ -66,7 +66,7 @@ function CreateReviewForm({setShowModal, product}){
                 </ul>
                 <label className='create-product-label'>
                     <div className="the-modal-review-labels">
-                        stars<i class="fa-solid fa-asterisk fa-2xs"></i>
+                        Stars<i class="fa-solid fa-asterisk fa-2xs"></i>
                     </div>
                     <input
                     type="number"
@@ -79,7 +79,7 @@ function CreateReviewForm({setShowModal, product}){
                 </label>
                 <label className='create-product-label'>
                     <div className="the-modal-review-labels">
-                        content<i class="fa-solid fa-asterisk fa-2xs"></i>
+                        Content<i class="fa-solid fa-asterisk fa-2xs"></i>
                     </div>
                     <input
                     type="text"
@@ -89,7 +89,7 @@ function CreateReviewForm({setShowModal, product}){
                     className='create-product-input' />
                 </label>
                 <label className='create-product-label'>
-                    img
+                    Img
                     <input
                     type="url"
                     value={img}
@@ -172,7 +172,7 @@ export function EditReviewForm({setShowModal, productId, review}){
                 </ul>
                 <label className='create-product-label'>
                     <div className="the-modal-review-labels">
-                        stars<i class="fa-solid fa-asterisk fa-2xs"></i>
+                        Stars<i class="fa-solid fa-asterisk fa-2xs"></i>
                     </div>
                     <input
                     type="number"
@@ -185,7 +185,7 @@ export function EditReviewForm({setShowModal, productId, review}){
                 </label>
                 <label className='create-product-label'>
                     <div className="the-modal-review-labels">
-                        content<i class="fa-solid fa-asterisk fa-2xs"></i>
+                        Content<i class="fa-solid fa-asterisk fa-2xs"></i>
                     </div>
                     <input
                     type="text"
@@ -195,7 +195,7 @@ export function EditReviewForm({setShowModal, productId, review}){
                     className='create-product-input' />
                 </label>
                 <label className='create-product-label'>
-                    img
+                    Img
                     <input
                     type="url"
                     value={img}
