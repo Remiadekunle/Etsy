@@ -9,7 +9,7 @@ class Category(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.Integer, nullable=False)
+    title = db.Column(db.String, nullable=False)
     description = db.Column(db.String(2000))
 
     products = db.relationship("Product", back_populates='category')
