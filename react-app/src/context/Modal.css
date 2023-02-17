@@ -36,7 +36,6 @@
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    z-index: -1;
 }
 
 #modal-background2 {
@@ -46,7 +45,6 @@
     left: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0);
-    z-index: -1;
 }
 
 #modal-content2 {
