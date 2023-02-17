@@ -52,8 +52,10 @@ def seed_products():
         owner=owner3, category=valorant
     ),
     Product(
+
         name='Valorant 3D Recon Phantom', description='Recon Phantom', price=290, stock=20, options='gray-red', preview_img='https://i.imgur.com/pGZezdU.png',
         owner=owner3, category=valorant
+
     ),
     Product(
         name='Valorant 3D Reaver Vandal', description='Reaver Vandal', price=260, stock=20, options='purple-red-black-gray', preview_img='https://i.imgur.com/HfCCfch.png',
@@ -80,6 +82,7 @@ def seed_products():
         owner=owner4, category=cod
     ),
     Product(
+
         name='COD Replica BAL-27 Skin', description='Gun modeled from call of duty advanced warfare gun', price=170, stock=20, options='Small-Large', preview_img='https://i.ytimg.com/vi/b7C_VovHQ4o/maxresdefault.jpg',
         owner=owner5, category=cod
     ),
@@ -138,6 +141,7 @@ def seed_products():
     Product(
         name='COD Replica Elemental Bows', description='Bows from call of duty B03 zombies', price=200, stock=20, options='Small-Large' , preview_img='https://pm1.narvii.com/6453/642f20155308cd84327a2b2d58d0b1575313d423_hq.jpg',
         owner=owner8, category=cod
+
     ),
     ]
 

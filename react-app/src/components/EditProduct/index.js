@@ -23,16 +23,16 @@ function EditProductForm({setShowModal, product}){
         let newErrors = [];
 
         if (name.trim().length < 1) newErrors.push("Product name must be at least 1 letter");
-        else if (name.trim().length > 30) newErrors.push("Product name must be less than 30 characters");
+        else if (name?.trim().length > 30) newErrors.push("Product name must be less than 30 characters");
         if (price < 1) newErrors.push('Price must be greater than $0')
         if (stock < 1) newErrors.push('Stock must be greater than 0')
-        if (description.trim().length < 50) newErrors.push('Description must be greater than 50 letters')
+        if (description?.trim().length < 50) newErrors.push('Description must be greater than 50 letters')
         if (option1?.trim().length < 1) newErrors.push('Option1 must be at least 1 letter')
         if (option2?.trim().length < 1) newErrors.push('Option2 must be at least 1 letter')
         if (option3?.trim().length < 1) newErrors.push('Option2 must be at least 1 letter')
-
-
-
+        if (option1 === '-') newErrors.push('Plz enter a different character')
+        if (option2 === '-') newErrors.push('Plz enter a different character')
+        if (option3 === '-') newErrors.push('Plz enter a different character')
         setErrors(newErrors);
     }, [name, previewImg, option3, option2, option1, stock, price, description]);
 
@@ -40,14 +40,18 @@ function EditProductForm({setShowModal, product}){
     const handleSubmit = async (e) => {
         e.preventDefault();
         // setErrors([]);
-        if (description.trim().length < 50) return
-        if (name.trim().length > 30) {
+        if (description?.trim().length < 50) return
+        if (name?.trim().length > 30) {
             return
         }
         if (parseInt(price) === 0) return
         if (option1?.trim().length < 1) return
         if (option2?.trim().length < 1) return
         if (option3?.trim().length < 1) return
+
+        if (option1 === '-') return
+        if (option2 === '-') return
+
         if (parseInt(stock) === 0) return
         // setErrors([]);
         const options = `${option1}-${option2}-${option3}`

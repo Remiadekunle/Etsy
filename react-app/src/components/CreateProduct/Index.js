@@ -30,6 +30,9 @@ function CreateProductForm({setShowModal}){
         if (option2.trim().length < 1) newErrors.push('Option2 must be at least 1 letter')
         if (option3.trim().length < 1) newErrors.push('Option2 must be at least 1 letter')
         if (description.trim().length < 50) newErrors.push('Description must be greater than 50 letters')
+        if (option1 === '-') newErrors.push('Plz enter a different character')
+        if (option2 === '-') newErrors.push('Plz enter a different character')
+        if (option3 === '-') newErrors.push('Plz enter a different character')
 
 
 
@@ -53,6 +56,9 @@ function CreateProductForm({setShowModal}){
         if (option1.trim().length < 1) return
         if (option2.trim().length < 1) return
         if (option3.trim().length < 1) return
+        if (option1 === '-') return
+        if (option2 === '-') return
+        if (option3 === '-') return
         if (price === 0) return
         if (stock === 0) return
         // setErrors([]);
