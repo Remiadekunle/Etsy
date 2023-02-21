@@ -504,3 +504,21 @@
         width: 80%;
     }
 }
+
+@media screen and (max-width: 1444px){
+    .welcome-back-container{
+        margin: 100px 5% 0px 5%;
+    }
+
+    .Besty-sample-gaming-row-img{
+        width: 170px;
+    }
+    
+    .home-sample-gaming{
+        height: 400px;
+    }
+    .home-page-product-itemA-img{
+        width: 240px;
+        /* height: 140px; */
+    }
+}

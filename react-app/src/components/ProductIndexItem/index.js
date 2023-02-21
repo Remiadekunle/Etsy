@@ -330,7 +330,7 @@ function ProductIndex(){
                     </div>
                 </div>
             </div>
-            <div style={{margin: '0 15%'}}>
+            <div className="YML-product-page-container">
                 {product.categoryId ? <YouMayLike ids={product.recs} categoryId={product.categoryId}/> : <></>}
             </div>
             <div style={{width: '100%'}}>
