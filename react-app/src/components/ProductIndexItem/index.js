@@ -220,8 +220,8 @@ function ProductIndex(){
                                         {quantityError.map((error,idx) =>(<li key={idx}>{error}</li>))}
                                     </ul>
                                 </div>
-                                <button className="product-quantity-button" onClick={incrimentQuantity}><i class="fa-solid fa-plus"></i></button>
                                 <button className="product-quantity-button" onClick={decrimentQuantity}><i class="fa-solid fa-minus"></i></button>
+                                <button className="product-quantity-button" onClick={incrimentQuantity}><i class="fa-solid fa-plus"></i></button>
                             </div>
                         </div>
                         <ComingSoonBuyItNowModal feature={'Direct purchase from product listing'}/>

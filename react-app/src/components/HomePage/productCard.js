@@ -2,27 +2,31 @@ import { useState } from "react"
 import { useSelector } from "react-redux"
 import { NavLink } from "react-router-dom"
 import FavButton, { FavButton2 } from "../FavButton"
-function ProductCard({product}){
+function ProductCard({product, extra}){
     const [hover, setHover] = useState(false)
 
     const toggleHover = () => {
         setHover(!hover)
     }
+    const nextClass = extra? extra : ''
+    const className = `home-page-product-itemA-container ${nextClass}`
+    // console.log('what is the className', className)
     return(
-        <div className="home-page-product-itemA-container" onMouseEnter={toggleHover} onMouseLeave={toggleHover}>
+        <div className={className} onMouseEnter={toggleHover} onMouseLeave={toggleHover}>
             <NavLink to={`/products/${product?.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                 <div className='home-page-product-itemA'>
                         <img className='home-page-product-itemA-img' src={`${product?.previewImg}`}></img>
                         <div className='home-page-product-itemA-price'>{`$${product?.price}.00`}</div>
                 </div>
             </NavLink>
-            {hover ? <FavButton2 productId={product?.id} /> : <></>}
-
+            <FavButton2 productId={product?.id} />
         </div>
     )
+
 }
 
-export function ProductCardRound({product}){
+
+export function ProductCardRound({product, extra}){
     return(
         <NavLink to={`/products/${product?.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
             <div className='home-page-welcome-hub-item-container'>
@@ -34,22 +38,25 @@ export function ProductCardRound({product}){
 }
 
 
-export function BestyPickCard({product}){
+export function BestyPickCard({product, extra}){
     const [hover, setHover] = useState(false)
 
     const toggleHover = () => {
         setHover(!hover)
     }
+    const nextClass = extra? extra : ''
+    const className = `Besty-sample-gaming-row-img-container ${nextClass}`
     return(
-        <div className="Besty-sample-gaming-row-img-container" onMouseEnter={toggleHover} onMouseLeave={toggleHover}>
+        <div className={className} onMouseEnter={toggleHover} onMouseLeave={toggleHover}>
             <NavLink to={`/products/${product?.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                 <img className='Besty-sample-gaming-row-img' src={`${product?.previewImg}`}></img>
-                {hover ? <div className='home-page-product-itemA-price'>{`$${product?.price}.00`}</div> : <></>}
+                <div className='home-page-product-itemA-price'>{`$${product?.price}.00`}</div>
             </NavLink>
-            {hover ? <FavButton2 productId={product?.id} /> : <></>}
+            <FavButton2 productId={product?.id} />
         </div>
     )
 }
+
 export function BestyPickCardBig({product}){
     return(
         <div className="home-page-product-itemA-container">
@@ -61,7 +68,7 @@ export function BestyPickCardBig({product}){
     )
 }
 
-export function UserCards({name, products, items, ids}){
+export function UserCards({name, products, items, ids, extra}){
     const [hover, setHover] = useState(false)
 
     const toggleHover = () => {
@@ -72,8 +79,10 @@ export function UserCards({name, products, items, ids}){
         const product = products[id]
         newProducts.push(product)
     })
+    const nextClass = extra? extra : ''
+    const className = `browse-user-item-container ${nextClass}`
     return(
-        <div className='browse-user-item-container'>
+        <div className={className}>
             <div className='browse-user-item-username'>
                 <div style={{display: 'flex', gap: '5px', alignItems: 'center'}}>
                     {name}
@@ -122,5 +131,6 @@ export function UserCards({name, products, items, ids}){
         </div>
     )
 }
+
 
 export default ProductCard

@@ -11,7 +11,23 @@ function OrderPage(){
     }
     const className = toggle ? 'disabled-search-feature' : 'disabled-search-feature disabled-hidden'
     const orderList = Object.values(orders)
-    console.log('yo what is the orderlist for this', orderList)
+
+   const compare = ( a, b, param, reverse ) => {
+    // console.log('in compare function', a, b)
+    let aDate = new Date(a.created_at)
+    let bDate = new Date(b.created_at)
+    console.log(bDate < aDate)
+        if ( aDate < bDate ){
+            console.log('we got here actually')
+          return 1
+        }
+        if ( aDate > bDate ){
+          return -1
+        }
+        return 0;
+    }
+    orderList.sort((a,b) => compare(a,b))
+    // console.log('yo what is the orderlist for this', orderList)
     return (
         <div>
             <div className='order-page-background' >

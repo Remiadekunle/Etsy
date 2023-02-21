@@ -13,11 +13,16 @@ import { SignUpFormModal } from './auth/SignUpForm';
 import CreateProductForm, { CreateProductModal } from './CreateProduct/Index';
 import './index.css';
 import OpenModalMenuItem from './OpenModalButton';
+import SearchResultIndex from './SearchResults';
 
 const NavBar = ({setSearch, search, setFilter}) => {
   const user = useSelector(state => state.session.user)
   const cart = useSelector(state => state.cart.cart)
   const [showMenu, setShowMenu] = useState(false)
+  const products =  useSelector(state => state.product.array)
+  const [searchResults, setSearchResults] = useState([])
+  const [showSearchMenu, setShowSearchMenu] = useState(false)
+
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -26,6 +31,20 @@ const NavBar = ({setSearch, search, setFilter}) => {
   const openMenu = () => {
     setShowMenu(!showMenu);
   };
+
+
+
+  const changeResults = () => {
+    // console.log('we actually got the product here', products)
+    const res = products.filter(product => {
+      if (product.name?.toLowerCase().includes(search.toLowerCase())){
+        return true
+      }
+      else if (product.name?.toLowerCase().includes(search.toLowerCase())) return true
+      return false
+    })
+    setSearchResults(res)
+  }
 
   useEffect(() => {
     return () => {
@@ -38,8 +57,10 @@ const NavBar = ({setSearch, search, setFilter}) => {
     if (!showMenu) return;
 
     const closeMenu = (e) => {
+      // console.log('we ran')
       if (!ulRef.current?.contains(e.target)) {
         setShowMenu(false);
+        setShowSearchMenu(false)
       }
     };
 
@@ -47,6 +68,22 @@ const NavBar = ({setSearch, search, setFilter}) => {
 
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
+  useEffect(() => {
+    if (!searchResults) return;
+
+    const closeMenu = (e) => {
+      // console.log('we ran')
+      if (!ulRef.current?.contains(e.target)) {
+        setShowSearchMenu(false)
+      }
+    };
+
+
+
+    document.addEventListener('click', closeMenu);
+
+    return () => document.removeEventListener("click", closeMenu);
+  }, [searchResults]);
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -80,7 +117,7 @@ const NavBar = ({setSearch, search, setFilter}) => {
     return history.push('/cart')
   }
 
-  console.log('searchinggggggggggggggg', search)
+  // console.log('searchinggggggggggggggg', search)
   return (
     <nav className='navbar'>
       <div style={{width: '100%'}}>
@@ -89,13 +126,35 @@ const NavBar = ({setSearch, search, setFilter}) => {
           <NavLink to={'/'} style={{ textDecoration: 'none', color: 'inherit' }}>
             <h1 className='navbar-h1'>Besty</h1>
           </NavLink>
-          <form onSubmit={handleSearch} className='search-form'>
-            <input className='search-input'
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-            placeholder='Search for products'></input>
-            <button className='nav-search-submit-button' type='submit'><i class="fa-solid fa-magnifying-glass fa-xl"></i></button>
-          </form>
+          <div className='search-form-div' ref={ulRef}>
+            <form onSubmit={handleSearch} className='search-form'>
+              <input className='search-input'
+              value={search}
+              onChange={e => {
+                setSearch(e.target.value)
+                changeResults()
+                setShowSearchMenu(true)
+              }}
+              placeholder='Search for products'></input>
+              <button className='nav-search-submit-button' type='submit'><i class="fa-solid fa-magnifying-glass fa-xl"></i></button>
+            </form>
+            <div className='products-search'  style={{boxShadow: !showSearchMenu?  'none' : '0px -2px 2px 4px rgba(0, 0, 255, .2)'}}>
+              {showSearchMenu ?(
+                <div style={{paddingTop: '10px'}}>
+                  {searchResults.map(item => (
+                    <SearchResultIndex product={item} setSearch={setSearch} />
+                  ))}
+                </div>
+                )
+                : <></> }
+              {/* {
+                searchResults.map(item => (
+                  <div>{item.name}</div>
+                ))
+              } */}
+            </div>
+
+          </div>
           <CreateProductModal />
           <div className='navbar-right-side-container'>
             <div className='profile-dropdown-container' onClick={openMenu} ref={ulRef}>

@@ -177,6 +177,7 @@ const productReducer = (state = initialState, action) => {
             newState = Object.assign({}, state);
             newState.allProducts = {...state.allProducts}
             const products = action.products
+            newState.array = products
             products.forEach(product => {
                 newState.allProducts[product.id] = product
             })
