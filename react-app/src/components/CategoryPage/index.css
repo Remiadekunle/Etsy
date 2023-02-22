@@ -13,6 +13,7 @@
 .category-products-container{
     margin: 30px 15%;
     display: grid;
+    min-height: 100vh;
     grid-template-columns: repeat(4, 1fr);
 }
 

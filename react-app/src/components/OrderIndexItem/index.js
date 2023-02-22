@@ -6,17 +6,34 @@ import Footer2 from '../FooterItems';
 function OrderPage(){
     const orders = useSelector(state => state.order.allOrders)
     const [toggle, setToggle] = useState(false)
-    const switchToggle = () => {
-        setToggle(!toggle)
-    }
+    const [orderSearch, setOrderSearch] = useState('')
+    const [searchResults, setSearchResults] = useState([])
+
     const className = toggle ? 'disabled-search-feature' : 'disabled-search-feature disabled-hidden'
     const orderList = Object.values(orders)
+
+    const handleSearch = () => {
+        const res = orderList.filter(order => {
+            let hasVal = false
+            const items = Object.values(order.items)
+            items.forEach(item => {
+                console.log(item.name)
+                if (item.name?.toLowerCase().includes(orderSearch.toLowerCase())) {
+                    console.log('hi')
+                    hasVal =  true
+                }
+                else if (item.description?.toLowerCase().includes(orderSearch.toLowerCase())) hasVal = true
+            })
+            return hasVal
+        })
+        console.log('yo whats the res', res)
+        setSearchResults(res)
+    }
 
    const compare = ( a, b, param, reverse ) => {
     // console.log('in compare function', a, b)
     let aDate = new Date(a.created_at)
     let bDate = new Date(b.created_at)
-    console.log(bDate < aDate)
         if ( aDate < bDate ){
             console.log('we got here actually')
           return 1
@@ -26,6 +43,7 @@ function OrderPage(){
         }
         return 0;
     }
+    console.log('what is the result heree,', searchResults)
     orderList.sort((a,b) => compare(a,b))
     // console.log('yo what is the orderlist for this', orderList)
     return (
@@ -36,12 +54,23 @@ function OrderPage(){
                         <div className='order-welcome-stuff-header'>
                             Purchases
                         </div>
-                        <form onMouseEnter={switchToggle} onMouseLeave={switchToggle}>
-                            <input disabled={true} className='order-search-bar' placeholder={`Search your orders` }></input>
-                            <div className={className}>
-                                Coming soon
+                        {/* <form >
+                            <input
+                            onChange={(e) => {
+                                setOrderSearch(e.target.value)
+                                handleSearch()
+                            }}
+                            className='order-search-bar' placeholder={`Search your orders` }></input>
+                            <div className='order-search-results-container'>
+                                {
+                                    searchResults.map(order => (
+                                        <div>
+                                            {order.items[0]}
+                                        </div>
+                                    ))
+                                }
                             </div>
-                        </form>
+                        </form> */}
                     </div>
 
 

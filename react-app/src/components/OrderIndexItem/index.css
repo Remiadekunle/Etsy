@@ -198,6 +198,13 @@
     justify-content: flex-end;
 }
 
+.order-search-results-container{
+    background-color: #FFFFFF;
+    /* z-index: 2; */
+    position: absolute;
+    width: 160px;
+    padding: 10px;
+}
 
 @media screen and (max-width: 1444px) {
     .order-page-container{

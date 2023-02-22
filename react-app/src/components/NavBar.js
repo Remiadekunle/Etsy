@@ -41,7 +41,7 @@ const NavBar = ({setSearch, search, setFilter}) => {
       if (product.name?.toLowerCase().includes(search.toLowerCase())){
         return true
       }
-      else if (product.name?.toLowerCase().includes(search.toLowerCase())) return true
+      else if (product.description?.toLowerCase().includes(search.toLowerCase())) return true
       return false
     })
     setSearchResults(res)
@@ -152,6 +152,7 @@ const NavBar = ({setSearch, search, setFilter}) => {
             <div className='products-search'  style={{boxShadow: !showSearchMenu?  'none' : '0px -2px 2px 4px rgba(0, 0, 255, .2)'}}>
               {showSearchMenu ?
                 <div style={{paddingTop: '10px'}}>
+                  {searchResults.length < 1 ? <div className='search-menu-results-no-results'>No Results</div> : <></>}
                   {searchResults.map(item => (
                     <SearchResultIndex product={item} showSearchMenu={showSearchMenu} setSearch={setSearch} setShowSearchMenu={setShowSearchMenu} />
                   ))}
