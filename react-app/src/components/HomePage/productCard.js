@@ -94,35 +94,39 @@ export function UserCards({name, products, items, ids, extra}){
             </div>
             <div className='browse-user-item-imgs-container'>
                 <div className='user-item-imgs-container-top'>
-                    <div style={{position: 'relative'}}>
+                    <div className="user-card-prouct-container" style={{position: 'relative'}}>
                         <NavLink className='user-card-a-tag' to={`/products/${newProducts[0]?.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                             <img className='user-item-img' src={`${newProducts[0]?.previewImg}`}>
                             </img>
                             <div className='home-page-product-itemA-price'>{`$${newProducts[0]?.price}.00`}</div>
                         </NavLink>
+                        <FavButton2 productId={newProducts[0]?.id} />
                     </div>
-                    <div style={{position: 'relative'}}>
+                    <div className="user-card-prouct-container" style={{position: 'relative'}}>
                         <NavLink className='user-card-a-tag' to={`/products/${newProducts[1]?.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                             <img className='user-item-img' src={`${newProducts[1]?.previewImg}`}>
                             </img>
                             <div className='home-page-product-itemA-price'>{`$${newProducts[1]?.price}.00`}</div>
                         </NavLink>
+                        <FavButton2 productId={newProducts[1]?.id} />
                     </div>
                 </div>
                 <div className='user-item-imgs-container-bottom'>
-                    <div style={{position: 'relative'}}>
+                    <div className="user-card-prouct-container" style={{position: 'relative'}}>
                         <NavLink className='user-card-a-tag' to={`/products/${newProducts[2]?.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                             <img className='user-item-img2' src={`${newProducts[2]?.previewImg}`}>
                                 </img>
                                 <div className='home-page-product-itemA-price'>{`$${newProducts[2]?.price}.00`}</div>
                         </NavLink>
+                        <FavButton2 productId={newProducts[2]?.id} />
                     </div>
-                    <div style={{position: 'relative'}}>
+                    <div className="user-card-prouct-container" style={{position: 'relative'}}>
                         <NavLink className='user-card-a-tag' to={`/products/${newProducts[3]?.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                             <img className='user-item-img3' src={`${newProducts[3]?.previewImg}`}>
                             </img>
                             <div className='home-page-product-itemA-price'>{`$${newProducts[3]?.price}.00`}</div>
                         </NavLink>
+                        <FavButton2 productId={newProducts[3]?.id} />
                     </div>
                 </div>
 

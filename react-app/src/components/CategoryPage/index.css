@@ -32,3 +32,29 @@
 .categories-heart{
     color: #F8EBE6;
 }
+
+@media screen and (max-width:1444px) {
+    .category-welcome-container{
+        margin: 0 5%;
+    }
+
+    .category-page-welcome-header{
+        margin: 30px 5%;
+    }
+
+    .category-products-container{
+        margin: 30px 5%;
+        min-height: 100vh;
+    }
+}
+
+@media screen and (max-width:1200px) and (min-width: 1001px){
+    .category-products-container{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media screen and (max-width:1000px){
+    .category-products-container{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

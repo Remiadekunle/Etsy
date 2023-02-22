@@ -29,7 +29,7 @@ function OrderPage(){
     orderList.sort((a,b) => compare(a,b))
     // console.log('yo what is the orderlist for this', orderList)
     return (
-        <div>
+        <div style={{height: '100%'}}>
             <div className='order-page-background' >
                 <div className='order-page-welcome-container'>
                     <div className='order-welcome-stuff'>
@@ -56,7 +56,7 @@ function OrderPage(){
                 </div> : <div className='no-orders-default-page'> No Orders</div>
                 }
             </div>
-            <div className='home-page-container-footer' style={{width: '100%', height:'50px',}}>
+            <div className='home-page-container-footer' style={{width: '100%', height:'50px'}}>
                 <Footer2 />
             </div>
         </div>

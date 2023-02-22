@@ -42,7 +42,7 @@ function HomePage(){
                         <ProductCardRound product={product[5]}/>
                     </div>
                     <div className='welcome-back-items'>
-                        <div className='welcome-back-items-groupA'>
+                        {/* <div className='welcome-back-items-groupA'>
                             <ProductCard product={product[6]}/>
                             <ProductCard product={product[7]}/>
                             <ProductCard product={product[8]}/>
@@ -55,7 +55,19 @@ function HomePage(){
                             <ProductCard product={product[12]}/>
                             <ProductCard product={product[1]} extra={'home-page-hidden'}/>
                             <ProductCard product={product[5]} extra={'home-page-hidden'}/>
-                        </div>
+                        </div> */}
+
+                            <ProductCard product={product[6]}/>
+                            <ProductCard product={product[7]}/>
+                            <ProductCard product={product[8]}/>
+                            <ProductCard product={product[9]} extra={'home-page-hidden'}/>
+                            <ProductCard product={product[10]}/>
+                            <ProductCard product={product[10]} extra={'home-page-hidden'}/>
+                            <ProductCard product={product[11]}/>
+                            <ProductCard product={product[12]}/>
+                            <ProductCard product={product[1]} extra={'home-page-hidden'}/>
+                            <ProductCard product={product[5]} extra={'home-page-hidden'}/>
+
                     </div>
                 </div>
                 <div className='home-slidehow-container'>

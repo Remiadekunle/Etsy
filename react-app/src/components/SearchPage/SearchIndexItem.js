@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom"
 import { addToCart } from "../../store/cart";
+import "./index.css";
 import { getSearch } from "../../store/search";
 import { scrollUp } from "../CategoryPage";
 import FavButton from "../FavButton";

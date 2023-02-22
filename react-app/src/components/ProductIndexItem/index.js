@@ -236,7 +236,9 @@ function ProductIndex(){
                             <div>
                                 {`${product.reviews?.length} product reviews`}
                             </div>
-                            {findStars(product.avg) === 'No Reviews' ? '' : findStars(product.avg)}
+                            <div>
+                                {findStars(product.avg) === 'No Reviews' ? '' : findStars(product.avg)}
+                            </div>
                             <CreateReviewFormModal product={product}/>
                         </div>
                         {product.reviews?.map(review => (

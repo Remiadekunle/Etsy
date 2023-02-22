@@ -40,7 +40,7 @@
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: center;
 }
 
 .favs-page-index-item-img{
@@ -69,4 +69,29 @@
 
 .favs-page-index-item{
     position: relative;
+}
+
+
+@media screen and (max-width: 1133px) {
+
+
+
+
+}
+
+@media screen and (max-width: 1444px){
+    .favorites-page-container{
+        margin: 20px 5% 0px 5%;
+        min-height: 100vh;
+    }
+    .favs-page-index-item-img{
+        width: 330px;
+        max-width: none;
+    }
+    .favs-page-index-navlink{
+        width: auto;
+    }
+    .favorites-welcome-section{
+        margin-bottom: 30px;
+    }
 }

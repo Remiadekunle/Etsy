@@ -27,6 +27,7 @@ const NavBar = ({setSearch, search, setFilter}) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const ulRef = useRef();
+  const ulref2 = useRef()
 
   const openMenu = () => {
     setShowMenu(!showMenu);
@@ -60,7 +61,6 @@ const NavBar = ({setSearch, search, setFilter}) => {
       // console.log('we ran')
       if (!ulRef.current?.contains(e.target)) {
         setShowMenu(false);
-        setShowSearchMenu(false)
       }
     };
 
@@ -73,7 +73,9 @@ const NavBar = ({setSearch, search, setFilter}) => {
 
     const closeMenu = (e) => {
       // console.log('we ran')
-      if (!ulRef.current?.contains(e.target)) {
+      if (!ulref2.current?.contains(e.target)) {
+        // console.log('setting false', ulref2)
+        console.log('firing in the useEffect')
         setShowSearchMenu(false)
       }
     };
@@ -95,13 +97,20 @@ const NavBar = ({setSearch, search, setFilter}) => {
     sessionStorage.setItem('search', search)
     // setSearch('')
     setFilter(0)
+    setShowSearchMenu(false)
     return history.push('/search')
   }
 
   const handleCategory = async (id) => {
     await dispatch(fetchCategory(id))
     return history.push('/category')
-}
+  }
+
+  const handleSearchToggle = () => {
+    if (search.trim().length < 1) return
+    console.log('firing in the handleSearchToggle')
+    setShowSearchMenu(true)
+  }
 
 
   const useDemo = async (e) => {
@@ -126,26 +135,28 @@ const NavBar = ({setSearch, search, setFilter}) => {
           <NavLink to={'/'} style={{ textDecoration: 'none', color: 'inherit' }}>
             <h1 className='navbar-h1'>Besty</h1>
           </NavLink>
-          <div className='search-form-div' ref={ulRef}>
+          <div className='search-form-div' ref={ulref2} >
             <form onSubmit={handleSearch} className='search-form'>
               <input className='search-input'
               value={search}
+              onClick={handleSearchToggle}
               onChange={e => {
                 setSearch(e.target.value)
                 changeResults()
+                console.log('firing in the search input')
                 setShowSearchMenu(true)
               }}
               placeholder='Search for products'></input>
               <button className='nav-search-submit-button' type='submit'><i class="fa-solid fa-magnifying-glass fa-xl"></i></button>
             </form>
             <div className='products-search'  style={{boxShadow: !showSearchMenu?  'none' : '0px -2px 2px 4px rgba(0, 0, 255, .2)'}}>
-              {showSearchMenu ?(
+              {showSearchMenu ?
                 <div style={{paddingTop: '10px'}}>
                   {searchResults.map(item => (
-                    <SearchResultIndex product={item} setSearch={setSearch} />
+                    <SearchResultIndex product={item} showSearchMenu={showSearchMenu} setSearch={setSearch} setShowSearchMenu={setShowSearchMenu} />
                   ))}
                 </div>
-                )
+
                 : <></> }
               {/* {
                 searchResults.map(item => (

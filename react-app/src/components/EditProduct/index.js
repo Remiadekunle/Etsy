@@ -97,11 +97,12 @@ function EditProductForm({setShowModal, product}){
                 </label>
                 <label className='create-product-label'>
                     Description
-                    <input
+                    <textarea
                     type="text"
                     required
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
+                    rows={4}
                     className='create-product-input' />
                 </label>
                 <label className='create-product-label'>
