@@ -306,7 +306,9 @@ function ProductIndex(){
                         </div>
                         {sellerToggle ? <div>
                         <div className="meet-seller-owner-container">
-                                <img className="meet-seller-img" src={'https://i.pinimg.com/originals/b1/92/4d/b1924dce177345b5485bb5490ab3441f.jpg'}></img>
+                                <img className="meet-seller-img" 
+                                onError={e => { e.currentTarget.src = "https://cdn.dribbble.com/users/6142/screenshots/5679189/media/1b96ad1f07feee81fa83c877a1e350ce.png?compress=1&resize=400x300&vertical=top"}}
+                                src={product.owner?.profile === null ? "https://cdn.dribbble.com/users/6142/screenshots/5679189/media/1b96ad1f07feee81fa83c877a1e350ce.png?compress=1&resize=400x300&vertical=top" : product.owner?.profile }></img>
                                 <div className="meet-seeler-description">
                                     <div style={{fontSize: '24px'}}>
                                         {product.owner?.username}

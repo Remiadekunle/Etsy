@@ -175,7 +175,7 @@ const NavBar = ({setSearch, search, setFilter}) => {
               {showMenu ? <ul className='profile-ul-dropdown'>
                 {user ? <div className='profile-dropdown-user'>
 
-                  <NavLink to={`/users/${user.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                  <NavLink to={`/favorites`} style={{ textDecoration: 'none', color: 'inherit' }}>
                     <div className='profile-dropdown-view-profile'>
                       <div>
                         <i class="fa-solid fa-user"></i>

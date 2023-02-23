@@ -27,5 +27,6 @@ class Review(db.Model):
             'userId': self.user_id,
             'productId': self.product_id,
             'username': self.user.username,
+            'profileImg': self.user.profile_img,
             'time': self.updated_at
         }
