@@ -128,7 +128,8 @@ function CreateProductForm({setShowModal}){
                     required
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
-                    className='create-product-input' />
+                    className='create-product-input'
+                    rows={4} />
                 </label>
                 <label className='create-product-label'>
                     Price

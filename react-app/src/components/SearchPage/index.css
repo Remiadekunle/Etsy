@@ -83,3 +83,33 @@
 }
 
 
+@media screen and (max-width: 1444px) {
+    .search-results-welcome{
+        margin: 0px 5%;
+    }
+
+    .search-results-container{
+        margin: 10px 5% 0px 5%;
+    }
+}
+
+
+
+@media screen and (max-width:1200px) and (min-width: 1001px){
+    .search-results-container{
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .search-item-img{
+        max-height: none;
+    }
+}
+
+
+@media screen and (max-width:1000px){
+    .search-results-container{
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .search-item-img{
+        max-height: none;
+    }
+}

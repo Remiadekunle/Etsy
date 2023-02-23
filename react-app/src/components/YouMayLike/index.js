@@ -35,7 +35,10 @@ function YouMayLike({ids, categoryId}){
                     You may also like
                 </span>
 
-                <button onClick={handleCategory} className='YML-button'>See more</button>
+                <button onClick={async () => {
+                    await handleCategory()
+                    window.scrollTo(0,0)
+                }} className='YML-button'>See more</button>
             </div>
             <div className='YML-products-container'>
                 {
@@ -53,9 +56,9 @@ export default YouMayLike
 export function RecsIndex({product}){
     return(
         <div className='recs-index-container'
-        onClick={() => window.scrollTo(0,0)}
+        
         >
-            <NavLink className='recs-index-a' to={`/products/${product.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+            <NavLink onClick={() => window.scrollTo(0,0)} className='recs-index-a' to={`/products/${product.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                 <div>
                     <img className='recs-index-img' src={product.previewImg}></img>
                     <div className='recs-index-name'>

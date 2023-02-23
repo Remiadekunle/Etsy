@@ -81,11 +81,12 @@ function CreateReviewForm({setShowModal, product}){
                     <div className="the-modal-review-labels">
                         Content<i class="fa-solid fa-asterisk fa-2xs"></i>
                     </div>
-                    <input
+                    <textarea
                     type="text"
                     required
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
+                    rows={3}
                     className='create-product-input' />
                 </label>
                 <label className='create-product-label'>
@@ -187,11 +188,12 @@ export function EditReviewForm({setShowModal, productId, review}){
                     <div className="the-modal-review-labels">
                         Content<i class="fa-solid fa-asterisk fa-2xs"></i>
                     </div>
-                    <input
+                    <textarea
                     type="text"
                     required
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
+                    rows={3}
                     className='create-product-input' />
                 </label>
                 <label className='create-product-label'>

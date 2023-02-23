@@ -29,14 +29,16 @@
 }
 #modal2 {
     position: fixed;
-    top: 0;
+    /* top: 0; */
     right: 0;
     left: 0;
-    bottom: 5%;
+    bottom: 0;
+    height: 60px;
+    width: 120px;
+    margin: 0% auto;
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    z-index: -1;
 }
 
 #modal-background2 {
@@ -45,8 +47,9 @@
     right: 0;
     left: 0;
     bottom: 0;
+    height: 60px;
+    width: 10px;
     background-color: rgba(0, 0, 0, 0);
-    z-index: -1;
 }
 
 #modal-content2 {

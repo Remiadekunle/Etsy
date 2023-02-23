@@ -11,7 +11,7 @@ function HomePageSlideshow(){
     const [index, setIndex] = useState(0)
     let timeOut;
     useEffect(() => {
-        console.log('jjjjjjjjjjjjjjjjjjjjjjjjjjj this is the index', index)
+        // console.log('jjjjjjjjjjjjjjjjjjjjjjjjjjj this is the index', index)
         const rand = Math.floor(Math.random() * 10)
         timeOut = setTimeout(() => {
             // setIndex(rand % len)
@@ -48,7 +48,7 @@ export function HomePageSlideshow2(){
     const [index, setIndex] = useState(len-1)
     let timeOut;
     useEffect(() => {
-        console.log('jjjjjjjjjjjjjjjjjjjjjjjjjjj this is the index', index)
+        // console.log('jjjjjjjjjjjjjjjjjjjjjjjjjjj this is the index', index)
         const rand = Math.floor(Math.random() * 10)
         timeOut = setTimeout(() => {
             // setIndex(rand % len)
@@ -58,7 +58,7 @@ export function HomePageSlideshow2(){
      return () => clearTimeout(timeOut)
     }, [index])
     return (
-        <div className="home-slideshow">
+        <div className="home-slideshow2">
           <div className="home-slideshowSlider" style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}>
             {
                 productsArr.map(product => (

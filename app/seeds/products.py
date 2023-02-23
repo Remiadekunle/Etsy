@@ -141,7 +141,42 @@ def seed_products():
     Product(
         name='COD Replica Elemental Bows', description='Bows from call of duty B03 zombies', price=200, stock=20, options='Small-Large' , preview_img='https://pm1.narvii.com/6453/642f20155308cd84327a2b2d58d0b1575313d423_hq.jpg',
         owner=owner8, category=cod
-
+    ),
+    Product(
+        name='Pokemon Master Ball Replica', description='Master ball from the pokemon videogames', price=100, stock=20, options='Small-medium-Large' , preview_img='https://www.gamebyte.com/wp-content/uploads/2019/03/master-ball-pokemon-lets-go-2_feature.jpg',
+        owner=owner8, category=pokemon
+    ),
+    Product(
+        name='Pokemon Pikachu Plushie Replica', description='Plushie from the pokemon videogames', price=120, stock=20, options='Small-medium-Large' , preview_img='https://g5j7v8q8.stackpathcdn.com/wp-content/uploads/2022/08/Pokemon-Sleeping-Gosedjur-Pikachu-1.jpg',
+        owner=owner8, category=pokemon
+    ),
+    Product(
+        name='Pokemon Eevee Plushie Replica', description='Plushie from the pokemon videogames', price=120, stock=20, options='Small-medium-Large' , preview_img='https://i.pinimg.com/originals/71/9c/e4/719ce40c64716db52d648f7766dd0031.jpg',
+        owner=owner9, category=pokemon
+    ),
+    Product(
+        name='Pokemon Charmander Plushie Replica', description='Plushie from the pokemon videogames', price=120, stock=20, options='Small-medium-Large' , preview_img='https://cdn11.bigcommerce.com/s-urahz4qi23/images/stencil/1280x1280/products/1486/2678/vdd_1200x1200__99527.1638143288.png?c=1',
+        owner=owner9, category=pokemon
+    ),
+    Product(
+        name='Pokemon Mew Plushie Replica', description='Plushie from the pokemon videogames', price=120, stock=20, options='Small-medium-Large' , preview_img='https://www.pokemoncenter.com/images/DAMRoot/High/10000/P5517_701-04636_01.jpg',
+        owner=owner9, category=pokemon
+    ),
+    Product(
+        name='Pokemon Lucario Plushie Replica', description='Plushie from the pokemon videogames', price=120, stock=20, options='Small-medium-Large' , preview_img='https://i5.walmartimages.com/asr/bfa01889-137c-4e94-9562-aec3c8cc996c.014a5592f5e4e544bb7c3e1dd883a627.jpeg',
+        owner=owner9, category=pokemon
+    ),
+    Product(
+        name='Pokemon Charizard Plushie Replica', description='Plushie from the pokemon videogames', price=120, stock=20, options='Small-medium-Large' , preview_img='https://m.media-amazon.com/images/I/51dnMAqGy9L.jpg',
+        owner=owner8, category=pokemon
+    ),
+    Product(
+        name='Pokemon Arceus Plushie Replica', description='Plushie from the pokemon videogames', price=120, stock=20, options='Small-medium-Large' , preview_img='https://cdn.shopify.com/s/files/1/1145/4632/products/8b24e1759ebe4f3e0d39c4f3340c0401_2048x.jpg?v=1650349995',
+        owner=owner8, category=pokemon
+    ),
+    Product(
+        name='Pokemon Greninja Plushie Replica', description='Plushie from the pokemon videogames', price=120, stock=20, options='Small-medium-Large' , preview_img='https://m.media-amazon.com/images/I/817+ZnO7QwL.jpg',
+        owner=owner8, category=pokemon
     ),
     ]
 

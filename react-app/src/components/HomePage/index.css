@@ -15,10 +15,12 @@
 .welcome-back-container{
     display: flex;
     /* width: 100%; */
-    height: 500px;
+    /* height: 500px; */
     flex-direction: column;
+    align-items: center;
     /* border: 1px solid red; */
     margin: 100px 15% 0px 15%;
+    /* overflow: hidden; */
 }
 
 .welcome-back-background{
@@ -35,7 +37,7 @@
 .home-sample-products{
     display: flex;
     /* width: 100%; */
-    height: 900px;
+    /* height: 900px; */
     flex-direction: column;
     margin: 10px 15%;
     /* border: 1px solid blue; */
@@ -71,18 +73,23 @@
     margin: 0px 200px;
     /* border: 1px solid green; */
     /* width: 100%; */
-    height: 200px;
-    justify-content: space-between;
+    min-height: 200px;
+    justify-content: center;
     align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
 .welcome-back-items{
     display: flex;
-    height: 330px;
+    /* height: 330px; */
+    max-width: 1300px;
     /* border: 1px solid purple; */
     gap: 10px;
     object-fit: contain;
-    flex-direction: column;
+    /* flex-direction: column; */
+    justify-content: center;
+    flex-wrap: wrap;
 
 }
 
@@ -125,11 +132,25 @@
     overflow: hidden;
     max-width: 500px;
 }
+
+.home-slideshow2{
+    margin: 0 auto;
+    overflow: hidden;
+    max-width: 500px;
+}
 .home-slideshowSlider{
     white-space: nowrap;
     transition:  ease 1000ms;
   }
 .home-slide{
+    display: inline-block;
+    /* height: 400px; */
+    width: 100%;
+    border-radius: 40px;
+    position: relative;
+}
+
+.home-slide2{
     display: inline-block;
     /* height: 400px; */
     width: 100%;
@@ -207,7 +228,9 @@
 
 .Usercard-container{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 
@@ -331,6 +354,38 @@
     object-fit: cover;
 }
 
+.browse-user-item-container4{
+    width: 320px;
+    height: 305px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    object-fit: cover;
+}
+.browse-user-item-container3{
+    width: 320px;
+    height: 305px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    object-fit: cover;
+}
+.browse-user-item-container2{
+    width: 320px;
+    height: 305px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    object-fit: cover;
+}
+
+.home-page-hidden{
+
+}
+
 .user-item-img{
     width: 158px;
     height: 130px;
@@ -398,9 +453,89 @@
 .home-slide:hover > a > div{
     display: flex;
 }
+.Besty-sample-gaming-row-img-container > a > div{
+    display: none;
+}
+.Besty-sample-gaming-row-img-container > div{
+    display: none;
+}
+.Besty-sample-gaming-row-img-container:hover > div{
+    display: flex;
+}
 
+.Besty-sample-gaming-row-img-container:hover > a > div{
+    display: flex;
+}
+
+.home-page-product-itemA-container > div{
+    display: none;
+}
+
+.home-page-product-itemA-container:hover >  div{
+    display: flex;
+}
+
+.user-card-prouct-container > div{
+    display: none;
+}
+
+.user-card-prouct-container:hover > div{
+    display: flex;
+}
 /* @media screen and (max-width: 1200px) {
     .home-sample-products{
         margin: 10px 5%;
     }
 } */
+
+@media screen and (max-width: 1100px) {
+    .home-sample-products{
+        margin: 10px 1%;
+    }
+
+    .welcome-back-container{
+        margin: 100px 5% 0px 5%;
+    }
+    .welcome-back-hub{
+        margin: 0;
+    }
+    .home-slideshow2{
+        display: none;
+    }
+
+    .home-page-hidden{
+        display: none;
+    }
+    .Besty-sample-gaming-imgs-top{
+        justify-content: flex-end;
+    }
+
+    .home-page-product-itemA-img{
+        width: 280px;
+    }
+
+    .Besty-sample-gaming-products{
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 1444px){
+    .welcome-back-container{
+        margin: 100px 5% 0px 5%;
+    }
+
+    .Besty-sample-gaming-row-img{
+        width: 170px;
+    }
+
+    .home-sample-gaming{
+        height: 400px;
+    }
+    .home-page-product-itemA-img{
+        width: 240px;
+        /* height: 140px; */
+    }
+    .welcome-back-items{
+        flex-wrap: wrap;
+    }
+}

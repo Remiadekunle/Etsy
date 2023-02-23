@@ -10,7 +10,7 @@ function CategoryPage(){
     const products = useSelector(state => state.category.category)
     const info = useSelector(state => state.category.info)
     if (! products || !Object?.values(products)) return null
-
+    
 
 
     const productsArr = Object?.values(products)

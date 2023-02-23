@@ -220,8 +220,8 @@ function ProductIndex(){
                                         {quantityError.map((error,idx) =>(<li key={idx}>{error}</li>))}
                                     </ul>
                                 </div>
-                                <button className="product-quantity-button" onClick={incrimentQuantity}><i class="fa-solid fa-plus"></i></button>
                                 <button className="product-quantity-button" onClick={decrimentQuantity}><i class="fa-solid fa-minus"></i></button>
+                                <button className="product-quantity-button" onClick={incrimentQuantity}><i class="fa-solid fa-plus"></i></button>
                             </div>
                         </div>
                         <ComingSoonBuyItNowModal feature={'Direct purchase from product listing'}/>
@@ -236,7 +236,9 @@ function ProductIndex(){
                             <div>
                                 {`${product.reviews?.length} product reviews`}
                             </div>
-                            {findStars(product.avg) === 'No Reviews' ? '' : findStars(product.avg)}
+                            <div>
+                                {findStars(product.avg) === 'No Reviews' ? '' : findStars(product.avg)}
+                            </div>
                             <CreateReviewFormModal product={product}/>
                         </div>
                         {product.reviews?.map(review => (
@@ -304,7 +306,9 @@ function ProductIndex(){
                         </div>
                         {sellerToggle ? <div>
                         <div className="meet-seller-owner-container">
-                                <img className="meet-seller-img" src={'https://i.pinimg.com/originals/b1/92/4d/b1924dce177345b5485bb5490ab3441f.jpg'}></img>
+                                <img className="meet-seller-img" 
+                                onError={e => { e.currentTarget.src = "https://cdn.dribbble.com/users/6142/screenshots/5679189/media/1b96ad1f07feee81fa83c877a1e350ce.png?compress=1&resize=400x300&vertical=top"}}
+                                src={product.owner?.profile === null ? "https://cdn.dribbble.com/users/6142/screenshots/5679189/media/1b96ad1f07feee81fa83c877a1e350ce.png?compress=1&resize=400x300&vertical=top" : product.owner?.profile }></img>
                                 <div className="meet-seeler-description">
                                     <div style={{fontSize: '24px'}}>
                                         {product.owner?.username}
@@ -330,7 +334,7 @@ function ProductIndex(){
                     </div>
                 </div>
             </div>
-            <div style={{margin: '0 15%'}}>
+            <div className="YML-product-page-container">
                 {product.categoryId ? <YouMayLike ids={product.recs} categoryId={product.categoryId}/> : <></>}
             </div>
             <div style={{width: '100%'}}>
