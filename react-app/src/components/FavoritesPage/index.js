@@ -12,7 +12,24 @@ function FavoritesPage(){
     if (favorites?.length < 1){
         return(
             <div className=''>
-                No Favorites
+                <div className='user-profile-container'>
+                    <div style={{borderRadius: '50%', position: 'relative'}}>
+                        <img className='profile-imgs' src={user.profileImg ? user.profileImg  : ''}
+                        onError={e => { e.currentTarget.src = "https://cdn.dribbble.com/users/6142/screenshots/5679189/media/1b96ad1f07feee81fa83c877a1e350ce.png?compress=1&resize=400x300&vertical=top"}}
+                        ></img>
+                        <EditProfileFormModal2 user={user} />
+                    </div>
+                    <div style={{marginLeft: '20px'}}>
+                        <h2>
+                            {user.username}
+                        </h2>
+                        <EditProfileFormModal user={user} />
+                    </div>
+
+                </div>
+                <h2 style={{width: '7%', margin: '50px auto',  }}>
+                    No Favorites
+                </h2>
             </div>
         )
     }
@@ -48,7 +65,7 @@ function FavoritesPage(){
                         placeholder='Search your favorites'></input>
                     </form> */}
                 </div>
-                <div className='favorites-index-container'>
+                <div className='favorites-index-container' style={{justifyContent: favorites.length % 5 === 0? 'center' : 'flex-start'}}>
                     {favorites && favorites.map(fav => (
                         <FavIndexItem fav={fav} />
                     ))}

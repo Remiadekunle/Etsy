@@ -1,5 +1,6 @@
 .favorites-page-container{
     margin: 20px 15% 0px 15%;
+    min-height: 100vh
 }
 
 .favorites-welcome-section{
