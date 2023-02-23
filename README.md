@@ -34,11 +34,11 @@ Welcome to Besty!  Start today by clicking the link below!
 
 ![Render](https://img.shields.io/badge/Render-%46E3B7.svg?style=for-the-badge&logo=render&logoColor=white)
 
-# 👷 Engineers
+# 👷 Engineer
 - Remi Adekunle [GitHub](https://github.com/Remiadekunle)
 
 
-# 🔍 Get Started on our Server!
+# 🔍 Get Started on my Server!
 
 <img width="2000" alt="home page" src="https://i.imgur.com/mvmTHpz.png">
 
