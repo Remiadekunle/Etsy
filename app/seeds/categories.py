@@ -23,12 +23,10 @@ def seed_categories():
         ),
         Category(
         title='Pokemon',
-        description='Call of Duty is a first-person shooter video game franchise published by Activision. \
-            Starting out in 2003, it first focused on games set in World War II. Over time, the series has seen \
-                games set in the midst of the Cold War, futuristic worlds, and the modern day. The games were first \
-                    developed by Infinity Ward, then also by Treyarch and Sledgehammer Games. Several spin-off and handheld \
-                        games were made by other developers. The most recent title, Call of Duty: Modern Warfare II, was \
-                            released on October 28, 2022.'
+        description='Pokémon is a Japanese media franchise managed by The Pokémon Company, founded by Nintendo, Game Freak, and Creatures. \
+            The franchise was created by Satoshi Tajiri in 1996, and is centered around fictional creatures called "Pokémon". \
+            In Pokémon, Pokémon Trainers are people who catch, train, care for, and battle with Pokémon.\
+              The English slogan for the franchise is "Gotta Catch ‘Em All!". There are currently 1008 Pokémon species.'
         ),
     ]
 
