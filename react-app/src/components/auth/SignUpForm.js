@@ -19,20 +19,21 @@ const SignUpForm = () => {
   const onSignUp = async (e) => {
     e.preventDefault();
     const test = '@'
-    console.log(email.indexOf(test))
+    // console.log(email.indexOf(test))
     setErrors([])
     const set = new Set(username.split(''))
-    if (set.size === 1 && set.has(' ')) {
-      console.log('um did we get herre')
-      setErrors(['Username: Username must not be all whitespace'])
+    const nameCheck = username.trim()
+    if (nameCheck.length < 1) {
+      // console.log('um did we get herre')
+      setErrors(['Username: Username must atleast 1 letter'])
       return
   }
-  else if (set.size < 1){
-    setErrors(['Username: Please enter a Username'])
+  if (username.trim().length > 40){
+    setErrors(['Username: Username must less than 40 letter'])
     return
   }
   if (email.indexOf(test) === -1){
-    console.log('hey we made it to the  if statement', email)
+    // console.log('hey we made it to the  if statement', email)
     setErrors(['Email: Email must include @'])
     return
   }
@@ -88,7 +89,7 @@ const SignUpForm = () => {
         </div>
         <div>
           {errors.map((error, ind) => (
-            <div key={ind}>{error}</div>
+            <div className='product-modal-errors' key={ind}>{error}</div>
           ))}
         </div>
         <div className='login-form-containers'>

@@ -18,15 +18,15 @@ function EditCartItemForm({setShowModal, product, item}){
     const handleSubmit = async (e) => {
         e.preventDefault();
         const newErrors = []
-        console.log('hi were in the submite with', newQuant)
+        // console.log('hi were in the submite with', newQuant)
         if (parseInt(newQuant) === parseInt(item.quantity)){
           newErrors.push('Please enter new quantity')
           setErrors(newErrors)
-          console.log('ummmm i think you should return')
+          // console.log('ummmm i think you should return')
           return
         }
         if (parseInt(newQuant) > parseInt(item.quantity)){
-          console.log('yep its def greater')
+          // console.log('yep its def greater')
           const final = parseInt(newQuant) - parseInt(item.quantity)
           dispatch(addToCart(product.id, final, item.option))
         } else{
@@ -72,10 +72,11 @@ function EditCartItemForm({setShowModal, product, item}){
 
 export function EditCartItemModal({product, item}){
     const [showModal, setShowModal] = useState(false);
+    const editCartProductClass = product.stock === 0? 'disabled-edit-cart-item-button' :  'edit-cart-item-button'
 
   return (
     <>
-      <button className="edit-cart-item-button" onClick={() => setShowModal(true)}>{item?.quantity}<i class="fa-solid fa-caret-down"></i></button>
+      <button disabled={product.stock === 0? true : false} className={editCartProductClass} onClick={() => setShowModal(true)}>{item?.quantity}<i class="fa-solid fa-caret-down"></i></button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <EditCartItemForm setShowModal={setShowModal} item={item} product={product}/>

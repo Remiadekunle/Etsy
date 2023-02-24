@@ -81,7 +81,10 @@ function ReviewIndex(review, productId){
                     {reviewItem.content}
                 </div>
                 <div className="review-user-container">
-                    <img className="review-user-img" src="https://i.pinimg.com/originals/b1/92/4d/b1924dce177345b5485bb5490ab3441f.jpg"></img>
+                    <img className="review-user-img" 
+                    onError={e => { e.currentTarget.src = "https://cdn.dribbble.com/users/6142/screenshots/5679189/media/1b96ad1f07feee81fa83c877a1e350ce.png?compress=1&resize=400x300&vertical=top"}}
+                    src={reviewItem.profileImg === null ? "https://cdn.dribbble.com/users/6142/screenshots/5679189/media/1b96ad1f07feee81fa83c877a1e350ce.png?compress=1&resize=400x300&vertical=top" : reviewItem.profileImg }
+                    ></img>
                     <div>{reviewItem.username}</div>
                     <div>{`${month} ${day}, ${year}`}</div>
 

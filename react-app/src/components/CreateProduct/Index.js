@@ -22,11 +22,17 @@ function CreateProductForm({setShowModal}){
     useEffect(() => {
         let newErrors = [];
 
-        if (name.length < 1) newErrors.push("Product name must be at least 1 character");
-        else if (name.length > 30) newErrors.push("Product name must be less than 30 characters");
+        if (name.trim().length < 1) newErrors.push("Product name must be at least 1 letter");
+        else if (name.trim().length > 30) newErrors.push("Product name must be less than 30 characters");
         if (price < 1) newErrors.push('Price must be greater than $0')
         if (stock < 1) newErrors.push('Stock must be greater than 0')
-        if (description.length < 50) newErrors.push('Description must be greater than 50 characters')
+        if (option1.trim().length < 1) newErrors.push('Option1 must be at least 1 letter')
+        if (option2.trim().length < 1) newErrors.push('Option2 must be at least 1 letter')
+        if (option3.trim().length < 1) newErrors.push('Option2 must be at least 1 letter')
+        if (description.trim().length < 50) newErrors.push('Description must be greater than 50 letters')
+        if (option1 === '-') newErrors.push('Plz enter a different character')
+        if (option2 === '-') newErrors.push('Plz enter a different character')
+        if (option3 === '-') newErrors.push('Plz enter a different character')
 
 
 
@@ -45,18 +51,25 @@ function CreateProductForm({setShowModal}){
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (description.length < 50) return
-        if (name.length > 30) return
+        if (description.trim().length < 50) return
+        if (name.trim().length > 30) return
+        if (option1.trim().length < 1) return
+        if (option2.trim().length < 1) return
+        if (option3.trim().length < 1) return
+        if (option1 === '-') return
+        if (option2 === '-') return
+        if (option3 === '-') return
         if (price === 0) return
         if (stock === 0) return
         // setErrors([]);
         const options = `${option1}-${option2}-${option3}`
         const set = new Set(name.split(''))
-        if (set.size == 1 && set.has(' ')) {
-            setErrors(['name: name must not be all whitespace'])
+        const nameCheck = name.trim()
+        if (nameCheck.length < 1) {
+            setErrors(['name: name must atleast 1 letter'])
             return
         }
-        console.log(typeof price)
+        // console.log(typeof price)
         const payload = {
             name,
             description,
@@ -74,11 +87,11 @@ function CreateProductForm({setShowModal}){
         })
 
         const errors = body.errors
-        console.log('yo theses are the errrors man', body)
+        // console.log('yo theses are the errrors man', body)
         if (body?.length > 0){
-            console.log(body)
+            // console.log(body)
 
-            console.log('plz')
+            // console.log('plz')
             setErrors(body)
             return
         }
@@ -115,7 +128,8 @@ function CreateProductForm({setShowModal}){
                     required
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
-                    className='create-product-input' />
+                    className='create-product-input'
+                    rows={4} />
                 </label>
                 <label className='create-product-label'>
                     Price

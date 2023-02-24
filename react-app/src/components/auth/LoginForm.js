@@ -13,11 +13,11 @@ const LoginForm = () => {
   const [password, setPassword] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
-  console.log('in modal already heheh')
+  // console.log('in modal already heheh')
 
   const onLogin = async (e) => {
     e.preventDefault();
-    console.log('in the dispatch function')
+    // console.log('in the dispatch function')
     const data = await dispatch(login(email, password));
     dispatch(fetchCart())
     dispatch(fetchOrders())
@@ -51,7 +51,7 @@ const LoginForm = () => {
         </div>
         <div>
           {errors.map((error, ind) => (
-            <div key={ind}>{error}</div>
+            <div className='product-modal-errors' key={ind}>{error}</div>
           ))}
         </div>
         <div className='login-form-containers'>

@@ -1,0 +1,105 @@
+.YML-container{
+    display: flex;
+    /* border: 1px solid red; */
+    flex-direction: column;
+    justify-content: space-between;
+    /* height: 350px; */
+    margin-bottom: 100px;
+}
+
+.YML-header{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    height: 100px;
+    align-items: center;
+    /* border: 1px solid blue; */
+}
+
+.YML-button{
+    padding: 10px 15px;
+    border-radius: 20px;
+    /* border: 2px solid black; */
+    background-color: #FFFFFF;
+    cursor: pointer;
+}
+
+
+
+.YML-button:hover{
+    box-shadow: 0px 0px 2px 1px darkslategray;
+    /* padding: 10.5px 15.5px; */
+}
+
+.YML-header span{
+    font-size: 40px;
+}
+
+.YML-products-container{
+    width: 100%;
+    height: calc(100% - 100px);
+    /* border: 1px dotted yellow; */
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.recs-index-img{
+    width: 100%;
+    height: 170px;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.recs-index-name{
+    display: flex;
+    width: 100%;
+}
+.recs-index-price{
+    display: flex;
+    width: 100%;
+}
+/* display: 'flex', flexDirection: 'column', alignItems: 'center', margin:'0 auto', position: 'relative' */
+.recs-index-border{
+    position: absolute;
+    height: 90%;
+    top: 0;
+    width: 100%;
+    /* border: 1px solid red; */
+    padding: 10px;
+    cursor: pointer;
+    box-shadow: 0px 0px 2px 2px darkslategray;
+    border-radius: 5px;
+    transition: ease 1000ms;
+    z-index: -1;
+}
+.recs-index-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* margin: 0 auto; */
+    position: relative;
+    justify-content: space-between;
+}
+
+.recs-index-a{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 90%;
+    cursor: pointer;
+
+}
+
+.recs-index-container > div{
+    display: none;
+}
+
+.recs-index-container:hover > div{
+    display: flex;
+}
+
+.recs-index-container:hover > div > button{
+    margin-top: 15px;
+}

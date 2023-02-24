@@ -31,10 +31,11 @@
     border-style: none;
     cursor: pointer;
     padding: 10px 5px;
+    font-family: 'Itim', cursive;
 }
 
 .create-product-nav-button:hover{
     background-color: lightgray;
     border-radius: 10px;
-    text-decoration: underline;
+    /* text-decoration: underline; */
 }

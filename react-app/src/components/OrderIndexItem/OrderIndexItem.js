@@ -6,26 +6,26 @@ import './index.css';
 import { ViewReciptPageModal } from "./viewReciept";
 
 function OrderIndex({order}){
-    console.log('yo this is the order', order)
+    // console.log('yo this is the order', order)
     const first = order.preview_item
     // const product = useSelector(state => state.allProducts[first.id])
-    console.log('this is the item', first)
+    // console.log('this is the item', first)
     const months = ["Jan", "Feb", "Mar", "Apr", "May", 'June', "July", 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
     const handleFormat = (time) =>{
         const sections = time.split('-')
-        console.log('just testing', parseInt(sections[1]), sections )
+        // console.log('just testing', parseInt(sections[1]), sections )
         const month = months[parseInt(sections[1]) - 1]
         const str = `${month} ${sections[2]}, ${sections[0]}`
         return str
     }
     const {address, city, state} = order
     const id = first.product_id
-    console.log('im stumped', typeof order.full_created, order.full_created)
+    // console.log('im stumped', typeof order.full_created, order.full_created)
     const createdAt = new Date(order.expires)
     const delivered = new Date(order.deliver_date)
     const cancelWindow = new Date(order.delivery_expires)
-    console.log('diid it work', createdAt)
-    console.log(Date.now() > createdAt)
+    // console.log('diid it work', createdAt)
+    // console.log(Date.now() > createdAt)
 
     return (
         <div className="order-item-container">
@@ -44,7 +44,7 @@ function OrderIndex({order}){
                     <div className="order-index-preview">
                         <NavLink to={`/products/${first.id}`}>
                             <div className="order-index-previewImg-container">
-                                <img className="order-index-previewImg" src={`${first.previewImg}`}></img>
+                                <img className="order-index-previewImg" src={`${first.previewImg}`} onError={e => { e.currentTarget.src = "https://freight.cargo.site/w/3840/q/75/i/a17dfc0b27e50cb1c75dcd8fcd13a2d11783729f60265d9a00d184bc5a8d9296/VALORANT_1.png"}}></img>
                             </div>
                         </NavLink>
                         <div className="order-index-preview-item-details">

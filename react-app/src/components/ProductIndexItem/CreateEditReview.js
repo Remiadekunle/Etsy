@@ -20,8 +20,8 @@ function CreateReviewForm({setShowModal, product}){
     useEffect(() => {
         let newErrors = [];
 
-        if (content.length < 5) newErrors.push('Content: please type atleast 5 chars')
-        if (content.length > 75) newErrors.push('Content: please type under 75 chars')
+        if (content.trim().length < 5) newErrors.push('Content: please type atleast 5 chars')
+        if (content.trim().length > 75) newErrors.push('Content: please type under 75 chars')
         if (stars > 5 || stars < 0) newErrors.push('Stars: please input a number between 1 and 5')
 
         setErrors(newErrors);
@@ -38,11 +38,11 @@ function CreateReviewForm({setShowModal, product}){
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors([]);
-        if (content.length < 5) {
+        if (content.trim().length < 5) {
             setErrors(['Content: please type atleast 5 chars'])
             return
         }
-        else if (content.length > 75){
+        else if (content.trim().length > 75){
             setErrors(['Content: please type under 75 chars'])
             return
         }
@@ -65,7 +65,9 @@ function CreateReviewForm({setShowModal, product}){
                     ))}
                 </ul>
                 <label className='create-product-label'>
-                    stars
+                    <div className="the-modal-review-labels">
+                        Stars<i class="fa-solid fa-asterisk fa-2xs"></i>
+                    </div>
                     <input
                     type="number"
                     required
@@ -76,16 +78,19 @@ function CreateReviewForm({setShowModal, product}){
                     className='create-product-input'/>
                 </label>
                 <label className='create-product-label'>
-                    content
-                    <input
+                    <div className="the-modal-review-labels">
+                        Content<i class="fa-solid fa-asterisk fa-2xs"></i>
+                    </div>
+                    <textarea
                     type="text"
                     required
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
+                    rows={3}
                     className='create-product-input' />
                 </label>
                 <label className='create-product-label'>
-                    img
+                    Img
                     <input
                     type="url"
                     value={img}
@@ -127,8 +132,8 @@ export function EditReviewForm({setShowModal, productId, review}){
     const [errors, setErrors] = useState([]);
     useEffect(() => {
         let newErrors = [];
-        if (content.length < 5) newErrors.push('Content: please type atleast 5 chars')
-        if (content.length > 75) newErrors.push('Content: please type under 75 chars')
+        if (content.trim().length < 5) newErrors.push('Content: please type atleast 5 chars')
+        if (content.trim().length > 75) newErrors.push('Content: please type under 75 chars')
         if (stars > 5 || stars < 0) newErrors.push('Stars: please input a number between 1 and 5')
 
 
@@ -139,11 +144,11 @@ export function EditReviewForm({setShowModal, productId, review}){
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors([]);
-        if (content.length < 5) {
+        if (content.trim().length < 5) {
             setErrors(['Content: please type atleast 5 chars'])
             return
         }
-        else if (content.length > 75){
+        else if (content.trim().length > 75){
             setErrors(['Content: please type under 75 chars'])
             return
         }
@@ -167,7 +172,9 @@ export function EditReviewForm({setShowModal, productId, review}){
                     ))}
                 </ul>
                 <label className='create-product-label'>
-                    stars
+                    <div className="the-modal-review-labels">
+                        Stars<i class="fa-solid fa-asterisk fa-2xs"></i>
+                    </div>
                     <input
                     type="number"
                     required
@@ -178,16 +185,19 @@ export function EditReviewForm({setShowModal, productId, review}){
                     className='create-product-input'/>
                 </label>
                 <label className='create-product-label'>
-                    content
-                    <input
+                    <div className="the-modal-review-labels">
+                        Content<i class="fa-solid fa-asterisk fa-2xs"></i>
+                    </div>
+                    <textarea
                     type="text"
                     required
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
+                    rows={3}
                     className='create-product-input' />
                 </label>
                 <label className='create-product-label'>
-                    img
+                    Img
                     <input
                     type="url"
                     value={img}

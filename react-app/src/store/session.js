@@ -147,6 +147,34 @@ export const signUp = (username, email, password, url) => async (dispatch) => {
   }
 }
 
+export const updateInfo = (email, password, username, id, profile_img) => async (dispatch) => {
+  console.log(profile_img, 'hiiiiiiiiiii')
+  const res = await fetch(`/api/users/${id}`,{
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      username,
+      email,
+      password,
+      profile_img
+    }),
+  })
+
+  if (res.ok){
+    const data = await res.json();
+    dispatch(setUser(data))
+  }
+  else if (res.status < 500) {
+    console.log('hi again')
+      const data = await res.json();
+      if (data.errors) {
+        return data.errors;
+    }
+  }
+}
+
 export default function reducer(state = initialState, action) {
   let newState;
   switch (action.type) {

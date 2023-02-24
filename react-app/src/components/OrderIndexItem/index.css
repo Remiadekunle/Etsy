@@ -3,7 +3,8 @@
 }
 
 .order-page-background{
-    width: 100vw;
+    width: 100%;
+    height: 100%;
 }
 
 .order-item-container{
@@ -40,6 +41,7 @@
     border-bottom: 1px solid darkslategray;
 }
 
+
 .order-welcome-stuff{
     margin: 0px 23%;
     /* width: 77%; */
@@ -49,9 +51,25 @@
 
 .order-search-bar{
     padding: 5px;
+    /* cursor: not-allowed; */
+}
+.disabled-search-feature{
+    width: 170px;
+    font-size: 16px;
+    margin-top: 5px;
+    color: #FFFFFF;
+    background-color: blue;
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    border-radius: 10px;
 }
 
-.order-welcome-stuff div{
+.disabled-hidden{
+    display: none;
+}
+
+.order-welcome-stuff-header{
     font-size: 30px;
 }
 
@@ -146,6 +164,14 @@
     font-weight: bold;
 }
 
+.no-orders-default-page{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: bold;
+}
+
 .view-receipt-page-container{
     width: 400px;
     height: 500px;
@@ -157,11 +183,40 @@
     justify-content: space-between;
     padding: 0px 20px;
     align-items: center;
+    margin: 10px 0;
 }
 
 .order-receipt-page-total{
+    border-top: 1px solid #222222;
     position: absolute;
     bottom: 0;
     padding: 10px;
     right: 0;
+    font-size: 24px;
+    width: 95%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.order-search-results-container{
+    background-color: #FFFFFF;
+    /* z-index: 2; */
+    position: absolute;
+    width: 160px;
+    padding: 10px;
+}
+
+@media screen and (max-width: 1444px) {
+    .order-page-container{
+        margin: 0px 10%;
+        /* height: 100vh; */
+        /* min-height: 1200px; */
+    }
+    .order-page-background{
+        min-height: 100vh;
+    }
+
+    .order-welcome-stuff{
+        margin: 0 10%;
+    }
 }

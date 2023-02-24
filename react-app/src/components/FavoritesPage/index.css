@@ -1,3 +1,139 @@
 .favorites-page-container{
     margin: 20px 15% 0px 15%;
+    min-height: 100vh
+}
+
+.favorites-welcome-section{
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.favorites-welcome-header{
+    font-size: 32px;
+}
+
+.favorites-welcome-header-span{
+    font-size: 16px;
+}
+
+.favorites-welcome-header-icon{
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    border-bottom: 0.5px solid #222222;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.favorites-search-form{
+    width: 98%;
+    margin-top: 5px;
+}
+
+.favorites-search-form-input{
+    width: 100%;
+    padding: 10px;
+    border-radius: 20px;
+    border: 0.5px solid black;
+}
+
+.favorites-index-container{
+    max-width: 100%;
+    /* border: 1px solid blue; */
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.favs-page-index-item-img{
+    /* width: 200px; */
+    height: 200px;
+    max-width: 250px;
+    object-fit: cover;
+    border-radius: 2px;
+    margin-bottom: 5px;
+}
+
+.favs-page-index-navlink{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: flex-start; */
+    margin-bottom: 10px;
+    width: 250px;
+
+}
+
+.favs-page-index-item-name{
+    display: flex;
+    overflow: hidden;
+    height: 18px;
+}
+
+.favs-page-index-item{
+    position: relative;
+}
+
+.user-profile-container{
+    margin: 10px auto;
+    width: 70%;
+    display: flex;
+}
+
+.edit-profile-img-button{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 40px;
+    height: 40px;
+    background-color: #FFFFFF;
+    border-width: 0.5px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.edit-profile-button{
+    background-color: transparent;
+    cursor: pointer;
+    text-decoration: underline;
+    border-style: none;
+    display: flex;
+    padding: 0;
+}
+
+.profile-imgs{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+@media screen and (max-width: 1133px) {
+
+
+
+
+}
+
+@media screen and (max-width: 1444px){
+    .favorites-page-container{
+        margin: 20px 5% 0px 5%;
+        min-height: 100vh;
+    }
+    .favs-page-index-item-img{
+        width: 330px;
+        max-width: none;
+    }
+    .favs-page-index-navlink{
+        width: auto;
+    }
+    .favorites-welcome-section{
+        margin-bottom: 30px;
+    }
+
+    .user-profile-container{
+        margin: 10px 5%;
+    }
 }

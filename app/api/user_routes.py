@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
 from .auth_routes import validation_errors_to_error_messages
 from app.models import User, Product, db
-from ..forms import ProductForm, ReviewForm, SearchForm, FavForm
+from ..forms import ProductForm, ReviewForm, SearchForm, FavForm, UpdateForm
 
 user_routes = Blueprint('users', __name__)
 
@@ -40,6 +40,8 @@ def add_fav():
         current_user.favorites.append(product)
         db.session.commit()
         return current_user.to_dict()
+    else:
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 @user_routes.route('/favorties', methods=['PUT'])
 @login_required
@@ -54,6 +56,8 @@ def edit_fav():
         current_user.favorites.remove(product)
         db.session.commit()
         return current_user.to_dict()
+    else:
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 # @user_routes.route('/<int:id>/favorties', methods=['PUT'])
 # # @login_required
@@ -90,3 +94,19 @@ def edit_fav():
 #         return user.to_dict()
 #     else:
 #         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+@user_routes.route('/<int:id>', methods=["PUT"])
+@login_required
+def update_user(id):
+    user = User.query.get(id)
+    form = UpdateForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        user.email = form.data['email']
+        user.username = form.data['username']
+        user.profile_img = form.data['profile_img']
+        db.session.commit()
+        print('something')
+        return user.to_dict()
+    else:
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 400

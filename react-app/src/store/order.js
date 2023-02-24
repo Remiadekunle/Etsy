@@ -55,6 +55,10 @@ export const createOrder = (address, city, state) => async dispatch => {
     if (res.ok){
         const body = await res.json();
         dispatch(addOrder(body.order))
+        return {}
+    } else{
+        const body = await res.json();
+        return body.errors
     }
 }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Redirect, useHistory } from 'react-router-dom';
+import { clearCart, resetCart } from '../../store/cart';
 import { logout } from '../../store/session';
 
 const LogoutButton = () => {
@@ -8,6 +9,7 @@ const LogoutButton = () => {
   const history = useHistory();
   const onLogout = async (e) => {
     await dispatch(logout());
+    await dispatch(resetCart())
     return history.push('/')
   };
 

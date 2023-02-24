@@ -1,17 +1,25 @@
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom";
 import { clearCart, fetchCart } from "../../store/cart";
 import { addOrder, createOrder } from "../../store/order";
+import { fetchProducts } from "../../store/product";
 import CartItem from "./CartItem"
 import { ClearCartModal } from "./clearCart";
 import './index.css';
 import { PlaceOrderFormModal } from "./placeOrder";
 function CartPage(){
     const cart = useSelector(state => state.cart.cart)
+    const [noStock, setNoStock] = useState(false)
+    const [cartErrors, setCartErrors] = useState([]);
     const dispatch = useDispatch()
     const history = useHistory();
-    console.log('this is the cart', cart)
+    // console.log('this is the cart', cart)
     const tag = cart.items?.length === 1 ? 'item' : 'items'
+
+    useEffect(() => {
+        dispatch(fetchProducts())
+    }, [dispatch])
 
     const deleteCart =  async () => {
         await dispatch(clearCart())
@@ -34,8 +42,13 @@ function CartPage(){
                 </div>
             </div>
             <div className="cart-index-container">
+                <div>
+                    {cartErrors.map((error, ind) => (
+                        <div className='product-modal-errors' key={ind}>{error}</div>
+                    ))}
+                </div>
                 {cart.items?.map(item => (
-                    <CartItem item={item}/>
+                    <CartItem  setNoStock={setNoStock} item={item}/>
                 ))}
                 <div className="cart-total-container">
                     <div className="payment-types-excepted">
@@ -76,7 +89,7 @@ function CartPage(){
                         </div>
                     </div>
                     {/* <button className="cart-place-order-button" onClick={placeOrder}>Place Order</button> */}
-                    <PlaceOrderFormModal cart={cart}/>
+                    <PlaceOrderFormModal setCartErrors={setCartErrors} noStock={noStock} cart={cart}/>
                     {/* <button className="cart-clear-button" type="button" onClick={deleteCart}>Clear Cart</button> */}
                     <ClearCartModal />
                     <button className="besty-coupon-button"><i class="fa-solid fa-tag fa-xl"></i><div>Apply Besty coupon code</div></button>
