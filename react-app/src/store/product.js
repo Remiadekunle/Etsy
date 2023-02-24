@@ -58,7 +58,7 @@ export const fetchOneProducts = (id) => async dispatch => {
 
 
 
-export const createProduct = (payload) => async dispatch => {
+export const createProduct = (payload, formData) => async dispatch => {
     const res = await fetch(`/api/products/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -68,13 +68,21 @@ export const createProduct = (payload) => async dispatch => {
             price:payload.price,
             stock:payload.stock,
             options:payload.options,
-            preview_img: payload.previewImg
         })
     } )
     if (res.ok){
         const body = await res.json()
         console.log('we got the body back', body)
-        dispatch(addProduct(body.product))
+        const prod = body.product
+        console.log('what is going on here', formData.entries(), payload.previewImg)
+        const res2 = await fetch(`/api/products/${prod.id}/images`, {
+            method: "POST",
+            body: formData
+        })
+        if (res2.ok){
+            const body2 = await res.json()
+            dispatch(addProduct(body2.product))
+        }
         return body
     } else{
         const body = await res.json()

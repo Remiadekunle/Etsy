@@ -50,6 +50,38 @@ def create_product():
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
+@product_routes.route('/<int:id>/images', methods=['POST'])
+@login_required
+def add_image(id):
+    product = Product.query.get(id)
+    if "image" not in request.files:
+        print('Jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj', request.files)
+        return {"errors": "image required"}, 400
+
+    image = request.files["image"]
+    print('staging aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', image, 'aaaaaa', image.filename)
+
+    if not allowed_file(image.filename):
+        return {"errors": "file type not permitted"}, 400
+
+    image.filename = get_unique_filename(image.filename)
+
+    upload = upload_file_to_s3(image)
+
+    if "url" not in upload:
+        # if the dictionary doesn't have a url key
+        # it means that there was an error when we tried to upload
+        # so we send back that error message
+        return upload, 400
+
+    url = upload["url"]
+    product.preview_img = url
+    print('what is the url here HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH', url)
+    db.session.commit()
+    return {"product": product.to_dict()} , 201
+
+
+
 @product_routes.route('/<int:id>', methods=['PUT'])
 @login_required
 def update_product(id):
@@ -216,5 +248,3 @@ def find_results():
         return {"products" : [product.to_dict() for product in final], 'length' : len(final)}
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 404
-
-
