@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useModal } from '../../context/Modal';
 import { Modal } from "../../context/Modal";
-import { createProduct } from "../../store/product";
+import { addImage, createProduct } from "../../store/product";
 import './index.css';
 
 function CreateProductForm({setShowModal}){
@@ -82,26 +82,25 @@ function CreateProductForm({setShowModal}){
 
         formData.append("image", previewImg);
         console.log('plzzzzzzzzzzzzzzzzzzzz', formData)
-        const body = await dispatch(createProduct(payload, formData)).catch(async (res) => {
-            const data = await res.json();
-            if (data && data.errors) {
-                setErrors(data.error)
-                return
-            }
-        })
-
-        const errors = body.errors
-        // console.log('yo theses are the errrors man', body)
-        if (body?.length > 0){
-            // console.log(body)
-
-            // console.log('plz')
-            setErrors(body)
-            return
+        const body = await dispatch(createProduct(payload, formData))
+        // .catch(async (res) => {
+        //     console.log('hey res', res)
+        //     // const data = await res.json();
+        //     // if (data && data.errors) {
+        //     //     setErrors(data.error)
+        //     //     return
+        //     // }
+        // })
+        if (body.id){
+            await dispatch(addImage(formData, body.id))
+        } else{
+            return setErrors(body)
         }
+        console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh', body)
 
 
-        history.push(`/products/${body.product.id}`)
+
+        history.push(`/products/${body.id}`)
         setShowModal(false)
     }
 

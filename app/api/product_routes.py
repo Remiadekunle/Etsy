@@ -68,6 +68,7 @@ def add_image(id):
 
     upload = upload_file_to_s3(image)
 
+    print('yo what is upload in this case vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv', upload)
     if "url" not in upload:
         # if the dictionary doesn't have a url key
         # it means that there was an error when we tried to upload
@@ -76,7 +77,7 @@ def add_image(id):
 
     url = upload["url"]
     product.preview_img = url
-    print('what is the url here HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH', url)
+    print('what is the url here HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH', product)
     db.session.commit()
     return {"product": product.to_dict()} , 201
 
