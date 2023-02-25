@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useModal } from '../../context/Modal';
 import { Modal } from "../../context/Modal";
-import { createProduct, editProduct, updateProduct } from "../../store/product";
+import { addImage, createProduct, editProduct, updateProduct } from "../../store/product";
 import './index.css';
 
 function EditProductForm({setShowModal, product}){
@@ -18,6 +18,7 @@ function EditProductForm({setShowModal, product}){
     const [option2, setOption2] = useState(product.options.split('-')[1])
     const [option3, setOption3] = useState(product.options.split('-')[2])
     const [previewImg, setPreviewImg] = useState(product.previewImg)
+    const [newPreview, setNewPreview] = useState(null)
     const [errors, setErrors] = useState([]);
     useEffect(() => {
         let newErrors = [];
@@ -70,7 +71,11 @@ function EditProductForm({setShowModal, product}){
             previewImg
         }
         const body = await dispatch(updateProduct(payload, product.id))
-
+        if (newPreview !== null){
+            const formData = new FormData();
+            formData.append("image", newPreview);
+            await dispatch(addImage(formData, product.id))
+        }
 
         setShowModal(false)
     }
@@ -159,6 +164,18 @@ function EditProductForm({setShowModal, product}){
                     required
                     value={previewImg}
                     onChange={(e) => setPreviewImg(e.target.value)}
+                    className='create-product-input'/>
+                </label>
+                <label className='create-product-label'>
+                    Change Image?
+                    <input
+                    type="file"
+                    required
+                    accept="image/*"
+                    onChange={(e) => {
+                        const url = e.target?.files[0]
+                        setNewPreview(url)
+                    }}
                     className='create-product-input'/>
                 </label>
                 <button className='creater-product-button' type='submit'>Edit your product</button>

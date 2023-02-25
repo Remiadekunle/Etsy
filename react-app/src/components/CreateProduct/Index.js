@@ -98,8 +98,6 @@ function CreateProductForm({setShowModal}){
         }
         console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh', body)
 
-
-
         history.push(`/products/${body.id}`)
         setShowModal(false)
     }

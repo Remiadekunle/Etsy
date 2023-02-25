@@ -72,14 +72,6 @@ function EditProfileForm({setShowModal, user}){
                     />
                 </label>
                 <label className='create-product-label'>
-                    Profile Img
-                    <input
-                    type="text"
-                    value={profileImg}
-                    onChange={(e) => setProfileImg(e.target.value)}
-                    className='create-product-input'/>
-                </label>
-                <label className='create-product-label'>
                     Password
                     <input
                     type="text"

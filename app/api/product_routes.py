@@ -96,7 +96,6 @@ def update_product(id):
         product.price=form.data['price']
         product.stock=form.data['stock']
         product.options=form.data['options']
-        product.preview_img=form.data['preview_img']
 
         db.session.commit()
         return {"product": product.to_dict()} , 201

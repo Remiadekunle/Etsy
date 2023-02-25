@@ -45,6 +45,19 @@ export const fetchExamples = () => async (dispatch) => {
     }
 }
 
+export const addUserImage = (id, formData) => async dispatch => {
+  const res = await fetch(`/api/users/${id}/images`, {
+      method: "POST",
+      body: formData
+  })
+
+  if (res.ok){
+      const body = await res.json()
+      dispatch(setUser(body))
+      return
+  }
+}
+
 export const addFavorite = (product_id) => async (dispatch) => {
   const res = await fetch('/api/users/favorties', {
     method: 'POST',
