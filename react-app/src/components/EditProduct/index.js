@@ -74,7 +74,10 @@ function EditProductForm({setShowModal, product}){
         if (newPreview !== null){
             const formData = new FormData();
             formData.append("image", newPreview);
-            await dispatch(addImage(formData, product.id))
+            const bod = await dispatch(addImage(formData, product.id))
+            if (bod){
+                return setErrors([bod])
+            }
         }
 
         setShowModal(false)

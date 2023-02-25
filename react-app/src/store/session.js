@@ -56,6 +56,10 @@ export const addUserImage = (id, formData) => async dispatch => {
       dispatch(setUser(body))
       return
   }
+  else{
+    const body = await res.json()
+    return body.errors
+}
 }
 
 export const addFavorite = (product_id) => async (dispatch) => {

@@ -93,6 +93,9 @@ export const addImage = (formData, id) => async dispatch => {
         const body = await res.json()
         dispatch(addProduct(body.product))
         return
+    } else{
+        const body = await res.json()
+        return body.errors
     }
 }
 

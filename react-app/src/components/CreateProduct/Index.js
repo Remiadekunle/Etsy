@@ -81,7 +81,6 @@ function CreateProductForm({setShowModal}){
         const formData = new FormData();
 
         formData.append("image", previewImg);
-        console.log('plzzzzzzzzzzzzzzzzzzzz', formData)
         const body = await dispatch(createProduct(payload, formData))
         // .catch(async (res) => {
         //     console.log('hey res', res)
@@ -92,7 +91,10 @@ function CreateProductForm({setShowModal}){
         //     // }
         // })
         if (body.id){
-            await dispatch(addImage(formData, body.id))
+            const bod = await dispatch(addImage(formData, body.id))
+            if (bod){
+                return setErrors([bod])
+            }
         } else{
             return setErrors(body)
         }

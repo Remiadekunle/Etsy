@@ -38,7 +38,7 @@ function EditProfileImageForm({setShowModal, user}){
         console.log('yuuuuuuuuuuuuuuuuuuuuuuuuuu', user)
         const body = await dispatch(addUserImage(user.id, formData))
         if (body){
-            return setErrors(body)
+            return setErrors([body])
         }
         setShowModal(false)
     }
