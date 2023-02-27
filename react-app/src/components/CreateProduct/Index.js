@@ -96,7 +96,7 @@ function CreateProductForm({setShowModal}){
                 return setErrors([bod])
             }
         } else{
-            return setErrors(body)
+            return setErrors([body])
         }
         console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh', body)
 
