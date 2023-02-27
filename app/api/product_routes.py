@@ -5,6 +5,7 @@ from .auth_routes import validation_errors_to_error_messages
 from ..forms import ProductForm, ReviewForm, SearchForm
 from datetime import datetime, timedelta
 from sqlalchemy import or_
+from ..aws import upload_file_to_s3, allowed_file, get_unique_filename
 
 product_routes = Blueprint('product', __name__)
 
@@ -25,7 +26,14 @@ def get_one_product(id):
 def create_product():
     form = ProductForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+
     if form.validate_on_submit():
+        image = form.data['preview_img']
+        # if not allowed_file(image):
+        #     return {"errors": "file type not permitted"}, 400
+        # upload = upload_file_to_s3(image)
+        # if "url" not in upload:
+        #     return upload, 400
         product = Product(
             name=form.data['name'],
             description=form.data['description'],
@@ -42,6 +50,39 @@ def create_product():
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
+@product_routes.route('/<int:id>/images', methods=['POST'])
+@login_required
+def add_image(id):
+    product = Product.query.get(id)
+    if "image" not in request.files:
+        print('Jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj', request.files)
+        return {"errors": "image required"}, 400
+
+    image = request.files["image"]
+    print('staging aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', image, 'aaaaaa', image.filename)
+
+    if not allowed_file(image.filename):
+        return {"errors": "file type not permitted"}, 400
+
+    image.filename = get_unique_filename(image.filename)
+
+    upload = upload_file_to_s3(image)
+
+    print('yo what is upload in this case vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv', upload)
+    if "url" not in upload:
+        # if the dictionary doesn't have a url key
+        # it means that there was an error when we tried to upload
+        # so we send back that error message
+        return upload, 400
+
+    url = upload["url"]
+    product.preview_img = url
+    print('what is the url here HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH', product)
+    db.session.commit()
+    return {"product": product.to_dict()} , 201
+
+
+
 @product_routes.route('/<int:id>', methods=['PUT'])
 @login_required
 def update_product(id):
@@ -55,7 +96,6 @@ def update_product(id):
         product.price=form.data['price']
         product.stock=form.data['stock']
         product.options=form.data['options']
-        product.preview_img=form.data['preview_img']
 
         db.session.commit()
         return {"product": product.to_dict()} , 201
@@ -208,5 +248,3 @@ def find_results():
         return {"products" : [product.to_dict() for product in final], 'length' : len(final)}
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 404
-
-

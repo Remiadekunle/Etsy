@@ -3,6 +3,7 @@ from flask_login import current_user, login_required
 from .auth_routes import validation_errors_to_error_messages
 from app.models import User, Product, db
 from ..forms import ProductForm, ReviewForm, SearchForm, FavForm, UpdateForm
+from ..aws import upload_file_to_s3, allowed_file, get_unique_filename
 
 user_routes = Blueprint('users', __name__)
 
@@ -110,3 +111,31 @@ def update_user(id):
         return user.to_dict()
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+@user_routes.route('/<int:id>/images', methods=["POST"])
+@login_required
+def add_image(id):
+    user = User.query.get(id)
+    if "image" not in request.files:
+        return {"errors": "image required"}, 400
+
+    image = request.files["image"]
+
+    if not allowed_file(image.filename):
+        return {"errors": "file type not permitted"}, 400
+
+    image.filename = get_unique_filename(image.filename)
+
+    upload = upload_file_to_s3(image)
+
+    if "url" not in upload:
+        # if the dictionary doesn't have a url key
+        # it means that there was an error when we tried to upload
+        # so we send back that error message
+        return upload, 400
+
+    url = upload["url"]
+    user.profile_img = url
+
+    db.session.commit()
+    return user.to_dict()

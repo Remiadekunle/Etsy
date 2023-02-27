@@ -4,6 +4,7 @@ import { Modal } from '../../context/Modal';
 import { Footer2 } from '../FooterItems';
 import FavIndexItem from './FavIndexItem';
 import './index.css';
+import { EditProfileImageFormModal } from './UpdateImage';
 import { EditProfileFormModal, EditProfileFormModal2 } from './UpdateProfile';
 
 function FavoritesPage(){
@@ -17,7 +18,7 @@ function FavoritesPage(){
                         <img className='profile-imgs' src={user.profileImg ? user.profileImg  : ''}
                         onError={e => { e.currentTarget.src = "https://cdn.dribbble.com/users/6142/screenshots/5679189/media/1b96ad1f07feee81fa83c877a1e350ce.png?compress=1&resize=400x300&vertical=top"}}
                         ></img>
-                        <EditProfileFormModal2 user={user} />
+                        <EditProfileImageFormModal user={user} />
                     </div>
                     <div style={{marginLeft: '20px'}}>
                         <h2>
@@ -40,7 +41,7 @@ function FavoritesPage(){
                     <img className='profile-imgs' src={user.profileImg ? user.profileImg  : ''}
                     onError={e => { e.currentTarget.src = "https://cdn.dribbble.com/users/6142/screenshots/5679189/media/1b96ad1f07feee81fa83c877a1e350ce.png?compress=1&resize=400x300&vertical=top"}}
                     ></img>
-                    <EditProfileFormModal2 user={user} />
+                    <EditProfileImageFormModal user={user} />
                 </div>
                 <div style={{marginLeft: '20px'}}>
                     <h2>

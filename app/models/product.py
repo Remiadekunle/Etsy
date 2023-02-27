@@ -13,7 +13,7 @@ class Product(db.Model):
     stock = db.Column(db.Integer, nullable=False)
     options = db.Column(db.String(500), nullable=False)
     owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-    preview_img = db.Column(db.String, nullable=False)
+    preview_img = db.Column(db.String)
     category_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('categories.id')))
 
     owner = db.relationship("User", back_populates='products')

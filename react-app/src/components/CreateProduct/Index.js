@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useModal } from '../../context/Modal';
 import { Modal } from "../../context/Modal";
-import { createProduct } from "../../store/product";
+import { addImage, createProduct } from "../../store/product";
 import './index.css';
 
 function CreateProductForm({setShowModal}){
@@ -17,7 +17,7 @@ function CreateProductForm({setShowModal}){
     const [option2, setOption2] = useState('')
     const user = useSelector(state => state.session.user)
     const [option3, setOption3] = useState('')
-    const [previewImg, setPreviewImg] = useState('')
+    const [previewImg, setPreviewImg] = useState(null)
     const [errors, setErrors] = useState([]);
     useEffect(() => {
         let newErrors = [];
@@ -78,26 +78,29 @@ function CreateProductForm({setShowModal}){
             options,
             previewImg
         }
-        const body = await dispatch(createProduct(payload)).catch(async (res) => {
-            const data = await res.json();
-            if (data && data.errors) {
-                setErrors(data.error)
-                return
+        const formData = new FormData();
+
+        formData.append("image", previewImg);
+        const body = await dispatch(createProduct(payload, formData))
+        // .catch(async (res) => {
+        //     console.log('hey res', res)
+        //     // const data = await res.json();
+        //     // if (data && data.errors) {
+        //     //     setErrors(data.error)
+        //     //     return
+        //     // }
+        // })
+        if (body.id){
+            const bod = await dispatch(addImage(formData, body.id))
+            if (bod){
+                return setErrors([bod])
             }
-        })
-
-        const errors = body.errors
-        // console.log('yo theses are the errrors man', body)
-        if (body?.length > 0){
-            // console.log(body)
-
-            // console.log('plz')
-            setErrors(body)
-            return
+        } else{
+            return setErrors([body])
         }
+        console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh', body)
 
-
-        history.push(`/products/${body.product.id}`)
+        history.push(`/products/${body.id}`)
         setShowModal(false)
     }
 
@@ -181,10 +184,13 @@ function CreateProductForm({setShowModal}){
                 <label className='create-product-label'>
                     PreviewImg
                     <input
-                    type="url"
+                    type="file"
                     required
-                    value={previewImg}
-                    onChange={(e) => setPreviewImg(e.target.value)}
+                    accept="image/*"
+                    onChange={(e) => {
+                        const url = e.target?.files[0]
+                        setPreviewImg(url)
+                    }}
                     className='create-product-input'/>
                 </label>
                 <button className='creater-product-button' type='submit'>Create a product</button>

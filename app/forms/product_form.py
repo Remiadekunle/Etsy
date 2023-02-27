@@ -10,4 +10,4 @@ class ProductForm(FlaskForm):
     price = FloatField('price', validators=[DataRequired()])
     stock = IntegerField('stock', validators=[DataRequired()])
     options = StringField('options', validators=[DataRequired()])
-    preview_img = StringField('preview_img', validators=[DataRequired()])
+    preview_img = StringField('preview_img')
