@@ -10,6 +10,9 @@ cart_routes = Blueprint('cart', __name__)
 @cart_routes.route('/<int:id>')
 # @login_required
 def get_user_cart(id):
+    """
+    Fetches the user's cart and returns it and all the items in the cart
+    """
     user = User.query.get(id)
     print(user.cart, 'testinggggggggg')
     return {"cart": user.cart.to_dict()}
@@ -17,6 +20,10 @@ def get_user_cart(id):
 
 @cart_routes.route('/<int:id>',  methods=['POST'])
 def add_product(id):
+    """
+    Adds products to the cart. The function also handles both adding new items to the cart 
+    as well as inreasing the amount of an item already in the cart.
+    """
     form = CartForm()
     user = User.query.get(id)
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -50,9 +57,11 @@ def add_product(id):
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
-# route is only for removing items from the cart. Use the add_product to increase the quantity of an item.
 @cart_routes.route('<int:id>',methods=['PUT'])
 def update_cart(id):
+    """
+    route is only for removing items from the cart. Use the add_product to increase the quantity of an item.
+    """
     form = CartForm()
     user = User.query.get(id)
     form['csrf_token'].data = request.cookies['csrf_token']

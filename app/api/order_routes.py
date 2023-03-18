@@ -17,6 +17,10 @@ def get_user_cart(id):
 
 @order_routes.route('/<int:id>',  methods=['POST'])
 def create_order(id):
+    """
+    This creates an order from the items in the cart
+    
+    """
     form = CartForm()
     user = User.query.get(id)
     form['csrf_token'].data = request.cookies['csrf_token']
