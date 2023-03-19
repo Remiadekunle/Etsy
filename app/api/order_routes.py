@@ -10,23 +10,20 @@ order_routes = Blueprint('order', __name__)
 @order_routes.route('/')
 @login_required
 def get_user_cart():
+    """
+    Queries for the users orders and returns them in a dictionary
+    """
     orders = Order.query.filter(Order.user_id == current_user.id).order_by(Order.created_at).all()[::-1]
-    print('hey these are the orders', [order.created_at.strftime('%m/%d/%Y') for order in orders])
-    delta = timedelta(
-            days=2
-    )
-    date = datetime(2023, 1, 19)
-    print('qqqqqqqqqqqqqqqqqqqqqqq', date)
-    print(delta, 'wwwwwwwwwwwwwwwwwwwwwwwwwwwwwww')
-    print('this is after adding them', delta + datetime.now())
     return {"orders": [order.to_dict() for order in orders]}
 
 @order_routes.route('/<int:id>')
 # @login_required
 def get_user_cart2(id):
+    """
+
+    """
     user = User.query.get(id)
     orders = Order.query.filter(Order.user_id == user.id)
-    print('help yo', user.to_dict())
     return {"orders": [order.to_dict() for order in orders]}
 
 
@@ -34,6 +31,9 @@ def get_user_cart2(id):
 @order_routes.route('/',  methods=['POST'])
 @login_required
 def create_order():
+    """
+    Creates an order based on the info sent form the frontend. Returns the created order in a dictionary.
+    """
     form = OrderForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
@@ -63,8 +63,6 @@ def create_order():
         cart_items = [item for item in current_user.cart.items]
         for item in cart_items:
             product = item.product
-            print('yay we got the product', product)
-            print('yay we got the products stock', product.stock)
             if product.stock == 0:
                 errors.append(f'{item.product.name} is out of stock')
                 return {'errors': f'{item.product.name} is out of stock'}, 400
@@ -79,15 +77,11 @@ def create_order():
                 option=item.option
             )
             product.stock = product.stock - item.quantity
-            print('yay this is the new order-item', order_item)
-            print('yay we got the new stock', product.stock)
             new_cost = item.quantity * product.price
             order.total = order.total + new_cost
             db.session.add(order_item)
             current_user.cart.total = current_user.cart.total - new_cost
             db.session.delete(item)
-        print('these are the order items',order.items )
-        print('just checkingout the cart', current_user.cart.to_dict())
         db.session.commit()
         return {"order": order.to_dict(), 'errors': errors}
     else:
@@ -97,6 +91,9 @@ def create_order():
 @order_routes.route('/<int:id>',  methods=['PUT'])
 @login_required
 def edit_order(id):
+    """
+    Edits an order based on its id and returns the edited order in a dictionary
+    """
     form = OrderForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
@@ -113,6 +110,9 @@ def edit_order(id):
 @order_routes.route('/<int:id>',  methods=['DELETE'])
 @login_required
 def delete_order(id):
+    """
+    Deletes an order based on its id and returns a succefful message once completed.
+    """
     order = Order.query.get(id)
     order_items = order.items
     for item in order_items:

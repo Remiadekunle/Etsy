@@ -11,9 +11,11 @@ product_routes = Blueprint('product', __name__)
 
 @product_routes.route('/')
 def get_all_products():
+    """
+    Queries for all the products and returns them in a dictionary
+    """
     products = Product.query.all()
     res = [product.to_dict() for product in products]
-    # print(res)
     return {'products': res}
 
 @product_routes.route('/<int:id>')
@@ -24,16 +26,13 @@ def get_one_product(id):
 @product_routes.route('/', methods=['POST'])
 @login_required
 def create_product():
+    """
+    Creates a product and returns the created product in a dictionary. 
+    """
     form = ProductForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
-        image = form.data['preview_img']
-        # if not allowed_file(image):
-        #     return {"errors": "file type not permitted"}, 400
-        # upload = upload_file_to_s3(image)
-        # if "url" not in upload:
-        #     return upload, 400
         product = Product(
             name=form.data['name'],
             description=form.data['description'],
@@ -53,13 +52,14 @@ def create_product():
 @product_routes.route('/<int:id>/images', methods=['POST'])
 @login_required
 def add_image(id):
+    """
+    Queries for a product based on its id and attaches an image after it has been entered into the s3 bucket. It returns the product in a dictionary
+    """
     product = Product.query.get(id)
     if "image" not in request.files:
-        print('Jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj', request.files)
         return {"errors": "image required"}, 400
 
     image = request.files["image"]
-    print('staging aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', image, 'aaaaaa', image.filename)
 
     if not allowed_file(image.filename):
         return {"errors": "file type not permitted"}, 400
@@ -68,7 +68,6 @@ def add_image(id):
 
     upload = upload_file_to_s3(image)
 
-    print('yo what is upload in this case vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv', upload)
     if "url" not in upload:
         # if the dictionary doesn't have a url key
         # it means that there was an error when we tried to upload
@@ -77,7 +76,6 @@ def add_image(id):
 
     url = upload["url"]
     product.preview_img = url
-    print('what is the url here HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH', product)
     db.session.commit()
     return {"product": product.to_dict()} , 201
 
@@ -86,6 +84,9 @@ def add_image(id):
 @product_routes.route('/<int:id>', methods=['PUT'])
 @login_required
 def update_product(id):
+    """
+    Queries the product based on its id and returns the product in a dictionary. 
+    """
     product = Product.query.get(id)
     form = ProductForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -105,6 +106,9 @@ def update_product(id):
 @product_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def delete_product(id):
+    """
+    Queries for the product based on its id and deletes it. It returns a successful message
+    """
     product = Product.query.get(id)
     if product:
         db.session.delete(product)
@@ -121,6 +125,9 @@ def delete_product(id):
 @product_routes.route('/<int:id>/reviews', methods=['POST'])
 @login_required
 def create_review(id):
+    """
+    Queries for the product based on its id and deletes it. It returns a successful message
+    """
     product = Product.query.get(id)
     form = ReviewForm()
     form['csrf_token'].data = request.cookies['csrf_token']

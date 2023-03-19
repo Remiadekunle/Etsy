@@ -8,18 +8,24 @@ from random import choices, randint
 
 category_routes = Blueprint('category', __name__)
 
-@category_routes.route('/')
-def get_categories():
-    return 'hi'
+# @category_routes.route('/')
+# def get_categories():
+#     return 'hi'
 
 @category_routes.route('/<int:id>')
 def get_category_products(id):
+    """
+    Queries for a category based on its id and returns all of the products within that cartegory aswell as the category in dictionaries.
+    """
     category = Category.query.get(id)
     return {"category": [product.to_dict() for product in category.products], 'info': category.to_dict2()}
 
 
 @category_routes.route('/<int:id>/recs')
 def get_category_recs(id):
+    """
+    Queries for a category based on its id and chooses a 6 random items to return in a dictionary
+    """
     category = Category.query.get(id)
     products = category.products
     # res2 = choices(products, k=6)
