@@ -51,7 +51,6 @@ export function CategoryIndex({product}){
         setHover(!hover)
     }
     const findStars = (avg) => {
-        console.log('testing the type', typeof avg)
         if (avg === 0) return null
         if (avg >  0 && avg <= 1) return <i class="fa-solid fa-star fa-xs"></i>
         else if (avg >=  1 && avg < 2) {

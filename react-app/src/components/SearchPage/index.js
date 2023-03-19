@@ -21,7 +21,6 @@ function SearchPage({search, setSearch, filter, setFilter}){
         return () => setFilter(0)
     }, [])
 
-    console.log('yo did we get the search?',products)
     if (Object.values(products).length < 1 || Object?.values(products.search).length < 1){
         return (
             <div className="search-no-results">
@@ -31,13 +30,10 @@ function SearchPage({search, setSearch, filter, setFilter}){
     }
     const results = Object?.values(products.search)
 
-    console.log('we arent getting this far')
-    console.log(' wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww', results2)
 
     const handleSearch = async (e, priceIncr, priceDecr, reviewed, label, idx) => {
         e.preventDefault();
         if (search.length === 0) return
-        console.log('this is the search', search)
         // await dispatch(clearSearch())
         const body = await dispatch(getSearch(search, priceIncr, priceDecr, reviewed))
         localStorage.setItem('search', search)
@@ -62,7 +58,6 @@ function SearchPage({search, setSearch, filter, setFilter}){
                         onChange={(e) => {
                             setFilter(e.target.value)
                             const idx = e.target.value
-                            console.log('heeeeeeeeeeeeeeeeeeeeeeeeeeee', e.target.value )
                             if (parseInt(e.target.value) === 1) handleSearch(e, true, false, false, e.target.childNodes[e.target.value].label, idx)
                             else if (parseInt(e.target.value) === 2) handleSearch(e, false, true, false, e.target.childNodes[e.target.value].label, idx)
                             else if (parseInt(e.target.value) === 3) handleSearch(e, false, false, true, e.target.childNodes[e.target.value].label, idx)

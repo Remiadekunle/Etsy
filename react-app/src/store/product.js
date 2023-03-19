@@ -36,13 +36,10 @@ export const deleteProduct = (id) => {
     }
 }
 
-
-
 export const fetchProducts = () => async dispatch => {
     const res = await fetch(`/api/products/`)
     if (res.ok){
         const body = await res.json();
-        console.log('heyyyyyyyyyyyyyyy', body)
         await dispatch(loadProducts(body.products))
     }
 }
@@ -51,11 +48,9 @@ export const fetchOneProducts = (id) => async dispatch => {
     const res = await fetch(`/api/products/${id}`)
     if (res.ok){
         const body = await res.json();
-        console.log('heyyyyyyyyyyyyyyy', body)
         await dispatch(addProduct(body.product))
     }
 }
-
 
 
 export const createProduct = (payload, formData) => async dispatch => {
@@ -72,9 +67,7 @@ export const createProduct = (payload, formData) => async dispatch => {
     } )
     if (res.ok){
         const body = await res.json()
-        console.log('we got the body back', body)
         const prod = body.product
-        console.log('what is going on here', formData.entries(), payload.previewImg)
 
         return prod
     } else{
@@ -114,7 +107,6 @@ export const updateProduct = (payload, id) => async dispatch => {
     } )
     if (res.ok){
         const body = await res.json()
-        console.log('we got the body back', body)
         dispatch(editProduct(body.product))
         return body
     }else{
@@ -130,7 +122,6 @@ export const removeProduct = (id) => async dispatch => {
     } )
     if (res.ok){
         const body = await res.json()
-        console.log('we got the body back', body)
         dispatch(deleteProduct(id))
         return body
     }
@@ -148,7 +139,6 @@ export const addReview = (productId, content, stars,  img) => async dispatch =>{
     })
     if (res.ok){
         const body = await res.json();
-        console.log('yay we got the cart back', body)
         dispatch(editProduct(body.product))
     }
 }
@@ -165,7 +155,6 @@ export const updateReview = (productId, content, stars,  img, reviewId) => async
     })
     if (res.ok){
         const body = await res.json();
-        console.log('yay we got the cart back', body)
         dispatch(editProduct(body.product))
     }
 }

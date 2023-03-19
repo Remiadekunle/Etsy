@@ -17,25 +17,20 @@ function OrderPage(){
             let hasVal = false
             const items = Object.values(order.items)
             items.forEach(item => {
-                console.log(item.name)
                 if (item.name?.toLowerCase().includes(orderSearch.toLowerCase())) {
-                    console.log('hi')
                     hasVal =  true
                 }
                 else if (item.description?.toLowerCase().includes(orderSearch.toLowerCase())) hasVal = true
             })
             return hasVal
         })
-        console.log('yo whats the res', res)
         setSearchResults(res)
     }
 
    const compare = ( a, b, param, reverse ) => {
-    // console.log('in compare function', a, b)
     let aDate = new Date(a.created_at)
     let bDate = new Date(b.created_at)
         if ( aDate < bDate ){
-            console.log('we got here actually')
           return 1
         }
         if ( aDate > bDate ){
@@ -43,9 +38,7 @@ function OrderPage(){
         }
         return 0;
     }
-    console.log('what is the result heree,', searchResults)
     orderList.sort((a,b) => compare(a,b))
-    // console.log('yo what is the orderlist for this', orderList)
     return (
         <div style={{height: '100%'}}>
             <div className='order-page-background' >

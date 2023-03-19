@@ -17,22 +17,6 @@ function ViewReciptPage({setShowModal, order}){
     const history = useHistory()
 
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const newErrors = []
-        if (address.length < 2) return
-        if (city.length < 2) return
-        if (state.length < 2) return
-        // dispatch(createOrder(address, city, state))
-        // dispatch(deleteFromCart(product.id));
-        // setErrors([]);
-
-        // await dispatch(fetchCart())
-        setShowModal(false)
-        return history.push('/orders')
-    }
-
-    console.log('hey were checking the order items', order.items)
     const items = order.items
     return(
         <div className="view-receipt-page-container">
@@ -65,7 +49,6 @@ export function ViewReciptPageModal({order, createdAt}){
 }
 
 function OrderItemIndex(item){
-    console.log('this is the  item', item)
     const object = item.item
     return(
         <div className="order-item-border">

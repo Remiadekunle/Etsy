@@ -19,20 +19,6 @@ export const clearSearch = () => {
     }
 }
 
-// export const addSearch = (search) => {
-//     return {
-//         type: ADD_SEARCH,
-//         search
-//     }
-// }
-
-// export const addDmSearch = (search) => {
-//     return {
-//         type: ADD_SEARCH,
-//         search
-//     }
-// }
-
 
 export const getSearch = (search, priceInc, priceDecr, reviews) => async dispatch => {
     const res = await fetch(`/api/products/search`, {

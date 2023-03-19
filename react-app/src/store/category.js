@@ -38,7 +38,6 @@ export const fetchCategoryRecs = (id) => async dispatch => {
     // console.log('the fetch happened', res.status)
     if (res.ok){
         const body = await res.json();
-        console.log('UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU', body.products)
         dispatch(loadRecs(body.products))
     }
 }
@@ -56,7 +55,6 @@ const categoryReducer = (state = initialState, action) => {
             category.forEach((product) => {
                 newState.category[product.id] = product
             })
-
             return newState;
         case LOAD_RECS:
             newState = Object.assign({}, state);

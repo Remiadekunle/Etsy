@@ -11,7 +11,6 @@ function HomePageSlideshow(){
     const [index, setIndex] = useState(0)
     let timeOut;
     useEffect(() => {
-        // console.log('jjjjjjjjjjjjjjjjjjjjjjjjjjj this is the index', index)
         const rand = Math.floor(Math.random() * 10)
         timeOut = setTimeout(() => {
             // setIndex(rand % len)
@@ -32,11 +31,6 @@ function HomePageSlideshow(){
                 ))
             }
           </div>
-          {/* <div className="home-slideshowDots">
-            {productsArr.map((_, idx) => (
-                <div key={idx} className="home-slideshowDot"></div>
-            ))}
-          </div> */}
         </div>
       );
 }
@@ -48,7 +42,6 @@ export function HomePageSlideshow2(){
     const [index, setIndex] = useState(len-1)
     let timeOut;
     useEffect(() => {
-        // console.log('jjjjjjjjjjjjjjjjjjjjjjjjjjj this is the index', index)
         const rand = Math.floor(Math.random() * 10)
         timeOut = setTimeout(() => {
             // setIndex(rand % len)
@@ -69,11 +62,6 @@ export function HomePageSlideshow2(){
                 ))
             }
           </div>
-          {/* <div className="home-slideshowDots">
-            {productsArr.map((_, idx) => (
-                <div key={idx} className="home-slideshowDot"></div>
-            ))}
-          </div> */}
         </div>
       );
 }

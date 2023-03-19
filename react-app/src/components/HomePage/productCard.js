@@ -10,7 +10,6 @@ function ProductCard({product, extra}){
     }
     const nextClass = extra? extra : ''
     const className = `home-page-product-itemA-container ${nextClass}`
-    // console.log('what is the className', className)
     return(
         <div className={className} onMouseEnter={toggleHover} onMouseLeave={toggleHover}>
             <NavLink to={`/products/${product?.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>

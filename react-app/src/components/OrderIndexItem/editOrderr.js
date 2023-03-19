@@ -24,7 +24,6 @@ function EditOrderForm({setShowModal, order}){
       if (state.trim().length !== 2) newErrors.push('state must be exactly 2 letter')
       if (city.trim().length < 1) newErrors.push('city must be atleast 1 letter')
       setErrors(newErrors)
-      console.log('ummmmmm the use effect is firing')
     }, [address, city, state])
 
 

@@ -45,7 +45,6 @@ function CartItem({item, setNoStock}){
     }
     const updateCart = async (e) => {
         if (cartQuantity === item.quantity) return
-        // console.log('we got past the validation', currQuantity)
         if (cartQuantity < currQuantity){
 
         } else{
@@ -85,7 +84,6 @@ function CartItem({item, setNoStock}){
                 <div className="cart-cost-metrics">
                     {/* <select value={cartQuantity} onChange={(e) => {
                         setCartQuantity(e.target.value)
-                        console.log('in the onchange')
                         updateCart(e)
                         }} className="cart-item-quantity">
                         {

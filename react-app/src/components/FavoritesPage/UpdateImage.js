@@ -35,7 +35,6 @@ function EditProfileImageForm({setShowModal, user}){
         }
         const formData = new FormData();
         formData.append("image", profileImg);
-        console.log('yuuuuuuuuuuuuuuuuuuuuuuuuuu', user)
         const body = await dispatch(addUserImage(user.id, formData))
         if (body){
             return setErrors([body])
@@ -82,7 +81,6 @@ function EditProfileImageForm({setShowModal, user}){
 
 export function EditProfileImageFormModal({user, type}){
     const [showModal, setShowModal] = useState(false);
-    console.log('bruh')
   return (
     <>
       <button className='edit-profile-img-button' onClick={() => setShowModal(true)}><i class="fa-solid fa-camera"></i></button>

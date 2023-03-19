@@ -24,10 +24,8 @@ function YouMayLike({ids, categoryId}){
     }
     
     const recs = useSelector(state => state.category.recs)
-    console.log('yaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', recs)
 
-    // if (!Object?.values(recs).length > 0) return null
-    // const recsArr = Object?.values(recs)
+
     return(
         <div className='YML-container'>
             <div className='YML-header'>

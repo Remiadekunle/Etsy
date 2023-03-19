@@ -42,20 +42,7 @@ function HomePage(){
                         <ProductCardRound product={product[5]}/>
                     </div>
                     <div className='welcome-back-items'>
-                        {/* <div className='welcome-back-items-groupA'>
-                            <ProductCard product={product[6]}/>
-                            <ProductCard product={product[7]}/>
-                            <ProductCard product={product[8]}/>
-                            <ProductCard product={product[9]} extra={'home-page-hidden'}/>
-                            <ProductCard product={product[10]} extra={'home-page-hidden'}/>
-                        </div>
-                        <div className='welcome-back-items-groupB'>
-                            <ProductCard product={product[10]}/>
-                            <ProductCard product={product[11]}/>
-                            <ProductCard product={product[12]}/>
-                            <ProductCard product={product[1]} extra={'home-page-hidden'}/>
-                            <ProductCard product={product[5]} extra={'home-page-hidden'}/>
-                        </div> */}
+                        
 
                             <ProductCard product={product[6]}/>
                             <ProductCard product={product[7]}/>
@@ -77,13 +64,6 @@ function HomePage(){
                     <div className='home-slides-container'>
                         <HomePageSlideshow product={product} className='slideshow1'/>
                         <HomePageSlideshow2 product={product} className='slideshow2'/>
-
-                        {/* {
-                            window.innerWidth < 1000? <HomePageSlideshow product={product}/> : <>
-                            <HomePageSlideshow product={product}/>
-                            <HomePageSlideshow2 product={product}/>
-                            </>
-                        } */}
                     </div>
                 </div>
                 <div className='home-sample-products'>
@@ -125,34 +105,12 @@ function HomePage(){
                             <UserCards products={product} items={4} name='Asta' ids={[4, 8, 12, 16]} extra={'home-page-hidden'}/>
                         </div>
                     </div>
-                    {/* <div className='home-sample-keyboards'>
-
-                    </div>
-                    <div className='home-sample-audio'>
-
-                    </div> */}
                 </div>
             </div>
 
             <div className='home-page-container-footer'>
                 <Footer />
             </div>
-            {/* <div className='footer'>
-                <h1>
-                    Besty
-                </h1>
-                <div className='footer-items-container'>
-                    <div className='footer-item'>
-                        Technology
-                    </div>
-                    <div className='footer-item'>
-                        About Me
-                    </div>
-                    <div className='footer-item'>
-                        Placeholder
-                    </div>
-                </div>
-            </div> */}
         </div>
     )
 }

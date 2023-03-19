@@ -24,7 +24,6 @@ export const fetchCart = () => async dispatch => {
 
     if (res.ok){
         const body = await res.json();
-        console.log('yay we got the cart back', body)
         dispatch(loadCart(body.cart))
     }
 }
@@ -42,7 +41,6 @@ export const addToCart = (productId, quantity, optionValue) => async dispatch =>
 
     if (res.ok){
         const body = await res.json();
-        console.log('yay we got the cart back', body)
         dispatch(loadCart(body.cart))
     }
 }
@@ -60,7 +58,6 @@ export const editToCartRemove = (productId, quantity, option) => async dispatch 
     })
     if (res.ok){
         const body = await res.json();
-        console.log('yay we got the cart back', body)
         dispatch(loadCart(body.cart))
     }
 }
@@ -75,7 +72,6 @@ export const deleteFromCart = (id, option) => async dispatch =>{
     })
     if (res.ok){
         const body = await res.json();
-        console.log('yay we got the cart back', body)
         dispatch(loadCart(body.cart))
     }
 }
@@ -87,7 +83,6 @@ export const clearCart = (id, option) => async dispatch => {
     })
     if (res.ok){
         const body = await res.json();
-        console.log('yay we got the cart back', body)
         dispatch(loadCart(body.cart))
     }
 }

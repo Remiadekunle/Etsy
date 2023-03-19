@@ -15,10 +15,8 @@ function DeleteCartItemForm({setShowModal, product, item}){
     const handleSubmit = async (e) => {
         e.preventDefault();
         dispatch(deleteFromCart(product.id, item.option));
-        // setErrors([]);
 
         setShowModal(false)
-        // history.push(`/`)
     }
 
 

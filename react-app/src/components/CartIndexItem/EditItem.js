@@ -18,11 +18,9 @@ function EditCartItemForm({setShowModal, product, item}){
     const handleSubmit = async (e) => {
         e.preventDefault();
         const newErrors = []
-        // console.log('hi were in the submite with', newQuant)
         if (parseInt(newQuant) === parseInt(item.quantity)){
           newErrors.push('Please enter new quantity')
           setErrors(newErrors)
-          // console.log('ummmm i think you should return')
           return
         }
         if (parseInt(newQuant) > parseInt(item.quantity)){
@@ -33,11 +31,10 @@ function EditCartItemForm({setShowModal, product, item}){
           const final = parseInt(item.quantity) - parseInt(newQuant)
           dispatch(editToCartRemove(product.id, final, item.option))
         }
-        // dispatch(deleteFromCart(product.id));
-        // setErrors([]);
+
 
         setShowModal(false)
-        // history.push(`/`)
+  
     }
 
 

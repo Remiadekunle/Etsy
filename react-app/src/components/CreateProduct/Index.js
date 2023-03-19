@@ -69,7 +69,6 @@ function CreateProductForm({setShowModal}){
             setErrors(['name: name must atleast 1 letter'])
             return
         }
-        // console.log(typeof price)
         const payload = {
             name,
             description,
@@ -83,7 +82,6 @@ function CreateProductForm({setShowModal}){
         formData.append("image", previewImg);
         const body = await dispatch(createProduct(payload, formData))
         // .catch(async (res) => {
-        //     console.log('hey res', res)
         //     // const data = await res.json();
         //     // if (data && data.errors) {
         //     //     setErrors(data.error)
@@ -98,7 +96,6 @@ function CreateProductForm({setShowModal}){
         } else{
             return setErrors([body])
         }
-        console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh', body)
 
         history.push(`/products/${body.id}`)
         setShowModal(false)

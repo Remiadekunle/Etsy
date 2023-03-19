@@ -25,7 +25,6 @@ function PlaceOrderForm({setShowModal, setCartErrors}){
       if (state.trim().length !== 2) newErrors.push('state must be exactly 2 letter')
       if (city.trim().length < 1) newErrors.push('city must be atleast 1 letter')
       setErrors(newErrors)
-      // console.log('ummmmmm the use effect is firing')
     }, [address, city, state])
 
     if (!user){
@@ -50,8 +49,7 @@ function PlaceOrderForm({setShowModal, setCartErrors}){
           setShowModal(false)
           return
         }
-        // dispatch(deleteFromCart(product.id));
-        // setErrors([]);
+
         await dispatch(fetchProducts())
         await dispatch(fetchCart())
         setShowModal(false)

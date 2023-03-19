@@ -3,7 +3,6 @@ import { EditReviewFormModal } from "./CreateEditReview"
 import { DeleteReviewFormModal } from "./DeleteReview"
 
 function ReviewIndex(review, productId){
-    console.log('we got into the component', review)
     const user = useSelector(state => state.session.user)
     const reviewItem = review.review
 
@@ -17,7 +16,6 @@ function ReviewIndex(review, productId){
 
 
     const findStars = (avg) => {
-        console.log('testing the type', typeof avg)
         if (avg === 0) return 'No Reviews'
         if (avg >  0 && avg <= 1) return <i class="fa-solid fa-star fa-xs"></i>
         else if (avg >=  1 && avg < 2) {

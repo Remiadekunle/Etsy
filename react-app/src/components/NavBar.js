@@ -7,12 +7,9 @@ import { fetchCategory } from '../store/category';
 import { fetchOrders } from '../store/order';
 import { clearSearch, getSearch } from '../store/search';
 import { login } from '../store/session';
-import { LoginFormModal } from './auth/LoginForm';
 import LogoutButton from './auth/LogoutButton';
-import { SignUpFormModal } from './auth/SignUpForm';
-import CreateProductForm, { CreateProductModal } from './CreateProduct/Index';
+import { CreateProductModal } from './CreateProduct/Index';
 import './index.css';
-import OpenModalMenuItem from './OpenModalButton';
 import SearchResultIndex from './SearchResults';
 
 const NavBar = ({setSearch, search, setFilter}) => {
@@ -36,7 +33,6 @@ const NavBar = ({setSearch, search, setFilter}) => {
 
 
   const changeResults = () => {
-    // console.log('we actually got the product here', products)
     const res = products.filter(product => {
       if (product.name?.toLowerCase().includes(search.toLowerCase())){
         return true
@@ -49,7 +45,6 @@ const NavBar = ({setSearch, search, setFilter}) => {
 
   useEffect(() => {
     return () => {
-      // console.log('this is b4 dismount')
       localStorage.setItem('search', search)
     }
   }, [])
@@ -58,7 +53,6 @@ const NavBar = ({setSearch, search, setFilter}) => {
     if (!showMenu) return;
 
     const closeMenu = (e) => {
-      // console.log('we ran')
       if (!ulRef.current?.contains(e.target)) {
         setShowMenu(false);
       }
@@ -72,10 +66,7 @@ const NavBar = ({setSearch, search, setFilter}) => {
     if (!searchResults) return;
 
     const closeMenu = (e) => {
-      // console.log('we ran')
       if (!ulref2.current?.contains(e.target)) {
-        // console.log('setting false', ulref2)
-        console.log('firing in the useEffect')
         setShowSearchMenu(false)
       }
     };
@@ -90,7 +81,6 @@ const NavBar = ({setSearch, search, setFilter}) => {
   const handleSearch = async (e) => {
     e.preventDefault();
     if (search.length === 0) return
-    // console.log('this is the search', search)
     await dispatch(clearSearch())
     await dispatch(getSearch(search))
     localStorage.setItem('search', search)
@@ -108,7 +98,6 @@ const NavBar = ({setSearch, search, setFilter}) => {
 
   const handleSearchToggle = () => {
     if (search.trim().length < 1) return
-    console.log('firing in the handleSearchToggle')
     setShowSearchMenu(true)
   }
 
@@ -126,7 +115,6 @@ const NavBar = ({setSearch, search, setFilter}) => {
     return history.push('/cart')
   }
 
-  // console.log('searchinggggggggggggggg', search)
   return (
     <nav className='navbar'>
       <div style={{width: '100%'}}>
@@ -143,7 +131,6 @@ const NavBar = ({setSearch, search, setFilter}) => {
               onChange={e => {
                 setSearch(e.target.value)
                 changeResults()
-                console.log('firing in the search input')
                 setShowSearchMenu(true)
               }}
               placeholder='Search for products'></input>

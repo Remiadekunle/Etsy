@@ -14,7 +14,6 @@ function CartPage(){
     const [cartErrors, setCartErrors] = useState([]);
     const dispatch = useDispatch()
     const history = useHistory();
-    // console.log('this is the cart', cart)
     const tag = cart.items?.length === 1 ? 'item' : 'items'
 
     useEffect(() => {
