@@ -35,14 +35,10 @@ def add_product(id):
         cart_items = [item.product_id for item in user.cart.items]
         if product_id in  cart_items:
             item = [item for item in user.cart.items if item.product_id == product_id]
-            print('this is item', item[0])
             found_item = item[0]
-            print('quanity b4', found_item.quantity)
             found_item.quantity = found_item.quantity + quantity
-            print('quanity after', found_item.quantity)
             user.cart.total = user.cart.total + total
             db.session.commit()
-            # return 'good'
             return {"cart": user.cart.to_dict()}
         cart_item = CartItem(
             cart=user.cart,
@@ -74,8 +70,6 @@ def update_cart(id):
         if product_id in  cart_items:
             item = [item for item in user.cart.items if item.product_id == product_id]
             found_item = item[0]
-            print('quanity b4', found_item.quantity)
-            print('price b4', user.cart.total)
             if found_item.quantity <= quantity:
                 db.session.delete(found_item)
                 new_total = found_item.quantity * product.price
@@ -83,9 +77,7 @@ def update_cart(id):
                 db.session.commit()
                 return {"cart": user.cart.to_dict()}
             found_item.quantity = found_item.quantity - quantity
-            print('quanity after', found_item.quantity)
             user.cart.total = user.cart.total - total
-            print('price after', user.cart.total)
             db.session.commit()
             return {"cart": user.cart.to_dict()}
         else:

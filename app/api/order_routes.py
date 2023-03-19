@@ -11,7 +11,6 @@ order_routes = Blueprint('order', __name__)
 # @login_required
 def get_user_cart(id):
     user = User.query.get(id)
-    print(user.cart, 'testinggggggggg')
     return {"cart": user.cart.to_dict()}
 
 
@@ -29,7 +28,6 @@ def create_order(id):
         product = Product.query.get(product_id)
         quantity = form.data['quantity']
         total = user.cart.total
-        print('this is the total', total)
         order = Order(
             total=0,
             user=user
@@ -38,8 +36,6 @@ def create_order(id):
         cart_items = [item for item in user.cart.items]
         for item in cart_items:
             product = item.product
-            print('yay we got the product', product)
-            print('yay we got the products stock', product.stock)
             if product.stock == 0:
                 errors.append(f'{item.product.name} is out of stock')
                 continue
@@ -51,11 +47,8 @@ def create_order(id):
                 order=order
             )
             product.stock = product.stock - item.quantity
-            print('yay this is the new order-item', order_item)
-            print('yay we got the new stock', product.stock)
             new_cost = item.quantity * product.price
             order.total = order.total + new_cost
             db.session.add(order_item)
-        print('these are the order items',cart_items )
         db.session.commit()
         return {"order": order.to_dict()}
