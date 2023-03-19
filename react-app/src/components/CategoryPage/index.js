@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSelector } from "react-redux"
 import { NavLink } from "react-router-dom";
-import FavButton, { FavButton2 } from "../FavButton";
+import  { FavButton2 } from "../FavButton";
 import { Footer2 } from "../FooterItems";
 import './index.css';
 
@@ -100,7 +100,7 @@ export function CategoryIndex({product}){
     return(
         <div style={{marginBottom: '10px', position: 'relative'}} onMouseEnter={toggleHover} onMouseLeave={toggleHover}>
             <NavLink to={`/products/${product.id}`} style={{ textDecoration: 'none', color: 'inherit' }} onClick={scrollUp}>
-                <img className="category-product-img" src={product.previewImg}></img>
+                <img className="category-product-img" alt="" src={product.previewImg}></img>
                 <div>
                     {`$${product.price}.00`}
                 </div>

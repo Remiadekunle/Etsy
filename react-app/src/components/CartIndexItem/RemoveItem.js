@@ -1,16 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { useModal } from '../../context/Modal';
 import { Modal } from "../../context/Modal";
 import { deleteFromCart } from "../../store/cart";
-import { createProduct, editProduct, removeProduct, updateProduct } from "../../store/product";
 import './index.css';
 
 function DeleteCartItemForm({setShowModal, product, item}){
     const dispatch = useDispatch()
-    const history = useHistory()
-    const {options} = product
 
     const handleSubmit = async (e) => {
         e.preventDefault();

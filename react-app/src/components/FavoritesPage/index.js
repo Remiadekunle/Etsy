@@ -1,11 +1,9 @@
-import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Modal } from '../../context/Modal';
 import { Footer2 } from '../FooterItems';
 import FavIndexItem from './FavIndexItem';
 import './index.css';
 import { EditProfileImageFormModal } from './UpdateImage';
-import { EditProfileFormModal, EditProfileFormModal2 } from './UpdateProfile';
+import { EditProfileFormModal} from './UpdateProfile';
 
 function FavoritesPage(){
     const user = useSelector(state => state.session.user)
@@ -15,7 +13,7 @@ function FavoritesPage(){
             <div className=''>
                 <div className='user-profile-container'>
                     <div style={{borderRadius: '50%', position: 'relative'}}>
-                        <img className='profile-imgs' src={user.profileImg ? user.profileImg  : ''}
+                        <img className='profile-imgs' alt='' src={user.profileImg ? user.profileImg  : ''}
                         onError={e => { e.currentTarget.src = "https://cdn.dribbble.com/users/6142/screenshots/5679189/media/1b96ad1f07feee81fa83c877a1e350ce.png?compress=1&resize=400x300&vertical=top"}}
                         ></img>
                         <EditProfileImageFormModal user={user} />
@@ -38,7 +36,7 @@ function FavoritesPage(){
         <div>
             <div className='user-profile-container'>
                 <div style={{borderRadius: '50%', position: 'relative'}}>
-                    <img className='profile-imgs' src={user.profileImg ? user.profileImg  : ''}
+                    <img className='profile-imgs' alt='' src={user.profileImg ? user.profileImg  : ''}
                     onError={e => { e.currentTarget.src = "https://cdn.dribbble.com/users/6142/screenshots/5679189/media/1b96ad1f07feee81fa83c877a1e350ce.png?compress=1&resize=400x300&vertical=top"}}
                     ></img>
                     <EditProfileImageFormModal user={user} />

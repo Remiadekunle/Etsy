@@ -1,15 +1,12 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { Modal } from "../../context/Modal";
 import { addUserImage } from "../../store/session";
 
 function EditProfileImageForm({setShowModal, user}){
     const dispatch = useDispatch()
-    const history = useHistory()
     const [currImage, setCurrImage] = useState(user.profileImg)
     const [profileImg, setProfileImg] = useState(null)
-    const [password, setPassword] = useState('')
     const [errors, setErrors] = useState([]);
     useEffect(() => {
         let newErrors = [];

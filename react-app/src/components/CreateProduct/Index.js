@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { useModal } from '../../context/Modal';
 import { Modal } from "../../context/Modal";
 import { addImage, createProduct } from "../../store/product";
 import './index.css';
@@ -63,7 +62,6 @@ function CreateProductForm({setShowModal}){
         if (stock === 0) return
         // setErrors([]);
         const options = `${option1}-${option2}-${option3}`
-        const set = new Set(name.split(''))
         const nameCheck = name.trim()
         if (nameCheck.length < 1) {
             setErrors(['name: name must atleast 1 letter'])

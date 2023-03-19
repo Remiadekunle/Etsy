@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { useModal } from '../../context/Modal';
+import { useDispatch } from 'react-redux';
 import { Modal } from "../../context/Modal";
-import { createProduct } from "../../store/product";
 import { updateInfo } from "../../store/session";
 import './index.css';
 
 function EditProfileForm({setShowModal, user}){
     const dispatch = useDispatch()
-    const history = useHistory()
     const [username, setUsername] = useState(user.username)
     const [email, setEmail] = useState(user.email)
     const [profileImg, setProfileImg] = useState(user.profileImg === null?  '': user.profileImg )

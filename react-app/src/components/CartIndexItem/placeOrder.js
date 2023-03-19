@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { useModal } from '../../context/Modal';
 import { Modal } from "../../context/Modal";
-import { addToCart, deleteFromCart, editToCartRemove, fetchCart } from "../../store/cart";
+import { fetchCart } from "../../store/cart";
 import { createOrder } from "../../store/order";
-import { createProduct, editProduct, fetchProducts, removeProduct, updateProduct } from "../../store/product";
+import { fetchProducts } from "../../store/product";
 import './index.css';
 
 function PlaceOrderForm({setShowModal, setCartErrors}){
@@ -38,7 +37,6 @@ function PlaceOrderForm({setShowModal, setCartErrors}){
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const newErrors = []
         if (address.trim().length < 1 || address.trim().length > 30) return
         if (city.trim().length < 1 || city.trim().length > 30) return
         if (state.trim().length !== 2) return

@@ -1,24 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Modal, Modal2 } from '../../context/Modal';
+import { Modal2 } from '../../context/Modal';
 import { addFavorite, removeFavorite } from '../../store/session';
 import './index.css';
 
 function FavButton({productId}){
     const user = useSelector(state => state.session.user)
-    const dispatch = useDispatch()
     const favs = user?.favIds
 
     const check = favs?.indexOf(parseInt(productId))
     const message = check === -1 ? 'Removed from your favorites' : 'Added to your favorites'
-    const handleFavs = (e, id) => {
-        e.preventDefault();
-        if (check === -1){
-            dispatch(addFavorite(id))
-        } else{
-            dispatch(removeFavorite(id))
-        }
-    }
 
     return(
         <>
@@ -32,19 +23,10 @@ function FavButton({productId}){
 }
 export function FavButton2({productId}){
     const user = useSelector(state => state.session.user)
-    const dispatch = useDispatch()
     const favs = user?.favIds
 
     const check = favs?.indexOf(parseInt(productId))
     const message = check === -1 ? 'Removed from your favorites' : 'Added to your favorites'
-    const handleFavs = (e, id) => {
-        e.preventDefault();
-        if (check === -1){
-            dispatch(addFavorite(id))
-        } else{
-            dispatch(removeFavorite(id))
-        }
-    }
 
     return(
         <>
@@ -78,7 +60,7 @@ export function FavsMessageModal({productId, check, message}){
     let timeOutId;
     useEffect(() => {
         return () => clearInterval(timeOutId)
-    }, [])
+    }, [timeOutId])
     const handleFavs = async (id) => {
         if (check === -1){
             await dispatch(addFavorite(id))
@@ -117,7 +99,7 @@ export function FavsMessageModal2({productId, check, message}){
     let timeOutId;
     useEffect(() => {
         return () => clearInterval(timeOutId)
-    }, [])
+    }, [timeOutId])
     const handleFavs = async (id) => {
         if (check === -1){
             await dispatch(addFavorite(id))

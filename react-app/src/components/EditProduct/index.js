@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { useModal } from '../../context/Modal';
 import { Modal } from "../../context/Modal";
-import { addImage, createProduct, editProduct, updateProduct } from "../../store/product";
+import { addImage, updateProduct } from "../../store/product";
 import './index.css';
 
 function EditProductForm({setShowModal, product}){
     const dispatch = useDispatch()
-    const history = useHistory()
-    const {options} = product
     const [name, setName] = useState(product.name)
     const [description, setDescription] = useState(product.description)
     const [price, setPrice] = useState(product.price)
@@ -56,7 +52,6 @@ function EditProductForm({setShowModal, product}){
         if (parseInt(stock) === 0) return
         // setErrors([]);
         const options = `${option1}-${option2}-${option3}`
-        const set = new Set(name.split(''))
         const nameCheck = name.trim()
         if (nameCheck.length < 1) {
             setErrors(['name: name must atleast 1 letter'])
@@ -70,7 +65,7 @@ function EditProductForm({setShowModal, product}){
             options,
             previewImg
         }
-        const body = await dispatch(updateProduct(payload, product.id))
+        await dispatch(updateProduct(payload, product.id))
         if (newPreview !== null){
             const formData = new FormData();
             formData.append("image", newPreview);

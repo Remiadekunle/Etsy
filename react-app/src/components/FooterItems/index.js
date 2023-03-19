@@ -4,9 +4,7 @@ import './index.css';
 function Footer(){
     const history = useHistory();
 
-    const toGit = () => {
-        return history.push('/')
-    }
+    
     return(
         <div className="Footer-container">
             <div className='footer-column'>

@@ -1,25 +1,13 @@
 import { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import { NavLink } from "react-router-dom"
-import { deleteFromCart, editToCartAdd, editToCartRemove } from "../../store/cart"
-import EditCartItemForm, { EditCartItemModal } from "./EditItem"
+import { EditCartItemModal } from "./EditItem"
 import { DeleteCartItemModal } from "./RemoveItem"
 
 function CartItem({item, setNoStock}){
     const product = useSelector(state => state.product.allProducts[item.product])
-    const [cartQuantity, setCartQuantity] = useState(item.quantity)
     const [errors, setErrors] = useState([])
-    const dispatch = useDispatch();
     const stockDrop = []
-    const currQuantity = item.quantity
-    const incrimentQuantity = () => {
-        if (cartQuantity >= product.stock) return
-        setCartQuantity(cartQuantity + 1)
-    }
-    const decrimentQuantity = () => {
-        if (cartQuantity === 0) return
-        setCartQuantity(cartQuantity - 1)
-    }
 
     const getStock = () => {
         for(let i = 0;  i < product.stock; i++ ){
@@ -39,26 +27,17 @@ function CartItem({item, setNoStock}){
             setNoStock(false)
             setErrors([])
         }
-    }, [product])
+    }, [product, setNoStock])
     if(!product){
         return null
     }
-    const updateCart = async (e) => {
-        if (cartQuantity === item.quantity) return
-        if (cartQuantity < currQuantity){
-
-        } else{
-
-        }
-        e.preventDefault();
-
-    }
+    
     getStock();
 
     return(
         <div className="cart-item-index-container">
             <NavLink to={`/products/${product.id}`}>
-                <img className="cart-product-img" src={product?.previewImg} onError={e => { e.currentTarget.src = "https://freight.cargo.site/w/3840/q/75/i/a17dfc0b27e50cb1c75dcd8fcd13a2d11783729f60265d9a00d184bc5a8d9296/VALORANT_1.png"}}></img>
+                <img className="cart-product-img" alt="" src={product?.previewImg} onError={e => { e.currentTarget.src = "https://freight.cargo.site/w/3840/q/75/i/a17dfc0b27e50cb1c75dcd8fcd13a2d11783729f60265d9a00d184bc5a8d9296/VALORANT_1.png"}}></img>
             </NavLink>
             <div className="cart-product-info-container">
                 <div className="cart-product-name-container">
