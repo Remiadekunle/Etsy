@@ -126,7 +126,7 @@ def delete_product(id):
 @login_required
 def create_review(id):
     """
-    Queries for the product based on its id and deletes it. It returns a successful message
+    Queries for the product based on its id and creates a review based for the product, returns the created review and updated product in a dictionary.
     """
     product = Product.query.get(id)
     form = ReviewForm()
@@ -174,6 +174,9 @@ def create_review(id):
 @product_routes.route('/<int:id>/reviews/<int:reviewId>', methods=['PUT'])
 @login_required
 def edit_review(id, reviewId):
+    """
+    Queires for a product and review based on their ids and updates the review, returns the review in a dictionary with the product.
+    """
     product = Product.query.get(id)
     form = ReviewForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -192,6 +195,9 @@ def edit_review(id, reviewId):
 @product_routes.route('/<int:id>/reviews/<int:reviewId>', methods=['DELETE'])
 @login_required
 def delete_review(id, reviewId):
+    """
+    Queires for a product and review based on their ids and deletes the review, returns the product in a dictionary.
+    """
     review = Review.query.get(reviewId)
     if review:
         db.session.delete(review)
@@ -204,6 +210,9 @@ def delete_review(id, reviewId):
 @product_routes.route('/search', methods=['POST'])
 # @login_required
 def find_results():
+    """
+    Searches for products based on the input values in the form. Returns the results of the search in a dictionary.
+    """
     form = SearchForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     print('ummmmmmmm whats going on', form.data['search'])
@@ -214,7 +223,6 @@ def find_results():
         highest_review = form.data['highest_review']
         most_recent = form.data['most_recent']
         prods = []
-        # print('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh')
         print(price_incr)
         if price_incr:
             # products = Product.query.filter(or_(len(str(Product.name.ilike(f"%{search}%"))) > 0, len(str(Product.description.ilike(f"%{search}%"))) > 0)).all()
@@ -223,16 +231,13 @@ def find_results():
             new = products + products2
             test_set = set(new)
             final = sorted(list(test_set), key=lambda x: x.price, reverse=True)
-            print('llllllllllllllllllllllllllllllllllllllllllllllllllll')
             return {"products" : [product.to_dict() for product in final], 'length' : len(final)}
-            # return {"products" : [product.to_dict() for product in products], 'length' : len(products)}
         elif price_decr:
             products = Product.query.filter(Product.name.ilike(f"%{search}%")).order_by(Product.price).all()
             products2 = Product.query.filter(Product.description.ilike(f"%{search}%")).order_by(Product.price).all()
             new = products + products2
             test_set = set(new)
             final = sorted(list(test_set), key=lambda x: x.price)
-            print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
             return {"products" : [product.to_dict() for product in final], 'length' : len(final)}
         elif highest_review:
             products = Product.query.filter(Product.name.ilike(f"%{search}%")).all()
@@ -241,17 +246,14 @@ def find_results():
             test_set = set(new)
             final = [product.to_dict() for product in test_set]
             res = sorted(list(final), key=lambda x: x['avg'], reverse=True)
-            print('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh')
             return {"products" : res, 'length' : len(final)}
         elif most_recent:
             pass
-        # products = Product.query.filter(or_(Product.name.ilike(f"%{search}%", Product.description.ilike(f"%{search}%")))).all()
         products = Product.query.filter(Product.name.ilike(f"%{search}%")).order_by(Product.name).all()
         products2 = Product.query.filter(Product.description.ilike(f"%{search}%")).order_by(Product.name).all()
         new = products + products2
         test_set = set(new)
         final = list(test_set)
-        # final = [product for product in new if ]
         return {"products" : [product.to_dict() for product in final], 'length' : len(final)}
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 404
