@@ -63,8 +63,6 @@ def create_order():
         cart_items = [item for item in current_user.cart.items]
         for item in cart_items:
             product = item.product
-            print('yay we got the product', product)
-            print('yay we got the products stock', product.stock)
             if product.stock == 0:
                 errors.append(f'{item.product.name} is out of stock')
                 return {'errors': f'{item.product.name} is out of stock'}, 400
@@ -79,8 +77,6 @@ def create_order():
                 option=item.option
             )
             product.stock = product.stock - item.quantity
-            print('yay this is the new order-item', order_item)
-            print('yay we got the new stock', product.stock)
             new_cost = item.quantity * product.price
             order.total = order.total + new_cost
             db.session.add(order_item)

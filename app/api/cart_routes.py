@@ -14,14 +14,20 @@ def get_user_cart():
 
 @cart_routes.route('/<int:id>')
 # @login_required
-def get_user_cart2(id):
+def get_user_cart(id):
+    """
+    Fetches the user's cart and returns it and all the items in the cart
+    """
     user = User.query.get(id)
     return {"cart": user.cart.to_dict()}
 
 
-@cart_routes.route('/',  methods=['POST'])
-@login_required
-def add_product():
+@cart_routes.route('/<int:id>',  methods=['POST'])
+def add_product(id):
+    """
+    Adds products to the cart. The function also handles both adding new items to the cart 
+    as well as inreasing the amount of an item already in the cart.
+    """
     form = CartForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
@@ -123,10 +129,11 @@ def add_product():
 #         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
-# route is only for removing items from the cart. Use the add_product to increase the quantity of an item.
-@cart_routes.route('/',methods=['PUT'])
-@login_required
-def update_cart():
+@cart_routes.route('<int:id>',methods=['PUT'])
+def update_cart(id):
+    """
+    route is only for removing items from the cart. Use the add_product to increase the quantity of an item.
+    """
     form = CartForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
@@ -139,8 +146,6 @@ def update_cart():
         if product_id in  cart_items:
             item = [item for item in current_user.cart.items if item.product_id == product_id and item.option == option]
             found_item = item[0]
-            print('quanity b4', found_item.quantity)
-            print('price b4', current_user.cart.total)
             if found_item.quantity <= quantity:
                 db.session.delete(found_item)
                 new_total = found_item.quantity * product.price

@@ -11,6 +11,9 @@ product_routes = Blueprint('product', __name__)
 
 @product_routes.route('/')
 def get_all_products():
+    """
+    Queries for all the products and returns their to_dict() values
+    """
     products = Product.query.all()
     res = [product.to_dict() for product in products]
     # print(res)
@@ -24,6 +27,9 @@ def get_one_product(id):
 @product_routes.route('/', methods=['POST'])
 @login_required
 def create_product():
+    """
+    Creates a product from information sent by the frontend and returns the created product in a dictionary
+    """
     form = ProductForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
@@ -86,6 +92,9 @@ def add_image(id):
 @product_routes.route('/<int:id>', methods=['PUT'])
 @login_required
 def update_product(id):
+    """
+    Updates the values of the product and returns the product in a dictionary
+    """
     product = Product.query.get(id)
     form = ProductForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -105,6 +114,9 @@ def update_product(id):
 @product_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def delete_product(id):
+    """
+    Deletes the product using the id from the route
+    """
     product = Product.query.get(id)
     if product:
         db.session.delete(product)
