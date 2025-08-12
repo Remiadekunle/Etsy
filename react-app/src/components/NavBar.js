@@ -133,7 +133,7 @@ const NavBar = ({setSearch, search, setFilter}) => {
 
         <div className='navbar-items'>
           <NavLink to={'/'} style={{ textDecoration: 'none', color: 'inherit' }}>
-            <h1 className='navbar-h1'>Besty</h1>
+            <h1 className='navbar-h1'>LootVerse</h1>
           </NavLink>
           <div className='search-form-div' ref={ulref2} >
             <form onSubmit={handleSearch} className='search-form'>
